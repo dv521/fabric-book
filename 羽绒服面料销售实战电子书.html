@@ -1316,7 +1316,7 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
   <table class="zebra">
     <thead><tr><th>指标</th><th>标准</th><th>怎么读</th></tr></thead>
     <tbody>
-      <tr><td><strong>抗水压（静水压）</strong></td><td>ISO 811（＝GB/T 4744）</td><td>10000 mm ＝ 10 米水柱，数字越大越抗压</td></tr>
+      <tr><td><strong>抗水压（静水压）</strong></td><td>ISO 811（＝GB/T 4744）</td><td>10000 mm ＝ 10 米水柱（约 98 kPa），数字越大越抗压</td></tr>
       <tr><td><strong>透湿</strong></td><td>ISO 11092（RET）／ASTM E96</td><td>g/(m²·24h)，越大越透气，常见 5000–15000</td></tr>
       <tr><td>沾水（表面拒水）</td><td>GB/T 4745（AATCC 22）</td><td>1–5 级，≥4 级合格</td></tr>
     </tbody>
@@ -1327,6 +1327,10 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
     <div><div class="lbl">5000–10000</div><div class="val">中到大雨</div><div class="sub">常规户外</div></div>
     <div><div class="lbl">10000 mm+</div><div class="val">暴雨</div><div class="sub">专业款起步</div></div>
     <div><div class="lbl">20000 mm+</div><div class="val">高海拔</div><div class="sub">透湿也要 ≥10000</div></div>
+  </div>
+  <div class="box warn">
+    <div class="bt">单位别被绕：mm 和 Pa 差 9.8 倍</div>
+    <p>ISO 811 / GB/T 4744 报的是<strong>毫米水柱（mm H₂O）</strong>；有些报告用 <strong>Pa 或 kPa</strong>。换算：<strong>1 mm ≈ 9.8 Pa</strong>。所以「5000 Pa」只有约 510 mm，是防泼水级别；「5000 mm」才是常见的小雨档。看到 Pa 先换算再比，别被数字唬住。</p>
   </div>
   <div class="box key">
     <div class="bt">话术：别只说「防水」</div>
@@ -1431,7 +1435,7 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
   <h3 id="c19-1">20.1 客户问「你们用的是什么膜」，怎么答</h3>
   <div class="box tip">
     <div class="bt">三句标准答法</div>
-    <p>①「我们这款是 TPU 贴膜，静水压 10 kPa，透湿 5000，日常通勤够用，价格比 Gore 低一半。」<br>
+    <p>①「我们这款是 TPU 贴膜，静水压 10 000 mm（约 98 kPa），透湿 5000，日常通勤够用，价格比 Gore 低一半。」<br>
     ②「如果客户指定 Gore-Tex，我们做不了授权的膜，但可以给你同等级参数的国产膜 + 检测报告。」<br>
     ③「品牌膜贵在授权和一致性，参数差距没价格差距大——您先看报告，再决定要不要为 logo 付钱。」</p>
   </div>
