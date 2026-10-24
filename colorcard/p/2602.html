@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2602 云羽纤 · 2026 色卡</title><style>
+:root{--ink:#111418;--ink2:#4b5563;--ink3:#8a929c;--line:#e6e8eb;--bg:#fbfbfa;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:880px;margin:0 auto;padding:26px 20px 70px}
+.top{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--ink3);letter-spacing:.08em;margin-bottom:22px}
+.top a{border-bottom:1px solid var(--line);padding-bottom:2px}
+h1{font-size:34px;letter-spacing:-.02em;margin:0 0 6px;font-weight:700}
+.sub{color:var(--ink2);font-size:14px;margin:0 0 22px}
+.hero{display:grid;grid-template-columns:1fr 300px;gap:22px;align-items:start;margin-bottom:34px}
+.hero img{width:100%;border-radius:8px;display:block;box-shadow:0 6px 26px rgba(0,0,0,.13)}
+.tagline{font-size:15px;color:var(--ink2);line-height:1.9;border-left:2px solid var(--ink);padding-left:14px}
+.tagline b{color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:.16s;display:block}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.card img{width:100%;aspect-ratio:3/4.4;object-fit:cover;object-position:top;display:block;background:#f2f2f0}
+.cb{padding:12px 13px 14px}
+.no{font-size:12px;letter-spacing:.16em;color:var(--ink3)}
+.nm{font-size:16.5px;font-weight:650;margin:2px 0 1px}
+.en{font-size:11.5px;color:var(--ink3);letter-spacing:.03em;margin-bottom:8px}
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chips span{font-size:11.5px;background:#f4f5f6;border-radius:4px;padding:1px 7px;color:var(--ink2)}
+.pbar{display:flex;gap:26px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);padding:12px 0;margin:0 0 22px;font-size:13px;color:var(--ink2)}
+.pbar b{display:block;font-size:15.5px;color:var(--ink);font-weight:650;letter-spacing:.02em}
+.shot{width:100%;display:block;border:1px solid var(--line);border-radius:6px;margin-bottom:14px;background:#fff}
+.lbl{font-size:11.5px;letter-spacing:.16em;color:var(--ink3);margin:18px 0 8px}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:30px;font-size:13.5px}
+.nav a{border:1px solid var(--line);border-radius:8px;padding:9px 15px;background:#fff}
+.hint{font-size:12px;color:var(--ink3);margin-top:8px}
+.lb{position:fixed;inset:0;background:#0b0c0d;display:none;z-index:99;overflow:auto;padding:20px}
+.lb.on{display:block}
+.lb img{max-width:100%;margin:0 auto;display:block}
+@media(max-width:640px){.hero{grid-template-columns:1fr}.hero img{max-width:230px;margin:0 auto}h1{font-size:27px}}
+</style></head><body>
+<div class="wrap">
+  <div class="top"><span>2602 · DOWN SERIES</span><a href="../index.html">色卡索引</a></div>
+  <h1>云羽纤</h1>
+  <p class="sub">2602 · Feather satin</p>
+  <div class="pbar">
+    <div><span>成分</span><b>100%N</b></div>
+    <div><span>克重</span><b>34 g/m²</b></div>
+    <div><span>门幅</span><b>142 cm</b></div>
+    <div><span>系列</span><b>Down Series</b></div>
+  </div>
+  <div class="lbl">面料实拍</div>
+  <img class="shot" src="../img/2602/main.jpg" alt="2602 产品页" data-zoom="../img/2602/main.jpg" style="cursor:zoom-in">
+  <div class="lbl">色卡 · 共 3 页</div>
+  <img class="shot" src="../img/2602/c1.jpg" alt="2602 色卡 1" data-zoom="../img/2602/c1.jpg" style="cursor:zoom-in">
+  <img class="shot" src="../img/2602/c2.jpg" alt="2602 色卡 2" data-zoom="../img/2602/c2.jpg" style="cursor:zoom-in">
+  <img class="shot" src="../img/2602/c3.jpg" alt="2602 色卡 3" data-zoom="../img/2602/c3.jpg" style="cursor:zoom-in">
+  <p class="hint">点击图片可全屏放大；手机长按可保存。屏幕有色差，以实物为准。</p>
+  <div class="nav"><a href="2601.html">← 2601</a><a href="../index.html">索引</a><a href="2603.html">2603 →</a></div>
+</div>
+<div class="lb" id="lb" onclick="this.classList.remove('on')"><img id="lbi" src=""></div>
+<script>
+document.querySelectorAll('[data-zoom]').forEach(function(el){
+  el.addEventListener('click',function(){document.getElementById('lbi').src=el.getAttribute('data-zoom');document.getElementById('lb').classList.add('on');});
+});
+</script>
+</body></html>
