@@ -61,4 +61,31 @@ document.querySelectorAll('[data-zoom]').forEach(function(el){
   el.addEventListener('click',function(){document.getElementById('lbi').src=el.getAttribute('data-zoom');document.getElementById('lb').classList.add('on');});
 });
 </script>
+
+<style id="cc-guard-css">
+  body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
+  img{-webkit-user-drag:none;user-drag:none}
+  .lb img{-webkit-touch-callout:none}
+</style>
+<script id="cc-guard-js">
+(function(){
+  var stop=function(e){e.preventDefault();};
+  document.addEventListener('contextmenu',stop);
+  document.addEventListener('dragstart',stop);
+  document.addEventListener('selectstart',stop);
+  document.addEventListener('copy',stop);
+  document.addEventListener('cut',stop);
+  document.addEventListener('keydown',function(e){
+    var k=(e.key||'').toLowerCase(), mod=e.ctrlKey||e.metaKey;
+    if(mod && ['c','x','a','s','u','p'].indexOf(k)>-1){e.preventDefault();}
+    if(k==='f12'){e.preventDefault();}
+  });
+  // 阻止 iOS 长按弹出“存储图像”
+  document.querySelectorAll('img').forEach(function(img){
+    img.addEventListener('touchstart',function(e){ if(e.touches.length>1) return; },{passive:true});
+    img.addEventListener('touchmove',stop,{passive:false});
+  });
+})();
+</script>
+
 </body></html>
