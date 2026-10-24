@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>TT纺织 · 内部资料（客户名单 / 工作室合作 / 人员安排）</title>
+<style>
+  :root{--ink:#1b232b;--ink2:#4a5561;--ink3:#7c8794;--line:#dfe4ea;--soft:#f7f9fb;--accent:#b45309;--red:#a13b32;}
+  *{box-sizing:border-box}
+  @page{size:A4;margin:16mm 14mm}
+  body{margin:0;background:#fff;color:var(--ink);font-size:12px;line-height:1.65;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+  .wrap{max-width:780px;margin:0 auto;padding:8px 4px 30px}
+  .eyebrow{font-size:10px;letter-spacing:.22em;color:var(--accent);font-weight:600}
+  h1{font-size:21px;margin:6px 0 4px}
+  .sub{font-size:11.5px;color:var(--ink2);margin-bottom:4px}
+  .warnbar{background:#fdf5ec;border:1px solid #f0dcc4;border-radius:6px;padding:8px 12px;
+    font-size:11px;color:#8a4b06;margin:12px 0 18px}
+  h2{font-size:14px;margin:24px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+  table{width:100%;border-collapse:collapse;font-size:11px}
+  th{background:var(--soft);text-align:left;padding:6px 8px;border:1px solid var(--line);font-weight:600;color:var(--ink2)}
+  td{padding:6px 8px;border:1px solid var(--line);vertical-align:top}
+  td.blank{color:#c3ccd5}
+  .tag{display:inline-block;font-size:9.5px;padding:1px 6px;border-radius:10px;border:1px solid var(--line);color:var(--ink3)}
+  .note{font-size:10.5px;color:var(--ink3);margin-top:6px}
+  .fill{color:#b8c2cc}
+  footer{margin-top:26px;padding-top:10px;border-top:1px solid var(--line);font-size:10px;color:var(--ink3)}
+
+  #gate{position:fixed;inset:0;background:#fff;z-index:9999;display:flex;align-items:center;justify-content:center}
+  #gate .box{width:320px;text-align:center;font-family:-apple-system,"PingFang SC",sans-serif}
+  #gate h3{font-size:15px;margin:0 0 6px}
+  #gate p{font-size:12px;color:#7c8794;margin:0 0 14px}
+  #gate input{width:100%;padding:9px 12px;border:1px solid #dfe4ea;border-radius:6px;font-size:14px;text-align:center;outline:none}
+  #gate button{margin-top:10px;width:100%;padding:9px 0;border:0;border-radius:6px;background:#1b232b;color:#fff;font-size:14px;cursor:pointer}
+  #gate .err{color:#a13b32;font-size:12px;margin-top:8px;height:16px}
+  body.locked{overflow:hidden}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="box">
+    <h3>内部资料</h3>
+    <p>仅限本部门使用，请输入访问密码</p>
+    <input id="pw" type="password" placeholder="密码" autocomplete="off">
+    <button onclick="check()">进入</button>
+    <div class="err" id="err"></div>
+  </div>
+</div>
+<script>
+  document.body.classList.add('locked');
+  function check(){
+    var v=document.getElementById('pw').value.trim();
+    if(v==='dv13588355444'){document.getElementById('gate').remove();document.body.classList.remove('locked');}
+    else{document.getElementById('err').textContent='密码不对';}
+  }
+  document.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+</script>
+
+<div class="wrap">
+  <div class="eyebrow">INTERNAL · 不对外</div>
+  <h1>TT纺织 · 内部资料</h1>
+  <div class="sub">客户与品牌名单 · 工作室合作排期 · 人员与培训安排</div>
+  <div class="sub">整理：窦金龙　微信 dv13588355444　·　2026-10</div>
+
+  <div class="warnbar">
+    <strong>使用说明：</strong>此件仅供内部使用，<strong>请勿上传到公开网站或发给客户</strong>。手写名单的字迹辨识存在误差，带 <span class="tag">待核</span> 的项目请你对照原件补正；空行是留给你续写的。
+  </div>
+
+  <h2>一、客户与品牌名单（代号制）</h2>
+  <table>
+    <thead><tr><th style="width:26%">客户代号</th><th style="width:18%">类型</th><th style="width:22%">主营品类</th><th style="width:18%">对接人</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A01</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A02</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A03</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A04</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A05</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A06</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A07</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A08</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A09</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A10</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A11</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td><strong>A12</strong></td><td class="blank">待填</td><td class="blank">—</td><td class="blank">—</td><td></td></tr>
+      <tr><td class="blank">（续写）</td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr>
+    </tbody>
+  </table>
+  <div class="note">代号与真名的对照表<strong>只保存在线下</strong>，不在本页、不在公开仓库。对外沟通、内部表单一律用代号。</div>
+
+  <h2>二、工作室合作与批次</h2>
+  <table>
+    <thead><tr><th style="width:14%">批次</th><th style="width:56%">工作室</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td><strong>第一批</strong></td><td>沐曦、羽依、马老师、三只鹅</td><td>首批给新款</td></tr>
+      <tr><td><strong>第二批</strong></td><td>山海、卡瑞斯、刘开、乐康、睿琪</td><td></td></tr>
+      <tr><td><strong>第三批</strong></td><td>集创、十加、小颜、杨老师、青青、蒋慧</td><td></td></tr>
+      <tr><td>第四批</td><td class="blank">待定</td><td class="blank">待补</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>节点：</strong>11 月 15 日前后，新款少量提供给第一、二批工作室；同步收色、安排颜色，跟进同行的颜色与产品动向，锁定市场爆款。</div>
+
+  <h2>三、市场、人员与场地</h2>
+  <table>
+    <thead><tr><th style="width:16%">项目</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td>市场优先级</td><td><strong>九天 ＞ 意法 ＞ 四季青 ＞ 环北</strong></td></tr>
+      <tr><td>区域优先级</td><td><strong>临平 ＞ 上城 ＞ 萧山</strong></td></tr>
+      <tr><td>临平方向</td><td>云尚、意尚、靓素、高地</td></tr>
+      <tr><td>上城方向</td><td>九堡、四季青</td></tr>
+      <tr><td>人员规模</td><td>5 进 2 ／ 3 进 1；年前考核，年后上岗</td></tr>
+      <tr><td>场地</td><td>费用 15–20（万/年），<strong>12 月前尽量敲定</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2>四、年前招人流程</h2>
+  <table>
+    <thead><tr><th style="width:12%">阶段</th><th style="width:30%">周期</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td><strong>初试</strong></td><td>集中培训 15 天</td><td>培训期内无薪；考核 10–15 天后初筛</td></tr>
+      <tr><td><strong>二试</strong></td><td>试用期</td><td>收集信息、画市场地图、跟进部分客户、色卡跟进；<strong>试用期工资照发</strong></td></tr>
+      <tr><td><strong>三试</strong></td><td>年前</td><td>实践扫楼、单独聊客户；通过者年后报到</td></tr>
+      <tr><td>编制</td><td>—</td><td>团队预计需要 2–3 人；统一工作机、工作微信</td></tr>
+    </tbody>
+  </table>
+  <div class="note">培训无薪这一条有合规风险，签协议前建议咨询劳动法口径，避免试用期争议。</div>
+
+  <h2>五、色号 ↔ 规格对照（内部编号）</h2>
+  <table>
+    <thead><tr><th style="width:16%">色号／编号</th><th style="width:40%">对应规格</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td>520</td><td>480T 尼丝纺（低弹丝）</td><td>锦盛 · 二分厂</td></tr>
+      <tr><td>7507</td><td>经 T400</td><td></td></tr>
+      <tr><td>796</td><td>超薄超扁弹</td><td class="blank">品名待核</td></tr>
+      <tr><td>7039</td><td>50D 超扁弹</td><td></td></tr>
+      <tr><td>5312</td><td>55／60 规格</td><td class="blank">数字待核</td></tr>
+      <tr><td>5016</td><td>380 塔丝绒（塔丝隆）</td><td></td></tr>
+      <tr><td>6035</td><td>320</td><td class="blank">规格待补</td></tr>
+      <tr><td>7508</td><td>加厚经 T400</td><td></td></tr>
+      <tr><td>NA33</td><td>400 涤锦纺</td><td></td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>新纤维（新开发／备选）：</strong>7217 → T400 105 克（7217-5）；7215 → 全雾收缩绒；5327 → 470 尼丝纺；7063 → 座丝棉 T400 156 克；754 → 380 锦塔夫。</div>
+
+  <h2>六、跟单节点与交期</h2>
+  <table>
+    <thead><tr><th style="width:8%">序</th><th style="width:26%">节点</th><th>要求</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>编号</td><td>新色号先编号入册，再进流程</td></tr>
+      <tr><td>2</td><td>在库统计</td><td>统计表汇总到厂，<strong>每月 28 号前</strong>完成</td></tr>
+      <tr><td>3</td><td>坯布整理</td><td><strong>每月 25–28 号</strong>，按每个跟单分开整理</td></tr>
+      <tr><td>4</td><td>交期</td><td>主料／温（副）分开跟；小批量补货＋回修<strong>不超过 4 天</strong>；服装 5098、5076 修补要及时</td></tr>
+      <tr><td>5</td><td>颜色</td><td>艳色要多层；补单对色在<strong>缸内小修</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="note">这页是内部作业口径（含供应商与自家编号），<strong>不进公开书</strong>；公开书里只保留通用的规格知识。</div>
+
+  <h2>七、工艺单要点（打样／大货）</h2>
+  <table>
+    <thead><tr><th style="width:16%">项目</th><th>要求</th></tr></thead>
+    <tbody>
+      <tr><td>G802</td><td>用静轴缸染，做平；前处理走预定定型</td></tr>
+      <tr><td>大货</td><td>做坯，温高；小批量另做对样</td></tr>
+      <tr><td>5605</td><td><strong>必须搭衣服</strong>，否则客户看不懂效果</td></tr>
+      <tr><td>涂层</td><td>全做涂层，选 <strong>6802</strong></td></tr>
+      <tr><td>7771</td><td>光油 ＋ 气凝胶膜</td></tr>
+      <tr><td>778 / 520</td><td>对贴，<strong>14 号出</strong></td></tr>
+      <tr><td>基布</td><td>3 ＋ 2 米</td></tr>
+    </tbody>
+  </table>
+  <div class="note">工艺单编号是本厂口径，对外报价时用「规格＋后工艺」描述，不要直接报编号。</div>
+
+  <footer>
+    TT纺织内部资料 · 整理 窦金龙（微信 dv13588355444）· 2026-10 · 请勿外传
+  </footer>
+</div>
+</body>
+</html>
