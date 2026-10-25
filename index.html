@@ -189,7 +189,7 @@
       var st=sub?sub.replace(/^\d{1,2}\.\d{1,2}\s*/,''):'';
       if(st && sn.indexOf(st)>=0){ sn=sn.replace(st,''); }
       sn=sn.replace(/\d{1,2}\.\d{1,2}\s*/g,'').replace(/^[…\s]+/,'');
-      html+='<a class="hit" href="'+BOOK+'?c='+c.id+'#'+c.id+'">'
+      html+='<a class="hit" href="'+BOOK+'?c='+c.id+'&q='+encodeURIComponent(term)+'#'+c.id+'">'
           + '<div class="hn">第 '+c.n+' 章'+(o.where?' · '+o.where:'')+'</div>'
           + '<div class="ht">'+hl(c.t,re)+'</div>'
           + (sub?'<div class="hs">'+hl(sub,re)+'</div>':'')

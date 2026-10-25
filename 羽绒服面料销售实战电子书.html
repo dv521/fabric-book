@@ -2565,30 +2565,73 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
   section[id],h3[id]{scroll-margin-top:16px}
   .flash{animation:landflash 1.6s ease}
   @keyframes landflash{0%{background:#fff6e2}70%{background:#fff6e2}100%{background:transparent}}
+  mark.qmark{background:#ffe27a;color:#3a2a00;padding:0 1px;border-radius:2px;box-shadow:0 0 0 1px #f3c94b inset}
+  mark.qmark.pulse{animation:qpulse 1.4s ease 2}
+  @keyframes qpulse{0%{background:#ffd74d}100%{background:#ffe27a}}
 </style>
-
 <script id="anchor-jump-js">
 (function(){
-  function target(){
-    var m=location.search.match(/[?&]c=([^&]+)/);
-    if(m) return decodeURIComponent(m[1]);
-    if(location.hash) return decodeURIComponent(location.hash.slice(1));
-    return null;
+  function param(k){
+    var m=location.search.match(new RegExp('[?&]'+k+'=([^&]+)'));
+    return m?decodeURIComponent(m[1]):null;
+  }
+  function escRe(c){ return "\\^$.*+?()[]{}|".indexOf(c)>=0 ? ('\\'+c) : c; }
+  function reFor(term){
+    var parts=term.split('').map(escRe);
+    return new RegExp(parts.join('\\s*'),'gi');
+  }
+  function markIn(root, term){
+    if(!term) return null;
+    var re=reFor(term), first=null, count=0, LIMIT=20;
+    var walker=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode:function(n){
+        if(!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        var p=n.parentNode.nodeName;
+        if(p==='SCRIPT'||p==='STYLE'||p==='MARK') return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var nodes=[], n;
+    while((n=walker.nextNode())) nodes.push(n);
+    nodes.forEach(function(node){
+      if(count>=LIMIT) return;
+      var txt=node.nodeValue, g=reFor(term), m, last=0, frag=document.createDocumentFragment(), hit=false;
+      while((m=g.exec(txt)) && count<LIMIT){
+        hit=true;
+        frag.appendChild(document.createTextNode(txt.slice(last,m.index)));
+        var mk=document.createElement('mark');
+        mk.className='qmark'; mk.textContent=m[0];
+        frag.appendChild(mk);
+        if(!first) first=mk;
+        last=m.index+m[0].length; count++;
+        if(m[0].length===0){ g.lastIndex++; }
+      }
+      if(hit){
+        frag.appendChild(document.createTextNode(txt.slice(last)));
+        node.parentNode.replaceChild(frag,node);
+      }
+    });
+    return first;
   }
   var tries=0;
   function jump(){
-    var id=target(); if(!id) return;
+    var id=param('c') || (location.hash?decodeURIComponent(location.hash.slice(1)):null);
+    if(!id) return;
     var el=document.getElementById(id); if(!el) return;
-    var y=el.getBoundingClientRect().top+window.pageYOffset-14;
-    try{ el.scrollIntoView({block:'start',behavior:'auto'}); }catch(e){ el.scrollIntoView(true); }
+    var term=param('q');
+    var target=el;
+    if(term){
+      var mk=markIn(el, term);
+      if(mk){ target=mk; mk.classList.add('pulse'); }
+    }
+    var y=target.getBoundingClientRect().top+window.pageYOffset-(target===el?14:90);
+    try{ target.scrollIntoView({block:'start',behavior:'auto'}); }catch(e){ target.scrollIntoView(true); }
     try{ window.scrollTo({top:y,behavior:'auto'}); }catch(e){ window.scrollTo(0,y); }
     document.documentElement.scrollTop=y; document.body.scrollTop=y;
-    if(location.hash!=='#'+id){ try{ history.replaceState(null,'','#'+id); }catch(e){} }
     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
     setTimeout(function(){ el.classList.remove('flash'); },2000);
-    // 版面还在撑开时，重试几次直到真的贴近顶部
     tries++;
-    if(tries<12 && Math.abs(el.getBoundingClientRect().top-14)>60){ setTimeout(jump,250); }
+    if(tries<12 && Math.abs(el.getBoundingClientRect().top-14)>80 && !term){ setTimeout(jump,250); }
   }
   window.addEventListener('hashchange', function(){ tries=0; jump(); });
   window.addEventListener('load', function(){ setTimeout(jump,60); });
