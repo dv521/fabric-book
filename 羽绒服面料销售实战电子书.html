@@ -2567,6 +2567,9 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
   @keyframes landflash{0%{background:#fff6e2}70%{background:#fff6e2}100%{background:transparent}}
   mark.qmark{background:#ffe27a;color:#3a2a00;padding:0 1px;border-radius:2px;box-shadow:0 0 0 1px #f3c94b inset}
   mark.qmark.pulse{animation:qpulse 1.4s ease 2}
+  #jtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:#1b232b;color:#fff;
+    font-size:13px;padding:9px 15px;border-radius:22px;opacity:0;transition:.25s;z-index:9999;box-shadow:0 6px 20px rgba(0,0,0,.22);max-width:86vw;text-align:center}
+  #jtoast.on{opacity:1;transform:translateX(-50%) translateY(0)}
   @keyframes qpulse{0%{background:#ffd74d}100%{background:#ffe27a}}
 </style>
 <script id="anchor-jump-js">
@@ -2613,22 +2616,15 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
     });
     return first;
   }
-  function lockTo(el, offset){
-    var root=document.documentElement;
-    var prev=root.style.scrollBehavior;
-    root.style.scrollBehavior='auto';
-    var n=0;
-    function step(){
-      var r=el.getBoundingClientRect();
-      var delta=Math.round(r.top-offset);
-      if(Math.abs(delta)>3){
-        window.scrollBy(0, delta);
-        if(document.body) document.body.scrollTop=window.pageYOffset+delta;
-      }
-      n++;
-      if(n<100){ requestAnimationFrame(step); } else { root.style.scrollBehavior=prev||''; }
+  function settle(el, center){
+    var i=0;
+    function once(){
+      try{ el.scrollIntoView({block: center?'center':'start', behavior:'auto'}); }
+      catch(e){ el.scrollIntoView(center?true:false); }
+      i++;
+      if(i<3) setTimeout(once, 260);
     }
-    requestAnimationFrame(step);
+    once();
   }
   var jumped=false;
   function jump(){
@@ -2642,7 +2638,16 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
       var mk=markIn(el, term);
       if(mk){ target=mk; mk.classList.add('pulse'); offset=Math.min(160, Math.round(window.innerHeight*0.25)); }
     }
-    lockTo(target, offset);
+    settle(target, target!==el);
+    if(term){
+      var tot=el.querySelectorAll('mark.qmark').length;
+      var t=document.getElementById('jtoast');
+      if(!t){ t=document.createElement('div'); t.id='jtoast'; document.body.appendChild(t); }
+      t.textContent='已定位「'+term+'」· 本章 '+tot+' 处';
+      t.classList.add('on');
+      clearTimeout(window.__jt);
+      window.__jt=setTimeout(function(){ t.classList.remove('on'); }, 3200);
+    }
     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
     setTimeout(function(){ el.classList.remove('flash'); },2000);
     jumped=true;
