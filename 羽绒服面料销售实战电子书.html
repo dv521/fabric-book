@@ -2613,32 +2613,45 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
     });
     return first;
   }
-  var tries=0;
+  function lockTo(el, offset){
+    var root=document.documentElement;
+    var prev=root.style.scrollBehavior;
+    root.style.scrollBehavior='auto';
+    var n=0;
+    function step(){
+      var r=el.getBoundingClientRect();
+      var delta=Math.round(r.top-offset);
+      if(Math.abs(delta)>3){
+        window.scrollBy(0, delta);
+        if(document.body) document.body.scrollTop=window.pageYOffset+delta;
+      }
+      n++;
+      if(n<100){ requestAnimationFrame(step); } else { root.style.scrollBehavior=prev||''; }
+    }
+    requestAnimationFrame(step);
+  }
+  var jumped=false;
   function jump(){
     var id=param('c') || (location.hash?decodeURIComponent(location.hash.slice(1)):null);
     if(!id) return;
     var el=document.getElementById(id); if(!el) return;
     var term=param('q');
-    if(!term){
-      try{ term=localStorage.getItem('tb_lastq'); if(term) localStorage.removeItem('tb_lastq'); }catch(e){}
-    }
-    var target=el;
+    if(!term){ try{ term=localStorage.getItem('tb_lastq'); if(term) localStorage.removeItem('tb_lastq'); }catch(e){} }
+    var target=el, offset=16;
     if(term){
       var mk=markIn(el, term);
-      if(mk){ target=mk; mk.classList.add('pulse'); }
+      if(mk){ target=mk; mk.classList.add('pulse'); offset=Math.min(160, Math.round(window.innerHeight*0.25)); }
     }
-    var y=target.getBoundingClientRect().top+window.pageYOffset-(target===el?14:90);
-    try{ target.scrollIntoView({block:'start',behavior:'auto'}); }catch(e){ target.scrollIntoView(true); }
-    try{ window.scrollTo({top:y,behavior:'auto'}); }catch(e){ window.scrollTo(0,y); }
-    document.documentElement.scrollTop=y; document.body.scrollTop=y;
+    lockTo(target, offset);
     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
     setTimeout(function(){ el.classList.remove('flash'); },2000);
-    tries++;
-    if(tries<12 && Math.abs(el.getBoundingClientRect().top-14)>80 && !term){ setTimeout(jump,250); }
+    jumped=true;
   }
   window.addEventListener('hashchange', function(){ tries=0; jump(); });
-  window.addEventListener('load', function(){ setTimeout(jump,60); });
-  setTimeout(jump,200);
+  window.addEventListener('load', function(){ setTimeout(jump,80); });
+  window.addEventListener('resize', function(){ if(jumped) jump(); });
+  setTimeout(jump,150);
+  setTimeout(function(){ if(jumped) jump(); }, 900);
 })();
 </script>
 
