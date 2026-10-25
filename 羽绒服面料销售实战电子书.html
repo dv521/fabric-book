@@ -2570,6 +2570,9 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
   #jtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:#1b232b;color:#fff;
     font-size:13px;padding:9px 15px;border-radius:22px;opacity:0;transition:.25s;z-index:9999;box-shadow:0 6px 20px rgba(0,0,0,.22);max-width:86vw;text-align:center}
   #jtoast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  #jbtn{position:fixed;right:16px;bottom:76px;z-index:9999;background:#b45309;color:#fff;border:0;border-radius:24px;
+    padding:11px 16px;font-size:13.5px;box-shadow:0 6px 18px rgba(180,83,9,.35);display:none;font-family:inherit}
+  #jbtn.on{display:block}
   @keyframes qpulse{0%{background:#ffd74d}100%{background:#ffe27a}}
 </style>
 <script id="anchor-jump-js">
@@ -2660,6 +2663,18 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
       clearTimeout(window.__jt);
       window.__jt=setTimeout(function(){ t.classList.remove('on'); }, 3200);
     }
+    setTimeout(function(){
+      var r=target.getBoundingClientRect();
+      var vis = r.top > -30 && r.top < (window.innerHeight - 60);
+      var b=document.getElementById('jbtn');
+      if(!vis){
+        if(!b){ b=document.createElement('button'); b.id='jbtn'; b.textContent='↓ 跳到高亮处'; document.body.appendChild(b);
+          b.addEventListener('click', function(){ target.scrollIntoView({block:'center',behavior:'smooth'}); b.classList.remove('on'); });
+        }
+        b.classList.add('on');
+        setTimeout(function(){ b.classList.remove('on'); }, 9000);
+      } else if(b){ b.classList.remove('on'); }
+    }, 1500);
     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
     setTimeout(function(){ el.classList.remove('flash'); },2000);
     jumped=true;
