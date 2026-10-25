@@ -203,6 +203,10 @@
     if(e.key==='Enter'){var f=res.querySelector('.hit'); if(f) location.href=f.getAttribute('href');}
   });
   go.addEventListener('click',run);
+  res.addEventListener('click',function(e){
+    var a=e.target.closest('.hit'); if(!a) return;
+    try{ localStorage.setItem('tb_lastq', q.value.trim()); }catch(err){}
+  });
   hot.addEventListener('click',function(e){
     if(e.target.tagName==='SPAN'){q.value=e.target.textContent;run();q.focus();}
   });

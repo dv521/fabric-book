@@ -2619,6 +2619,9 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
     if(!id) return;
     var el=document.getElementById(id); if(!el) return;
     var term=param('q');
+    if(!term){
+      try{ term=localStorage.getItem('tb_lastq'); if(term) localStorage.removeItem('tb_lastq'); }catch(e){}
+    }
     var target=el;
     if(term){
       var mk=markIn(el, term);
