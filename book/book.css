@@ -257,7 +257,6 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
 
 nav.side a.cur{background:#1b232b;color:#fff}
 nav.side a.cur:after{content:" · 当前";font-size:10px;opacity:.7}
-
 .crumb{font-size:12.5px;color:#8a929c;letter-spacing:.08em;margin-bottom:18px}
 .crumb a{color:#b45309;text-decoration:none;border-bottom:1px dotted #e0b98c}
 .chnav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:46px 0 10px;padding-top:18px;border-top:1px solid #e2e7ec;font-size:13.5px}
