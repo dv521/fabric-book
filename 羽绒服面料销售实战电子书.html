@@ -2640,7 +2640,15 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
       var mk=markIn(el, term);
       if(mk && mk.classList) mk.classList.add('pulse');
       if(h3){ target=h3; }
-      else if(mk){ target=mk; }
+      else if(mk){
+        // 没传小节参数时，自己找到“含这个词的小节标题”
+        var anc=mk.closest?mk.closest('h3'):null;
+        if(!anc){
+          var hs=el.querySelectorAll('h3');
+          for(var i=0;i<hs.length;i++){ if(hs[i].textContent.replace(/\s/g,'').indexOf(term.replace(/\s/g,''))>=0){ anc=hs[i]; break; } }
+        }
+        target=anc||mk;
+      }
     } else if(h3){ target=h3; }
     settle(target, target!==el && target!==h3);
     if(term){
