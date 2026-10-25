@@ -168,14 +168,14 @@
     if(!term){res.classList.remove('on');res.innerHTML='';return;}
     var out=[], re=termRe(term);
     D.forEach(function(c){
-      var score=0, where='', hitH=null, cnt=0;
+      var score=0, where='', hitH=null, hitId=null, cnt=0;
       if(re.test(c.t)){score+=12;where='章标题';}
-      c.hs.forEach(function(h){
-        if(!hitH && re.test(h.t)){hitH=h.t;score+=6;}
+      c.hs.forEach(function(hh){
+        if(!hitH && re.test(hh.t)){hitH=hh.t; hitId=hh.id; score+=6;}
       });
       var all=c.x.match(new RegExp(re.source,'gi'));
       if(all){cnt=all.length;score+=2+Math.min(4,cnt);}
-      if(score>0) out.push({c:c,score:score,where:where,hitH:hitH});
+      if(score>0) out.push({c:c,score:score,where:where,hitH:hitH,hitId:hitId});
     });
     out.sort(function(a,b){return b.score-a.score;});
     if(!out.length){
@@ -189,7 +189,7 @@
       var st=sub?sub.replace(/^\d{1,2}\.\d{1,2}\s*/,''):'';
       if(st && sn.indexOf(st)>=0){ sn=sn.replace(st,''); }
       sn=sn.replace(/\d{1,2}\.\d{1,2}\s*/g,'').replace(/^[…\s]+/,'');
-      html+='<a class="hit" href="'+BOOK+'?c='+c.id+'&q='+encodeURIComponent(term)+'#'+c.id+'">'
+      html+='<a class="hit" href="'+BOOK+'?c='+c.id+(o.hitId?'&h='+o.hitId:'')+'&q='+encodeURIComponent(term)+'#'+c.id+'">'
           + '<div class="hn">第 '+c.n+' 章'+(o.where?' · '+o.where:'')+'</div>'
           + '<div class="ht">'+hl(c.t,re)+'</div>'
           + (sub?'<div class="hs">'+hl(sub,re)+'</div>':'')

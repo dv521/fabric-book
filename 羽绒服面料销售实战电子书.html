@@ -2633,12 +2633,16 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
     var el=document.getElementById(id); if(!el) return;
     var term=param('q');
     if(!term){ try{ term=localStorage.getItem('tb_lastq'); if(term) localStorage.removeItem('tb_lastq'); }catch(e){} }
+    var hid=param('h');
+    var h3=hid?document.getElementById(hid):null;
     var target=el, offset=16;
     if(term){
       var mk=markIn(el, term);
-      if(mk){ target=mk; mk.classList.add('pulse'); offset=Math.min(160, Math.round(window.innerHeight*0.25)); }
-    }
-    settle(target, target!==el);
+      if(mk && mk.classList) mk.classList.add('pulse');
+      if(h3){ target=h3; }
+      else if(mk){ target=mk; }
+    } else if(h3){ target=h3; }
+    settle(target, target!==el && target!==h3);
     if(term){
       var tot=el.querySelectorAll('mark.qmark').length;
       var t=document.getElementById('jtoast');
