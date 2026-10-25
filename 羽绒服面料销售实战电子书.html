@@ -2560,5 +2560,31 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
   }
 </style>
 
+
+<style id="anchor-jump">
+  section[id],h3[id]{scroll-margin-top:16px}
+  .flash{animation:landflash 1.6s ease}
+  @keyframes landflash{0%{background:#fff6e2}70%{background:#fff6e2}100%{background:transparent}}
+</style>
+
+<script id="anchor-jump-js">
+(function(){
+  function jump(){
+    if(!location.hash) return;
+    var id=decodeURIComponent(location.hash.slice(1));
+    var el=document.getElementById(id);
+    if(!el) return;
+    var y=el.getBoundingClientRect().top+window.pageYOffset-14;
+    try{ window.scrollTo({top:y,behavior:'auto'}); }catch(e){ window.scrollTo(0,y); }
+    document.documentElement.scrollTop=y; document.body.scrollTop=y;
+    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+    setTimeout(function(){ el.classList.remove('flash'); },1800);
+  }
+  window.addEventListener('hashchange', jump);
+  window.addEventListener('load', function(){ setTimeout(jump,80); setTimeout(jump,500); });
+  setTimeout(jump,1200);
+})();
+</script>
+
 </body>
 </html>
