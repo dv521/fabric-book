@@ -90,10 +90,10 @@
   </div>
 
   <h2>主资料</h2>
-  <a class="card" href="羽绒服面料销售实战电子书.html">
+  <a class="card" href="book/index.html">
     <div class="t">羽绒服面料销售实战电子书</div>
     <div class="d">五大板块 · 36 章：① 常见面料成份　② 从石油到化纤　③ 单丝规格与技术环节　④ 生产全流程四阶段　⑤ 销售核心技巧（售前/售中/售后）。含棉麻丝毛、再生纤维素、纺丝七段、FDY/DTY/ATY、染厂五步、燃烧法拆布、开裁界限等新增章节，每章带标准号与可查链接。</div>
-    <div class="m"><span>在线阅读</span><span>36 章 · 五大板块</span><span>2026-10</span></div>
+    <div class="m"><span>分章阅读 · 36 章</span><span>点开即达</span><span>2026-10</span></div>
   </a>
 
   <a class="card" href="colorcard/index.html">
@@ -136,7 +136,7 @@
   var D=JSON.parse(document.getElementById('sd').textContent);
   var q=document.getElementById('q'), res=document.getElementById('res'),
       hot=document.getElementById('hot'), go=document.getElementById('go');
-  var BOOK="https://dv521.github.io/fabric-book/%E7%BE%BD%E7%BB%92%E6%9C%8D%E9%9D%A2%E6%96%99%E9%94%80%E5%94%AE%E5%AE%9E%E6%88%98%E7%94%B5%E5%AD%90%E4%B9%A6.html";
+  var BOOK="";
   var SPECIAL="\\^$.*+?()[]{}|";
   function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
   function termRe(t){
@@ -189,7 +189,7 @@
       var st=sub?sub.replace(/^\d{1,2}\.\d{1,2}\s*/,''):'';
       if(st && sn.indexOf(st)>=0){ sn=sn.replace(st,''); }
       sn=sn.replace(/\d{1,2}\.\d{1,2}\s*/g,'').replace(/^[…\s]+/,'');
-      html+='<a class="hit" href="'+BOOK+'?c='+c.id+(o.hitId?'&h='+o.hitId:'')+'&q='+encodeURIComponent(term)+'#'+c.id+'">'
+      html+='<a class="hit" href="book/ch'+c.n+'.html?c='+c.id+(o.hitId?'&h='+o.hitId:'')+'&q='+encodeURIComponent(term)+'#'+c.id+'">'
           + '<div class="hn">第 '+c.n+' 章'+(o.where?' · '+o.where:'')+'</div>'
           + '<div class="ht">'+hl(c.t,re)+'</div>'
           + (sub?'<div class="hs">'+hl(sub,re)+'</div>':'')
