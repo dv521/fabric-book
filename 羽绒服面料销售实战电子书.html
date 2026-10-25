@@ -2569,20 +2569,28 @@ a.ref:hover{color:var(--accent);border-bottom-color:var(--accent);}
 
 <script id="anchor-jump-js">
 (function(){
+  function target(){
+    var m=location.search.match(/[?&]c=([^&]+)/);
+    if(m) return decodeURIComponent(m[1]);
+    if(location.hash) return decodeURIComponent(location.hash.slice(1));
+    return null;
+  }
+  var tries=0;
   function jump(){
-    if(!location.hash) return;
-    var id=decodeURIComponent(location.hash.slice(1));
-    var el=document.getElementById(id);
-    if(!el) return;
+    var id=target(); if(!id) return;
+    var el=document.getElementById(id); if(!el) return;
     var y=el.getBoundingClientRect().top+window.pageYOffset-14;
     try{ window.scrollTo({top:y,behavior:'auto'}); }catch(e){ window.scrollTo(0,y); }
     document.documentElement.scrollTop=y; document.body.scrollTop=y;
     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
-    setTimeout(function(){ el.classList.remove('flash'); },1800);
+    setTimeout(function(){ el.classList.remove('flash'); },2000);
+    // 版面还在撑开时，重试几次直到真的贴近顶部
+    tries++;
+    if(tries<12 && Math.abs(el.getBoundingClientRect().top-14)>60){ setTimeout(jump,250); }
   }
-  window.addEventListener('hashchange', jump);
-  window.addEventListener('load', function(){ setTimeout(jump,80); setTimeout(jump,500); });
-  setTimeout(jump,1200);
+  window.addEventListener('hashchange', function(){ tries=0; jump(); });
+  window.addEventListener('load', function(){ setTimeout(jump,60); });
+  setTimeout(jump,200);
 })();
 </script>
 
