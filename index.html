@@ -6,377 +6,261 @@
 <title>TT纺织 · 羽绒服面料销售知识库</title>
 <meta name="description" content="从一根纱线到一笔订单：羽绒服面料成分、化纤工艺、单丝规格、生产四阶段与销售技巧，五大板块 36 章。">
 <style>
-:root{--ink:#0e1116;--ink2:#3d4650;--ink3:#77818c;--line:#e6e8ea;--bg:#ffffff;--soft:#f7f7f5;--accent:#b45309;--accent2:#8a3f07}
+:root{--ink:#0e1013;--ink2:#414a54;--ink3:#7b848f;--line:#e8eaee;--soft:#f6f7f8;--accent:#b45309;--dark:#12101a}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15.5px;
- font-family:"IBM Plex Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:#fff;color:var(--ink);line-height:1.75;
+ font-family:"IBM Plex Sans","PingFang SC","Hiragino Sans GB",-apple-system,sans-serif;
+ -webkit-font-smoothing:antialiased;font-size:15.5px}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
 
-/* nav */
-header.nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header.nav .in{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1080px;margin:0 auto;padding:0 24px}
-.brandbox{display:flex;align-items:center;gap:11px}
-.mark{width:34px;height:34px;border-radius:9px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;letter-spacing:.02em}
-.brandbox .n{font-weight:700;font-size:15.5px;line-height:1.2}
-.brandbox .t{font-size:11.5px;color:var(--ink3);letter-spacing:.06em}
-nav.menu{display:flex;gap:6px;align-items:center}
-nav.menu a{padding:7px 13px;border-radius:20px;font-size:14px;color:var(--ink2)}
-nav.menu a:hover{background:var(--soft)}
-nav.menu a.on{background:#eef1f4;color:var(--ink);font-weight:600}
+/* ── header ── */
+.site-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{display:flex;align-items:center;gap:12px}
+.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#1d2430,#3c2a18);color:#f2c48a;
+ display:grid;place-items:center;font-weight:750;font-size:15px;letter-spacing:.02em;flex:0 0 auto}
+.bt{display:flex;flex-direction:column;line-height:1.25}
+.bt b{font-size:18px;font-weight:750;letter-spacing:-.01em}
+.bt i{font-style:normal;font-size:12.5px;color:var(--ink3);margin-top:2px}
+.desktop-nav{display:flex;gap:2px;align-items:center}
+.desktop-nav a{padding:8px 14px;border-radius:20px;font-size:14px;color:var(--ink2);white-space:nowrap}
+.desktop-nav a:hover{background:var(--soft)}
+.desktop-nav a.on{background:#eef1f4;color:var(--ink);font-weight:650}
+.mobile-nav-grid{display:none}
 
-/* hero */
-.hero{background:radial-gradient(120% 120% at 78% 18%,#243244 0%,#141b26 42%,#0b0f15 100%);color:#fff;padding:74px 0 66px}
-.hero .eyebrow{font-size:11.5px;letter-spacing:.32em;color:#c8a06a;font-weight:700}
-.hero h1{font-size:clamp(38px,5.4vw,62px);line-height:1.12;letter-spacing:-.02em;margin:14px 0 16px;font-weight:800}
-.hero h1 em{font-style:normal;color:#f2c48a}
-.hero p.sub{font-size:16px;color:#c3cbd6;margin:0 0 26px;max-width:640px}
-.btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:26px;font-size:14.5px;font-weight:600}
-.btn.pri{background:#f2c48a;color:#2a1a06}
-.btn.pri:hover{background:#f6d3a4}
-.btn.sec{border:1px solid rgba(255,255,255,.35);color:#fff}
-.btn.sec:hover{background:rgba(255,255,255,.1)}
-.meta{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap;font-size:13px;color:#9aa5b1}
-.meta b{display:block;color:#fff;font-size:20px;font-weight:700;letter-spacing:-.01em}
+/* ── hero ── */
+.hero{position:relative;isolation:isolate;overflow:clip;padding:clamp(64px,8vw,100px) 0 clamp(56px,6vw,80px);color:#fff}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;
+ background:radial-gradient(circle at 16% 18%,rgba(210,160,90,.18),transparent 26%),
+            radial-gradient(circle at 78% 14%,rgba(108,128,255,.14),transparent 24%),
+            linear-gradient(132deg,#0f0d18 0%,#191623 44%,#122236 100%)}
+.kicker{font-size:11.5px;letter-spacing:.26em;color:#e0b483;font-weight:700;text-transform:uppercase}
+.hero h1{margin:14px 0 0;display:grid;gap:.1em;font-size:clamp(2.6rem,6.4vw,4.6rem);line-height:.98;letter-spacing:-.05em;font-weight:800}
+.hero h1 em{font-style:normal;color:#f4c78f}
+.hero .sub{max-width:40rem;margin:20px 0 0;color:rgba(224,232,244,.88);font-size:clamp(1rem,1.6vw,1.15rem)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:26px;font-size:14.5px;font-weight:650}
+.btn.pri{background:#f4c78f;color:#241505}
+.btn.pri:hover{background:#f7d5a8}
+.btn.ghost{border:1px solid rgba(255,255,255,.34);color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.1)}
+.stats{display:flex;gap:34px;flex-wrap:wrap;margin-top:40px;font-size:12.5px;color:#9aa5b2}
+.stats b{display:block;font-size:22px;color:#fff;font-weight:750;letter-spacing:-.02em}
 
-/* search */
-.srch{margin:-34px 0 0;position:relative;z-index:20}
-.srch .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 12px 34px rgba(16,24,36,.09)}
-.srch .hd{font-size:11.5px;letter-spacing:.18em;color:var(--ink3);margin-bottom:10px}
-.srch .row{display:flex;gap:10px;align-items:center;position:relative}
-.srch input{flex:1;border:1px solid #dcd7cd;background:#fcfbf9;border-radius:11px;padding:13px 14px 13px 40px;font-size:15px;outline:none;font-family:inherit}
-.srch input:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px rgba(180,83,9,.1)}
-.sicon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;opacity:.55;pointer-events:none}
-.srch button{border:0;background:var(--accent);color:#fff;border-radius:11px;padding:13px 20px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:inherit}
-.srch button:hover{background:var(--accent2)}
-.hot{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
-.hot span{font-size:12.5px;color:var(--ink2);background:#f2f3f4;border-radius:20px;padding:4px 11px;cursor:pointer}
-.hot span:hover{background:#efe4d2;color:#8a5a1e}
-.res{margin-top:12px;display:none;background:#fff;border:1px solid #f0e2cc;border-radius:12px;padding:4px 6px}
-.res.on{display:block}
-.hit{display:block;padding:12px 12px;border-top:1px solid #f2f4f6;color:inherit}
-.hit:first-child{border-top:0}
-.hit:hover{background:#fcfaf6;border-radius:8px}
-.hit .hn{font-size:11.5px;color:var(--accent);letter-spacing:.12em}
-.hit .ht{font-size:15.5px;font-weight:650;margin:2px 0 3px}
-.hit .hs{font-size:13px;color:var(--ink2);line-height:1.65}
-.hit mark{background:#ffe9a8;color:inherit}
-.none,.cnt{font-size:12.5px;color:var(--ink3);padding:8px 4px}
+/* ── section ── */
+.block{padding:clamp(46px,6vw,72px) 0;border-bottom:1px solid var(--line)}
+.block:last-of-type{border-bottom:0}
+.block h2{font-size:clamp(1.55rem,3vw,2.1rem);letter-spacing:-.025em;margin:10px 0 8px;font-weight:780}
+.block .lede{color:var(--ink2);margin:0 0 26px;max-width:660px}
 
-/* sections */
-section{padding:62px 0}
-section.soft{background:var(--soft)}
-.eyebrow2{font-size:11.5px;letter-spacing:.3em;color:var(--accent);font-weight:700}
-h2.st{font-size:clamp(24px,3vw,32px);letter-spacing:-.02em;margin:10px 0 8px;font-weight:750}
-p.lede{color:var(--ink2);margin:0 0 30px;max-width:680px}
+/* 列表行 */
+.rows{border-top:1px solid var(--line)}
+.rows a{display:grid;grid-template-columns:88px 1fr auto;gap:18px;align-items:baseline;padding:18px 2px;border-bottom:1px solid var(--line)}
+.rows a:hover{background:#fffdf8}
+.rows .d{font-size:12.5px;color:var(--ink3);letter-spacing:.04em}
+.rows .t{font-size:17.5px;font-weight:650;letter-spacing:-.01em}
+.rows .x{font-size:13.5px;color:var(--ink2);margin-top:3px}
+.rows .go{font-size:12.5px;color:var(--ink3);white-space:nowrap}
 
-/* 最新更新 */
-.upd{border-top:1px solid var(--line)}
-.upd a{display:grid;grid-template-columns:96px 1fr auto;gap:16px;align-items:baseline;padding:18px 4px;border-bottom:1px solid var(--line)}
-.upd a:hover{background:#fffdf8}
-.upd .d{font-size:12.5px;color:var(--ink3);letter-spacing:.04em}
-.upd .tt{font-size:17px;font-weight:650}
-.upd .dd{font-size:13.5px;color:var(--ink2);margin-top:3px}
-.upd .go{font-size:12.5px;color:var(--ink3);white-space:nowrap}
+/* 板块卡 */
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.pc{border:1px solid var(--line);border-radius:14px;padding:24px 22px;transition:.16s}
+.pc:hover{border-color:#d9b98c;box-shadow:0 10px 28px rgba(16,24,36,.07);transform:translateY(-2px)}
+.pc .k{font-size:11px;letter-spacing:.2em;color:var(--accent);font-weight:700}
+.pc h3{font-size:19px;margin:8px 0 6px;font-weight:700;letter-spacing:-.01em}
+.pc p{font-size:13.5px;color:var(--ink2);margin:0}
+.pc .more{margin-top:14px;font-size:13px;color:var(--accent);font-weight:600}
 
-/* 板块卡片 */
-.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
-.pcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;transition:.16s;display:block}
-.pcard:hover{box-shadow:0 10px 30px rgba(16,24,36,.08);transform:translateY(-2px);border-color:#d8dce0}
-.pcard .k{font-size:11.5px;letter-spacing:.24em;color:var(--accent);font-weight:700}
-.pcard h3{font-size:19px;margin:8px 0 6px;font-weight:700;letter-spacing:-.01em}
-.pcard p{font-size:13.5px;color:var(--ink2);margin:0 0 12px}
-.pcard ul{margin:0;padding-left:0;list-style:none;font-size:13px;color:var(--ink2)}
-.pcard li{padding:3px 0 3px 15px;position:relative}
-.pcard li:before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:#d9b98c}
-.pcard .more{margin-top:12px;font-size:13px;color:var(--accent);font-weight:600}
-
-/* 色卡条 */
+/* 色卡 */
 .cc{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
-.cc a{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;text-align:center}
+.cc a{border:1px solid var(--line);border-radius:10px;padding:13px;text-align:center}
 .cc a:hover{border-color:#d9b98c;background:#fffdf7}
 .cc .no{font-size:11.5px;color:var(--ink3);letter-spacing:.1em}
 .cc .nm{font-size:14.5px;font-weight:650;margin-top:2px}
 
+/* 检索 */
+.sbox{background:#fbfaf7;border:1px solid #ece5d8;border-radius:16px;padding:20px 22px}
+.sbox .hd{font-size:11px;letter-spacing:.2em;color:var(--ink3);margin-bottom:10px}
+.row2{display:flex;gap:10px;align-items:center;position:relative}
+.sbox input{flex:1;border:1px solid #dcd3c2;background:#fff;border-radius:11px;padding:13px 14px 13px 40px;font-size:15px;outline:none;font-family:inherit}
+.sbox input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(180,83,9,.1)}
+.sicon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;opacity:.5}
+.sbox button{border:0;background:var(--accent);color:#fff;border-radius:11px;padding:13px 20px;font-size:14.5px;font-weight:650;cursor:pointer;font-family:inherit}
+.hot{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.hot span{font-size:12.5px;color:var(--ink2);background:#f1f2f4;border-radius:20px;padding:4px 11px;cursor:pointer}
+.hot span:hover{background:#efe4d2;color:#8a5a1e}
+.res{margin-top:12px;display:none;background:#fff;border:1px solid #efe3cd;border-radius:12px;padding:4px 6px}
+.res.on{display:block}
+.hit{display:block;padding:12px;border-top:1px solid #f2f4f6;color:inherit}
+.hit:first-child{border-top:0}
+.hit:hover{background:#fcfaf6;border-radius:8px}
+.hit .hn{font-size:11.5px;color:var(--accent);letter-spacing:.12em}
+.hit .ht{font-size:15.5px;font-weight:650;margin:2px 0 3px}
+.hit .hs{font-size:13px;color:var(--ink2)}
+.hit mark{background:#ffe9a8}
+.none,.cnt{font-size:12.5px;color:var(--ink3);padding:8px 4px}
+
 /* 关于 */
-.about{display:grid;grid-template-columns:1.4fr 1fr;gap:34px}
+.about{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:start}
 .about p{color:var(--ink2);margin:0 0 14px}
-.card2{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
-.card2 .row{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}
-.card2 .row:last-child{border-bottom:0}
-.card2 .row b{min-width:52px;color:var(--ink3);font-weight:500;font-size:12.5px;letter-spacing:.08em}
-.card2 .row .note-red{color:#A8352B}
+.contact{border:1px solid var(--line);border-radius:14px;padding:22px}
+.contact .r{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.contact .r:last-child{border-bottom:0}
+.contact .r b{min-width:48px;font-size:12px;color:var(--ink3);font-weight:500;letter-spacing:.1em}
+.note-red{color:#A8352B}
 
-footer{border-top:1px solid var(--line);padding:34px 0 60px;font-size:12.5px;color:var(--ink3)}
-footer a{color:var(--accent)}
+/* footer */
+.site-footer{background:var(--dark);color:#8d95a1;padding:44px 0 60px;font-size:12.5px;margin-top:0}
+.site-footer a{color:#e0b483}
 
-@media(max-width:760px){
-  nav.menu a{padding:6px 10px;font-size:13px}
-  nav.menu a.hidem{display:none}
-  .hero{padding:54px 0 58px}
-  .about{grid-template-columns:1fr}
-  .upd a{grid-template-columns:1fr;gap:4px}
-  .upd .go{display:none}
-}
-
-/* —— 响应式菜单 —— */
-nav.menu a{white-space:nowrap}
-.hbtn{display:none;background:none;border:0;padding:8px 6px;cursor:pointer;line-height:0}
-.hbtn i{display:block;width:20px;height:2px;background:var(--ink);margin:4px 0;border-radius:2px;transition:.2s}
-.hbtn.on i:nth-child(1){transform:translateY(6px) rotate(45deg)}
-.hbtn.on i:nth-child(2){opacity:0}
-.hbtn.on i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+/* ── 手机端：cge 同款网格导航 ── */
 @media(max-width:820px){
-  .brandbox .t{display:none}
-  .brandbox .n{font-size:14.5px}
-  .hbtn{display:block}
-  nav.menu{position:fixed;left:0;right:0;top:60px;background:#fff;border-bottom:1px solid var(--line);
-    flex-direction:column;align-items:stretch;padding:8px 14px 16px;gap:2px;
-    transform:translateY(-10px);opacity:0;pointer-events:none;transition:.18s ease;
-    box-shadow:0 14px 30px rgba(16,24,36,.12);z-index:59}
-  nav.menu.open{transform:none;opacity:1;pointer-events:auto}
-  nav.menu a{padding:13px 12px;border-radius:10px;font-size:15.5px;border-bottom:1px solid #f4f6f8}
-  nav.menu a:last-child{border-bottom:0}
-  nav.menu a.hidem{display:block}
-  nav.menu a.on{background:#eef1f4}
+  .hd{height:auto;padding:14px 0 10px;justify-content:flex-start}
+  .desktop-nav{display:none}
+  .mobile-nav-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px 0;padding:0 14px 12px}
+  .mobile-nav-grid a{text-align:center;padding:12px 2px;font-size:14.5px;color:var(--ink2);border-radius:8px}
+  .mobile-nav-grid a.on{background:#eef1f4;color:var(--ink);font-weight:650}
+  .hero{padding:54px 0 56px}
+  .stats{gap:22px}
+  .rows a{grid-template-columns:1fr;gap:3px}
+  .rows .go{display:none}
+  .about{grid-template-columns:1fr;gap:26px}
 }
-
-/* —— 手机端：品牌块 + 四列网格菜单（对齐 cge.wang 的做法） —— */
-@media(max-width:820px){
-  .hbtn{display:none !important}
-  header.nav .in{height:auto;flex-direction:column;align-items:stretch;padding:16px 18px 4px;gap:14px}
-  .brandbox{gap:12px}
-  .brandbox .mark{width:46px;height:46px;border-radius:50%;font-size:16px;flex:0 0 auto}
-  .brandbox .n{font-size:20px;font-weight:750;letter-spacing:-.01em}
-  .brandbox .t{display:block;font-size:12.5px;color:var(--ink3);margin-top:3px;letter-spacing:.02em}
-  nav.menu{position:static !important;top:auto !important;left:auto !important;right:auto !important;
-    display:grid !important;grid-template-columns:repeat(4,1fr);gap:2px 0;
-    opacity:1 !important;transform:none !important;pointer-events:auto !important;
-    box-shadow:none !important;border:0 !important;background:transparent !important;
-    padding:0 0 10px !important;flex-direction:row !important;align-items:stretch !important}
-  nav.menu a{padding:12px 2px !important;font-size:14.5px;text-align:center;border:0 !important;
-    border-radius:8px;color:var(--ink2)}
-  nav.menu a.hidem{display:block !important}
-  nav.menu a.on{background:#eef1f4;color:var(--ink);font-weight:650}
-}
-
-.brandbox .bt{display:flex;flex-direction:column;line-height:1.25}
-@media(max-width:820px){.brandbox .bt{line-height:1.2}}
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <div class="in">
-    <a class="brandbox" href="./"><span class="mark">TT</span><span class="bt"><span class="n">TT纺织</span><span class="t">羽绒服面料知识库</span></span></a>
-    <button class="hbtn" aria-label="菜单"><i></i><i></i><i></i></button><nav class="menu">
-      <a class="on" href="./">首页</a>
-      <a href="book/index.html">资料库</a>
-      <a href="colorcard/index.html">色卡</a>
-      <a href="daily/index.html">日课</a>
-      <a href="articles/index.html">文章</a>
-      <a href="cases/index.html">案例</a>
-      <a href="internal.html">内部</a>
-      <a href="#about">关于</a>
-    </nav>
+<header class="site-header">
+  <div class="container hd">
+    <a class="brand" href="./">
+      <span class="avatar">TT</span>
+      <span class="bt"><b>TT纺织</b><i>羽绒服面料知识库</i></span>
+    </a>
+    <nav class="desktop-nav"><a href="./" class="on">首页</a><a href="book/index.html">资料库</a><a href="colorcard/index.html">色卡</a><a href="daily/index.html">日课</a><a href="articles/index.html">文章</a><a href="cases/index.html">案例</a><a href="internal.html">内部</a><a href="#about">关于</a></nav>
   </div>
+  <nav class="container mobile-nav-grid"><a href="./" class="on">首页</a><a href="book/index.html">资料库</a><a href="colorcard/index.html">色卡</a><a href="daily/index.html">日课</a><a href="articles/index.html">文章</a><a href="cases/index.html">案例</a><a href="internal.html">内部</a><a href="#about">关于</a></nav>
 </header>
 
-<div class="hero">
-  <div class="wrap">
-    <div class="eyebrow">FABRIC KNOWLEDGE BASE · 2026</div>
-    <h1>从一根纱线<br>到<em>一笔订单</em></h1>
+<section class="hero">
+  <div class="container">
+    <div class="kicker">Fabric Knowledge Base · 2026</div>
+    <h1><span>从一根纱线</span><span>到<em>一笔订单</em></span></h1>
     <p class="sub">羽绒服面料销售的手头书：成分怎么分、丝怎么纺、布怎么染、话怎么说。每个结论都带标准或出处，经验值单独标注。</p>
-    <div class="btns">
+    <div class="actions">
       <a class="btn pri" href="book/index.html">开始阅读 →</a>
-      <a class="btn sec" href="colorcard/index.html">查色卡</a>
+      <a class="btn ghost" href="colorcard/index.html">查色卡</a>
     </div>
-    <div class="meta">
-      <div><b>36</b>章</div>
-      <div><b>5</b>大板块</div>
-      <div><b>8</b>款色卡</div>
-      <div><b>73</b>页 PDF</div>
+    <div class="stats">
+      <div><b>36</b>章</div><div><b>5</b>大板块</div><div><b>8</b>款色卡</div><div><b>30</b>条日课</div><div><b>73</b>页 PDF</div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="wrap srch">
-  <div class="card">
-    <div class="hd">知识点检索 · 全书 36 章</div>
-    <div class="row">
+<section class="container block">
+  <div class="kicker">Search</div>
+  <h2>知识点检索</h2>
+  <p class="lede">全书 36 章，搜标题、小节和正文。命中后直达那一节，并把关键词标黄。</p>
+  <div class="sbox">
+    <div class="hd">输入关键词，例如「冷堆」「开裁」「静水压」「F数」</div>
+    <div class="row2">
       <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="#8a6a3a" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
-      <input id="q" type="search" placeholder="搜知识点：冷堆、开裁、静水压、F数、尼丝纺、足码…" autocomplete="off">
+      <input id="q" type="search" placeholder="搜知识点…" autocomplete="off">
       <button id="go">搜索</button>
     </div>
-    <div class="hot" id="hot">
-      <span>F数极限</span><span>尼丝纺</span><span>冷堆</span><span>静水压</span><span>开裁</span><span>足码</span><span>三防</span><span>无胆防绒</span>
-    </div>
+    <div class="hot" id="hot"><span>F数极限</span><span>尼丝纺</span><span>冷堆</span><span>静水压</span><span>开裁</span><span>足码</span><span>三防</span></div>
     <div class="res" id="res"></div>
   </div>
-</div>
+</section>
 
-<section>
-  <div class="wrap">
-    <div class="eyebrow2">LATEST UPDATES</div>
-    <h2 class="st">最近更新</h2>
-    <p class="lede">书是活的——每次跟客户对完、跟染厂碰完，有出入就改。这里是最新动过的几章。</p>
-    <div class="upd">
-      <a href="book/ch23.html"><div class="d">10 / 25</div><div><div class="tt">同族辨析：春亚纺、涤塔夫、尼丝纺、塔丝隆</div><div class="dd">"全是 FDY 是涤塔夫，用了 DTY 是春亚纺"——四行表 + 抽丝判断法。</div></div><div class="go">第 23 章 →</div></a>
-      <a href="book/ch04.html"><div class="d">10 / 25</div><div><div class="tt">单 6 与双 6：说的是聚合物，不是长短丝</div><div class="dd">尼龙 6 与 66 都既有长丝也有短纤；羽绒服面布基本都是长丝，以单 6 为主。</div></div><div class="go">第 04 章 →</div></a>
-      <a href="book/ch12.html"><div class="d">10 / 24</div><div><div class="tt">F 数极限：15D 为什么停在 34F</div><div class="dd">DPF 换算、孔数越高为什么越难做，附行业协会与专利出处。</div></div><div class="go">第 12 章 →</div></a>
-      <a href="book/ch17.html"><div class="d">10 / 24</div><div><div class="tt">染厂五步与交期：冷堆、进缸、皂洗、定型</div><div class="dd">冷堆 3–5 天、前处理后 7–15 天必须进缸，压光与防水的排队时间。</div></div><div class="go">第 17 章 →</div></a>
-      <a href="book/ch32.html"><div class="d">10 / 24</div><div><div class="tt">售后：开裁界限、色牢度底线、送检费用</div><div class="dd">开裁前后责任怎么分、3 级是底线、送检各担 50%。</div></div><div class="go">第 32 章 →</div></a>
+<section class="container block">
+  <div class="kicker">Featured</div>
+  <h2>最近更新</h2>
+  <p class="lede">书是活的——跟客户对完、跟染厂碰完，有出入就改。</p>
+  <div class="rows"><a href="book/ch12.html"><div class="d">10 / 26</div><div><div class="t">15D 34F 为什么是天花板</div><div class="x">15D 除以 34 孔，单丝只有 0.44 旦；再往上加孔，断头和色花压不住。</div></div><div class="go">对应章节 →</div></a><a href="book/ch04.html"><div class="d">10 / 25</div><div><div class="t">F 数越大越软，但越难做</div><div class="x">同样 20D，96 孔和 24 孔是两个价、两种手感。</div></div><div class="go">对应章节 →</div></a><a href="book/ch23.html"><div class="d">10 / 24</div><div><div class="t">全是 FDY 是涤塔夫，用了 DTY 是春亚纺</div><div class="x">春亚纺的关键不是长丝加长丝，而是经纬至少一向是低弹丝。</div></div><div class="go">对应章节 →</div></a></div>
+</section>
+
+<section class="container block">
+  <div class="kicker">Structure</div>
+  <h2>五大板块，36 章</h2>
+  <p class="lede">不按知识分类堆，按一块布真实的来路排：成分 → 石油 → 单丝 → 织造染整后整 → 卖出去。</p>
+  <div class="parts">
+    <a class="pc" href="book/ch01.html"><div class="k">PART 01 · 6 章</div><h3>常见面料成份</h3><p>棉麻丝毛、再生纤维素、合成纤维与羽绒，从「这是什么料」开始。</p><div class="more">从第 01 章读起 →</div></a>
+    <a class="pc" href="book/ch07.html"><div class="k">PART 02 · 3 章</div><h3>从石油到化纤</h3><p>沸点分离、PX 到切片、纺丝七段，回答「锦纶为什么贵一倍」。</p><div class="more">从第 07 章读起 →</div></a>
+    <a class="pc" href="book/ch10.html"><div class="k">PART 03 · 4 章</div><h3>单丝规格与技术环节</h3><p>D 数、F 数、T 数，六个指标与四个毛病，外加燃烧法拆布。</p><div class="more">从第 10 章读起 →</div></a>
+    <a class="pc" href="book/ch14.html"><div class="k">PART 04 · 11 章</div><h3>生产全流程：四阶段</h3><p>纺丝厂 → 坯布厂 → 染厂 → 后整理，每一段的时间与责任都写清。</p><div class="more">从第 14 章读起 →</div></a>
+    <a class="pc" href="book/ch25.html"><div class="k">PART 05 · 12 章</div><h3>销售核心技巧</h3><p>售前怎么问、售中怎么报、售后怎么担，话术与避坑都在这里。</p><div class="more">从第 25 章读起 →</div></a>
+    <a class="pc" href="book/index.html" style="background:#12101a;border-color:#12101a;color:#fff"><div class="k" style="color:#f4c78f">Full Index</div><h3 style="color:#fff">完整目录</h3><p style="color:#9aa5b2">36 章全部列出，按板块分组，点开即读。</p><div class="more" style="color:#f4c78f">打开目录 →</div></a>
+  </div>
+</section>
+
+<section class="container block">
+  <div class="kicker">Color Card</div>
+  <h2>电子色卡</h2>
+  <p class="lede">他地 HEADSHE · Down Series，八个产品，成分、克重、门幅与全部色号。</p>
+  <div class="cc">
+    <a href="colorcard/p/2601.html"><div class="no">2601</div><div class="nm">云丝锦</div></a>
+    <a href="colorcard/p/2602.html"><div class="no">2602</div><div class="nm">云羽纤</div></a>
+    <a href="colorcard/p/2603.html"><div class="no">2603</div><div class="nm">云丝缎</div></a>
+    <a href="colorcard/p/2605.html"><div class="no">2605</div><div class="nm">云滑绸</div></a>
+    <a href="colorcard/p/2606.html"><div class="no">2606</div><div class="nm">云透锦</div></a>
+    <a href="colorcard/p/2607.html"><div class="no">2607</div><div class="nm">舒弹绸</div></a>
+    <a href="colorcard/p/2608.html"><div class="no">2608</div><div class="nm">霁格锦</div></a>
+    <a href="colorcard/p/2610.html"><div class="no">2610</div><div class="nm">纹韧绸</div></a>
+  </div>
+</section>
+
+<section class="container block">
+  <div class="kicker">Daily</div>
+  <h2>面料日课</h2>
+  <p class="lede">每天一条，都是客户问过的问题。</p>
+  <div class="rows"><a href="daily/index.html"><div class="d">10 / 26</div><div><div class="t">15D 34F 为什么是天花板</div><div class="x">15D 除以 34 孔，单丝只有 0.44 旦；再往上加孔，断头和色花压不住。</div></div><div class="go">日课 →</div></a><a href="daily/index.html"><div class="d">10 / 25</div><div><div class="t">F 数越大越软，但越难做</div><div class="x">同样 20D，96 孔和 24 孔是两个价、两种手感。</div></div><div class="go">日课 →</div></a></div>
+  <div class="actions" style="margin-top:22px"><a class="btn pri" href="daily/index.html" style="background:#12101a;color:#fff">全部 30 条 →</a></div>
+</section>
+
+<section class="container block">
+  <div class="kicker">Articles</div>
+  <h2>文章</h2>
+  <p class="lede">把客户常问的问题写成短文，每条都指向书里对应的章节。</p>
+  <div class="rows"><a href="articles/a1.html"><div class="d">文章</div><div><div class="t">客户问「这布会不会钻绒」，别只答「不会」</div><div class="x">钻绒不是一句保证能解决的，把三个变量讲清楚。</div></div><div class="go">阅读 →</div></a><a href="articles/a2.html"><div class="d">文章</div><div><div class="t">客户说「人家 20D 才卖 12 块」，怎么接</div><div class="x">比价不是比数字，是比四个参数。</div></div><div class="go">阅读 →</div></a><a href="articles/a3.html"><div class="d">文章</div><div><div class="t">15D 34F 到底强在哪，一句话讲明白</div><div class="x">单丝 0.44 旦之后，手感、光泽、防绒全部换了一档。</div></div><div class="go">阅读 →</div></a><a href="articles/a4.html"><div class="d">文章</div><div><div class="t">打样到大货，最容易翻车的四个节点</div><div class="x">颜色、克重、门幅、交期——每个都有人栽过。</div></div><div class="go">阅读 →</div></a></div>
+</section>
+
+<section class="container block">
+  <div class="kicker">Cases</div>
+  <h2>案例</h2>
+  <p class="lede">做过的活儿，按「客户要什么 → 我们给什么 → 结果」三段记，客户名用代号。</p>
+  <div class="parts">
+    <div class="pc" style="border-style:dashed;color:var(--ink3)"><div class="k">CASE 01</div><h3 style="color:var(--ink2)">轻薄排骨款</h3><p>15D 级超薄、直接充绒、预算 20 元/米以内。待补充。</p></div>
+    <div class="pc" style="border-style:dashed;color:var(--ink3)"><div class="k">CASE 02</div><h3 style="color:var(--ink2)">撞色拼接款</h3><p>两色拼接，水洗不串色。待补充。</p></div>
+    <div class="pc" style="border-style:dashed;color:var(--ink3)"><div class="k">CASE 03</div><h3 style="color:var(--ink2)">户外三防款</h3><p>静水压 10000 mm、透湿 8000，需检测报告。待补充。</p></div>
+  </div>
+  <div style="margin-top:18px"><a href="cases/template.html" style="color:var(--accent);font-size:13.5px;font-weight:600">案例模板 →</a></div>
+</section>
+
+<section class="container block" id="about">
+  <div class="kicker">About</div>
+  <h2>关于这个资料库</h2>
+  <div class="about">
+    <div>
+      <p>这是我在杭州／平湖做羽绒服面料销售时，一点点攒下来的资料库。刚开始入行，客户问的问题一个都答不上来，所以把每次被问住的、被纠正的、回去查了标准才弄明白的，都写下来。</p>
+      <p>结构不是按「知识点分类」排的，而是<strong>按一块布真实的来路</strong>：成分、化纤、单丝，到织造、染整、后整理，最后才到报价与成交。</p>
+      <p>书里的标准号都能查证；经验值（利用率、交期、单价区间）都单独标注，别当标准引用——各厂实盘不同，报价前换成本厂数据。</p>
+    </div>
+    <div class="contact">
+      <div class="r"><b>整理</b><span>TT纺织　窦金龙</span></div>
+      <div class="r"><b>微信</b><span>dv13588355444</span></div>
+      <div class="r"><b>基地</b><span>福建晋江（染整）</span></div>
+      <div class="r"><b>备注</b><span class="note-red">自学资料，持续矫正更新，与你有益多看，无益勿喷。</span></div>
+      <div class="r"><b>内部</b><a href="internal.html" style="color:var(--accent)">内部资料（需密码）→</a></div>
     </div>
   </div>
 </section>
 
-<section class="soft">
-  <div class="wrap">
-    <div class="eyebrow2">STRUCTURE</div>
-    <h2 class="st">五大板块，36 章</h2>
-    <p class="lede">不按"知识分类"堆，按一块布真实的来路排：成分 → 石油 → 单丝 → 织造染整后整 → 卖出去。</p>
-    <div class="parts">
-      <a class="pcard" href="book/ch01.html">
-        <div class="k">PART 01 · 6 章</div>
-        <h3>常见面料成份</h3>
-        <p>从"这是什么料"开始，把棉麻丝毛、再生纤维素、合成纤维与羽绒讲透。</p>
-        <ul><li>纤维总览：三种出身</li><li>棉麻丝毛的性格</li><li>单 6 与双 6</li><li>羽绒：90 绒与 95 绒</li></ul>
-        <div class="more">从第 01 章读起 →</div>
-      </a>
-      <a class="pcard" href="book/ch07.html">
-        <div class="k">PART 02 · 3 章</div>
-        <h3>从石油到化纤</h3>
-        <p>沸点分离、PX 到切片、纺丝七段——回答"锦纶为什么贵一倍"。</p>
-        <ul><li>石油到切片</li><li>纺丝：切片变丝</li><li>FDY / DTY / ATY</li></ul>
-        <div class="more">从第 07 章读起 →</div>
-      </a>
-      <a class="pcard" href="book/ch10.html">
-        <div class="k">PART 03 · 4 章</div>
-        <h3>单丝规格与技术环节</h3>
-        <p>D 数、F 数、T 数，六个指标与四个毛病，外加燃烧法拆布。</p>
-        <ul><li>组织与规格</li><li>六指标与四毛病</li><li>15D 与 F 数极限</li><li>燃烧法与拆布</li></ul>
-        <div class="more">从第 10 章读起 →</div>
-      </a>
-      <a class="pcard" href="book/ch14.html">
-        <div class="k">PART 04 · 11 章</div>
-        <h3>生产全流程：四阶段</h3>
-        <p>纺丝厂 → 坯布厂 → 染厂 → 后整理，每一段的时间与责任都写清。</p>
-        <ul><li>染厂五步与交期</li><li>三防与功能整理</li><li>无胆防绒与胆布</li><li>面料图谱：八种布</li></ul>
-        <div class="more">从第 14 章读起 →</div>
-      </a>
-      <a class="pcard" href="book/ch25.html">
-        <div class="k">PART 05 · 12 章</div>
-        <h3>销售核心技巧</h3>
-        <p>售前怎么问、售中怎么报、售后怎么担，话术与避坑都在这一板块。</p>
-        <ul><li>换算与足码</li><li>单耗与成本七步</li><li>报价、打样与验货</li><li>开裁界限与话术库</li></ul>
-        <div class="more">从第 25 章读起 →</div>
-      </a>
-      <a class="pcard" href="book/index.html" style="background:#0e1116;color:#fff;border-color:#0e1116">
-        <div class="k" style="color:#f2c48a">FULL INDEX</div>
-        <h3 style="color:#fff">完整目录</h3>
-        <p style="color:#aab3bd">36 章全部列出，按板块分组，点开即读。也可下载 PDF 打印。</p>
-        <div class="more" style="color:#f2c48a">打开目录 →</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="eyebrow2">COLOR CARD 2026</div>
-    <h2 class="st">电子色卡</h2>
-    <p class="lede">他地 HEADSHE · Down Series，八个产品，成分、克重、门幅与全部色号。手机可翻、可放大。</p>
-    <div class="cc">
-      <a href="colorcard/p/2601.html"><div class="no">2601</div><div class="nm">云丝锦</div></a>
-      <a href="colorcard/p/2602.html"><div class="no">2602</div><div class="nm">云羽纤</div></a>
-      <a href="colorcard/p/2603.html"><div class="no">2603</div><div class="nm">云丝缎</div></a>
-      <a href="colorcard/p/2605.html"><div class="no">2605</div><div class="nm">云滑绸</div></a>
-      <a href="colorcard/p/2606.html"><div class="no">2606</div><div class="nm">云透锦</div></a>
-      <a href="colorcard/p/2607.html"><div class="no">2607</div><div class="nm">舒弹绸</div></a>
-      <a href="colorcard/p/2608.html"><div class="no">2608</div><div class="nm">霁格锦</div></a>
-      <a href="colorcard/p/2610.html"><div class="no">2610</div><div class="nm">纹韧绸</div></a>
-    </div>
-  </div>
-</section>
-
-
-<style>
-.dl{display:grid;grid-template-columns:78px 1fr;gap:16px;padding:16px 2px;border-bottom:1px solid var(--line)}
-.dl .d{font-size:12.5px;color:var(--ink3);letter-spacing:.04em;padding-top:3px}
-.dl .t{font-size:16.5px;font-weight:650;letter-spacing:-.01em}
-.dl .b{font-size:13.8px;color:var(--ink2);margin-top:2px;line-height:1.7}
-.dl .l{font-size:12px;color:var(--accent);display:inline-block;margin-top:5px}
-.agrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-.ac{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 20px 16px}
-.ac:hover{border-color:#d9b98c;background:#fffdf7}
-.ac .t{font-size:16.5px;font-weight:700;line-height:1.45;letter-spacing:-.01em}
-.ac .b{font-size:13.5px;color:var(--ink2);margin-top:8px}
-.ac .m{font-size:12.5px;color:var(--accent);margin-top:12px;font-weight:600}
-.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.case{border:1px dashed #d5dae0;border-radius:12px;padding:20px;background:#fcfcfb;color:var(--ink3);font-size:13.5px}
-.case b{display:block;color:var(--ink2);font-size:15px;margin-bottom:5px}
-</style>
-
-<section>
-  <div class="wrap">
-    <div class="eyebrow2">DAILY LESSON</div>
-    <h2 class="st">面料日课</h2>
-    <p class="lede">每天一条，都是客户问过的问题。读完一条顺手记一句自己的话，比背定义管用。</p>
-    <div class="dl"><div class="d">10 / 26</div><div><div class="t">15D 34F 为什么是天花板</div><div class="b">15D 除以 34 孔，单丝只有 0.44 旦；再往上加孔，断头和色花压不住，成本也不划算。</div><a class="l" href="book/ch12.html">对应章节 →</a></div></div><div class="dl"><div class="d">10 / 25</div><div><div class="t">F 数越大越软，但越难做</div><div class="b">同样 20D，96 孔和 24 孔是两个价、两种手感。孔数多→单丝细→更软更蓬，但强度低、易勾丝。</div><a class="l" href="book/ch04.html">对应章节 →</a></div></div><div class="dl"><div class="d">10 / 24</div><div><div class="t">全是 FDY 是涤塔夫，用了 DTY 是春亚纺</div><div class="b">春亚纺的关键不是长丝加长丝，而是经纬至少一向是低弹丝。</div><a class="l" href="book/ch23.html">对应章节 →</a></div></div>
-    <div class="btns" style="margin-top:22px"><a class="btn pri" href="daily/index.html" style="background:#0e1116;color:#fff">全部 30 条 →</a></div>
-  </div>
-</section>
-
-<section class="soft">
-  <div class="wrap">
-    <div class="eyebrow2">ARTICLES</div>
-    <h2 class="st">文章</h2>
-    <p class="lede">把客户常问的问题写成短文，每条都指向书里对应的章节，可直接转发。</p>
-    <div class="agrid"><a class="ac" href="articles/a1.html"><div class="t">客户问「这布会不会钻绒」，别只答「不会」</div><div class="b">钻绒不是一句保证能解决的，把三个变量讲清楚。</div><div class="m">阅读 →</div></a><a class="ac" href="articles/a2.html"><div class="t">客户说「人家 20D 才卖 12 块」，怎么接</div><div class="b">比价不是比数字，是比四个参数。</div><div class="m">阅读 →</div></a><a class="ac" href="articles/a3.html"><div class="t">15D 34F 到底强在哪，一句话讲明白</div><div class="b">单丝 0.44 旦之后，手感、光泽、防绒全部换了一档。</div><div class="m">阅读 →</div></a><a class="ac" href="articles/a4.html"><div class="t">打样到大货，最容易翻车的四个节点</div><div class="b">颜色、克重、门幅、交期——每个都有人栽过。</div><div class="m">阅读 →</div></a></div>
-    <div class="btns" style="margin-top:22px"><a class="btn sec" href="articles/index.html" style="border-color:#d5dae0;color:#0e1116">查看全部 →</a></div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="eyebrow2">CASES</div>
-    <h2 class="st">案例</h2>
-    <p class="lede">做过的活儿，按「客户要什么 → 我们给什么 → 结果」三段记，客户名用代号。</p>
-    <div class="cases">
-      <div class="case"><b>01 · 轻薄排骨款</b>15D 级超薄、直接充绒、预算 20 元/米以内。待补充。</div>
-      <div class="case"><b>02 · 撞色拼接款</b>两色拼接，水洗不串色。待补充。</div>
-      <div class="case"><b>03 · 户外三防款</b>静水压 10000 mm、透湿 8000，需检测报告。待补充。</div>
-    </div>
-  </div>
-</section>
-
-<section class="soft" id="about">
-  <div class="wrap">
-    <div class="eyebrow2">ABOUT</div>
-    <h2 class="st">关于这个资料库</h2>
-    <div class="about">
-      <div>
-        <p>这是我在杭州／平湖做羽绒服面料销售时，一点点攒下来的资料库。刚开始入行，客户问的问题一个都答不上来，所以把每次被问住的、被纠正的、回去查了标准才弄明白的，都写下来。</p>
-        <p>结构不是按"知识点分类"排的，而是<strong>按一块布真实的来路</strong>：从成分、化纤、单丝，到织造、染整、后整理，最后才到报价与成交。看一遍，等于跟着一块布走完全程。</p>
-        <p>书里的标准号都能查证；经验值（利用率、交期、单价区间）都单独标了"经验值"，别当标准引用——各厂实盘不同，报价前换成本厂数据。</p>
-      </div>
-      <div class="card2">
-        <div class="row"><b>整理</b><span>TT纺织　窦金龙</span></div>
-        <div class="row"><b>微信</b><span>dv13588355444</span></div>
-        <div class="row"><b>基地</b><span>福建晋江（染整）</span></div>
-        <div class="row"><b>备注</b><span class="note-red">自学资料，持续矫正更新，与你有益多看，无益勿喷。</span></div>
-        <div class="row"><b>内部</b><a href="internal.html" style="color:#b45309">内部资料（需密码）→</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    内容依据现行国家标准与行业通行做法整理，经验值已单独标注 · 建议每季度核对一次标准状态<br>
-    <a href="book/index.html">目录</a> · <a href="colorcard/index.html">色卡</a> · <a href="internal.html">内部资料</a> · <a href="../">　</a>
+<footer class="site-footer">
+  <div class="container">
+    TT纺织 · 羽绒服面料销售知识库　·　内容依据现行国家标准与行业通行做法整理，经验值已单独标注<br><br>
+    <a href="book/index.html">目录</a>　<a href="colorcard/index.html">色卡</a>　<a href="daily/index.html">日课</a>　<a href="articles/index.html">文章</a>　<a href="internal.html">内部</a>
   </div>
 </footer>
 
@@ -459,18 +343,6 @@ nav.menu a{white-space:nowrap}
   });
   hot.addEventListener('click',function(e){
     if(e.target.tagName==='SPAN'){q.value=e.target.textContent;run();q.focus();}
-  });
-})();
-</script>
-
-<script>
-(function(){
-  var b=document.querySelector('.hbtn'), m=document.querySelector('nav.menu');
-  if(!b||!m) return;
-  b.addEventListener('click',function(){ m.classList.toggle('open'); b.classList.toggle('on'); });
-  m.addEventListener('click',function(e){ if(e.target.tagName==='A'){ m.classList.remove('open'); b.classList.remove('on'); } });
-  document.addEventListener('click',function(e){
-    if(!m.contains(e.target) && !b.contains(e.target)){ m.classList.remove('open'); b.classList.remove('on'); }
   });
 })();
 </script>
