@@ -272,6 +272,5 @@ a.tch b{font-size:12px;color:#b45309;letter-spacing:.1em;min-width:26px}
 a.tch span{font-size:15.5px;font-weight:600}
 a.tch i{font-style:normal;font-size:12px;color:#8a929c;margin-left:auto;white-space:nowrap}
 @media(max-width:640px){.tocwrap{padding:28px 16px 60px}a.tch span{font-size:14.5px}a.tch i{display:none}}
-
 .main a:link{color:#2f8fb5}
 .main a:visited{color:#98a3b0}
