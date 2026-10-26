@@ -35,6 +35,14 @@
 @media (prefers-reduced-motion: reduce){
   .reveal{animation:none !important;opacity:1 !important;transform:none !important}
 }
+
+/* hero 背景改用稳定渐变（原 canvas 场景未引入） */
+.home-hero{background:#242c37}
+.home-hero::before{background:
+  radial-gradient(120% 90% at 78% 12%,rgba(111,198,232,.20),transparent 55%),
+  radial-gradient(90% 80% at 10% 90%,rgba(255,255,255,.05),transparent 60%),
+  linear-gradient(150deg,#39424f 0%,#2b3440 48%,#232b36 100%) !important}
+.home-hero::after{display:none !important}
 </style>
 </head>
 <body class="site-body">
