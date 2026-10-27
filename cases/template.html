@@ -41,98 +41,30 @@ article li{margin-bottom:6px}
 footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 60px;font-size:12.5px;color:var(--ink3)}
 footer a{color:var(--accent)}
 
-/* —— 响应式菜单 —— */
-nav.menu a{white-space:nowrap}
-.hbtn{display:none;background:none;border:0;padding:8px 6px;cursor:pointer;line-height:0}
-.hbtn i{display:block;width:20px;height:2px;background:var(--ink);margin:4px 0;border-radius:2px;transition:.2s}
-.hbtn.on i:nth-child(1){transform:translateY(6px) rotate(45deg)}
-.hbtn.on i:nth-child(2){opacity:0}
-.hbtn.on i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-@media(max-width:820px){
-  .brandbox .t{display:none}
-  .brandbox .n{font-size:14.5px}
-  .hbtn{display:block}
-  nav.menu{position:fixed;left:0;right:0;top:60px;background:#fff;border-bottom:1px solid var(--line);
-    flex-direction:column;align-items:stretch;padding:8px 14px 16px;gap:2px;
-    transform:translateY(-10px);opacity:0;pointer-events:none;transition:.18s ease;
-    box-shadow:0 14px 30px rgba(16,24,36,.12);z-index:59}
-  nav.menu.open{transform:none;opacity:1;pointer-events:auto}
-  nav.menu a{padding:13px 12px;border-radius:10px;font-size:15.5px;border-bottom:1px solid #f4f6f8}
-  nav.menu a:last-child{border-bottom:0}
-  nav.menu a.hidem{display:block}
-  nav.menu a.on{background:#eef1f4}
-}
-
-/* —— 手机端：品牌块 + 四列网格菜单（对齐 cge.wang 的做法） —— */
+/* 手机端：四列网格菜单 */
 @media(max-width:820px){
   .hbtn{display:none !important}
-  header.nav .in{height:auto;flex-direction:column;align-items:stretch;padding:16px 18px 4px;gap:14px}
-  .brandbox{gap:12px}
-  .brandbox .mark{width:46px;height:46px;border-radius:50%;font-size:16px;flex:0 0 auto}
-  .brandbox .n{font-size:20px;font-weight:750;letter-spacing:-.01em}
-  .brandbox .t{display:block;font-size:12.5px;color:var(--ink3);margin-top:3px;letter-spacing:.02em}
-  nav.menu{position:static !important;top:auto !important;left:auto !important;right:auto !important;
-    display:grid !important;grid-template-columns:repeat(4,1fr);gap:2px 0;
-    opacity:1 !important;transform:none !important;pointer-events:auto !important;
-    box-shadow:none !important;border:0 !important;background:transparent !important;
-    padding:0 0 10px !important;flex-direction:row !important;align-items:stretch !important}
-  nav.menu a{padding:12px 2px !important;font-size:14.5px;text-align:center;border:0 !important;
-    border-radius:8px;color:var(--ink2)}
-  nav.menu a.hidem{display:block !important}
-  nav.menu a.on{background:#eef1f4;color:var(--ink);font-weight:650}
+  header.nav .in{height:auto;flex-direction:column;align-items:stretch;padding:14px 16px 4px;gap:10px}
+  .brandbox .mark{width:42px;height:42px;border-radius:50%;font-size:15px;flex:0 0 auto}
+  .brandbox .n{font-size:18px}
+  .brandbox .t{display:block;font-size:12px}
+  nav.menu{display:grid !important;grid-template-columns:repeat(4,1fr);gap:2px 0;
+    position:static !important;opacity:1 !important;transform:none !important;pointer-events:auto !important;
+    box-shadow:none !important;border:0 !important;background:transparent !important;padding:0 0 8px !important}
+  nav.menu a{padding:11px 2px !important;font-size:14.5px;text-align:center;border:0 !important;border-radius:8px}
+  nav.menu a.on{background:#eef1f4;color:#1d2733;font-weight:650}
 }
 
-.brandbox .bt{display:flex;flex-direction:column;line-height:1.25}
-@media(max-width:820px){.brandbox .bt{line-height:1.2}}
-
-/* ── 克隆站头部（二级页） ── */
-.site-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8eaee}
-.hd{display:flex;align-items:center;justify-content:space-between;height:70px;max-width:1120px;margin:0 auto;padding:0 24px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#1d2430,#3c2a18);color:#f2c48a;
- display:grid;place-items:center;font-weight:750;font-size:15px;flex:0 0 auto}
-.bt2{display:flex;flex-direction:column;line-height:1.25}
-.bt2 b{font-size:18px;font-weight:750;letter-spacing:-.01em;color:#0e1013}
-.bt2 i{font-style:normal;font-size:12.5px;color:#7b848f;margin-top:2px}
-.desktop-nav{display:flex;gap:2px;align-items:center}
-.desktop-nav a{padding:8px 14px;border-radius:20px;font-size:14px;color:#414a54;white-space:nowrap;text-decoration:none}
-.desktop-nav a:hover{background:#f6f7f8}
-.desktop-nav a.on{background:#eef1f4;color:#0e1013;font-weight:650}
-.mobile-nav-grid{display:none}
-.site-footer{background:#12101a;color:#8d95a1;padding:44px 0 60px;font-size:12.5px;margin-top:50px}
-.site-footer a{color:#e0b483;text-decoration:none}
-.site-footer .container{max-width:1120px;margin:0 auto;padding:0 24px}
-@media(max-width:820px){
-  .hd{height:auto;padding:14px 18px 10px;justify-content:flex-start}
-  .desktop-nav{display:none}
-  .mobile-nav-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px 0;padding:0 14px 12px;max-width:1120px;margin:0 auto}
-  .mobile-nav-grid a{text-align:center;padding:12px 2px;font-size:14.5px;color:#414a54;border-radius:8px;text-decoration:none}
-  .mobile-nav-grid a.on{background:#eef1f4;color:#0e1013;font-weight:650}
-}
-
-/* 统一冷色调（对齐对标站） */
-body{background:#eef3f8 !important;color:#1d2733 !important}
-.site-header{background:rgba(238,243,248,.92) !important;border-bottom:1px solid #dbe4ee !important}
-.eyebrow2{color:#2f8fb5 !important}
-h1,h2,h3{color:#1d2733}
-.sub,.card p,.item p,article p{color:#4c5a6b}
-.item{border-bottom:1px solid #e2ebf4 !important}
-.item .src{color:#2f8fb5 !important}
-a.card{background:#fff !important;border:1px solid #e2ebf4 !important;border-radius:14px !important}
-a.card:hover{border-color:#bfd8ea !important;background:#f7fbfe !important}
-.case{background:#fff !important;border:1px dashed #cfdde9 !important}
-article blockquote{background:#eaf4fa !important;border-left:3px solid #9fd4ea !important;color:#26414f !important}
-.site-footer{background:#242c37 !important}
-.site-footer a{color:#a9e0f4 !important}
-.byline .av{background:linear-gradient(135deg,#3a4a5e,#1d2733) !important;color:#dff2fb !important}
-.byline a{color:#2f8fb5 !important}
-</style></head><body><header class="site-header">
-  <div class="hd">
-    <a class="brand" href="../"><span class="avatar">TT</span><span class="bt2"><b>TT纺织</b><i>羽绒服面料知识库</i></span></a>
-    <nav class="desktop-nav"><a href="../">首页</a><a href="../book/index.html">资料库</a><a href="../colorcard/index.html">色卡</a><a href="../daily/index.html">日课</a><a href="../articles/index.html">文章</a><a href="../cases/index.html" class="on">案例</a><a href="../internal.html">内部</a><a href="../index.html#about">关于</a></nav>
-  </div>
-  <nav class="mobile-nav-grid"><a href="../">首页</a><a href="../book/index.html">资料库</a><a href="../colorcard/index.html">色卡</a><a href="../daily/index.html">日课</a><a href="../articles/index.html">文章</a><a href="../cases/index.html" class="on">案例</a><a href="../internal.html">内部</a><a href="../index.html#about">关于</a></nav>
-</header>
+/* 全站链接：未访问蓝色，访问后灰色 */
+.site-main a:link{color:#2f8fb5}
+.site-main a:visited{color:#98a3b0}
+.site-main a.button,.site-main a.button:visited{color:#0d2b36 !important}
+</style></head><body><header class="nav"><div class="in">
+  <a class="brandbox" href="../"><span class="mark">TT</span><span class="n">TT纺织 · 知识库</span></a>
+  <nav class="menu">
+    <a href="../">首页</a><a href="../book/index.html">资料库</a><a href="../colorcard/index.html">色卡</a>
+    <a href="../daily/index.html">日课</a><a class="on" href="../articles/index.html">文章</a><a href="../cases/index.html">案例</a>
+  </nav></div></header>
 
 
 <div class="wrap"><div class="top">
@@ -192,20 +124,5 @@ article blockquote{background:#eaf4fa !important;border-left:3px solid #9fd4ea !
 <div style="margin-top:30px"><a class="btn" href="index.html" style="background:#0e1116;color:#fff;padding:12px 22px;border-radius:24px;display:inline-block">← 返回案例</a></div>
 </div>
 
-<footer class="site-footer"><div class="container">
-TT纺织 · 羽绒服面料销售知识库　·　内容依据现行国家标准与行业通行做法整理，经验值已单独标注<br><br>
-<a href="../book/index.html">目录</a>　<a href="../colorcard/index.html">色卡</a>　<a href="../daily/index.html">日课</a>　<a href="../articles/index.html">文章</a>　<a href="../internal.html">内部</a>
-</div></footer>
-
-<script>
-(function(){
-  var b=document.querySelector('.hbtn'), m=document.querySelector('nav.menu');
-  if(!b||!m) return;
-  b.addEventListener('click',function(){ m.classList.toggle('open'); b.classList.toggle('on'); });
-  m.addEventListener('click',function(e){ if(e.target.tagName==='A'){ m.classList.remove('open'); b.classList.remove('on'); } });
-  document.addEventListener('click',function(e){
-    if(!m.contains(e.target) && !b.contains(e.target)){ m.classList.remove('open'); b.classList.remove('on'); }
-  });
-})();
-</script>
+<footer><div class="wrap">TT纺织 · 窦金龙 · 微信 dv13588355444　·　<a href="../book/index.html">电子书目录</a></div></footer>
 </body></html>
