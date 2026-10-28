@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>行业动态 · TT纺织</title>
+<link rel="stylesheet" href="../assets/css/tailwind.min.css">
+<link rel="stylesheet" href="../assets/css/home-hero.css">
+<link rel="stylesheet" href="../assets/css/related.css">
+<style>
+.searchbox{background:var(--surface,#fff);border:1px solid var(--line,#dfe9f2);border-radius:18px;padding:22px 24px;margin-top:8px}
+.searchbox .row{display:flex;gap:10px;position:relative}
+.searchbox input{flex:1;border:1px solid #cfdde9;background:#f8fbfd;border-radius:12px;padding:13px 14px 13px 40px;font-size:15px;font-family:inherit;outline:none}
+.searchbox input:focus{border-color:#2f8fb5;background:#fff;box-shadow:0 0 0 3px rgba(47,143,181,.12)}
+.searchbox .si{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;opacity:.5}
+.searchbox button{border:0;background:#2f8fb5;color:#fff;border-radius:12px;padding:13px 22px;font-size:14.5px;font-weight:650;cursor:pointer;font-family:inherit}
+.hot{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.hot span{font-size:12.5px;color:#3f5466;background:#e8f1f8;border-radius:20px;padding:4px 11px;cursor:pointer}
+.res{margin-top:12px;display:none;border:1px solid #dce8f2;border-radius:12px;padding:4px 6px}
+.res.on{display:block}
+.hit{display:block;padding:12px;border-top:1px solid #eef3f8;color:inherit;text-decoration:none}
+.hit:first-child{border-top:0}
+.hit .hn{font-size:11.5px;color:#2f8fb5;letter-spacing:.12em}
+.hit .ht{font-size:15.5px;font-weight:650;margin:2px 0 3px}
+.hit .hs{font-size:13px;color:#4c5a6b}
+.hit mark{background:#cdeaf7}
+.searchbox .cnt,.searchbox .none{font-size:12.5px;color:#8a97a6;padding:8px 4px}
+
+/* 打印/减少动效时，reveal 不要隐藏内容 */
+@media print{
+  .reveal{animation:none !important;opacity:1 !important;transform:none !important}
+  .site-noise,.site-grid{display:none !important}
+  .home-hero{color:#fff !important}
+}
+@media (prefers-reduced-motion: reduce){
+  .reveal{animation:none !important;opacity:1 !important;transform:none !important}
+}
+
+/* 全站链接：未点开=蓝色，点开后=灰色 */
+.site-main a:link{color:#2f8fb5}
+.site-main a:visited{color:#98a3b0}
+.site-main a:hover{color:#1d6f8f}
+.site-main a.button,.site-main a.button:visited{color:#0d2b36 !important}
+.site-main a.text-link:visited{color:#98a3b0}
+</style>
+</head>
+<body class="site-body">
+<div class="site-noise" aria-hidden="true"></div>
+<div class="site-grid" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="header-surface">
+    <div class="container header-inner">
+      <a class="brand" href="../">
+        <img class="brand-logo" src="../assets/img/logo.png" alt="TT纺织 logo">
+        <span class="brand-text"><strong>TT纺织</strong><small>羽绒服面料知识库</small></span>
+      </a>
+      <nav class="desktop-nav"><a class="nav-link" href="../">首页</a><a class="nav-link" href="../book/index.html">资料库</a><a class="nav-link" href="../colorcard/index.html">色卡</a><a class="nav-link" href="../daily/index.html">日课</a><a class="nav-link" href="../news/index.html">动态</a><a class="nav-link is-active" href="../articles/index.html">文章</a><a class="nav-link" href="../cases/index.html">案例</a><a class="nav-link" href="../internal.html">内部</a><a class="nav-link" href="../index.html#about">关于</a></nav>
+    </div>
+    <nav class="container mobile-nav-grid"><a class="mobile-grid-link" href="../">首页</a><a class="mobile-grid-link" href="../book/index.html">资料库</a><a class="mobile-grid-link" href="../colorcard/index.html">色卡</a><a class="mobile-grid-link" href="../daily/index.html">日课</a><a class="mobile-grid-link" href="../news/index.html">动态</a><a class="mobile-grid-link is-active" href="../articles/index.html">文章</a><a class="mobile-grid-link" href="../cases/index.html">案例</a><a class="mobile-grid-link" href="../internal.html">内部</a><a class="mobile-grid-link" href="../index.html#about">关于</a></nav>
+  </div>
+</header>
+
+
+<main class="site-main">
+<section class="container page-hero reveal">
+  <div class="eyebrow">INDUSTRY PULSE</div>
+  <h1 class="section-title">行业动态</h1>
+  <p class="page-intro">只保留对报价和成交有影响的信息：羽绒价格、化纤原料、标准法规。每条都标来源与日期，「对我们意味着什么」是经验判断，不是官方结论。</p>
+</section>
+<section class="container section-block reveal reveal-delay-1">
+  <div class="section-head"><div><div class="eyebrow">本期</div><h2 class="section-title">2026-10-28 · 第 1 期</h2></div></div>
+  <article class="card" style="margin-bottom:16px">
+  <div class="meta-line"><span class="meta-date">2026-10-23</span>　<span class="meta-badge">羽绒价格</span></div>
+  <h3 class="card-title" style="margin:6px 0 10px">90% 白鸭绒跌到 542.8 元/公斤，周环比 −1.5%</h3>
+  <ul style="margin:0 0 12px;padding-left:20px;font-size:14.5px;line-height:1.8;color:#414a54"><li>中国羽绒信息网 10 月第 3 期（10/23）：GB/T 14272-2021 标准 90% 白鸭绒均价 <b>542.8 元/kg</b>，环比降 1.5%，降幅比上周扩大。</li><li>市场交易量不大，服装企业按需采购，行情在等降温带动。</li></ul>
+  <p style="margin:0 0 10px;font-size:14.5px"><b>对我们意味着什么：</b>10 月底到 11 月初是今年的锁价窗口。12 月交货的单子，现在锁比 10 月初便宜；但别赌继续跌——冷空气一来就反弹。</p>
+  <p style="margin:0;font-size:12.5px;color:#8a97a6">来源：<a href="https://www.cfd.com.cn/index.php?s=/Web/News/detail/id/3833.html" target="_blank" rel="noopener">中国羽绒信息网</a></p>
+</article><article class="card" style="margin-bottom:16px">
+  <div class="meta-line"><span class="meta-date">2026-10-19</span>　<span class="meta-badge">同比对比</span></div>
+  <h3 class="card-title" style="margin:6px 0 10px">同比仍高 7%：10 月中旬 551.42 元/公斤</h3>
+  <ul style="margin:0 0 12px;padding-left:20px;font-size:14.5px;line-height:1.8;color:#414a54"><li>中国城市报（人民日报社）10/19 报道：羽绒金网 10 月 15 日行情，90% 白鸭绒 <b>551.42 元/kg，同比上涨 7.06%</b>。</li><li>终端售价总体平稳，原料端先涨。</li></ul>
+  <p style="margin:0 0 10px;font-size:14.5px"><b>对我们意味着什么：</b>客户拿「去年价格」压价时，把这两个数一起给：同比还高 7%，但月内已经回落。用「现在锁」代替「再等等」。</p>
+  <p style="margin:0;font-size:12.5px;color:#8a97a6">来源：<a href="https://paper.people.com.cn/zgcsb/pc/content/202610/19/content_30186571.html" target="_blank" rel="noopener">中国城市报 · 人民日报社</a></p>
+</article><article class="card" style="margin-bottom:16px">
+  <div class="meta-line"><span class="meta-date">2026-09-01</span>　<span class="meta-badge">标准法规</span></div>
+  <h3 class="card-title" style="margin:6px 0 10px">《羽绒羽毛》新国标 9 月 1 日实施</h3>
+  <ul style="margin:0 0 12px;padding-left:20px;font-size:14.5px;line-height:1.8;color:#414a54"><li>《羽绒羽毛》GB/T 17685-2026 与《羽绒羽毛检验方法》9 月 1 日起实施（消费日报/新华网 9-03 报道）。</li><li>报道称新标抬高品质门槛，行业告别低价内卷。</li></ul>
+  <p style="margin:0 0 10px;font-size:14.5px"><b>对我们意味着什么：</b>报价单、吊牌、检测报告的口径要按新标对齐；老标签上的「90 绒」说法要改成绒子含量。客户问「怎么降标了」，讲尺子换了。</p>
+  <p style="margin:0;font-size:12.5px;color:#8a97a6">来源：<a href="https://www.news.cn/fashion/20260903/43c233ad3e794a3da1d12262b55edcff/c.html" target="_blank" rel="noopener">消费日报 · 新华网转载</a></p>
+</article><article class="card" style="margin-bottom:16px">
+  <div class="meta-line"><span class="meta-date">2026-10-23</span>　<span class="meta-badge">化纤原料</span></div>
+  <h3 class="card-title" style="margin:6px 0 10px">化纤端平稳：涨 2 种、跌 3 种、持平 5 种</h3>
+  <ul style="margin:0 0 12px;padding-left:20px;font-size:14.5px;line-height:1.8;color:#414a54"><li>生意社 10/23 化纤价格涨跌榜：上涨 2 种、下跌 3 种、持平 5 种。</li><li>10/27 纺织大宗榜同样没有单边行情。</li></ul>
+  <p style="margin:0 0 10px;font-size:14.5px"><b>对我们意味着什么：</b>面布成本短期没有大波动，报价可以按现价走；要盯的是 PTA 与己内酰胺，它们一动，两周后布价才动。</p>
+  <p style="margin:0;font-size:12.5px;color:#8a97a6">来源：<a href="https://top.100ppi.com/hx/detail-day-2026-1022-1.html" target="_blank" rel="noopener">生意社 · 化纤价格涨跌榜</a></p>
+</article>
+  <p style="margin:18px 0 0;font-size:12.5px;color:#8a97a6">价格类数据均引自公开来源，可能与实际成交有差异；下单前以供应商当日报价为准。</p>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-surface">
+    <div class="container footer-grid footer-grid-simple">
+      <div class="footer-brand">
+        <h3 class="footer-label">TT纺织</h3>
+        <p class="footer-icp">羽绒服面料销售知识库 · 自学资料，持续矫正更新</p>
+      </div>
+      <div>
+        <h3 class="footer-label">内容入口</h3>
+        <div class="footer-links footer-links-grid">
+          <a href="../">首页</a><a href="../book/index.html">资料库</a><a href="../colorcard/index.html">色卡</a>
+          <a href="../daily/index.html">日课</a><a href="../articles/index.html">文章</a><a href="../cases/index.html">案例</a>
+          <a href="../internal.html">内部资料</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body></html>
