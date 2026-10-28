@@ -42,6 +42,16 @@
 .site-main a:hover{color:#1d6f8f}
 .site-main a.button,.site-main a.button:visited{color:#0d2b36 !important}
 .site-main a.text-link:visited{color:#98a3b0}
+
+/* 页脚二维码区 */.footer-grid-simple{grid-template-columns:minmax(0,190px) 1fr auto;align-items:start}
+@media(max-width:820px){.footer-grid-simple{grid-template-columns:1fr}.footer-qr .qrrow{justify-content:flex-start}}
+
+.footer-qr .qrrow{display:flex;gap:14px;margin-top:12px}
+.qrcell{margin:0;text-align:center}
+.qrcell img,.qrph{width:86px;height:86px;border-radius:10px;display:block;box-sizing:border-box}
+.qrcell img{border:1px solid #e6eef4;object-fit:cover}
+.qrph{display:flex;align-items:center;justify-content:center;border:1px dashed #c9d8e4;color:#93a3b1;font-size:11.5px;line-height:1.45;background:#fafcfe}
+.qrcell figcaption{margin-top:7px;font-size:12px;color:#7a8794;white-space:nowrap}
 </style>
 </head>
 <body class="site-body">
@@ -94,7 +104,15 @@
           <a href="../daily/index.html">日课</a><a href="../articles/index.html">文章</a><a href="../cases/index.html">案例</a>
           <a href="../internal.html">内部资料</a>
         </div>
+      </div>      <div class="footer-qr">
+        <h3 class="footer-label">扫码联系</h3>
+        <div class="qrrow">
+          <figure class="qrcell"><img src="../assets/img/wechat-qr.jpg" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></figure>
+          <figure class="qrcell"><div class="qrph">公众号<br>待补</div><figcaption>公众号</figcaption></figure>
+          <figure class="qrcell"><div class="qrph">小程序<br>待补</div><figcaption>小程序</figcaption></figure>
+        </div>
       </div>
+
     </div>
   </div>
 </footer>
