@@ -7,21 +7,25 @@
 <meta name="theme-color" content="#12202c">
 <title>扫楼表</title>
 <style>
-:root{--ink:#111d27;--ink2:#42505c;--mut:#7c8a97;--line:#e3ecf3;--bg:#f4f8fb;--brand:#2f8fb5;--warn:#c0392b;--ok:#1f7a4d}
+:root{--ink:#111d27;--ink2:#42505c;--mut:#7c8a97;--line:#e3ecf3;--bg:#f4f8fb;--brand:#2f8fb5;--warn:#c0392b;--ok:#1f7a4d;--amber:#b26a00}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif;padding-bottom:96px}
-header{position:sticky;top:0;z-index:9;background:#12202c;color:#fff;padding:12px 16px calc(12px + env(safe-area-inset-top)) ;padding-top:calc(12px + env(safe-area-inset-top))}
+header{position:sticky;top:0;z-index:9;background:#12202c;color:#fff;padding:12px 16px calc(12px + env(safe-area-inset-top));padding-top:calc(12px + env(safe-area-inset-top))}
 header h1{margin:0;font-size:17px;font-weight:700;letter-spacing:.02em}
 header p{margin:2px 0 0;font-size:12px;color:#9fb2c1}
 .stat{display:flex;gap:8px;margin-top:10px}
-.stat div{flex:1;background:rgba(255,255,255,.09);border-radius:10px;padding:6px 8px;text-align:center}
-.stat b{display:block;font-size:16px}
-.stat span{font-size:11px;color:#a9bccb}
+.stat button{flex:1;background:rgba(255,255,255,.09);border:1px solid transparent;border-radius:10px;padding:7px 4px;text-align:center;color:#fff;font:inherit;cursor:pointer}
+.stat button b{display:block;font-size:17px;line-height:1.25}
+.stat button span{font-size:11px;color:#a9bccb}
+.stat button.on{background:#fff;color:#12202c;border-color:#fff}
+.stat button.on span{color:#5a6b78}
+.stat button.late b{color:#ff938a}
+.stat button.on.late b{color:#c0392b}
 main{padding:14px}
 .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 4px 14px rgba(16,38,54,.04)}
 label{display:block;font-size:12.5px;color:var(--ink2);font-weight:600;margin:12px 0 6px}
 label:first-child{margin-top:0}
-input[type=text],input[type=date],textarea{width:100%;border:1px solid #d3e0ea;background:#fafcfe;border-radius:11px;padding:12px;font:inherit;font-size:16px;color:var(--ink);outline:none}
+input[type=text],textarea{width:100%;border:1px solid #d3e0ea;background:#fafcfe;border-radius:11px;padding:12px;font:inherit;font-size:16px;color:var(--ink);outline:none}
 input:focus,textarea:focus{border-color:var(--brand);background:#fff;box-shadow:0 0 0 3px rgba(47,143,181,.12)}
 textarea{min-height:52px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -29,25 +33,26 @@ textarea{min-height:52px;resize:vertical}
 .chip.on{background:#e8f4fa;border-color:#7fc0dc;color:#12556f}
 .chip.on.good{background:#e7f6ee;border-color:#7cc9a2;color:#14603c}
 .chip.on.bad{background:#fdecea;border-color:#e6a5a0;color:#8f2b22}
-.save{position:fixed;left:0;right:0;bottom:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(244,248,251,0),#f4f8fb 30%);}
+.save{position:fixed;left:0;right:0;bottom:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(244,248,251,0),#f4f8fb 30%)}
 .save button{width:100%;border:0;border-radius:14px;background:#12202c;color:#fff;font:inherit;font-size:17px;font-weight:700;padding:15px;cursor:pointer}
 .save button:active{transform:scale(.99)}
 .row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid #eef4f8}
 .row:last-child{border-bottom:0}
 .row .nm{font-weight:700;font-size:15.5px}
-.row .meta{font-size:12.5px;color:var(--mut);margin-top:3px}
+.row .meta{font-size:12.5px;color:var(--mut);margin-top:3px;line-height:1.5}
 .badge{font-size:11px;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .b-hot{background:#e7f6ee;color:#14603c}
 .b-wait{background:#eef2f6;color:#4b5c6b}
 .b-dead{background:#f2f2f2;color:#8b8b8b}
 .due-late{color:var(--warn);font-weight:700}
-.due-today{color:#b26a00;font-weight:700}
+.due-today{color:var(--amber);font-weight:700}
 .due-ok{color:var(--ink2)}
-h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:20px 4px 8px;text-transform:uppercase}
+h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.06em;margin:18px 4px 8px;display:flex;justify-content:space-between;align-items:center}
+h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin:6px 4px 0}
 .tools button{border:1px solid #cfdde9;background:#fff;color:var(--ink2);border-radius:10px;padding:9px 13px;font:inherit;font-size:13.5px;font-weight:600}
-.empty{color:var(--mut);font-size:13.5px;text-align:center;padding:18px 0}
-.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%) translateY(10px);background:#12202c;color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.22s;z-index:20}
+.empty{color:var(--mut);font-size:13.5px;text-align:center;padding:22px 0}
+.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%) translateY(10px);background:#12202c;color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.22s;z-index:20;max-width:88vw;text-align:center}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 .detail{display:none;padding:6px 0 12px;border-bottom:1px solid #eef4f8}
 .detail.on{display:block}
@@ -55,17 +60,19 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
 .detail .acts{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
 .detail button{border:1px solid #cfdde9;background:#f8fbfd;border-radius:9px;padding:8px 12px;font:inherit;font-size:13px}
 .detail button.del{color:#8f2b22;border-color:#e6c3bf;background:#fdf6f5}
+.hist{margin:8px 0 0;padding:8px 10px;background:#f8fbfd;border-radius:9px;font-size:12.5px;color:#5a6b78;line-height:1.7}
 @media print{.save,.tools{display:none}}
 </style>
 </head>
 <body>
 <header>
   <h1>扫楼表</h1>
-  <p>只存本机，不上传；跑完一天记得导出备份 · 私用页面，勿转发链接</p>
+  <p>只存本机，不上传；跑完一天记得导出备份</p>
   <div class="stat">
-    <div><b id="s-all">0</b><span>客户</span></div>
-    <div><b id="s-todo">0</b><span>待跟进</span></div>
-    <div><b id="s-late">0</b><span>逾期</span></div>
+    <button data-f="all" class="on"><b id="s-all">0</b><span>全部</span></button>
+    <button data-f="todo"><b id="s-todo">0</b><span>待跟进</span></button>
+    <button data-f="today"><b id="s-today">0</b><span>今天</span></button>
+    <button data-f="late" class="late"><b id="s-late">0</b><span>逾期</span></button>
   </div>
 </header>
 
@@ -111,6 +118,7 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
 
     <label>下次跟进</label>
     <div class="chips" id="f-next">
+      <button class="chip" data-v="1">明天</button>
       <button class="chip" data-v="3">+3 天</button>
       <button class="chip on" data-v="7">+7 天</button>
       <button class="chip" data-v="15">+15 天</button>
@@ -121,7 +129,7 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
     <textarea id="f-note" placeholder="例：怕浅色透，主推 2602；她说下月备 3000 米"></textarea>
   </div>
 
-  <h2>待跟进</h2>
+  <h2>客户清单<span id="listhint">按跟进日期排</span></h2>
   <div class="card" id="list"><div class="empty">还没有记录</div></div>
 
   <div class="tools">
@@ -138,46 +146,19 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
 (function(){
   var KEY='dv_visit_v1';
   var $=function(s){return document.querySelector(s)};
-  var data=[];
+  var data=[], filter='all';
   var geoLat=null, geoLng=null, geoName='';
   try{data=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){data=[]}
+  data.forEach(function(x){ if(!x.hist)x.hist=[]; if(!x.addr)x.addr=''; });
 
   function save(){localStorage.setItem(KEY,JSON.stringify(data))}
   function pad(n){return n<10?'0'+n:''+n}
   function fmt(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
-  function days(n){var d=new Date();d.setDate(d.getDate()+n);return fmt(d)}
+  function shift(n){var d=new Date();d.setDate(d.getDate()+n);return fmt(d)}
   function today(){return fmt(new Date())}
-  function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('on');setTimeout(function(){el.classList.remove('on')},1500)}
-
-
-  var geoBtn=document.getElementById('btn-geo'), geoHint=document.getElementById('geo-hint'), addrInput=document.getElementById('f-addr');
-  function setHint(t,color){ if(geoHint){geoHint.textContent=t; geoHint.style.color=color||'#7c8a97';} }
-  if(geoBtn){
-    geoBtn.addEventListener('click',function(){
-      if(!navigator.geolocation){setHint('这台浏览器不支持定位，请手动填','#c0392b');return}
-      geoBtn.disabled=true; setHint('正在定位…');
-      navigator.geolocation.getCurrentPosition(function(pos){
-        geoLat=+pos.coords.latitude.toFixed(6); geoLng=+pos.coords.longitude.toFixed(6);
-        var url='https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+geoLat+'&longitude='+geoLng+'&localityLanguage=zh';
-        fetch(url).then(function(r){return r.json()}).then(function(j){
-          var parts=[];
-          var adm=(j.localityInfo&&j.localityInfo.administrative)||[];
-          adm.filter(function(a){return a.order>=2}).sort(function(a,b){return a.order-b.order}).forEach(function(a){
-            if(a.name&&parts.indexOf(a.name)<0) parts.push(a.name);
-          });
-          var txt=parts.join('');
-          geoName=txt;
-          if(addrInput && txt) addrInput.value=txt;
-          setHint('已定位'+(txt?'：'+txt:'')+'　'+(geoLat+','+geoLng)+'（可手改）','#1f7a4d');
-        }).catch(function(){
-          setHint('已取到坐标 '+(geoLat+','+geoLng)+'，地址解析失败，可手动补','#b26a00');
-        }).then(function(){ geoBtn.disabled=false; });
-      },function(err){
-        geoBtn.disabled=false;
-        setHint(err.code===1?'定位被拒绝：请到 设置→Safari→位置 允许访问':'定位失败，可手动填写','#c0392b');
-      },{enableHighAccuracy:true,timeout:12000,maximumAge:0});
-    });
-  }
+  function diff(a,b){return Math.round((new Date(a)-new Date(b))/86400000)}
+  function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('on');setTimeout(function(){el.classList.remove('on')},1600)}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 
   function chipsInit(sel,multi){
     var box=$(sel);
@@ -191,99 +172,154 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
     });
   }
   chipsInit('#f-area',false); chipsInit('#f-acts',true); chipsInit('#f-rate',false); chipsInit('#f-next',false);
+  function picked(sel){return Array.prototype.map.call(document.querySelectorAll(sel+' .chip.on'),function(c){return c.dataset.v})}
 
-  function picked(sel){
-    return Array.prototype.map.call(document.querySelectorAll(sel+' .chip.on'),function(c){return c.dataset.v});
-  }
+  /* 定位 */
+  var geoBtn=$('#btn-geo'), geoHint=$('#geo-hint'), addrInput=$('#f-addr');
+  function setHint(t,c){geoHint.textContent=t;geoHint.style.color=c||'#7c8a97'}
+  geoBtn.addEventListener('click',function(){
+    if(!navigator.geolocation){setHint('这台浏览器不支持定位，请手动填','#c0392b');return}
+    geoBtn.disabled=true;setHint('正在定位…');
+    navigator.geolocation.getCurrentPosition(function(pos){
+      geoLat=+pos.coords.latitude.toFixed(6);geoLng=+pos.coords.longitude.toFixed(6);
+      fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+geoLat+'&longitude='+geoLng+'&localityLanguage=zh')
+        .then(function(r){return r.json()})
+        .then(function(j){
+          var parts=[],adm=(j.localityInfo&&j.localityInfo.administrative)||[];
+          adm.filter(function(a){return a.order>=2}).sort(function(a,b){return a.order-b.order}).forEach(function(a){
+            if(a.name&&parts.indexOf(a.name)<0)parts.push(a.name);
+          });
+          geoName=parts.join('');
+          if(geoName)addrInput.value=geoName;
+          setHint('已定位'+(geoName?'：'+geoName:'')+'　'+(geoLat+','+geoLng)+'（可手改）','#1f7a4d');
+        })
+        .catch(function(){setHint('已取到坐标 '+(geoLat+','+geoLng)+'，地址解析失败，可手动补','#b26a00')})
+        .then(function(){geoBtn.disabled=false});
+    },function(err){
+      geoBtn.disabled=false;
+      setHint(err.code===1?'定位被拒绝：设置 → 隐私 → 定位服务 里允许':'定位失败，可手动填写','#c0392b');
+    },{enableHighAccuracy:true,timeout:12000,maximumAge:0});
+  });
 
+  /* 保存 */
   $('#btn-save').addEventListener('click',function(){
     var name=$('#f-name').value.trim();
     if(!name){toast('先填客户名');$('#f-name').focus();return}
     var plus=parseInt(picked('#f-next')[0]||'7',10);
+    var acts=picked('#f-acts');
     var item={
-      id:Date.now(),
-      name:name,
-      area:(picked('#f-area')[0]||'平湖'),
-      addr:($('#f-addr')?.value||'').trim(),
-      lat:geoLat, lng:geoLng, geoName:geoName,
-      designer:$('#f-designer').value.trim(),
-      acts:picked('#f-acts'),
-      rate:picked('#f-rate')[0]||'待观察',
-      next:days(plus),
-      note:$('#f-note').value.trim(),
-      created:today()
+      id:Date.now(), name:name, area:(picked('#f-area')[0]||'平湖'),
+      addr:addrInput.value.trim(), lat:geoLat, lng:geoLng, geoName:geoName,
+      designer:$('#f-designer').value.trim(), acts:acts,
+      rate:picked('#f-rate')[0]||'待观察', next:shift(plus),
+      note:$('#f-note').value.trim(), created:today(),
+      lastFollow:today(), hist:[{d:today(),a:acts.join('/')||'—'}]
     };
-    data.unshift(item); save(); render();
-    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';if(addrInput)addrInput.value='';geoLat=null;geoLng=null;geoName='';setHint('');
+    data.unshift(item);save();
+    filter='todo';syncFilter();render();
+    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';addrInput.value='';
+    geoLat=null;geoLng=null;geoName='';setHint('');
     Array.prototype.forEach.call(document.querySelectorAll('#f-acts .chip'),function(c){c.classList.remove('on')});
-    toast('已保存：'+name);
+    toast('已存：'+name+'，'+item.next+' 跟进');
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
+  /* 统计 */
+  function counts(){
+    var t=today(), todo=data.filter(function(x){return x.rate!=='没戏'});
+    return {all:data.length, todo:todo.length,
+            today:todo.filter(function(x){return x.next===t}).length,
+            late:todo.filter(function(x){return x.next<t}).length};
+  }
+  function syncFilter(){
+    Array.prototype.forEach.call(document.querySelectorAll('.stat button'),function(b){
+      b.classList.toggle('on',b.dataset.f===filter);
+    });
+  }
+  document.querySelector('.stat').addEventListener('click',function(e){
+    var b=e.target.closest('button[data-f]'); if(!b)return;
+    filter=b.dataset.f;syncFilter();render();
+    $('#list').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  /* 渲染 */
   function render(){
-    var t=today();
-    var todo=data.filter(function(x){return x.rate!=='没戏'});
-    var late=todo.filter(function(x){return x.next<t});
-    $('#s-all').textContent=data.length;
-    $('#s-todo').textContent=todo.length;
-    $('#s-late').textContent=late.length;
+    var c=counts(), t=today();
+    $('#s-all').textContent=c.all;$('#s-todo').textContent=c.todo;
+    $('#s-today').textContent=c.today;$('#s-late').textContent=c.late;
+
+    var rows=data.slice();
+    if(filter==='todo')rows=rows.filter(function(x){return x.rate!=='没戏'});
+    if(filter==='today')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.next===t});
+    if(filter==='late')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.next<t});
+    rows.sort(function(a,b){return a.next<b.next?-1:a.next>b.next?1:0});
+
+    $('#listhint').textContent={all:'共 '+c.all+' 家',todo:'待跟进 '+c.todo+' 家',today:'今天 '+c.today+' 家',late:'逾期 '+c.late+' 家'}[filter];
 
     var box=$('#list');
-    if(!data.length){box.innerHTML='<div class="empty">还没有记录</div>';return}
-    var sorted=data.slice().sort(function(a,b){return a.next<b.next?-1:a.next>b.next?1:0});
-    box.innerHTML=sorted.map(function(x){
+    if(!rows.length){box.innerHTML='<div class="empty">这个筛选下没有客户</div>';return}
+
+    box.innerHTML=rows.map(function(x){
+      var d=diff(x.next,t);
       var cls=x.next<t?'due-late':(x.next===t?'due-today':'due-ok');
+      var when=x.next<t?'逾期 '+Math.abs(d)+' 天':(x.next===t?'今天到期':(d===1?'明天':'还有 '+d+' 天'));
       var bcls=x.rate==='有戏'?'b-hot':(x.rate==='没戏'?'b-dead':'b-wait');
+      var hist=(x.hist||[]).slice(-5).map(function(h){return h.d+'　'+esc(h.a)}).join('<br>');
       return '<div class="rowwrap" data-id="'+x.id+'">'+
         '<div class="row"><div><div class="nm">'+esc(x.name)+'</div>'+
-        '<div class="meta">'+esc(x.area)+(x.designer?' · '+esc(x.designer):'')+' · '+(x.acts.length?esc(x.acts.join('/')):'—')+(x.addr?'<br>📍'+esc(x.addr):'')+'</div></div>'+
+        '<div class="meta">'+esc(x.area)+(x.designer?' · '+esc(x.designer):'')+' · '+((x.acts&&x.acts.length)?esc(x.acts.join('/')):'—')+
+        (x.addr?'<br>📍'+esc(x.addr):'')+'</div></div>'+
         '<div style="text-align:right"><span class="badge '+bcls+'">'+esc(x.rate)+'</span>'+
-        '<div class="meta '+cls+'">'+x.next+'</div></div></div>'+
-        '<div class="detail"><p>'+(x.note?esc(x.note):'（无备注）')+'</p><p style="color:#8a97a6">录入 '+x.created+'</p>'+
-        '<div class="acts"><button data-act="bump">今天跟进了（+7 天）</button><button data-act="done">标记没戏</button><button class="del" data-act="del">删除</button></div></div>'+
-        '</div>';
+        '<div class="meta '+cls+'">'+x.next+'<br>'+when+'</div></div></div>'+
+        '<div class="detail">'+
+          '<p>'+(x.note?esc(x.note):'（无备注）')+'</p>'+
+          '<p style="color:#8a97a6">已跟进 '+((x.hist||[]).length)+' 次'+(x.lastFollow?' · 最近 '+x.lastFollow:'')+
+            (x.lat?' · <a href="https://uri.amap.com/marker?position='+x.lng+','+x.lat+'&name='+encodeURIComponent(x.name)+'" target="_blank" rel="noopener">地图</a>':'')+'</p>'+
+          (hist?'<div class="hist">'+hist+'</div>':'')+
+          '<div class="acts"><button data-act="bump">跟进过了（+7 天）</button><button data-act="done">标记没戏</button><button class="del" data-act="del">删除</button></div>'+
+        '</div></div>';
     }).join('');
   }
 
-  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-
   $('#list').addEventListener('click',function(e){
-    var wrap=e.target.closest('.rowwrap');
-    if(!wrap) return;
+    var wrap=e.target.closest('.rowwrap'); if(!wrap)return;
     var id=parseInt(wrap.dataset.id,10);
     var btn=e.target.closest('button[data-act]');
+    var it=data.filter(function(x){return x.id===id})[0]; if(!it)return;
     if(btn){
-      var it=data.filter(function(x){return x.id===id})[0]; if(!it) return;
-      if(btn.dataset.act==='bump'){it.next=days(7);toast('已推到 '+it.next)}
+      if(btn.dataset.act==='bump'){
+        it.next=shift(7); it.lastFollow=today();
+        it.hist=(it.hist||[]).concat([{d:today(),a:'跟进'}]);
+        toast('已推到 '+it.next);
+      }
       if(btn.dataset.act==='done'){it.rate='没戏';toast('已标记没戏')}
       if(btn.dataset.act==='del'){
-        if(!confirm('删除这条？'))return;
+        if(!confirm('删除「'+it.name+'」？'))return;
         data=data.filter(function(x){return x.id!==id});
       }
       save();render();return;
     }
-    var d=wrap.querySelector('.detail');
-    if(d) d.classList.toggle('on');
+    var d=wrap.querySelector('.detail'); if(d)d.classList.toggle('on');
   });
 
   function csvCell(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'}
   $('#btn-csv').addEventListener('click',function(){
     if(!data.length){toast('没有数据');return}
-    var head=['客户','片区','详细地址','设计师','今天动作','评级','下次跟进','备注','录入日期','纬度','经度'];
+    var head=['客户','片区','详细地址','设计师','最近动作','评级','下次跟进','备注','跟进次数','最后跟进','录入日期','纬度','经度'];
     var rows=[head.map(csvCell).join(',')].concat(data.map(function(x){
-      return [x.name,x.area,x.addr||'',x.designer,x.acts.join('/'),x.rate,x.next,x.note,x.created,x.lat||'',x.lng||''].map(csvCell).join(',');
+      return [x.name,x.area,x.addr||'',x.designer,(x.acts||[]).join('/'),x.rate,x.next,x.note,(x.hist||[]).length,x.lastFollow||'',x.created,x.lat||'',x.lng||''].map(csvCell).join(',');
     }));
     var blob=new Blob(['\ufeff'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'});
     var a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download='扫楼表_'+today()+'.csv';
-    document.body.appendChild(a);a.click();a.remove();
-    toast('已导出');
+    a.href=URL.createObjectURL(blob);a.download='扫楼表_'+today()+'.csv';
+    document.body.appendChild(a);a.click();a.remove();toast('已导出');
   });
 
   $('#btn-txt').addEventListener('click',function(){
     if(!data.length){toast('没有数据');return}
-    var txt=data.map(function(x){return x.next+' | '+x.name+' | '+(x.designer||'—')+' | '+x.acts.join('/')+' | '+x.rate+' | '+(x.note||'')}).join('\n');
+    var txt=data.map(function(x){
+      return x.next+' | '+x.name+' | '+(x.area||'')+' | '+(x.designer||'—')+' | '+((x.acts||[]).join('/')||'—')+' | '+x.rate+' | '+(x.note||'');
+    }).join('\n');
     if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){toast('已复制，可粘到微信')},function(){prompt('手动复制：',txt)})}
     else prompt('手动复制：',txt);
   });
@@ -294,7 +330,7 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
     data=[];save();render();toast('已清空');
   });
 
-  render();
+  syncFilter();render();
 })();
 </script>
 </body>
