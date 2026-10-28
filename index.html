@@ -261,7 +261,11 @@
   </div>
   <script>
   (function(){var b=document.getElementById('qrbtn'),x=document.getElementById('qrbox');
-   if(b&&x)b.addEventListener('click',function(){x.style.display='flex';b.style.display='none';});})();
+   if(b&&x)b.addEventListener('click',function(){
+     var open=x.style.display==='flex';
+     x.style.display=open?'none':'flex';
+     b.textContent=open?'显示我的微信二维码':'收起二维码';
+   });})();
   </script>
 </section>
 
