@@ -195,15 +195,21 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       last_follow:x.lastFollow||null, hist:x.hist||[]
     };
   }
-  function push(x,upsert){
-    var h={'Content-Type':'application/json','apikey':CLOUD.key,'Authorization':'Bearer '+CLOUD.key};
-    h['Prefer']=upsert?'resolution=merge-duplicates,return=minimal':'return=minimal';
-    var url=CLOUD.url+'/rest/v1/visits'+(upsert?'?on_conflict=client_id':'');
-    return fetch(url,{method:'POST',headers:h,body:JSON.stringify(row(x))}).then(function(r){
-      if(!r.ok){
-        return r.text().then(function(t){ throw new Error('HTTP '+r.status+(t?' · '+t.slice(0,90):'')) });
-      }
+  function baseHeaders(){
+    return {'Content-Type':'application/json','apikey':CLOUD.key,'Authorization':'Bearer '+CLOUD.key,'Prefer':'return=minimal'};
+  }
+  function patchRow(x){
+    var u=CLOUD.url+'/rest/v1/visits?client_id=eq.'+encodeURIComponent(String(x.id));
+    return fetch(u,{method:'PATCH',headers:baseHeaders(),body:JSON.stringify(row(x))}).then(function(r){
+      if(!r.ok) return r.text().then(function(t){ throw new Error('HTTP '+r.status+(t?' · '+t.slice(0,90):'')) });
       return true;
+    });
+  }
+  function push(x){
+    return fetch(CLOUD.url+'/rest/v1/visits',{method:'POST',headers:baseHeaders(),body:JSON.stringify(row(x))}).then(function(r){
+      if(r.ok) return true;
+      if(r.status===409) return patchRow(x);   // 已存在就改成更新
+      return r.text().then(function(t){ throw new Error('HTTP '+r.status+(t?' · '+t.slice(0,90):'')) });
     });
   }
   function syncAll(silent){
@@ -216,7 +222,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     var chain=Promise.resolve();
     pend.forEach(function(x){
       chain=chain.then(function(){
-        return push(x,true).then(function(){ x.synced=true; done++; })
+        return push(x).then(function(){ x.synced=true; done++; })
           .catch(function(e){ throw e });
       });
     });
