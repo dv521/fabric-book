@@ -81,6 +81,13 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
       <button class="chip" data-v="其他">其他</button>
     </div>
 
+    <label>详细地址</label>
+    <div style="display:flex;gap:8px">
+      <input id="f-addr" type="text" placeholder="点「定位」自动填，也可手改" autocomplete="off">
+      <button id="btn-geo" type="button" style="flex:0 0 auto;border:1px solid #cfdde9;background:#f8fbfd;color:#1d6f8f;font:inherit;font-size:14.5px;font-weight:650;border-radius:11px;padding:0 16px;white-space:nowrap">定位</button>
+    </div>
+    <div id="geo-hint" style="font-size:12.5px;color:#7c8a97;margin-top:6px"></div>
+
     <label>设计师称呼（可空）</label>
     <input id="f-designer" type="text" placeholder="例：小林 / 王工" autocomplete="off">
 
@@ -132,6 +139,7 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
   var KEY='dv_visit_v1';
   var $=function(s){return document.querySelector(s)};
   var data=[];
+  var geoLat=null, geoLng=null, geoName='';
   try{data=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){data=[]}
 
   function save(){localStorage.setItem(KEY,JSON.stringify(data))}
@@ -140,6 +148,36 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
   function days(n){var d=new Date();d.setDate(d.getDate()+n);return fmt(d)}
   function today(){return fmt(new Date())}
   function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('on');setTimeout(function(){el.classList.remove('on')},1500)}
+
+
+  var geoBtn=document.getElementById('btn-geo'), geoHint=document.getElementById('geo-hint'), addrInput=document.getElementById('f-addr');
+  function setHint(t,color){ if(geoHint){geoHint.textContent=t; geoHint.style.color=color||'#7c8a97';} }
+  if(geoBtn){
+    geoBtn.addEventListener('click',function(){
+      if(!navigator.geolocation){setHint('这台浏览器不支持定位，请手动填','#c0392b');return}
+      geoBtn.disabled=true; setHint('正在定位…');
+      navigator.geolocation.getCurrentPosition(function(pos){
+        geoLat=+pos.coords.latitude.toFixed(6); geoLng=+pos.coords.longitude.toFixed(6);
+        var url='https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+geoLat+'&longitude='+geoLng+'&localityLanguage=zh';
+        fetch(url).then(function(r){return r.json()}).then(function(j){
+          var parts=[];
+          var adm=(j.localityInfo&&j.localityInfo.administrative)||[];
+          adm.filter(function(a){return a.order>=2}).sort(function(a,b){return a.order-b.order}).forEach(function(a){
+            if(a.name&&parts.indexOf(a.name)<0) parts.push(a.name);
+          });
+          var txt=parts.join('');
+          geoName=txt;
+          if(addrInput && txt) addrInput.value=txt;
+          setHint('已定位'+(txt?'：'+txt:'')+'　'+(geoLat+','+geoLng)+'（可手改）','#1f7a4d');
+        }).catch(function(){
+          setHint('已取到坐标 '+(geoLat+','+geoLng)+'，地址解析失败，可手动补','#b26a00');
+        }).then(function(){ geoBtn.disabled=false; });
+      },function(err){
+        geoBtn.disabled=false;
+        setHint(err.code===1?'定位被拒绝：请到 设置→Safari→位置 允许访问':'定位失败，可手动填写','#c0392b');
+      },{enableHighAccuracy:true,timeout:12000,maximumAge:0});
+    });
+  }
 
   function chipsInit(sel,multi){
     var box=$(sel);
@@ -166,6 +204,8 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
       id:Date.now(),
       name:name,
       area:(picked('#f-area')[0]||'平湖'),
+      addr:($('#f-addr')?.value||'').trim(),
+      lat:geoLat, lng:geoLng, geoName:geoName,
       designer:$('#f-designer').value.trim(),
       acts:picked('#f-acts'),
       rate:picked('#f-rate')[0]||'待观察',
@@ -174,7 +214,7 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
       created:today()
     };
     data.unshift(item); save(); render();
-    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';
+    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';if(addrInput)addrInput.value='';geoLat=null;geoLng=null;geoName='';setHint('');
     Array.prototype.forEach.call(document.querySelectorAll('#f-acts .chip'),function(c){c.classList.remove('on')});
     toast('已保存：'+name);
     window.scrollTo({top:0,behavior:'smooth'});
@@ -196,7 +236,7 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
       var bcls=x.rate==='有戏'?'b-hot':(x.rate==='没戏'?'b-dead':'b-wait');
       return '<div class="rowwrap" data-id="'+x.id+'">'+
         '<div class="row"><div><div class="nm">'+esc(x.name)+'</div>'+
-        '<div class="meta">'+esc(x.area)+(x.designer?' · '+esc(x.designer):'')+' · '+(x.acts.length?esc(x.acts.join('/')):'—')+'</div></div>'+
+        '<div class="meta">'+esc(x.area)+(x.designer?' · '+esc(x.designer):'')+' · '+(x.acts.length?esc(x.acts.join('/')):'—')+(x.addr?'<br>📍'+esc(x.addr):'')+'</div></div>'+
         '<div style="text-align:right"><span class="badge '+bcls+'">'+esc(x.rate)+'</span>'+
         '<div class="meta '+cls+'">'+x.next+'</div></div></div>'+
         '<div class="detail"><p>'+(x.note?esc(x.note):'（无备注）')+'</p><p style="color:#8a97a6">录入 '+x.created+'</p>'+
@@ -229,9 +269,9 @@ h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.08em;margin:2
   function csvCell(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'}
   $('#btn-csv').addEventListener('click',function(){
     if(!data.length){toast('没有数据');return}
-    var head=['客户','片区','设计师','今天动作','评级','下次跟进','备注','录入日期'];
+    var head=['客户','片区','详细地址','设计师','今天动作','评级','下次跟进','备注','录入日期','纬度','经度'];
     var rows=[head.map(csvCell).join(',')].concat(data.map(function(x){
-      return [x.name,x.area,x.designer,x.acts.join('/'),x.rate,x.next,x.note,x.created].map(csvCell).join(',');
+      return [x.name,x.area,x.addr||'',x.designer,x.acts.join('/'),x.rate,x.next,x.note,x.created,x.lat||'',x.lng||''].map(csvCell).join(',');
     }));
     var blob=new Blob(['\ufeff'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'});
     var a=document.createElement('a');
