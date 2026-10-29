@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>选品卡 · 模板</title>
+<style>
+:root{--ink:#111d27;--mut:#7c8a97;--line:#e3ecf3;--brand:#2f8fb5}
+*{box-sizing:border-box}
+body{margin:0;background:#eef3f7;color:var(--ink);font:14.5px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
+.page{max-width:820px;margin:18px auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 28px;box-shadow:0 6px 24px rgba(16,38,54,.06)}
+h1{margin:0;font-size:21px}
+.sub{margin:5px 0 0;color:var(--mut);font-size:12.5px}
+h2{font-size:12.5px;color:var(--mut);letter-spacing:.08em;margin:16px 0 6px;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13.4px}
+th,td{border:1px solid #e8eff5;padding:7px 8px;text-align:left;vertical-align:top}
+th{background:#f7fafc;color:#5a6b78;font-weight:600;white-space:nowrap;width:98px}
+.line{display:block;border-bottom:1px solid #c8d6e2;height:20px;margin:2px 0}
+.blank{color:#b9c9d6}
+.cm{color:var(--mut);font-size:11.8px;margin-top:5px}
+.foot{margin-top:12px;padding-top:8px;border-top:1px dashed #dbe6ef;font-size:11.5px;color:var(--mut);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media print{
+  body{background:#fff}
+  .page{margin:0;border:0;box-shadow:none;padding:7mm 9mm;max-width:none;font-size:10.2px;line-height:1.45}
+  h1{font-size:16px}.sub{font-size:9px}
+  h2{font-size:8.8px;margin:8px 0 3px}
+  table{font-size:9.6px}
+  th,td{padding:3px 5px}
+  .line{height:15px}
+  .cm{font-size:8.4px}
+  .foot{font-size:8.4px;margin-top:7px}
+  @page{size:A4;margin:0}
+}
+@media(max-width:640px){.page{margin:0;border-radius:0;padding:18px 16px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>选品卡<span style="color:#7c8a97;font-size:13px;margin-left:8px">一款一张，给主播和采购看</span></h1>
+  <p class="sub">填完这一张，就能回答：这布做什么款、卖多少钱、能不能出报告、有没有坑。</p>
+
+  <h2>一、基本信息</h2>
+  <table>
+    <tr><th>款号 / 名称</th><td><span class="blank">＿＿＿＿＿＿＿＿</span></td><th>成分</th><td><span class="blank">＿＿＿＿＿＿</span></td></tr>
+    <tr><th>规格</th><td><span class="blank">＿＿D / ＿＿F</span></td><th>克重</th><td><span class="blank">＿＿ g/㎡</span></td></tr>
+    <tr><th>门幅</th><td><span class="blank">＿＿ cm</span></td><th>组织</th><td>平纹 / 斜纹 / 缎纹 / 其他<span class="blank">＿＿</span></td></tr>
+    <tr><th>后整理</th><td colspan="3">压光 / 涂层 / 贴膜 / 三防 / 抗静电 / 抗菌 <span class="blank">（勾选并注明）</span></td></tr>
+    <tr><th>色号</th><td colspan="3">共 <span class="blank">＿＿</span> 个色　主推色号：<span class="blank">＿＿＿＿＿＿＿＿＿＿</span></td></tr>
+  </table>
+
+  <h2>二、功能与检测</h2>
+  <table>
+    <tr><th>防绒方式</th><td colspan="3">压无胆 / 覆膜 / 注剂 / 其他 <span class="blank">＿＿＿＿</span>　检测：GB/T 12705 <span class="blank">（有／无）</span></td></tr>
+    <tr><th>防水</th><td><span class="blank">＿＿ mm</span></td><th>透湿</th><td><span class="blank">＿＿ g/㎡·24h</span></td></tr>
+    <tr><th>色牢度</th><td><span class="blank">＿＿ 级</span></td><th>安全类别</th><td>GB 18401 <span class="blank">B 类 / 其他</span></td></tr>
+    <tr><th>报告齐套</th><td colspan="3">□ 成分　□ 防钻绒　□ 色牢度　□ 防水　□ 抗静电　□ 其他<span class="blank">＿＿</span></td></tr>
+  </table>
+
+  <h2>三、商业条件</h2>
+  <table>
+    <tr><th>起订</th><td><span class="blank">＿＿ 米/色</span></td><th>打样</th><td><span class="blank">＿＿ 天</span></td></tr>
+    <tr><th>大货交期</th><td><span class="blank">＿＿ 天</span></td><th>价格</th><td><span class="blank">＿＿ 元/米（含税／不含税）</span></td></tr>
+    <tr><th>结算口径</th><td colspan="3">足码 / 码折　·　含税 <span class="blank">＿＿%</span>　·　报价有效期 <span class="blank">＿＿ 天</span></td></tr>
+  </table>
+
+  <h2>四、卖点三句（主播照念）</h2>
+  <table>
+    <tr><th>① 讲规格</th><td><span class="line"></span></td></tr>
+    <tr><th>② 讲手感</th><td><span class="line"></span></td></tr>
+    <tr><th>③ 讲工艺</th><td><span class="line"></span></td></tr>
+  </table>
+
+  <h2>五、适配与风险</h2>
+  <table>
+    <tr><th>适配款型</th><td>短款 / 排骨款 / 中长款 / 内胆 / 其他<span class="blank">＿＿</span>　建议零售价带 <span class="blank">＿＿–＿＿ 元</span></td></tr>
+    <tr><th>风险提示</th><td>□ 浅色透　□ 易勾丝　□ 跨缸色差　□ 缩水　□ 透湿不足　□ 其他<span class="blank">＿＿＿＿</span></td></tr>
+    <tr><th>结论</th><td>□ 主推　□ 备选　□ 不推　　理由：<span class="blank">＿＿＿＿＿＿＿＿＿＿＿＿＿＿</span></td></tr>
+  </table>
+
+  <p class="cm">填卡原则：能查的写数字（克重、门幅、检测项目），不能查的写“经验值”。这张卡会跟着主播上镜，写错比不写更麻烦。</p>
+
+  <div class="foot">
+    <span>TT纺织 · 窦金龙 · 微信 dv13588355444</span>
+    <span>选品卡模板 · 每款一张</span>
+  </div>
+</div>
+</body>
+</html>

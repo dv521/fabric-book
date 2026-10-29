@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>退货原因分类卡 · 模板</title>
+<style>
+:root{--ink:#111d27;--mut:#7c8a97;--line:#e3ecf3;--red:#A8352B;--ok:#14603c}
+*{box-sizing:border-box}
+body{margin:0;background:#eef3f7;color:var(--ink);font:14.5px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
+.page{max-width:860px;margin:18px auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 28px;box-shadow:0 6px 24px rgba(16,38,54,.06)}
+h1{margin:0;font-size:21px}
+.sub{margin:5px 0 0;color:var(--mut);font-size:12.5px}
+h2{font-size:12.5px;color:var(--mut);letter-spacing:.08em;margin:16px 0 6px;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13.2px}
+th,td{border:1px solid #e8eff5;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f7fafc;color:#5a6b78;font-weight:600}
+.own{color:var(--ok);font-weight:600}
+.them{color:#b26a00;font-weight:600}
+.both{color:#6b5aa0;font-weight:600}
+.cm{color:var(--mut);font-size:11.8px;margin-top:5px}
+.foot{margin-top:12px;padding-top:8px;border-top:1px dashed #dbe6ef;font-size:11.5px;color:var(--mut);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media print{
+  body{background:#fff}
+  .page{margin:0;border:0;box-shadow:none;padding:6mm 8mm;max-width:none;font-size:9.8px;line-height:1.42}
+  h1{font-size:15.5px}.sub{font-size:8.8px}
+  h2{font-size:8.5px;margin:7px 0 3px}
+  table{font-size:9.1px}
+  th,td{padding:2.6px 4px}
+  .cm{font-size:8.2px}
+  .foot{font-size:8.2px;margin-top:6px}
+  @page{size:A4;margin:0}
+}
+@media(max-width:640px){.page{margin:0;border-radius:0;padding:18px 16px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>退货原因分类卡</h1>
+  <p class="sub">直播单退货率高，先把“为什么退”分清楚，再谈谁承担。分类错了，后面全错。</p>
+
+  <h2>一、八类原因与责任归属</h2>
+  <table>
+    <tr><th style="width:13%">大类</th><th style="width:26%">具体表现</th><th style="width:28%">怎么判定（拿证据）</th><th style="width:15%">责任方</th><th>处理动作</th></tr>
+    <tr><td rowspan="3"><b>钻绒</b></td><td>针孔周围出绒</td><td>对灯看针孔，孔缘带绒丝</td><td class="them">使用方</td><td>查针号（9 号）与针距（≥12 针/3cm）</td></tr>
+    <tr><td>接缝处出绒</td><td>看是否压胶条、缝线是否过紧</td><td class="them">使用方</td><td>补压胶工艺</td></tr>
+    <tr><td>布面整体起毛、无针孔</td><td>布面泛白、绒丝从组织间冒出</td><td class="own">我方</td><td>取样送检 GB/T 12705，按结果换货</td></tr>
+
+    <tr><td rowspan="2"><b>色差</b></td><td>与确认样板不符</td><td>D65 灯箱、45° 比色，记 ΔE</td><td class="both">看数据</td><td>ΔE ≤ 1.0 属正常；1.0–2.0 协商；&gt;2.0 我方负责</td></tr>
+    <tr><td>同件不同部位深浅不一</td><td>同片对比、拍照留证</td><td class="own">我方</td><td>换布或补米</td></tr>
+
+    <tr><td><b>织疵</b></td><td>断经、破洞、粗节、色条</td><td>按四分制验布，扣分留记录</td><td class="own">我方</td><td>按扣分折价或补米</td></tr>
+
+    <tr><td><b>手感不符</b></td><td>比留样硬、薄、糙</td><td>与客户留样同条件对比</td><td class="own">我方（若与样不符）</td><td>换货；若因后整理差异，提前说明</td></tr>
+
+    <tr><td><b>描述不符</b></td><td>“太薄不保暖”“和直播间不一样”</td><td>调直播回放，比对口播原话</td><td class="them">客户（话术）</td><td>改一页卡口播句，不背这个锅</td></tr>
+
+    <tr><td><b>尺码问题</b></td><td>偏大偏小、版型不合</td><td>对照尺码表与版房记录</td><td class="them">客户</td><td>提供面料缩率数据协助改版</td></tr>
+
+    <tr><td><b>物流破损</b></td><td>压痕、受潮、延迟</td><td>物流单 + 开箱照</td><td class="both">看环节</td><td>补发；改进包装</td></tr>
+
+    <tr><td><b>七天无理由</b></td><td>不喜欢、拍错、比价</td><td>平台规则</td><td class="them">客户</td><td>按平台规则，不计入质量问题</td></tr>
+  </table>
+  <p class="cm">责任方：<span class="own">我方</span>＝面料侧；<span class="them">使用方</span>＝缝制/话术/尺码侧；<span class="both">看数据</span>＝以检测或比色结果为准。</p>
+
+  <h2>二、三条判定小抄（当场能用）</h2>
+  <table>
+    <tr><th style="width:14%">钻绒</th><td>撕一小块，对着灯看针孔——孔缘带绒丝＝缝制；布面整体起毛、找不到孔＝面料。</td></tr>
+    <tr><th>色差</th><td>D65 灯箱、45° 观察；ΔE ≤ 1.0 正常，1.0–2.0 协商，&gt; 2.0 我方负责。没有灯箱就用窗边自然光，别在暖光下判。</td></tr>
+    <tr><th>起球</th><td>看摩擦部位（袖口、下摆、领口）；马丁代尔 2000 转 ≥ 3 级为合格线（经验值，按合同约定）。</td></tr>
+  </table>
+
+  <h2>三、这张卡怎么用</h2>
+  <table>
+    <tr><th style="width:20%">直播后 48h</th><td>让客户按这张表把退货逐条归类，填数量。</td></tr>
+    <tr><th>归类后</th><td>只处理“我方”那一列；“使用方”的给出改进建议，不当赔款谈。</td></tr>
+    <tr><th>每月</th><td>统计哪类最多——最多的那类，就是下个月要改的工艺或话术。</td></tr>
+  </table>
+
+  <div class="foot">
+    <span>TT纺织 · 窦金龙 · 微信 dv13588355444</span>
+    <span>判定阈值以合同与检测报告为准；经验值已标注</span>
+  </div>
+</div>
+</body>
+</html>
