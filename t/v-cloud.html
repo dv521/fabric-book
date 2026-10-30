@@ -206,32 +206,43 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       return true;
     });
   }
-  function push(x){
+  function push(x, allowUpdate){
     return fetch(CLOUD.url+'/rest/v1/visits',{method:'POST',headers:baseHeaders(),body:JSON.stringify(row(x))}).then(function(r){
-      if(r.ok) return true;
-      if(r.status===409) return patchRow(x);   // 已存在就改成更新
+      if(r.ok) return 'inserted';
+      if(r.status===409){
+        if(!allowUpdate) return 'exists';          // 全新同步：后端已有就跳过
+        return patchRow(x).then(function(){ return 'updated'; });
+      }
       return r.text().then(function(t){ throw new Error('HTTP '+r.status+(t?' · '+t.slice(0,90):'')) });
     });
   }
-  function syncAll(silent){
+
+  /* full=true：把全部记录重新核一遍（后端被清空时会自动补回；后端已有的跳过）
+     full=false：只推本地标记为待同步的 */
+  function syncAll(full, silent){
     if(!cloudOn){ if(!silent) toast('还没配置云端'); return Promise.resolve(0) }
     if(syncing) return Promise.resolve(0);
+    var list = full ? data.slice() : data.filter(function(x){return !x.synced});
+    if(!list.length){ badge(); if(!silent) toast('已经全部同步'); return Promise.resolve(0) }
     syncing=true;
-    var pend=data.filter(function(x){return !x.synced});
-    if(!pend.length){ syncing=false; badge(); if(!silent) toast('已经全部同步'); return Promise.resolve(0) }
-    var done=0;
+    if(!silent) bar('warn','正在核对 '+list.length+' 条…');
+    var ins=0, exi=0;
     var chain=Promise.resolve();
-    pend.forEach(function(x){
+    list.forEach(function(x){
       chain=chain.then(function(){
-        return push(x).then(function(){ x.synced=true; done++; })
-          .catch(function(e){ throw e });
+        return push(x, !full).then(function(r){
+          if(r==='inserted'||r==='updated'){ ins++; }
+          else { exi++; }
+          x.synced=true;
+        });
       });
     });
     return chain.then(function(){
       save(); syncing=false; badge();
-      bar('ok','已同步 '+done+' 条 · '+new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}));
-      if(!silent) toast('已同步 '+done+' 条');
-      return done;
+      var msg='上空 '+ins+' 条 · 后端已有 '+exi+' 条 · '+new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
+      bar(ins?'ok':'ok', msg);
+      if(!silent) toast(ins?('已上传 '+ins+' 条'):'后端已有全部记录，无需重复上传');
+      return ins;
     }).catch(function(e){
       syncing=false; badge();
       bar('warn','上云失败（'+e.message+'），数据已存本地，联网后点「立即同步」');
@@ -239,7 +250,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       return 0;
     });
   }
-  $('#btn-sync').addEventListener('click',function(){ syncAll(false) });
+  $('#btn-sync').addEventListener('click',function(){ syncAll(true,false) });
 
   /* 诊断：只读查询，把真实返回打出来 */
   $('#btn-diag').addEventListener('click',function(){
@@ -364,7 +375,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     Array.prototype.forEach.call(document.querySelectorAll('#f-acts .chip'),function(c){c.classList.remove('on')});
     toast('已存：'+name+'，'+item.next+' 跟进');
     window.scrollTo({top:0,behavior:'smooth'});
-    syncAll(true);
+    syncAll(false,true);
   });
 
   function counts(){
@@ -440,7 +451,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
         if(!confirm('删除「'+it.name+'」？本地会删；云端记录保留'))return;
         data=data.filter(function(x){return x.id!==id});
       }
-      save();render();syncAll(true);return;
+      save();render();syncAll(false,true);return;
     }
     var d=wrap.querySelector('.detail'); if(d)d.classList.toggle('on');
   });
@@ -476,7 +487,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   syncFilter();render();restoreDraft();
   if(location.protocol==='file:'){
     bar('bad','⚠️ 你打开的是下载到手机里的文件，不能连云端。请用网址打开：dv521.github.io/fabric-book/t/v-cloud.html（Chrome → 添加到主屏幕）');
-  } else if(cloudOn){ bar('ok','云端已连接；保存后自动上云'); syncAll(true); }
+  } else if(cloudOn){ bar('ok','云端已连接；保存后自动上云'); syncAll(false,true); }
   else { bar('warn','云端未配置：现在和旧版一样，只存本机'); }
 })();
 </script>
