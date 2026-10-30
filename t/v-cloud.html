@@ -298,6 +298,52 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   chipsInit('#f-area',false); chipsInit('#f-acts',true); chipsInit('#f-rate',false); chipsInit('#f-next',false);
   function picked(sel){return Array.prototype.map.call(document.querySelectorAll(sel+' .chip.on'),function(c){return c.dataset.v})}
 
+  /* ===== 表单草稿：切后台/重载不丢 ===== */
+  var DKEY='dv_draft_v1';
+  function setChips(sel,val){
+    var box=$(sel), vals=Array.isArray(val)?val:(val?[val]:[]);
+    Array.prototype.forEach.call(box.querySelectorAll('.chip'),function(c){
+      c.classList.toggle('on', vals.indexOf(c.dataset.v)>=0);
+    });
+  }
+  function collectDraft(){
+    return {name:$('#f-name').value, designer:$('#f-designer').value, addr:addrInput.value,
+            area:(picked('#f-area')[0]||''), acts:picked('#f-acts'), rate:(picked('#f-rate')[0]||''),
+            plus:(picked('#f-next')[0]||''), note:$('#f-note').value,
+            lat:geoLat, lng:geoLng, geoName:geoName, ts:Date.now()};
+  }
+  function saveDraft(){
+    try{ localStorage.setItem(DKEY, JSON.stringify(collectDraft())); }catch(e){}
+  }
+  function clearDraft(){ try{ localStorage.removeItem(DKEY); }catch(e){} }
+  function restoreDraft(){
+    var d=null;
+    try{ d=JSON.parse(localStorage.getItem(DKEY)||'null'); }catch(e){ d=null; }
+    if(!d) return;
+    var has=(d.name||'').trim()||(d.note||'').trim()||((d.acts||[]).length);
+    if(!has) return;
+    if($('#f-name').value) return;                 // 已有内容就不覆盖
+    $('#f-name').value=d.name||'';
+    $('#f-designer').value=d.designer||'';
+    addrInput.value=d.addr||'';
+    $('#f-note').value=d.note||'';
+    geoLat=(d.lat===undefined?null:d.lat); geoLng=(d.lng===undefined?null:d.lng); geoName=d.geoName||'';
+    if(d.area) setChips('#f-area', d.area);
+    if(d.rate) setChips('#f-rate', d.rate);
+    if(d.plus) setChips('#f-next', d.plus);
+    setChips('#f-acts', d.acts||[]);
+    toast('已恢复上次没保存的填写');
+  }
+  (function(){
+    var form=$('.card');
+    ['input','change','click'].forEach(function(ev){
+      form.addEventListener(ev, function(){ saveDraft(); }, true);
+    });
+    window.addEventListener('pagehide', saveDraft);
+    window.addEventListener('visibilitychange', function(){ if(document.hidden) saveDraft(); else restoreDraft(); });
+    window.addEventListener('pageshow', function(){ restoreDraft(); });
+  })();
+
   $('#btn-save').addEventListener('click',function(){
     var name=$('#f-name').value.trim();
     if(!name){toast('先填客户名');$('#f-name').focus();return}
@@ -311,7 +357,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       note:$('#f-note').value.trim(), created:today(),
       lastFollow:today(), hist:[{d:today(),a:acts.join('/')||'—'}], synced:false
     };
-    data.unshift(item);save();
+    data.unshift(item);save();clearDraft();
     filter='todo';syncFilter();render();badge();
     $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';addrInput.value='';
     geoLat=null;geoLng=null;geoName='';setHint('');
@@ -427,7 +473,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     data=[];save();render();toast('已清空');
   });
 
-  syncFilter();render();
+  syncFilter();render();restoreDraft();
   if(location.protocol==='file:'){
     bar('bad','⚠️ 你打开的是下载到手机里的文件，不能连云端。请用网址打开：dv521.github.io/fabric-book/t/v-cloud.html（Chrome → 添加到主屏幕）');
   } else if(cloudOn){ bar('ok','云端已连接；保存后自动上云'); syncAll(true); }
