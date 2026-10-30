@@ -18,8 +18,8 @@ h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-wei
 .stage{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:9px;background:#fbfdff}
 .shead{font-size:14.5px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:7px}
 .shead i{font-style:normal;background:#e8f4fa;color:#12556f;font-size:11.5px;font-weight:700;border-radius:6px;padding:1px 7px}
-.kv{display:grid;grid-template-columns:72px 1fr;gap:8px;font-size:13.6px;line-height:1.62;padding:3px 0}
-.kv .k{color:var(--mut);font-size:12.5px}
+.kv{display:grid;grid-template-columns:82px 1fr;gap:8px;font-size:13.6px;line-height:1.62;padding:3px 0}
+.kv .k{color:var(--mut);font-size:12.5px;line-height:1.45}
 .kv .v{color:var(--ink2)}
 .issue{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:13.6px;padding:7px 0;border-bottom:1px solid #eef4f8}
 .issue:last-child{border-bottom:0}
@@ -47,7 +47,7 @@ h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-wei
   .three{grid-template-columns:1fr}
   .three div{text-align:left}
   .warn{grid-template-columns:1fr}
-  .kv{grid-template-columns:64px 1fr;font-size:14px}
+  .kv{grid-template-columns:78px 1fr;font-size:13.6px}
 }
 @media print{
   @page{size:A4;margin:0}
@@ -59,7 +59,7 @@ h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-wei
   h2{font-size:9px;margin:0 0 4px}
   .stage{padding:4px 6px;margin-bottom:4px;break-inside:avoid}
   .shead{font-size:10px;margin-bottom:2px}
-  .kv{font-size:9.4px;padding:1px 0;grid-template-columns:60px 1fr}
+  .kv{font-size:9.2px;padding:1px 0;grid-template-columns:66px 1fr}
   .kv .k{font-size:9px}
   .issue{font-size:9.4px;padding:2.4px 0}
   .note{font-size:9.3px;padding:5px 7px;line-height:1.48}
@@ -89,51 +89,62 @@ h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-wei
 
     <div class="stage">
       <div class="shead"><i>0</i>坯布验收</div>
-      <div class="kv"><span class="k">要解决</span><span class="v">先看底子：经柳、色条、织疵</span></div>
+      <div class="kv"><span class="k">步骤</span><span class="v">① 拆包点卷、核对码数与重量 → ② 量门幅、称克重 → ③ 验布机过布，按四分制记扣分 → ④ 剪留样（每批留 1 米）→ ⑤ 贴批号标签、分区码放</span></div>
+      <div class="kv"><span class="k">要解决</span><span class="v">先看底子：经柳、色条、织疵、短码</span></div>
       <div class="kv"><span class="k">关键参数</span><span class="v">四分制扣分、克重 ±3%、门幅、批号</span></div>
-      <div class="kv"><span class="k">设备</span><span class="v">验布机、磅秤、卷尺</span></div>
+      <div class="kv"><span class="k">设备</span><span class="v">验布机、磅秤、卷尺、打标机</span></div>
     </div>
 
     <div class="stage">
-      <div class="shead"><i>1</i>前处理</div>
-      <div class="kv"><span class="k">要解决</span><span class="v">洗掉浆料油污，放开纤维内应力</span></div>
-      <div class="kv"><span class="k">关键参数</span><span class="v">60–80℃、偏中性、<b>低张力</b>；尼龙怕强碱</span></div>
+      <div class="shead"><i>1</i>前处理（按纤维分开做）</div>
+      <div class="kv"><span class="k">通用步骤</span><span class="v">① 退浆（去织造浆料）→ ② 精练（去油剂、去污）→ ③ 热水洗 → ④ 酸中和 → ⑤ 松式烘干或湿进缸</span></div>
+      <div class="kv"><span class="k">棉才做</span><span class="v">冷堆（轧碱＋双氧水，堆置 12–24 h）→ 煮练 → 漂白（氧漂/氯漂）→ 丝光</span></div>
+      <div class="kv"><span class="k">涤纶才做</span><span class="v">碱减量（开纤，仿丝绸手感）→ 皂洗 → 水洗</span></div>
+      <div class="kv"><span class="k">尼龙注意</span><span class="v"><b>不做冷堆、不做碱减量</b>（强碱伤强力）；重点是去油＋热松弛，全程低张力、防擦伤</span></div>
+      <div class="kv"><span class="k">关键参数</span><span class="v">60–80℃、偏中性、低张力</span></div>
       <div class="kv"><span class="k">设备</span><span class="v">平幅水洗机、松式退浆机、绳状缸</span></div>
     </div>
 
     <div class="stage">
       <div class="shead"><i>2</i>染色</div>
+      <div class="kv"><span class="k">步骤</span><span class="v">① 化验室打小样、对客户色样 → ② 坯布进缸、走匀（布在缸内循环顺畅）→ ③ 加助剂（匀染剂、缓染剂、酸调 pH）→ ④ 升温 1℃/min 至 95–100℃ → ⑤ 保温 30–60 min → ⑥ 取样对色（灯箱比 ΔE）→ ⑦ 降温、排液 → ⑧ 需要时套色/回修</span></div>
       <div class="kv"><span class="k">要解决</span><span class="v">颜色均匀上色，整匹一致、跨缸也一致</span></div>
       <div class="kv"><span class="k">关键参数</span><span class="v">酸性染料、<b>95–100℃ 常压</b>、pH 4.5–6.5、升温 1℃/min、浴比</span></div>
       <div class="kv"><span class="k">设备</span><span class="v">溢流（绳状）/ 气流（低浴比）/ 卷染（平幅）/ 经轴</span></div>
     </div>
 
     <div class="stage">
-      <div class="shead"><i>3</i>固色水洗</div>
-      <div class="kv"><span class="k">要解决</span><span class="v">洗掉浮色，把染料固定住</span></div>
-      <div class="kv"><span class="k">关键参数</span><span class="v">阳离子固色剂、皂洗 40℃、多道清水</span></div>
-      <div class="kv"><span class="k">设备</span><span class="v">水洗槽、固色槽</span></div>
+      <div class="shead"><i>3</i>固色与水洗</div>
+      <div class="kv"><span class="k">步骤</span><span class="v">① 温水洗（去浮色）→ ② 皂洗 40℃ → ③ 热水洗 → ④ 冷水洗 → ⑤ 固色（阳离子固色剂或单宁酸＋吐酒石）→ ⑥ 脱水 / 开幅</span></div>
+      <div class="kv"><span class="k">要解决</span><span class="v">洗浮色、把染料固定住（决定洗后掉不掉色）</span></div>
+      <div class="kv"><span class="k">关键参数</span><span class="v">皂洗 40℃、多道清水至水清；耐皂洗 ≥3–4 级</span></div>
+      <div class="kv"><span class="k">设备</span><span class="v">水洗槽、固色槽、脱水机、开幅机</span></div>
     </div>
 
     <div class="stage">
       <div class="shead"><i>4</i>后定型</div>
+      <div class="kv"><span class="k">步骤</span><span class="v">① 上机穿布、设定超喂 → ② 分区升温（预烘 100–120℃ → 定型 170–180℃）→ ③ 在线量门幅、调拉幅 → ④ 出布冷却 → ⑤ 打卷</span></div>
       <div class="kv"><span class="k">要解决</span><span class="v">定门幅、定克重、定手感，去掉前道的皱</span></div>
-      <div class="kv"><span class="k">关键参数</span><span class="v"><b>170–180℃</b>、30–40 s、超喂控制</span></div>
-      <div class="kv"><span class="k">设备</span><span class="v">拉幅定型机（针板 / 布铗）</span></div>
+      <div class="kv"><span class="k">关键参数</span><span class="v"><b>170–180℃</b>、30–40 s、超喂控制、门幅公差 ±1 cm</span></div>
+      <div class="kv"><span class="k">设备</span><span class="v">拉幅定型机（针板 / 布铗）、温度记录仪</span></div>
     </div>
 
     <div class="stage">
-      <div class="shead"><i>5</i>后整理</div>
-      <div class="kv"><span class="k">要解决</span><span class="v">加功能：光泽、防水、贴膜、抗静电</span></div>
-      <div class="kv"><span class="k">关键参数</span><span class="v">按功能定；三防要问含氟还是无氟</span></div>
-      <div class="kv"><span class="k">设备</span><span class="v">压光机、涂层机、贴膜线、浸轧槽</span></div>
+      <div class="shead"><i>5</i>后整理（按功能选做）</div>
+      <div class="kv"><span class="k">压光</span><span class="v">上辊→加压加热→出布冷却（出光泽、压平）</span></div>
+      <div class="kv"><span class="k">涂层</span><span class="v">刮涂/辊涂 → 预烘 → 焙烘 → 冷却打卷</span></div>
+      <div class="kv"><span class="k">贴膜</span><span class="v">上胶 → 复合 TPU 膜 → 压辊 → 熟成 → 冷却</span></div>
+      <div class="kv"><span class="k">三防</span><span class="v">浸轧（拒水剂）→ 预烘 100℃ → 焙烘 160–170℃ → 检测拒水等级</span></div>
+      <div class="kv"><span class="k">柔软/抗静电</span><span class="v">浸轧 → 烘干，常与三防同浴</span></div>
+      <div class="kv"><span class="k">关键参数</span><span class="v">按功能定；三防要问<b>含氟 C6 还是无氟 C0</b></span></div>
     </div>
 
     <div class="stage">
-      <div class="shead"><i>6</i>检验打卷</div>
-      <div class="kv"><span class="k">要解决</span><span class="v">交付前最后一关</span></div>
-      <div class="kv"><span class="k">关键参数</span><span class="v">四分制、ΔE ≤1.0（同缸）、缩水率、色牢度</span></div>
-      <div class="kv"><span class="k">设备</span><span class="v">验布机、测色仪、缩水测试</span></div>
+      <div class="shead"><i>6</i>检验与打卷</div>
+      <div class="kv"><span class="k">步骤</span><span class="v">① 验布机过布，四分制扣分 → ② 折算每 100 平方码 → ③ 对色（分光仪测 ΔE，同缸 ≤1.0）→ ④ 抽测克重、门幅、缩水率、色牢度 → ⑤ 定等（A/B 级）→ ⑥ 打卷、贴标、入库</span></div>
+      <div class="kv"><span class="k">要解决</span><span class="v">交付前最后一关：扣分、色差、物性三项一起过</span></div>
+      <div class="kv"><span class="k">关键参数</span><span class="v">单匹 ≤20 分/100 平方码、ΔE ≤1.0、缩水率按合同</span></div>
+      <div class="kv"><span class="k">设备</span><span class="v">验布机、测色仪、缩水测试、打卷机</span></div>
     </div>
 
     <div class="note">主线：<b>前处理定底子 → 染色定颜色 → 固色定牢度 → 定型定尺寸手感 → 后整理定功能</b>。</div>
