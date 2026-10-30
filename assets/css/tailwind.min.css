@@ -2140,3 +2140,6 @@ html.circle-lightbox-open {
         background: var(--line);
     }
 }
+
+/* dv 圆标在深色 hero 上需要一圈浅色描边，否则深底深标看不见（仅视觉，不改结构） */
+.page-home .site-header .brand-logo{box-shadow:0 0 0 1.5px rgba(241,246,255,.85), 0 8px 20px rgba(0,0,0,.35)}
