@@ -9,7 +9,7 @@
 :root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e3ebf2;--bg:#f4f8fb;--brand:#2f8fb5}
 *{box-sizing:border-box;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
-.wrap{max-width:860px;margin:0 auto;padding:0 14px 40px}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 40px;overflow-wrap:anywhere}
 header{background:#12202c;color:#fff;padding:18px 16px calc(14px + env(safe-area-inset-top));margin:0 -14px 14px}
 header h1{margin:0;font-size:19px}
 header p{margin:5px 0 0;font-size:12.5px;color:#a9bccb}
@@ -32,6 +32,10 @@ h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-wei
 @media(max-width:640px){
   .cols{grid-template-columns:1fr}
   .meta{grid-template-columns:1fr}
+  header h1{font-size:18px;line-height:1.35}
+  header p{font-size:12px;line-height:1.5}
+  .sign{grid-template-columns:1fr;gap:8px}
+  .foot{font-size:11px}
 }
 @media print{
   @page{size:A4 portrait;margin:0}
