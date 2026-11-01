@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12202c">
+<title>针号对比实测记录表 · dv面料手记</title>
+<style>
+:root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e3ebf2;--bg:#f4f8fb;--brand:#2f8fb5}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 40px}
+header{background:#12202c;color:#fff;padding:18px 16px calc(14px + env(safe-area-inset-top));margin:0 -14px 14px}
+header h1{margin:0;font-size:19px}
+header p{margin:5px 0 0;font-size:12.5px;color:#a9bccb}
+section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-weight:700}
+.meta{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.field{font-size:13.5px;color:var(--ink2)}
+.field b{display:block;color:var(--mut);font-weight:400;font-size:12px;margin-bottom:2px}
+.line{border-bottom:1px solid #c8d6e2;height:22px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.col{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fbfdff}
+.col h3{margin:0 0 8px;font-size:14.5px}
+.col .row{display:grid;grid-template-columns:1fr 72px;gap:6px;font-size:12.8px;color:var(--ink2);padding:4px 0;border-bottom:1px dashed #e6eef4}
+.col .row span:last-child{border-bottom:1px solid #c8d6e2;height:18px}
+.note{background:#f8fbfd;border:1px dashed #cfdde9;border-radius:10px;padding:10px 12px;font-size:13.4px;line-height:1.8}
+.note b{color:#12556f}
+.sign{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px;font-size:13px;color:var(--mut)}
+.cm{color:var(--mut);font-size:12px}
+.foot{color:var(--mut);font-size:11.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:4px 2px 0}
+@media(max-width:640px){
+  .cols{grid-template-columns:1fr}
+  .meta{grid-template-columns:1fr}
+}
+@media print{
+  @page{size:A4 portrait;margin:0}
+  body{background:#fff;font-size:12px;line-height:1.5}
+  .wrap{max-width:none;padding:12mm 11mm 8mm}
+  header{background:#fff;color:#111d27;border-bottom:2.5px solid #111d27;padding:0 0 8px;margin:0 0 14px}
+  header h1{font-size:23px}
+  header p{color:#444;font-size:11.5px}
+  section{border:0;padding:0;margin:0 0 11px}
+  h2{font-size:11px;margin:0 0 8px}
+  .meta{gap:14px}
+  .field{font-size:11.5px}
+  .field b{font-size:10.5px}
+  .line{height:17px}
+  .col{padding:9px 10px}
+  .col h3{font-size:12.5px;margin-bottom:7px}
+  .col .row{font-size:11px;padding:6.5px 0}
+  .col .row span:last-child{height:15px}
+  .note{font-size:11px;padding:9px 11px;line-height:1.6}
+  .cm{font-size:10px}
+  .sign{font-size:11.5px;margin-top:12px}
+  .foot{font-size:9.5px;margin-top:6px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>针号对比实测记录表</h1>
+    <p>15D／20D 超薄无胆防绒 · 同一块布，7／9／11 号各缝一组，用数据定针号</p>
+  </header>
+
+  <section>
+    <h2>一、批样信息</h2>
+    <div class="meta">
+      <div class="field"><b>面料编号／批号</b><div class="line"></div></div>
+      <div class="field"><b>克重（g/m²）／门幅（cm）</b><div class="line"></div></div>
+      <div class="field"><b>成分／规格（如 15D34F）</b><div class="line"></div></div>
+      <div class="field"><b>试验日期／试验人</b><div class="line"></div></div>
+      <div class="field"><b>缝纫机台／车速档位</b><div class="line"></div></div>
+      <div class="field"><b>缝线规格（面线／底线）</b><div class="line"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>二、三组对比（同一块布、同一针距、同一车速）</h2>
+    <div class="cols">
+      <div class="col">
+        <h3>7 号（NM55 / 0.55 mm）</h3>
+        <div class="row"><span>针距（针/3cm）</span><span></span></div>
+        <div class="row"><span>缝制长度（m）</span><span></span></div>
+        <div class="row"><span>断针次数</span><span></span></div>
+        <div class="row"><span>断线／跳线次数</span><span></span></div>
+        <div class="row"><span>转箱钻绒根数</span><span></span></div>
+        <div class="row"><span>缝口外观（起皱/孔大）</span><span></span></div>
+        <div class="row"><span>车工手感评价</span><span></span></div>
+      </div>
+      <div class="col">
+        <h3>9 号（NM65 / 0.65 mm）</h3>
+        <div class="row"><span>针距（针/3cm）</span><span></span></div>
+        <div class="row"><span>缝制长度（m）</span><span></span></div>
+        <div class="row"><span>断针次数</span><span></span></div>
+        <div class="row"><span>断线／跳线次数</span><span></span></div>
+        <div class="row"><span>转箱钻绒根数</span><span></span></div>
+        <div class="row"><span>缝口外观（起皱/孔大）</span><span></span></div>
+        <div class="row"><span>车工手感评价</span><span></span></div>
+      </div>
+      <div class="col">
+        <h3>11 号（NM75 / 0.75 mm）</h3>
+        <div class="row"><span>针距（针/3cm）</span><span></span></div>
+        <div class="row"><span>缝制长度（m）</span><span></span></div>
+        <div class="row"><span>断针次数</span><span></span></div>
+        <div class="row"><span>断线／跳线次数</span><span></span></div>
+        <div class="row"><span>转箱钻绒根数</span><span></span></div>
+        <div class="row"><span>缝口外观（起皱/孔大）</span><span></span></div>
+        <div class="row"><span>车工手感评价</span><span></span></div>
+      </div>
+    </div>
+    <p class="cm">针距建议统一 12–13 针/3cm（约 2.3–2.5 mm）；三组必须在同一台机、同一车速下做，否则数据不可比。</p>
+  </section>
+
+  <section>
+    <h2>三、判定</h2>
+    <div class="field"><b>钻绒根数最少的一组</b><div class="line"></div></div>
+    <div class="field" style="margin-top:8px"><b>断针／断线可接受的一组</b><div class="line"></div></div>
+    <div class="field" style="margin-top:8px"><b>综合结论：本批面料内控针号定为</b><div class="line"></div></div>
+    <div class="sign">
+      <div>工艺：＿＿＿＿＿</div><div>品质：＿＿＿＿＿</div><div>日期：＿＿＿＿＿</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>四、为什么不能直接抄一个数字</h2>
+    <div class="note">
+      <b>GB/T 14272《羽绒服装》</b>管的是成衣的防钻绒性能（转箱法测钻绒根数），<b>GB/T 12705</b> 是织物防钻绒的试验方法——两个标准都<b>不规定针号，也不规定针距</b>。
+      针号由面料克重、纱线细度、缝线粗细、车速共同决定，<b>同是 15D，不同厂的布也可能选不同针</b>。
+      所以对外只能说“<b>我们这款实测过</b>”，不能说“行业规定用几号针”。
+    </div>
+    <p class="cm" style="margin:8px 0 0">行业常见区间（经验值，非标准）：15D 超薄 7–9 号；20–30D 用 9 号；30D 以上或带胆布 11 号。</p>
+  </section>
+
+  <section>
+    <h2>五、备注（布面状态、机台异常、补测记录）</h2>
+    <div class="field"><div class="line"></div></div>
+    <div class="field" style="margin-top:10px"><div class="line"></div></div>
+    <div class="field" style="margin-top:10px"><div class="line"></div></div>
+    <div class="field" style="margin-top:10px"><div class="line"></div></div>
+  </section>
+
+  <div class="foot">
+    <span>TT纺织 · 窦金龙 · 微信 dv13588355444</span>
+    <span>dv面料手记 · 工具</span>
+  </div>
+</div>
+</body>
+</html>
