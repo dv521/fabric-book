@@ -15,11 +15,22 @@
     box.innerHTML = '本站累计浏览 <b id="dv-views-n" style="color:#cfe3ef;font-weight:600">0</b> 次';
     brand.appendChild(box);
 
-    var s = document.createElement('script');
-    s.src = SCRIPT;
-    s.async = true;
-    s.onerror = function () { box.remove(); };
-    document.body.appendChild(s);
+    // 不蒜子需要一个隐藏占位容器，且必须在它执行前就存在
+    if (!document.getElementById('busuanzi_container_site_pv')) {
+      var keep = document.createElement('span');
+      keep.id = 'busuanzi_container_site_pv';
+      keep.style.display = 'none';
+      keep.innerHTML = '<span id="busuanzi_value_site_pv"></span>';
+      document.body.appendChild(keep);
+    }
+
+    if (typeof bszCaller === 'undefined') {
+      var s = document.createElement('script');
+      s.src = SCRIPT;
+      s.async = true;
+      s.onerror = function () { box.remove(); };
+      document.body.appendChild(s);
+    }
 
     var tries = 0;
     var timer = setInterval(function () {
@@ -36,14 +47,6 @@
       }
     }, 150);
 
-    // 不蒜子需要一个隐藏占位 span 才会渲染数据
-    if (!document.getElementById('busuanzi_container_site_pv')) {
-      var keep = document.createElement('span');
-      keep.id = 'busuanzi_container_site_pv';
-      keep.style.display = 'none';
-      keep.innerHTML = '<span id="busuanzi_value_site_pv"></span>';
-      document.body.appendChild(keep);
-    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
