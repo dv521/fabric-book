@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>羽绒服成本表 · 在线计算｜dv面料手记</title>
+<style>
+:root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e3ebf2;--bg:#f4f8fb;--brand:#2f8fb5}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 44px;overflow-wrap:anywhere}
+header{background:#12202c;color:#fff;margin:0 -14px 14px;padding:18px 16px calc(14px + env(safe-area-inset-top))}
+header a{color:#8fb6c9;font-size:12.5px;text-decoration:none;display:inline-block;margin-bottom:8px}
+header h1{margin:0;font-size:19px}
+header p{margin:6px 0 0;font-size:12.5px;color:#a9bccb}
+section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-weight:700}
+.row{display:grid;grid-template-columns:1fr 96px 52px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px dashed #eef3f8;font-size:14px}
+.row:last-child{border-bottom:0}
+.row label{color:var(--ink2)}
+.row input{border:1px solid #cfdde9;border-radius:9px;padding:9px 10px;font-size:15px;text-align:right;font-family:inherit;width:100%;background:#fbfdff}
+.row input:focus{outline:none;border-color:var(--brand);background:#fff}
+.row .u{color:var(--mut);font-size:12.5px}
+.out{background:#0f1c26;color:#e9f2f8;border-radius:14px;padding:16px;margin-bottom:12px}
+.out .big{font-size:44px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:.01em}
+.out .big small{font-size:15px;font-weight:400;color:#9fb6c6;margin-left:6px}
+.out .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.out .k{font-size:12px;color:#9fb6c6}
+.out .v{font-size:17px;font-weight:600}
+.note{font-size:12.5px;color:var(--mut);line-height:1.7;margin:8px 0 0}
+.warn{background:#fff8ee;border:1px solid #f0dfc4;border-radius:10px;padding:10px 12px;font-size:13px;color:#7a5b23}
+@media(max-width:520px){.row{grid-template-columns:1fr 84px 44px}.out .big{font-size:36px}}
+@media print{
+  @page{size:A4 portrait;margin:10mm}
+  body{background:#fff;font-size:10.5px;line-height:1.45}
+  .wrap{max-width:none;padding:0}
+  header{background:#fff;color:#111;border-bottom:2px solid #111;padding:0 0 6px;margin:0 0 8px}
+  header h1{font-size:17px} header p{color:#555;font-size:9.5px}
+  .out{background:#fff;color:#111;border:1px solid #999;padding:8px}
+  .out .big{font-size:24px;color:#111} .out .k{color:#555} .out .v{color:#111}
+  section{margin-bottom:6px;padding:6px 0;border:0}
+  .row{padding:4px 0}
+  .row input{border:0;border-bottom:1px solid #999;border-radius:0;background:#fff}
+  .note,.warn{font-size:9px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a href="index.html">← 返回工具</a>
+  <h1>羽绒服成本表 · 在线算</h1>
+  <p>改任意一格，下面立刻重算。填完可打印 A4 带去谈单。</p>
+</header>
+
+<div class="out">
+  <div class="big"><span id="o-total">0</span><small>元 / 件（总成本）</small></div>
+  <div class="grid">
+    <div><div class="k">含税出厂价（毛利 25%）</div><div class="v"><span id="o-ex">0</span> 元</div></div>
+    <div><div class="k">建议零售（× 倍率）</div><div class="v"><span id="o-retail">0</span> 元</div></div>
+    <div><div class="k">其中：面料</div><div class="v"><span id="o-fabric">0</span> 元</div></div>
+    <div><div class="k">其中：羽绒</div><div class="v"><span id="o-down">0</span> 元</div></div>
+  </div>
+</div>
+
+<section>
+  <h2>一、面料与里料</h2>
+  <div class="row"><label>面料用量</label><input id="fl" type="number" step="0.01" value="2.0"><span class="u">米</span></div>
+  <div class="row"><label>面料米价</label><input id="fp" type="number" step="0.1" value="15"><span class="u">元/米</span></div>
+  <div class="row"><label>里料用量</label><input id="ll" type="number" step="0.01" value="1.5"><span class="u">米</span></div>
+  <div class="row"><label>里料米价</label><input id="lp" type="number" step="0.1" value="6"><span class="u">元/米</span></div>
+  <div class="row"><label>胆布用量（无胆填 0）</label><input id="gl" type="number" step="0.01" value="0"><span class="u">米</span></div>
+  <div class="row"><label>胆布米价</label><input id="gp" type="number" step="0.1" value="3"><span class="u">元/米</span></div>
+</section>
+
+<section>
+  <h2>二、羽绒（最大变量）</h2>
+  <div class="row"><label>充绒量</label><input id="dw" type="number" step="1" value="150"><span class="u">克</span></div>
+  <div class="row"><label>绒价</label><input id="dp" type="number" step="1" value="528"><span class="u">元/kg</span></div>
+  <p class="note">参考：2026-10-30 中国羽绒信息网，90% 白鸭绒 528.3 元/kg、90% 白鹅绒 922.1 元/kg（GB/T 14272 口径）。下单前按当日报价改。</p>
+</section>
+
+<section>
+  <h2>三、辅料与加工</h2>
+  <div class="row"><label>拉链／扣具</label><input id="zx" type="number" step="0.5" value="10"><span class="u">元</span></div>
+  <div class="row"><label>织带／商标／其它辅料</label><input id="fl2" type="number" step="0.5" value="5"><span class="u">元</span></div>
+  <div class="row"><label>加工费</label><input id="lab" type="number" step="1" value="120"><span class="u">元</span></div>
+  <div class="row"><label>包装</label><input id="pk" type="number" step="0.5" value="5"><span class="u">元</span></div>
+</section>
+
+<section>
+  <h2>四、损耗与报价参数</h2>
+  <div class="row"><label>损耗率</label><input id="loss" type="number" step="0.5" value="3"><span class="u">%</span></div>
+  <div class="row"><label>管理分摊</label><input id="mg" type="number" step="0.5" value="8"><span class="u">%</span></div>
+  <div class="row"><label>毛利率</label><input id="gm" type="number" step="1" value="25"><span class="u">%</span></div>
+  <div class="row"><label>零售倍率</label><input id="mr" type="number" step="0.1" value="3.5"><span class="u">×</span></div>
+  <div class="row"><label>增值税率</label><input id="tax" type="number" step="1" value="13"><span class="u">%</span></div>
+</section>
+
+<div class="warn">
+  <b>四个最容易算错的地方：</b>① 面料用量×米价别心算错位；② 绒价按「元/kg」填，充绒按「克」填，系统会自动 ÷1000；③ 工费低于 90 元的多半漏了工序；④ 损耗与管理分摊最容易漏，漏了就少算 10%。
+</div>
+
+<p class="note">公式：总成本 =（面料＋里料＋胆布＋羽绒＋辅料＋加工＋包装）×（1＋损耗）＋ 管理分摊；出厂价 = 总成本 ÷（1−毛利率）；含税 = 出厂价 ×（1＋税率）；零售 = 含税 × 倍率。<br>本章口径见 <a href="../book/ch28.html">第 28 章 成衣成本七步法</a>。</p>
+<p class="note" style="margin-top:14px">TT纺织 · 窦金龙　dv面料手记 · TT纺织·窦金龙出品</p>
+</div>
+
+<script>
+(function(){
+  var ids=['fl','fp','ll','lp','gl','gp','dw','dp','zx','fl2','lab','pk','loss','mg','gm','mr','tax'];
+  function v(id){ var x=parseFloat(document.getElementById(id).value); return isNaN(x)?0:x; }
+  function fmt(n){ return (Math.round(n*10)/10).toLocaleString('zh-CN'); }
+  function calc(){
+    var fabric = v('fl')*v('fp');
+    var lining = v('ll')*v('lp');
+    var gut    = v('gl')*v('gp');
+    var down   = v('dw')/1000*v('dp');
+    var acc    = v('zx')+v('fl2');
+    var labor  = v('lab');
+    var pack   = v('pk');
+    var direct = fabric+lining+gut+down+acc+labor+pack;
+    var withLoss = direct*(1+v('loss')/100);
+    var total = withLoss*(1+v('mg')/100);
+    var ex = total/(1-v('gm')/100);
+    var taxed = ex*(1+v('tax')/100);
+    var retail = taxed*v('mr');
+    document.getElementById('o-total').textContent = fmt(total);
+    document.getElementById('o-ex').textContent = fmt(taxed);
+    document.getElementById('o-retail').textContent = fmt(retail);
+    document.getElementById('o-fabric').textContent = fmt(fabric+lining+gut);
+    document.getElementById('o-down').textContent = fmt(down);
+  }
+  ids.forEach(function(id){ document.getElementById(id).addEventListener('input', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
