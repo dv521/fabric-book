@@ -24,7 +24,7 @@ html{scroll-behavior:smooth;}
 body{
   margin:0;background:var(--bg);color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
-  font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased;
+  font-size:18px;line-height:1.70;-webkit-font-smoothing:antialiased;
 }
 .layout{display:flex;max-width:1340px;margin:0 auto;}
 
