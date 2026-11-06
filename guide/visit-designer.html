@@ -41,17 +41,13 @@ li{margin:5px 0}
 <style>html{font-size:18px}
 
 @media print{}
-/* 页脚内嵌微信码 */
-.foot{align-items:center}
-.foot .qrf{display:flex;align-items:center;gap:7px;margin:0;text-align:left}
-.foot .qrf img{width:86px;height:86px;border-radius:10px;border:1px solid #e6eef4;display:block}
-.foot .qrf figcaption{font-size:11.5px;color:#7a8794;white-space:nowrap;margin:0}
-@media print{.foot .qrf img{width:10mm;height:10mm;border-radius:0;border:.4pt solid #999}
-  .foot .qrf figcaption{font-size:6.8pt;color:#444}.foot .qrf{gap:1.4mm}}
-.qrfend{display:flex;align-items:center;gap:9px;margin:18px 0 8px}
-.qrfend img{width:86px;height:86px;border:1px solid #e6eef4;border-radius:10px;display:block}
-.qrfend span{font-size:12px;color:#7a8794}
-@media print{.qrfend{margin:1.6mm 0 0;gap:2mm}.qrfend img{width:10mm;height:10mm;border:.4pt solid #999;border-radius:0}.qrfend span{font-size:6.8pt;color:#444}}
+.qrrow{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:18px 0 8px}
+.qrcell{margin:0;text-align:center}
+.qrcell img{width:86px;height:86px;border-radius:10px;border:1px solid #e6eef4;object-fit:cover;display:block}
+.qrcell figcaption{font-size:12px;color:#7a8794;margin-top:6px;white-space:nowrap}
+@media print{.qrrow{gap:3mm;justify-content:flex-start;margin:1.4mm 0 0}
+  .qrcell img{width:10mm;height:10mm;border-radius:0;border:.4pt solid #999}
+  .qrcell figcaption{font-size:6.6pt;margin-top:.5mm;color:#444}}
 </style>
 </head>
 <body>
@@ -186,6 +182,11 @@ li{margin:5px 0}
 </div>
 
 
-<div class="qrfend"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><span>微信 · 窦金龙</span></div>
+<div class="qrrow">
+  <figure class="qrcell"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/douyin-qr.jpg?v=3" alt="抖音二维码：dv面料手记 抖音号 90405142813" style="border-radius:50%"><figcaption>抖音</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/xhs-qr.jpg?v=2" alt="小红书二维码：dv面料手记" style="border-radius:6px"><figcaption>小红书</figcaption></figure>
+</div>
+
 </body>
 </html>

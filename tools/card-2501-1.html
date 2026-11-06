@@ -45,13 +45,13 @@ th{width:80px;color:var(--mut);font-weight:600;white-space:nowrap}
 
 
 @media print{}
-/* 页脚内嵌微信码 */
-.foot{align-items:center}
-.foot .qrf{display:flex;align-items:center;gap:7px;margin:0;text-align:left}
-.foot .qrf img{width:86px;height:86px;border-radius:10px;border:1px solid #e6eef4;display:block}
-.foot .qrf figcaption{font-size:11.5px;color:#7a8794;white-space:nowrap;margin:0}
-@media print{.foot .qrf img{width:10mm;height:10mm;border-radius:0;border:.4pt solid #999}
-  .foot .qrf figcaption{font-size:6.8pt;color:#444}.foot .qrf{gap:1.4mm}}
+.qrrow{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:18px 0 8px}
+.qrcell{margin:0;text-align:center}
+.qrcell img{width:86px;height:86px;border-radius:10px;border:1px solid #e6eef4;object-fit:cover;display:block}
+.qrcell figcaption{font-size:12px;color:#7a8794;margin-top:6px;white-space:nowrap}
+@media print{.qrrow{gap:3mm;justify-content:flex-start;margin:1.4mm 0 0}
+  .qrcell img{width:10mm;height:10mm;border-radius:0;border:.4pt solid #999}
+  .qrcell figcaption{font-size:6.6pt;margin-top:.5mm;color:#444}}
 </style>
 </head>
 <body>
@@ -132,11 +132,16 @@ th{width:80px;color:var(--mut);font-weight:600;white-space:nowrap}
   </div>
 
   
+<div class="qrrow">
+  <figure class="qrcell"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/douyin-qr.jpg?v=3" alt="抖音二维码：dv面料手记 抖音号 90405142813" style="border-radius:50%"><figcaption>抖音</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/xhs-qr.jpg?v=2" alt="小红书二维码：dv面料手记" style="border-radius:6px"><figcaption>小红书</figcaption></figure>
+</div>
+
 <div class="foot">
     <span>TT纺织 · 窦金龙 · 微信 dv13588355444</span>
     <span>参数以批次检测报告与卷标为准；经验值已在文中标注</span>
-    <span class="qrf"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></span>
-  </div>
+    </div>
 </div>
 
 
