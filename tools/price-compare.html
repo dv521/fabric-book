@@ -65,9 +65,9 @@ th{background:#f7fbfd;font-size:12.6px;color:#4a5865}
 </header>
 
 <section>
-  <h2>01 填两家的报价</h2>
+  <h2>01 填两个面料商的报价</h2>
   <div class="side">
-    <h3><i>A</i> 这家</h3>
+    <h3><i>A</i> 面料商</h3>
     <div class="row"><label>报价</label><input id="pa" type="number" step="0.01" value="10"><span class="u">元/米</span></div>
     <div class="row"><label>码折</label>
       <select id="za"><option value="1">足码</option><option value="0.98" selected>98 码</option><option value="0.95">95 码</option><option value="0.90">90 码</option></select>
@@ -80,7 +80,7 @@ th{background:#f7fbfd;font-size:12.6px;color:#4a5865}
   </div>
 
   <div class="side">
-    <h3><i>B</i> 那家</h3>
+    <h3><i>B</i> 面料商</h3>
     <div class="row"><label>报价</label><input id="pb" type="number" step="0.01" value="10"><span class="u">元/米</span></div>
     <div class="row"><label>码折</label>
       <select id="zb"><option value="1" selected>足码</option><option value="0.98">98 码</option><option value="0.95">95 码</option><option value="0.90">90 码</option></select>
@@ -145,11 +145,11 @@ function calc(){
   var big=Math.abs(d)*area/util*0;  // placeholder
   var perPiece=Math.abs(ca-cb);
   var tenWan=perPiece*100000;
-  var who = d>0? "A 家" : (d<0? "B 家" : "");
+  var who = d>0? "A 面料商" : (d<0? "B 面料商" : "");
   if(!who){v.className="verdict";v.innerHTML="两家<b>每平方米完全一样</b>，谁的交期和服务好用谁。";return;}
-  var loser = d>0? "A" : "B", gain = d>0? "B" : "A";
+  var loser = d>0? "A 面料商" : "B 面料商";
   v.className="verdict";
-  v.innerHTML = "同样做这个款，<b>"+loser+" 家每平方米贵 "+Math.abs(d).toFixed(2)+" 元（"+Math.abs(pct).toFixed(1)+"%）</b>；"+
+  v.innerHTML = "同样做这个款，<b>"+loser+"每平方米贵 "+Math.abs(d).toFixed(2)+" 元（"+Math.abs(pct).toFixed(1)+"%）</b>；"+
     "单件差 "+perPiece.toFixed(2)+" 元，1 000 件差 <b>"+Math.round(perPiece*1000).toLocaleString()+" 元</b>，"+
     "10 万件差 <b>"+Math.round(tenWan).toLocaleString()+" 元</b>。"+
     (Math.abs(pct)>=3? "　差价主要来自码折和门幅，不是单价。" : "");
