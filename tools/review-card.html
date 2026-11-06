@@ -34,12 +34,14 @@ th{background:#f7fafc;color:#5a6b78;font-weight:600;white-space:nowrap;width:104
 @media(max-width:640px){.page{margin:0;border-radius:0;padding:18px 16px}}
 
 
-.qrf{display:flex;flex-direction:column;align-items:center;gap:6px;margin:16px 0 6px;padding-top:14px;border-top:1px solid var(--line,rgba(0,0,0,.08))}
-.qrf img{width:86px;height:86px;display:block;border-radius:4px}
-.qrf figcaption{font-size:12px;color:#7a8794;letter-spacing:.02em}
-@media print{.qrf{flex-direction:row;align-items:center;justify-content:flex-start;gap:2mm;margin:1.6mm 0 0;padding-top:1mm}
-  .qrf img{width:13mm;height:13mm;border-radius:0}
-  .qrf figcaption{font-size:7pt;color:#444}}
+@media print{}
+/* 页脚内嵌微信码 */
+.foot{align-items:center}
+.foot .qrf{display:flex;align-items:center;gap:7px;margin:0;text-align:left}
+.foot .qrf img{width:86px;height:86px;border-radius:10px;border:1px solid #e6eef4;display:block}
+.foot .qrf figcaption{font-size:11.5px;color:#7a8794;white-space:nowrap;margin:0}
+@media print{.foot .qrf img{width:10mm;height:10mm;border-radius:0;border:.4pt solid #999}
+  .foot .qrf figcaption{font-size:6.8pt;color:#444}.foot .qrf{gap:1.4mm}}
 </style>
 </head>
 <body>
@@ -90,9 +92,11 @@ th{background:#f7fafc;color:#5a6b78;font-weight:600;white-space:nowrap;width:104
 
   <p class="cm">复盘只回答一件事：<b>下一场怎么少退一点、多卖一点。</b>写得越短，越有人照着做。</p>
 
-  <div class="foot">
+  
+<div class="foot">
     <span>TT纺织 · 窦金龙 · 微信 dv13588355444</span>
     <span>直播复盘卡模板 · 一场一张</span>
+    <span class="qrf"><img src="../assets/img/wechat-qr.jpg" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></span>
   </div>
 </div>
 
@@ -102,11 +106,6 @@ th{background:#f7fafc;color:#5a6b78;font-weight:600;white-space:nowrap;width:104
 
 </div>
 
-
-<figure class="qrf">
-  <img src="../assets/img/wechat-qr.jpg" alt="微信二维码：TT纺织 窦金龙">
-  <figcaption>微信 · 窦金龙</figcaption>
-</figure>
 
 </body>
 </html>
