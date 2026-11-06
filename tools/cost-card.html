@@ -46,6 +46,14 @@ h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-wei
   .row input{border:0;border-bottom:1px solid #999;border-radius:0;background:#fff}
   .note,.warn{font-size:9px}
 }
+
+
+.qrf{display:flex;flex-direction:column;align-items:center;gap:6px;margin:16px 0 6px;padding-top:14px;border-top:1px solid var(--line,rgba(0,0,0,.08))}
+.qrf img{width:86px;height:86px;display:block;border-radius:4px}
+.qrf figcaption{font-size:12px;color:#7a8794;letter-spacing:.02em}
+@media print{.qrf{flex-direction:row;align-items:center;justify-content:flex-start;gap:2mm;margin:1.6mm 0 0;padding-top:1mm}
+  .qrf img{width:13mm;height:13mm;border-radius:0}
+  .qrf figcaption{font-size:7pt;color:#444}}
 </style>
 </head>
 <body>
@@ -138,5 +146,14 @@ h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-wei
   calc();
 })();
 </script>
+
+</div>
+
+
+<figure class="qrf">
+  <img src="../assets/img/wechat-qr.jpg" alt="微信二维码：TT纺织 窦金龙">
+  <figcaption>微信 · 窦金龙</figcaption>
+</figure>
+
 </body>
 </html>
