@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12202c">
+<title>面料比价 · 每平方米才是真价</title>
+<style>
+:root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e6eef4;--bg:#f4f8fb;--brand:#2f8fb5;--nav:#12202c;--red:#A8352B;--ok:#14603c}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 40px}
+header{background:var(--nav);color:#fff;padding:18px 16px calc(14px + env(safe-area-inset-top));margin:0 -14px 14px}
+header h1{margin:0;font-size:19px}
+header p{margin:5px 0 0;font-size:12.5px;color:#a9bccb}
+section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-weight:700}
+.side{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px;background:#fbfdff}
+.side h3{margin:0 0 8px;font-size:14.5px}
+.side h3 i{font-style:normal;font-size:11.5px;background:#e8f4fa;color:#12556f;border-radius:6px;padding:1px 7px;margin-right:6px}
+.row{display:grid;grid-template-columns:1fr 92px 34px;gap:8px;align-items:center;margin-bottom:8px}
+.row label{font-size:13.6px;color:var(--ink2)}
+.row input,.row select{border:1px solid #cfdde9;border-radius:9px;padding:9px 10px;font-size:15px;text-align:right;font-family:inherit;width:100%;background:#fff}
+.row .u{font-size:12.5px;color:var(--mut);text-align:left}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:4px}
+.res div{background:#f4f9fd;border:1px solid var(--line);border-radius:10px;padding:9px 10px}
+.res b{display:block;font-size:20px;color:#12556f;font-variant-numeric:tabular-nums;line-height:1.25}
+.res span{font-size:11.8px;color:var(--mut)}
+.verdict{margin-top:10px;border-radius:10px;padding:11px 12px;font-size:13.8px;line-height:1.75;background:#fdf6f5;border:1px solid #f0d8d4;color:#6b2b23}
+.verdict b{color:var(--red)}
+.cm{color:var(--mut);font-size:12px;line-height:1.7}
+ol{margin:0;padding-left:20px;font-size:13.8px;line-height:1.85;color:var(--ink2)}
+table{width:100%;border-collapse:collapse;font-size:13.4px;margin-top:6px}
+th,td{border-bottom:1px solid var(--line);padding:6px;text-align:left}
+th{background:#f7fbfd;font-size:12.6px;color:#4a5865}
+.foot{color:var(--mut);font-size:11.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:4px 2px 0}
+@media(max-width:600px){
+  .res{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr 86px 30px}
+  table{font-size:12.8px}
+}
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff;font-size:11px;line-height:1.45}
+  .wrap{max-width:none;padding:6mm 9mm}
+  header{background:#fff;color:#111d27;border-bottom:1.4pt solid #111d27;margin:0 0 3mm;padding:0 0 2mm}
+  header h1{font-size:15pt}
+  header p{color:#444;font-size:9px}
+  section{border:none;padding:0;margin:0 0 3mm}
+  h2{font-size:9px;margin:0 0 1.5mm}
+  .side{background:#fff;padding:0 0 2mm;border:none;border-bottom:.5pt solid #ccc}
+  .row{grid-template-columns:1fr 26mm 8mm;margin-bottom:1.2mm}
+  .row input,.row select{border:none;border-bottom:.6pt solid #888;border-radius:0;padding:0.6mm 1mm}
+  .res div{background:#fff;border:.6pt solid #bbb}
+  .verdict{background:#fff;border:.6pt solid #bbb;color:#111}
+  .cm,ol,table{font-size:9.2px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>面料比价 · 每平方米才是真价</h1>
+  <p>填两家的报价、码折、门幅，直接比每平方和单件成本 ｜ 改一个数就重算</p>
+</header>
+
+<section>
+  <h2>01 填两家的报价</h2>
+  <div class="side">
+    <h3><i>A</i> 这家</h3>
+    <div class="row"><label>报价</label><input id="pa" type="number" step="0.01" value="10"><span class="u">元/米</span></div>
+    <div class="row"><label>码折</label>
+      <select id="za"><option value="1">足码</option><option value="0.98" selected>98 码</option><option value="0.95">95 码</option><option value="0.90">90 码</option></select>
+      <span class="u">实给</span></div>
+    <div class="row"><label>有效门幅</label><input id="wa" type="number" step="1" value="142"><span class="u">cm</span></div>
+    <div class="res">
+      <div><span>每平方米</span><b id="ma">—</b></div>
+      <div><span>单件成本</span><b id="ca">—</b></div>
+    </div>
+  </div>
+
+  <div class="side">
+    <h3><i>B</i> 那家</h3>
+    <div class="row"><label>报价</label><input id="pb" type="number" step="0.01" value="10"><span class="u">元/米</span></div>
+    <div class="row"><label>码折</label>
+      <select id="zb"><option value="1" selected>足码</option><option value="0.98">98 码</option><option value="0.95">95 码</option><option value="0.90">90 码</option></select>
+      <span class="u">实给</span></div>
+    <div class="row"><label>有效门幅</label><input id="wb" type="number" step="1" value="144"><span class="u">cm</span></div>
+    <div class="res">
+      <div><span>每平方米</span><b id="mb">—</b></div>
+      <div><span>单件成本</span><b id="cb">—</b></div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:6px"><label>单件净面积</label><input id="area" type="number" step="0.01" value="1.80"><span class="u">㎡</span></div>
+  <div class="row"><label>利用率</label><input id="util" type="number" step="1" value="80"><span class="u">%</span></div>
+  <div class="verdict" id="verdict">填完自动给结论。</div>
+</section>
+
+<section>
+  <h2>02 算法（一条公式）</h2>
+  <table>
+    <tbody>
+      <tr><th style="width:38%">每平方米单价</th><td>报价 ÷ 码折 ÷ 门幅（米）</td></tr>
+      <tr><th>单件面料成本</th><td>净面积 ÷ 利用率 × 每平方米单价</td></tr>
+      <tr><th>码折</th><td>98 码 ＝ 每给 0.98 米，就是比足码贵 2%</td></tr>
+    </tbody>
+  </table>
+  <p class="cm" style="margin:8px 0 0">例：10 元/米、98 码、142 cm → 10 ÷ 0.98 ÷ 1.42 ≈ <b>7.19 元/㎡</b>；同样 10 元、足码、144 cm → <b>6.94 元/㎡</b>。差 3.5%，10 万件差 4.3 万元。</p>
+</section>
+
+<section>
+  <h2>03 当面就问这三句</h2>
+  <ol>
+    <li>「您这是<b>足码还是 98 码</b>？」</li>
+    <li>「<b>有效门幅</b>多少厘米，含不含边？」</li>
+    <li>「折成<b>每平方米</b>，咱俩再比。」</li>
+  </ol>
+  <p class="cm" style="margin:8px 0 0">米价是幌子，平方米才是真价。只比单价，等于拿两把不同的尺子在量。</p>
+</section>
+
+<div class="foot">
+  <span>dv面料手记 · 工具卡</span>
+  <span>码折、利用率属行业惯例，无国标条款；结果按输入值计算，以合同与实测为准</span>
+</div>
+</div>
+
+<script>
+var ids=["pa","za","wa","pb","zb","wb","area","util"];
+function n(id){var v=parseFloat(document.getElementById(id).value);return isFinite(v)?v:0;}
+function calc(){
+  var area=n("area"), util=n("util")/100;
+  var A={p:n("pa"),z:parseFloat(document.getElementById("za").value),w:n("wa")};
+  var B={p:n("pb"),z:parseFloat(document.getElementById("zb").value),w:n("wb")};
+  function m2(x){return x.w>0&&x.z>0? x.p/x.z/(x.w/100) : 0;}
+  function per(x){return area>0&&util>0? area/util*m2(x) : 0;}
+  var ma=m2(A), mb=m2(B), ca=per(A), cb=per(B);
+  document.getElementById("ma").textContent = ma? ma.toFixed(2)+" 元/㎡" : "—";
+  document.getElementById("mb").textContent = mb? mb.toFixed(2)+" 元/㎡" : "—";
+  document.getElementById("ca").textContent = ca? ca.toFixed(2)+" 元" : "—";
+  document.getElementById("cb").textContent = cb? cb.toFixed(2)+" 元" : "—";
+  var v=document.getElementById("verdict");
+  if(!ma||!mb){v.textContent="把四格数字填全，就能出结论。";return;}
+  var d=ma-mb, pct=mb? (d/mb*100):0;
+  var big=Math.abs(d)*area/util*0;  // placeholder
+  var perPiece=Math.abs(ca-cb);
+  var tenWan=perPiece*100000;
+  var who = d>0? "A 家" : (d<0? "B 家" : "");
+  if(!who){v.className="verdict";v.innerHTML="两家<b>每平方米完全一样</b>，谁的交期和服务好用谁。";return;}
+  var loser = d>0? "A" : "B", gain = d>0? "B" : "A";
+  v.className="verdict";
+  v.innerHTML = "同样做这个款，<b>"+loser+" 家每平方米贵 "+Math.abs(d).toFixed(2)+" 元（"+Math.abs(pct).toFixed(1)+"%）</b>；"+
+    "单件差 "+perPiece.toFixed(2)+" 元，1 000 件差 <b>"+Math.round(perPiece*1000).toLocaleString()+" 元</b>，"+
+    "10 万件差 <b>"+Math.round(tenWan).toLocaleString()+" 元</b>。"+
+    (Math.abs(pct)>=3? "　差价主要来自码折和门幅，不是单价。" : "");
+}
+ids.forEach(function(id){document.getElementById(id).addEventListener("input",calc);document.getElementById(id).addEventListener("change",calc);});
+calc();
+</script>
+</body>
+</html>
