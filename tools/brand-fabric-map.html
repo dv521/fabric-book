@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12202c">
+<title>品牌与面料对照 · 谁在用什么样的布</title>
+<style>
+:root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e6eef4;--bg:#f4f8fb;--brand:#2f8fb5;--red:#A8352B;--ok:#14603c}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 40px}
+header{background:#12202c;color:#fff;padding:18px 16px calc(14px + env(safe-area-inset-top));margin:0 -14px 14px}
+header h1{margin:0;font-size:19px}
+header p{margin:5px 0 0;font-size:12.5px;color:#a9bccb}
+section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 14px 10px;margin-bottom:12px}
+h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-weight:700}
+h3{font-size:14.5px;margin:14px 0 6px}
+p{margin:0 0 9px;font-size:14px;line-height:1.75;color:var(--ink2)}
+table{width:100%;border-collapse:collapse;font-size:13.2px;margin:6px 0 10px}
+th,td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+th{background:#f7fbfd;color:#4a5865;font-size:12.4px}
+td b{color:#12556f}
+.note{background:#f8fbfd;border:1px dashed #cfdde9;border-radius:10px;padding:10px 12px;font-size:13.4px;line-height:1.75;margin:8px 0}
+.warn{background:#fdf6f5;border:1px solid #f0d8d4;border-radius:10px;padding:10px 12px;font-size:13.4px;line-height:1.75;margin:8px 0}
+.warn b{color:var(--red)}
+.tip{background:#f2faf6;border:1px solid #cfe8db;border-radius:10px;padding:10px 12px;font-size:13.4px;line-height:1.75;margin:8px 0}
+.cm{color:var(--mut);font-size:12px;line-height:1.7}
+.foot{color:var(--mut);font-size:11.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:4px 2px 0}
+.qrrow{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:18px 0 8px}
+.qrcell{margin:0;text-align:center}
+.qrcell img{width:86px;height:86px;border-radius:10px;border:1px solid #e6eef4;object-fit:cover;display:block}
+.qrcell figcaption{font-size:12px;color:#7a8794;margin-top:6px;white-space:nowrap}
+@media(max-width:600px){table{font-size:12.6px}th,td{padding:6px 4px}}
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff;font-size:9.2px;line-height:1.42}
+  .wrap{max-width:none;padding:6mm 9mm}
+  header{background:#fff;color:#111d27;border-bottom:1.4pt solid #111d27;margin:0 0 3mm;padding:0 0 2mm}
+  header h1{font-size:15pt} header p{color:#444;font-size:8.6px}
+  section{border:none;padding:0;margin:0 0 2.6mm;break-inside:avoid}
+  h2{font-size:8.4px;margin:0 0 1.4mm}
+  h3{font-size:9.6px;margin:2mm 0 1mm}
+  p{font-size:9px;margin:0 0 1.4mm}
+  table{font-size:8.2px;margin:1mm 0 1.6mm}
+  th,td{padding:1.1mm 1.4mm}
+  .note,.warn,.tip{padding:1.4mm 2mm;font-size:8.4px}
+  .qrrow{gap:3mm;justify-content:flex-start;margin:2mm 0 0}
+  .qrcell img{width:11mm;height:11mm;border-radius:0;border:.4pt solid #999}
+  .qrcell figcaption{font-size:6.6pt;margin-top:.4mm;color:#444}
+  .foot{font-size:7pt;padding-top:1mm;border-top:.5pt solid #999}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>品牌与面料对照 · 谁在用什么样的布</h1>
+  <p>三层市场 ｜ 各层要什么布、什么认证、多少起订 ｜ 我们 15D 站在哪一格</p>
+</header>
+
+<section>
+  <h2>01 先把三种「名牌」分开</h2>
+  <p>把 Gore-Tex、始祖鸟、Nike 放一张榜上排，是概念错位。它们根本不在同一个赛道：</p>
+  <table>
+    <thead><tr><th style="width:22%">类型</th><th style="width:34%">代表</th><th>卖的是什么</th></tr></thead>
+    <tbody>
+      <tr><td><b>规模型服装品牌</b></td><td>Nike、Inditex(Zara)、H&amp;M、优衣库、adidas</td><td>衣服，靠量；年收入百亿美元级</td></tr>
+      <tr><td><b>专业户外品牌</b></td><td>始祖鸟、猛犸象、凯乐石、Patagonia、TNF</td><td>衣服，靠性能；十亿到二十亿美元级</td></tr>
+      <tr><td><b>材料／技术品牌</b></td><td><b>Gore-Tex</b>、Pertex、Polartec、PrimaLoft</td><td><b>不卖衣服，卖膜、面料技术和授权</b></td></tr>
+      <tr><td><b>奢侈品牌</b></td><td>LVMH、Kering、Hermès</td><td>品牌与工艺；面料本身即卖点</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>关键区分：</b>Gore-Tex 是 W.L. Gore 的防水透湿膜，膜卖给始祖鸟、TNF、凯乐石做成衣。所以它不是服装品牌，<b>是我们上游的技术方</b>——你卖的布如果要贴它的膜，要过它的贴合与测试要求。</div>
+</section>
+
+<section>
+  <h2>02 四层市场，要的布完全不同</h2>
+  <table>
+    <thead><tr><th style="width:15%">层级</th><th style="width:26%">面料要求</th><th style="width:20%">认证／门槛</th><th>起订与周期</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>快时尚</b><br>Zara／H&amp;M</td>
+        <td>涤纶、棉、粘胶混纺；常规克重；<b>交期快、色号多</b>，不追极限参数</td>
+        <td>GRS／OCS（再生）、基础安全 GB 18401</td>
+        <td>起订 300–1 000 m/色；打样 7–15 天，大货 20–35 天</td>
+      </tr>
+      <tr>
+        <td><b>运动</b><br>Nike／adidas</td>
+        <td>再生涤为主，吸湿排汗、防泼水、弹力；<b>功能整理＋稳定性</b></td>
+        <td>bluesign、OEKO-TEX 100、验厂审核</td>
+        <td>起订大；验证 3–6 个月，供应链审核严</td>
+      </tr>
+      <tr>
+        <td><b>专业户外</b><br>始祖鸟／凯乐石／TNF</td>
+        <td><b>15–40D 高密尼龙</b>、轻薄防绒、可贴合膜；静水压／透湿；<b>色差 ΔE ≤1.0</b></td>
+        <td>防钻绒 GB/T 12705、静水压 GB/T 4744、贴膜附着力</td>
+        <td>单量小（几百到几千米）；验证 3–6 个月，打样反复</td>
+      </tr>
+      <tr>
+        <td><b>奢侈</b><br>LVMH／Hermès</td>
+        <td>高支棉、真丝、羊绒；<b>手感、光泽、稀有性</b>；特种整理（水洗、做旧、提花）</td>
+        <td>成分与产地可追溯；小批量手工</td>
+        <td>单量很小；对色极严，通常指定供应商</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="cm">年收入量级为公开年报/媒体口径的近似值（Nike 五百亿美元级、Inditex 四百亿欧元级、Fast Retailing 两万亿日元级、始祖鸟二十亿美元级），仅用于说明层级差异，不作精确排名依据。</p>
+</section>
+
+<section>
+  <h2>03 我们的位置：15D 属于哪一格</h2>
+  <div class="tip">
+    <p><b>15D34F（无光锦纶，34 g/㎡、142 cm）落在「专业户外」与「高端轻薄羽绒」这一格。</b></p>
+    <p>对标的是：优衣库 Ultra Light Down 的 15–20D 面料、TNF 的 20D 级防绒布、始祖鸟轻薄款的尼龙基布。<b>不是快时尚那一格</b>——那格拼的是价格和交期，我们的布比涤塔夫贵一倍。</p>
+  </div>
+  <table>
+    <thead><tr><th style="width:26%">客户问什么</th><th>他在哪一层</th><th>我们接不接</th></tr></thead>
+    <tbody>
+      <tr><td>「涤塔夫多少钱一米」</td><td>快时尚／低价跑量</td><td>不接，用 15D 报价必死</td></tr>
+      <tr><td>「能贴膜吗？静水压多少？」</td><td>专业户外</td><td><b>接</b>，报基布参数＋贴合方案</td></tr>
+      <tr><td>「洗 10 次还防泼水吗？」</td><td>运动／户外</td><td><b>接</b>，给洗前洗后两级数据</td></tr>
+      <tr><td>「有没有 GRS／bluesign？」</td><td>运动品牌供应链</td><td>看有没有认证，没有就说清，别硬答</td></tr>
+      <tr><td>「一米差 3 毛，能做吗？」</td><td>快时尚</td><td>不接，改推克重更低的替代规格</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>04 四层客户，四套说法</h2>
+  <table>
+    <thead><tr><th style="width:18%">对象</th><th>他真正怕的</th><th>你该先给什么</th></tr></thead>
+    <tbody>
+      <tr><td><b>快时尚采购</b></td><td>交期拖、色号不够</td><td>交期承诺＋色卡齐不齐；别提“国标数据”</td></tr>
+      <tr><td><b>运动品牌供应链</b></td><td>审核不过、数据不齐</td><td>认证清单＋检测报告；先给文件再谈价</td></tr>
+      <tr><td><b>专业户外买手</b></td><td>性能不达标、样不对</td><td>克重／旦数／静水压／防绒数据＋样布</td></tr>
+      <tr><td><b>奢侈品牌</b></td><td>手感不对、批次不一</td><td>手感样＋缸差控制说明；价格不是话题</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>05 三个最容易说错的地方</h2>
+  <div class="warn">
+    <p>① <b>把 Gore-Tex 当服装品牌</b>——它是膜和授权，说错一句，专业客户立刻降级看待。<br>
+    ② <b>拿快时尚的价格谈户外面料</b>——层错了，价格永远谈不拢；先确认他在哪一层再报价。<br>
+    ③ <b>拿“国标合格”当卖点对奢侈品牌讲</b>——那一层看的是手感与一致性，合规只是入场券。</p>
+  </div>
+</section>
+
+<section>
+  <h2>06 落地的三句话</h2>
+  <div class="tip">
+    <p>① 「您这个款，是走量还是走性能？」——一句话分层。<br>
+    ② 「我这块是 15D 尼龙，34 克，对标的是轻薄羽绒那条线，不是涤塔夫。」——把对手定在对的层。<br>
+    ③ 「要贴膜的话，我给您基布参数和贴合方案，膜由膜厂定。」——不越界，也不掉分。</p>
+  </div>
+  <p class="cm">→ 书里对应：第 23 章「羽绒服面料图谱」、第 25 章「行业地图」、第 29 章「报价与商务条款」。</p>
+</section>
+
+<div class="qrrow">
+  <figure class="qrcell"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/douyin-qr.jpg?v=3" alt="抖音二维码：dv面料手记" style="border-radius:50%"><figcaption>抖音</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/xhs-qr.jpg?v=2" alt="小红书二维码：dv面料手记" style="border-radius:6px"><figcaption>小红书</figcaption></figure>
+</div>
+<div class="foot">
+  <span>dv面料手记 · 工具卡</span>
+  <span>品牌营收量级为公开口径近似值；面料要求与起订/周期为行业经验值，以客户规格书为准</span>
+</div>
+</div>
+</body>
+</html>
