@@ -49,7 +49,23 @@ header p{margin:6px 0 0;font-size:12.5px;color:#a9bccb;line-height:1.6}
   .qrcell img{width:10mm;height:10mm;border-radius:0;border:.4pt solid #999}
   .qrcell figcaption{font-size:6.6pt;margin-top:.5mm;color:#444}}
 </style>
-</head><body><div class="wrap">
+</head><body><a class="tool-share" href="javascript:void(0)" aria-label="分享这个工具">分享</a>
+<style>.tool-share{position:fixed;right:14px;top:calc(10px + env(safe-area-inset-top));z-index:9999;
+display:inline-block;padding:7px 14px;border-radius:999px;background:#2f8fb5;color:#fff !important;
+border:1px solid #2f8fb5;font:600 13.5px/1.2 -apple-system,"PingFang SC",sans-serif;text-decoration:none;
+box-shadow:0 2px 10px rgba(47,143,181,.28)}.tool-share:active{background:#27799b}
+.tool-toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:rgba(17,29,39,.92);
+color:#fff;padding:10px 18px;border-radius:999px;font:500 14px/1.4 -apple-system,"PingFang SC",sans-serif;
+z-index:10000;opacity:0;transition:opacity .2s}@media print{.tool-share,.tool-toast{display:none}}</style>
+<script>(function(){var b=document.querySelector('.tool-share');if(!b)return;
+b.addEventListener('click',function(){var d={title:document.title,text:document.title,url:location.href};
+if(navigator.share){navigator.share(d).catch(function(){});return;}
+var t=document.createElement('div');t.className='tool-toast';t.textContent='链接已复制，粘贴发微信即可';
+document.body.appendChild(t);requestAnimationFrame(function(){t.style.opacity=1});
+setTimeout(function(){t.style.opacity=0;setTimeout(function(){t.remove()},250)},1600);
+if(navigator.clipboard){navigator.clipboard.writeText(location.href).catch(function(){});}
+});})();</script>
+<div class="wrap">
 <header>
   <a href="index.html" style="display:inline-block;margin-bottom:10px;font-size:12.5px;color:#8fb6c9;text-decoration:none">← 返回工具</a>
   <h1>抖音选题库 · 50 条</h1>

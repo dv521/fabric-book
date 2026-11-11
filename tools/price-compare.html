@@ -68,6 +68,22 @@ th{background:#f7fbfd;font-size:12.6px;color:#4a5865}
 </style>
 </head>
 <body>
+<a class="tool-share" href="javascript:void(0)" aria-label="分享这个工具">分享</a>
+<style>.tool-share{position:fixed;right:14px;top:calc(10px + env(safe-area-inset-top));z-index:9999;
+display:inline-block;padding:7px 14px;border-radius:999px;background:#2f8fb5;color:#fff !important;
+border:1px solid #2f8fb5;font:600 13.5px/1.2 -apple-system,"PingFang SC",sans-serif;text-decoration:none;
+box-shadow:0 2px 10px rgba(47,143,181,.28)}.tool-share:active{background:#27799b}
+.tool-toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:rgba(17,29,39,.92);
+color:#fff;padding:10px 18px;border-radius:999px;font:500 14px/1.4 -apple-system,"PingFang SC",sans-serif;
+z-index:10000;opacity:0;transition:opacity .2s}@media print{.tool-share,.tool-toast{display:none}}</style>
+<script>(function(){var b=document.querySelector('.tool-share');if(!b)return;
+b.addEventListener('click',function(){var d={title:document.title,text:document.title,url:location.href};
+if(navigator.share){navigator.share(d).catch(function(){});return;}
+var t=document.createElement('div');t.className='tool-toast';t.textContent='链接已复制，粘贴发微信即可';
+document.body.appendChild(t);requestAnimationFrame(function(){t.style.opacity=1});
+setTimeout(function(){t.style.opacity=0;setTimeout(function(){t.remove()},250)},1600);
+if(navigator.clipboard){navigator.clipboard.writeText(location.href).catch(function(){});}
+});})();</script>
 <a class="tool-back" href="index.html" aria-label="返回小工具">← 小工具</a>
 <style>.tool-back{position:fixed;left:14px;top:calc(10px + env(safe-area-inset-top));z-index:9999;display:inline-block;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid #cfdde9;color:#12556f !important;font:600 13.5px/1.2 -apple-system,"PingFang SC",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(18,32,44,.10);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}.tool-back:active{background:#eaf4fa}body{padding-top:46px !important}@media print{.tool-back{display:none}body{padding-top:0 !important}}</style>
 <div class="wrap">
