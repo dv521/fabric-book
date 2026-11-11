@@ -49,7 +49,7 @@ th{background:#f7fafc;color:#5a6b78;font-weight:600;white-space:nowrap;width:98p
 <style>.tool-share{position:fixed;right:14px;top:calc(10px + env(safe-area-inset-top));z-index:9999;
 display:inline-block;padding:7px 14px;border-radius:999px;background:#2f8fb5;color:#fff !important;
 border:1px solid #2f8fb5;font:600 13.5px/1.2 -apple-system,"PingFang SC",sans-serif;text-decoration:none;
-box-shadow:0 2px 10px rgba(47,143,181,.28)}.tool-share:active{background:#27799b}
+box-shadow:0 2px 10px rgba(47,143,181,.28)}.tool-share:active{background:#27799b}.share-box{position:fixed;left:16px;right:16px;bottom:24px;z-index:10001;background:#fff;border:1px solid #cfdde9;border-radius:14px;padding:14px 16px;box-shadow:0 8px 30px rgba(18,32,44,.18);font:14px/1.6 -apple-system,'PingFang SC',sans-serif}.share-box .sb-t{font-weight:700;color:#111d27;margin-bottom:6px}.share-box .sb-u{word-break:break-all;color:#12556f;background:#f4f9fc;border-radius:8px;padding:8px 10px;-webkit-user-select:all;user-select:all}.share-box .sb-h{color:#7c8a97;font-size:12.5px;margin-top:8px}body{padding-top:46px !important}@media print{body{padding-top:0 !important}}
 .tool-toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:rgba(17,29,39,.92);
 color:#fff;padding:10px 18px;border-radius:999px;font:500 14px/1.4 -apple-system,"PingFang SC",sans-serif;
 z-index:10000;opacity:0;transition:opacity .2s}@media print{.tool-share,.tool-toast{display:none}}</style>
@@ -57,24 +57,25 @@ z-index:10000;opacity:0;transition:opacity .2s}@media print{.tool-share,.tool-to
 var b=document.querySelector('.tool-share');if(!b)return;
 function toast(msg){var t=document.createElement('div');t.className='tool-toast';t.textContent=msg;
 document.body.appendChild(t);requestAnimationFrame(function(){t.style.opacity=1});
-setTimeout(function(){t.style.opacity=0;setTimeout(function(){t.remove()},250)},1800);}
-function copy(){try{navigator.clipboard.writeText(location.href);}catch(e){}toast('链接已复制，去微信粘贴给朋友');}
-b.addEventListener('click',function(){
-  var ua=navigator.userAgent||'';
-  // 微信内置浏览器：系统分享会闪退，直接复制链接
-  if(/MicroMessenger/i.test(ua)){copy();return;}
-  if(navigator.share){
-    try{
-      var p=navigator.share({title:document.title,url:location.href});
-      if(p&&p.catch)p.catch(function(){copy();});
-    }catch(e){copy();}
-    return;
-  }
-  copy();
-});
+setTimeout(function(){t.style.opacity=0;setTimeout(function(){t.remove()},250)},1600);}
+function box(url){
+  var old=document.querySelector('.share-box');if(old)old.remove();
+  var d=document.createElement('div');d.className='share-box';
+  d.innerHTML='<div class="sb-t">复制这个链接发给朋友</div><div class="sb-u">'+url+'</div><div class="sb-h">长按上面链接 → 复制</div>';
+  d.addEventListener('click',function(){d.remove();});
+  document.body.appendChild(d);
+}
+function copyLink(){
+  var url=location.href, ok=false;
+  try{var ta=document.createElement('textarea');ta.value=url;ta.style.position='fixed';ta.style.top='-100px';
+    document.body.appendChild(ta);ta.focus();ta.select();ok=document.execCommand('copy');document.body.removeChild(ta);}catch(e){}
+  if(navigator.clipboard&&navigator.clipboard.writeText){try{navigator.clipboard.writeText(url);ok=true;}catch(e){}}
+  if(ok){toast('链接已复制，去微信粘贴给朋友');}else{box(url);}
+}
+b.addEventListener('click',copyLink);
 })();</script>
-<a class="tool-back" href="index.html" aria-label="返回小工具">← 小工具</a>
-<style>.tool-back{position:fixed;left:14px;top:calc(10px + env(safe-area-inset-top));z-index:9999;display:inline-block;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid #cfdde9;color:#12556f !important;font:600 13.5px/1.2 -apple-system,"PingFang SC",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(18,32,44,.10);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}.tool-back:active{background:#eaf4fa}body{padding-top:46px !important}@media print{.tool-back{display:none}body{padding-top:0 !important}}</style>
+
+
 <div class="page">
 
   <h1>选品卡<span style="color:#7c8a97;font-size:13px;margin-left:8px">一款一张，给主播和采购看</span></h1>
