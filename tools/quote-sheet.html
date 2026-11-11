@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12202c">
+<title>面料报价单 · 三件套自动算</title>
+<style>
+:root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e6eef4;--bg:#f4f8fb;--brand:#2f8fb5;--red:#A8352B}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 40px}
+header{background:#12202c;color:#fff;padding:18px 16px 14px;margin:0 0 14px;border-radius:0 0 14px 14px}
+header h1{margin:0;font-size:19px}
+header p{margin:5px 0 0;font-size:12.5px;color:#a9bccb}
+section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+label{display:block;font-size:12.5px;color:var(--mut);margin-bottom:4px}
+input,select{width:100%;border:1px solid #cfdde9;background:#f8fbfd;border-radius:10px;padding:11px 12px;font-size:15px;font-family:inherit;outline:none}
+input:focus,select:focus{border-color:var(--brand);background:#fff;box-shadow:0 0 0 3px rgba(47,143,181,.12)}
+.res{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:6px}
+.kpi{background:#f7fbfd;border:1px solid #e2eef5;border-radius:12px;padding:10px 12px}
+.kpi .k{font-size:12px;color:var(--mut)}
+.kpi .v{font-size:20px;font-weight:700;color:#12556f;line-height:1.35}
+.kpi .u{font-size:12px;color:var(--mut);font-weight:400}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+button{border:0;border-radius:12px;padding:13px 20px;font-size:15px;font-weight:650;font-family:inherit;cursor:pointer}
+.primary{background:var(--brand);color:#fff}
+.ghost{background:#eef6fb;color:#12556f}
+pre{white-space:pre-wrap;background:#f8fbfd;border:1px dashed #cfdde9;border-radius:12px;padding:12px;font-size:14px;line-height:1.75;margin:10px 0 0;color:#26333f}
+.cm{color:var(--mut);font-size:12px;line-height:1.7}
+.foot{color:var(--mut);font-size:11.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:4px 2px 0}
+.qrrow{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:18px 0 8px}
+.qrcell{margin:0;text-align:center}
+.qrcell img{width:86px;height:86px;border-radius:10px;border:1px solid #e6eef4;object-fit:cover;display:block}
+.qrcell figcaption{font-size:12px;color:#7a8794;margin-top:6px;white-space:nowrap}
+@media(max-width:560px){.grid,.grid3,.res{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:400px){.grid,.grid3{grid-template-columns:1fr}}
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff;font-size:10px;line-height:1.45}
+  .wrap{max-width:none;padding:9mm 11mm}
+  header{background:#fff;color:#111d27;border-bottom:1.5pt solid #111d27;margin:0 0 3mm;padding:0 0 2mm}
+  header h1{font-size:16pt} header p{color:#444;font-size:8.6px}
+  section{border:none;padding:0;margin:0 0 3mm;break-inside:avoid}
+  h2{font-size:8.4px;margin:0 0 1.4mm}
+  label{font-size:7.6px;margin-bottom:0.6mm}
+  input,select{border:.4pt solid #bbb;border-radius:2px;padding:1.2mm;font-size:9px;background:#fff}
+  .grid{gap:2mm}.grid3{gap:2mm}
+  .res{gap:2mm}
+  .kpi{padding:1.6mm;border:.4pt solid #ccc}
+  .kpi .k{font-size:7.4px}.kpi .v{font-size:11pt}.kpi .u{font-size:7.4px}
+  .btns,pre,.qrrow,.foot{display:none}
+  .cm{font-size:7.4px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>面料报价单 · 三件套自动算</h1>
+  <p>足码价 · 含税价 · 有效期 ｜ 自动折每平方米、单件用量与成本 ｜ 可复制发微信，可打印 A4</p>
+</header>
+
+<section>
+  <h2>01 客户与产品</h2>
+  <div class="grid">
+    <div><label>客户</label><input id="cust" placeholder="例：A01（代号）"></div>
+    <div><label>日期</label><input id="date" type="date"></div>
+  </div>
+  <div class="grid" style="margin-top:10px">
+    <div><label>品名</label><input id="name" value="锦纶平纹 15D34F 无胆防绒"></div>
+    <div><label>成分</label><input id="comp" value="100% 锦纶"></div>
+  </div>
+  <div class="grid3" style="margin-top:10px">
+    <div><label>克重 g/㎡</label><input id="gsm" type="number" step="0.1" value="36"></div>
+    <div><label>有效门幅 cm</label><input id="width" type="number" step="1" value="143"></div>
+    <div><label>色号</label><input id="color" placeholder="TCX / 色卡号"></div>
+  </div>
+</section>
+
+<section>
+  <h2>02 价格三件套</h2>
+  <div class="grid3">
+    <div><label>报价（元/米）</label><input id="price" type="number" step="0.01" value="11"></div>
+    <div><label>码折</label>
+      <select id="zhe"><option value="1">足码 100</option><option value="0.98">98 码</option><option value="0.95">95 码</option><option value="0.9">90 码</option></select>
+    </div>
+    <div><label>税</label>
+      <select id="tax"><option value="1.13">含税 13%</option><option value="1">不含税</option></select>
+    </div>
+  </div>
+  <div class="grid3" style="margin-top:10px">
+    <div><label>起订量（米）</label><input id="moq" type="number" value="300"></div>
+    <div><label>交期（天）</label><input id="lead" type="number" value="12"></div>
+    <div><label>有效期（天）</label><input id="valid" type="number" value="7"></div>
+  </div>
+</section>
+
+<section>
+  <h2>03 算成每平方米与单件成本</h2>
+  <div class="grid">
+    <div><label>单件净面积（㎡）</label><input id="area" type="number" step="0.01" value="1.80"></div>
+    <div><label>利用率（%）</label><input id="use" type="number" step="1" value="80"></div>
+  </div>
+  <div class="res">
+    <div class="kpi"><div class="k">折足码单价</div><div class="v"><span id="o_foot">—</span><span class="u"> 元/米</span></div></div>
+    <div class="kpi"><div class="k">每平方米单价</div><div class="v"><span id="o_m2">—</span><span class="u"> 元/㎡</span></div></div>
+    <div class="kpi"><div class="k">米重</div><div class="v"><span id="o_mw">—</span><span class="u"> g/m</span></div></div>
+    <div class="kpi"><div class="k">单件用量</div><div class="v"><span id="o_use">—</span><span class="u"> 米</span></div></div>
+    <div class="kpi"><div class="k">单件面料成本</div><div class="v"><span id="o_pc">—</span><span class="u"> 元</span></div></div>
+    <div class="kpi"><div class="k">1000 件成本</div><div class="v"><span id="o_1k">—</span><span class="u"> 元</span></div></div>
+  </div>
+  <div class="btns">
+    <button class="primary" onclick="copyText()">复制报价文字</button>
+    <button class="ghost" onclick="window.print()">打印 A4</button>
+  </div>
+  <pre id="out">填完上面几格，这里会自动生成可直接发微信的报价文字。</pre>
+</section>
+
+<section>
+  <h2>04 三条规矩</h2>
+  <p class="cm">① 报价必须写「足码／98 码」，否则客户拿短码价来比；② 必须写「含税或不含税」，差 13%；③ 必须写有效期，绒价与染费一动，旧价就是亏。</p>
+</section>
+
+<div class="qrrow">
+  <figure class="qrcell"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/douyin-qr.jpg?v=3" alt="抖音二维码" style="border-radius:50%"><figcaption>抖音</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/xhs-qr.jpg?v=2" alt="小红书二维码" style="border-radius:6px"><figcaption>小红书</figcaption></figure>
+</div>
+<div class="foot"><span>dv面料手记 · 工具</span><span>足码与码折属行业惯例；含税按 13% 增值税</span></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmt = (n, d=2) => (isFinite(n) ? n.toFixed(d) : '—');
+
+function calc(){
+  const price = +$('price').value || 0;
+  const zhe = +$('zhe').value || 1;
+  const tax = +$('tax').value || 1;
+  const gsm = +$('gsm').value || 0;
+  const width = (+$('width').value || 0) / 100;
+  const area = +$('area').value || 0;
+  const use = (+$('use').value || 0) / 100;
+
+  const foot = price / zhe;              // 折足码单价
+  const withTax = foot * tax;            // 含税折足码单价
+  const m2 = width > 0 ? withTax / width : NaN;
+  const mw = gsm * width;                // g/m
+  const perUse = (area > 0 && width > 0 && use > 0) ? area / (width * use) : NaN;
+  const perCost = perUse * withTax;
+  const k1 = perCost * 1000;
+
+  $('o_foot').textContent = fmt(withTax);
+  $('o_m2').textContent = fmt(m2, 2);
+  $('o_mw').textContent = fmt(mw, 0);
+  $('o_use').textContent = fmt(perUse, 2);
+  $('o_pc').textContent = fmt(perCost, 1);
+  $('o_1k').textContent = k1 ? Math.round(k1).toLocaleString() : '—';
+
+  const cust = $('cust').value || '——';
+  const name = $('name').value || '——';
+  const comp = $('comp').value || '——';
+  const color = $('color').value || '——';
+  const moq = $('moq').value || '——';
+  const lead = $('lead').value || '——';
+  const valid = $('valid').value || '——';
+  const zheTxt = zhe === 1 ? '足码' : Math.round(zhe*100) + ' 码';
+  const taxTxt = tax > 1 ? '含税 13%' : '不含税';
+
+  $('out').textContent =
+`【报价】${name}
+客户：${cust}
+成分：${comp}　克重：${gsm} g/㎡　有效门幅：${Math.round(width*100)} cm
+色号：${color}
+价格：${fmt(withTax)} 元/米（${zheTxt}，${taxTxt}）
+折算：每平方米 ${fmt(m2)} 元／米重 ${fmt(mw,0)} g/m
+单件（净 ${area} ㎡、利用率 ${Math.round(use*100)}%）：${fmt(perUse)} 米，面料成本 ${fmt(perCost,1)} 元
+起订：${moq} 米　交期：${lead} 天　报价有效期：${valid} 天`;
+}
+['price','zhe','tax','gsm','width','area','use','cust','name','comp','color','moq','lead','valid']
+  .forEach(id => $(id).addEventListener('input', calc));
+$('date').value = new Date().toISOString().slice(0,10);
+calc();
+
+function copyText(){
+  const t = $('out').textContent;
+  navigator.clipboard?.writeText(t).then(()=>{
+    const b = document.querySelector('.primary');
+    const old = b.textContent; b.textContent = '已复制'; setTimeout(()=>b.textContent=old, 1200);
+  }).catch(()=>alert('复制失败，请长按文字手动复制'));
+}
+</script>
+</body>
+</html>
