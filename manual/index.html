@@ -171,16 +171,19 @@ document.addEventListener('copy',e=>e.preventDefault());
 <script>
 (function(){
   var K='dv_manual_ok';
-  if(sessionStorage.getItem(K)==='1'){document.getElementById('gate').remove();return;}
+  var g=document.getElementById('gate');
+  if(sessionStorage.getItem(K)==='1'){g.remove();return;}
   document.documentElement.style.overflow='hidden';
+  var key=document.getElementById('gk'), btn=document.getElementById('gb'), err=document.getElementById('ge');
+  function norm(v){return (v||'').toLowerCase().replace(/[^0-9a-z]/g,'').replace(/^dv/,'');}
   function ok(){
-    var v=document.getElementById('gk').value.trim();
-    if(v==='13588355444'){sessionStorage.setItem(K,'1');var g=document.getElementById('gate');g.remove();document.documentElement.style.overflow='';}
-    else{document.getElementById('ge').textContent='访问码不对';}
+    var raw=key.value.trim(), v=norm(raw);
+    if(v==='13588355444'){sessionStorage.setItem(K,'1');g.remove();document.documentElement.style.overflow='';}
+    else{err.textContent='不对（你输了 '+v.length+' 位），应是手机号 11 位';key.value='';key.focus();}
   }
-  document.getElementById('gb').onclick=ok;
-  document.getElementById('gk').addEventListener('keydown',function(e){if(e.key==='Enter')ok();});
-  setTimeout(function(){document.getElementById('gk').focus();},300);
+  btn.onclick=ok;
+  key.addEventListener('keydown',function(e){if(e.key==='Enter')ok();});
+  setTimeout(function(){key.focus();},300);
 })();
 </script>
 </body>
