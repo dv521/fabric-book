@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12202c">
+<title>总则与说明 v3.1 · 内部手册 · dv面料手记</title>
+<style>
+:root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e3ebf2;--bg:#f4f8fb;--brand:#2f8fb5;--blue:#1f6f95}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.75 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 40px;overflow-wrap:anywhere}
+header{background:#12202c;color:#fff;padding:20px 16px calc(16px + env(safe-area-inset-top));margin:0 -14px 14px}
+header h1{margin:0;font-size:20px;letter-spacing:.02em}
+header p{margin:6px 0 0;font-size:12.5px;color:#a9bccb;line-height:1.6}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.toc a{font-size:12.5px;color:var(--blue);background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px;text-decoration:none}
+section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+h2{font-size:15px;color:#12202c;margin:0 0 12px;font-weight:700;padding-left:11px;border-left:4px solid var(--brand);line-height:1.3}
+h3{font-size:14px;color:var(--blue);margin:16px 0 8px;font-weight:700}
+h3:first-of-type{margin-top:4px}
+p{margin:0 0 10px;font-size:14.5px;color:var(--ink2)}
+ul,ol{margin:0 0 10px;padding-left:20px;font-size:14.5px;color:var(--ink2)}
+li{margin:3px 0}
+table{width:100%;border-collapse:collapse;margin:6px 0 12px;font-size:13.6px}
+th{background:#f2f8fc;color:#12556f;font-weight:700;text-align:left;padding:8px 10px;border:1px solid var(--line)}
+td{padding:8px 10px;border:1px solid var(--line);color:var(--ink2);vertical-align:top;line-height:1.65}
+.note{background:#f8fbfd;border:1px dashed #cfdde9;border-radius:10px;padding:11px 13px;font-size:13.6px;line-height:1.8;margin:10px 0}
+.note b{color:#12556f}
+.cmd{background:#12202c;color:#d7e6f2;border-radius:10px;padding:11px 13px;font:13px/1.6 ui-monospace,Menlo,monospace;overflow-x:auto;white-space:pre-wrap;margin:8px 0 12px}
+.kw{color:#7fd0f0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.box{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fbfdff;font-size:13.6px;color:var(--ink2)}
+.box b{display:block;color:#12556f;margin-bottom:4px;font-size:13.4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{counter-increment:s;position:relative;padding-left:30px;margin:7px 0;font-size:14.4px;color:var(--ink2)}
+.steps li:before{content:counter(s);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:50%;background:var(--brand);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.red li{color:#8a3a3a}
+.qrrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 6px;text-align:center}
+.qrrow img{width:100%;max-width:110px;border-radius:8px;border:1px solid var(--line)}
+.qrrow span{display:block;font-size:11.5px;color:var(--mut);margin-top:5px}
+.foot{color:var(--mut);font-size:11.5px;line-height:1.7;border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
+@media(max-width:640px){
+  header h1{font-size:18px}
+  .two{grid-template-columns:1fr}
+  table{font-size:12.8px}
+  th,td{padding:7px 8px}
+  section{padding:14px 13px}
+  .qrrow img{max-width:86px}
+}
+@media print{
+  body{background:#fff;font-size:11pt}
+  header{background:#fff;color:#111;margin:0 0 10px;padding:0 0 8px;border-bottom:2px solid #12202c}
+  header p{color:#555}
+  .toc,.qrrow{display:none}
+  section{border:none;padding:0;margin:0 0 10pt;break-inside:avoid}
+  h2{border-left:3px solid #12202c;font-size:13pt}
+  table{font-size:9.5pt}
+  .cmd{background:#f2f2f2;color:#111;border:1px solid #ddd}
+  .foot{font-size:8.5pt}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>总则与说明 v3.1</h1>
+  <p>2026-11-12 定稿　明天起执行<br>TT纺织 · 窦金龙　内部手册，不对外</p>
+</header>
+<nav class="toc"><a href="#s0">怎么用这份手册</a><a href="#s1">客户（第一规则）</a><a href="#s2">平台与时间</a><a href="#s3">内容：选题与结构</a><a href="#s4">录音与出片（自然语速）</a><a href="#s5">封面与文案</a><a href="#s6">指标与复盘</a><a href="#s7">红线</a><a href="#s8">每日交付（07:30）</a><a href="#s9">30 天目标（11-11 → 12-10）</a></nav>
+<section id="s0"><h2>怎么用这份手册</h2>
+<p>这是给自己和团队看的内部标准，不是对外资料。每天照着做，不用再问。</p>
+<div class="note"><b>三个口令，只有三个：</b>日课发　动态发　视频出。没出现这两个字以外的词，一律不做。</div>
+<table class=""><thead><tr><th>口令</th><th>我要交什么</th></tr></thead><tbody><tr><td><b>日课发</b></td><td>日课页上站发布（发布前给标题和摘要预览）</td></tr><tr><td><b>动态发</b></td><td>行业动态上站发布（发布后给线上链接）</td></tr><tr><td><b>视频出</b></td><td>成片 mp4 ＋ 小红书封面一张 ＋ 三端文案</td></tr></tbody></table>
+<p>每天的固定节奏：<b>07:30</b> 收交付；<b>12:00</b> 视频号；<b>12:30</b> 小红书；<b>20:40</b> 抖音；睡前回填数据。</p>
+</section><section id="s1"><h2>一、客户（第一规则）</h2>
+<p><b>只服务三类人：一批服装批发老板（自己有档口）、服装设计师、服装设计工作室。</b></p>
+<table class=""><thead><tr><th>客群</th><th>在哪</th><th>拿布干什么</th><th>每天在想什么</th></tr></thead><tbody><tr><td>一批批发老板</td><td>平湖、杭州批发市场，有档口</td><td>选布 → 做货 → 档口批发 → 返单</td><td>这版卖不卖得动、成本压不压得住、客户会不会退</td></tr><tr><td>服装设计师</td><td>园区服装公司、版房</td><td>选布 → 做样衣 → 卖版</td><td>好不好看、今年什么色好卖、版新不新、打样快不快</td></tr><tr><td>服装设计工作室</td><td>杭州园区、独立工作室</td><td><b>自己开发款 → 选布打样 → 把款卖给客户（批发客、品牌）</b></td><td>这一版有没有辨识度、布能不能撑起卖价、小单几件能不能做、颜色跟不跟得上</td></tr></tbody></table>
+<p><b>不服务</b>：只收加工费的服装厂、C 端消费者、品牌总部、纯同行。</p>
+<h3>三条铁律</h3>
+<ol class="steps">
+<li>只讲他明天能用上的——一个判断、一句话、一个数</li>
+<li>只用他的语言——「这批压手里了」，不是「库存周转率」</li>
+<li>每条必须有他的原话——客户说／老板说／设计师说</li>
+</ol>
+<h3>出片四问（全过才做）</h3>
+<ol class="steps">
+<li>是批发老板、设计师或工作室会遇到的场景吗？</li>
+<li>他听完能照做、照说吗？</li>
+<li>开头有他的原话吗？</li>
+<li>他会不会转给同行看？</li>
+</ol>
+</section><section id="s2"><h2>二、平台与时间</h2>
+<table class=""><thead><tr><th>平台</th><th>对象</th><th>频率</th><th>发布</th><th>最晚</th></tr></thead><tbody><tr><td>视频号</td><td>老客户、同行</td><td>每周 3 条</td><td><b>12:00</b></td><td>21:00</td></tr><tr><td>小红书</td><td>设计师、设计工作室</td><td>每周 2 条</td><td><b>12:30</b></td><td>22:00</td></tr><tr><td>抖音</td><td>批发老板＋泛人群</td><td>每周 3 条</td><td><b>20:40</b></td><td>21:30</td></tr></tbody></table>
+<div class="note">一天只发一条内容，三端是同一内容分时段发。赶不上就顺延次日同一时段，<b>不深夜硬发</b>。<br>合集：知识类 → <b>羽绒服面料·避坑现场</b>；行情类 → <b>面料行情速报</b>。</div>
+</section><section id="s3"><h2>三、内容：选题与结构</h2>
+<h3>七类选题（固定配比）</h3>
+<table class=""><thead><tr><th>类型</th><th>占比</th><th>对象</th><th>开头原话</th></tr></thead><tbody><tr><td>卖不动／选布</td><td>20%</td><td>批发老板</td><td>「这批压手里了，下一版怎么选布？」</td></tr><tr><td>客户说太贵</td><td>15%</td><td>批发老板</td><td>「便宜两块，别家能做。」</td></tr><tr><td>退货／客诉</td><td>20%</td><td>批发老板</td><td>「客户退回来，说洗一次就漏。」</td></tr><tr><td>设计师能不能做</td><td>20%</td><td>设计师</td><td>「15D 做撞色，能行吗？」</td></tr><tr><td>流行色与趋势</td><td>15%</td><td>设计师、工作室</td><td>「今年这个色还能做吗？」</td></tr><tr><td>上新／交期</td><td>5%</td><td>批发老板</td><td>「15 天能到吗？我要赶档口。」</td></tr><tr><td>行情／口径</td><td>5%</td><td>两者</td><td>「绒跌了，布怎么不跌？」</td></tr></tbody></table>
+<div class="note">趋势类必须指来源：中国流行色协会／Pantone TCX／市场实测；给不出就写「经验判断」。<br><b>停做</b>：纯参数科普（旦数、T 数、标准号开头）。</div>
+<h3>结构（25–28 秒）</h3>
+<table class=""><thead><tr><th>时间</th><th>内容</th></tr></thead><tbody><tr><td>0–3 秒</td><td>客户原话</td></tr><tr><td>3–12 秒</td><td>为什么会这样（只讲一个数）</td></tr><tr><td>12–20 秒</td><td>你该怎么答（一句能照抄）</td></tr><tr><td>20–26 秒</td><td>报数提问</td></tr></tbody></table>
+<p>结尾固定：<b>我是他她纺织窦金龙，做轻雹羽绒面料。</b>＋报数提问（轻雹＝轻薄的读音，念 báo）。</p>
+<h3>泛人群测试（抖音准入）</h3>
+<div class="note">一个不卖衣服的人，听完第一句能不能听懂？<b>能</b> → 发抖音；<b>不能</b> → 只发视频号／小红书。</div>
+<table class=""><thead><tr><th>抖音只发三类</th><th>抖音停发</th></tr></thead><tbody><tr><td>漏绒跑绒<br>洗坏保养<br>同款为什么差几百块</td><td>98 码、门幅、旦数、T 数<br>CPL／PTA<br>缸差这类纯行业题</td></tr></tbody></table>
+<h3>开头禁忌</h3>
+<table class=""><thead><tr><th>别写</th><th>改写成</th></tr></thead><tbody><tr><td>缝口一开，这钱谁出</td><td>客户说：这衣服一按一个印</td></tr><tr><td>无胆要三道防线</td><td>设计师说：15D 做无胆，能行吗</td></tr></tbody></table>
+</section><section id="s4"><h2>四、录音与出片（自然语速）</h2>
+<table class=""><thead><tr><th>项</th><th>值</th></tr></thead><tbody><tr><td>语速</td><td><b>1.00</b>（自然人声，不加速）</td></tr><tr><td>音色</td><td>S_Lnxqb9Vj2，锁死，不改</td></tr><tr><td>段间停顿</td><td><b>DV_GAP=0.15</b>（0.35 会一顿一顿）</td></tr><tr><td>变速处理</td><td><b>不做</b>（不用 atempo 硬拉时长）</td></tr><tr><td>字数</td><td><b>120–130 字</b></td></tr><tr><td>成片</td><td>25–28 秒；超界加／删 8–12 字重录，不改语速</td></tr><tr><td>画幅</td><td>1080×1920 / 30fps / H.264＋AAC</td></tr></tbody></table>
+<h3>固定命令</h3>
+<div class="cmd"><span class="kw">DV_GAP=0.15</span> python3 build_video.py --episode 稿子.json --speed <span class="kw">1.00</span></div>
+<div class="note">目标听感：<b>像正常人坐着说话</b>，句子之间停一下，句内连起来。<br>时长靠字数控制，不靠变速——变速会把语气拉平，听起来假。</div>
+</section><section id="s5"><h2>五、封面与文案</h2>
+<table class=""><thead><tr><th>平台</th><th>封面</th></tr></thead><tbody><tr><td>抖音／视频号</td><td><b>不发封面图，直接发视频</b>（平台自动取首帧）</td></tr><tr><td>小红书</td><td>只做 <b>1080×1440（3:4）</b> 一张</td></tr></tbody></table>
+<div class="note">每天只产出一张封面：<b>小红书 3:4</b>。不导出首帧文件、不做抖音／视频号封面。</div>
+<h3>封面模板（宋体 Songti SC）</h3>
+<p>顶部条（栏目／日期）＋ 标题两行 96 ＋ 蓝短横线 ＋ 大关键词 190 ＋ 副标 44 ＋ 要点 44（一条）＋ 品牌条。</p>
+<div class="note"><b>不许用带底图的旧模板</b>——会在底图上再叠一层字，出现重影和旧数据（142 门幅、34 克）。</div>
+<h3>文案三条</h3>
+<ol class="steps">
+<li><b>第一行必须是提问句</b>（抖音多数版本没有评论置顶）</li>
+<li>第二行起讲事实与数据，一行一个信息</li>
+<li>三端分开写：抖音（批发老板）、小红书（设计师／工作室）、视频号（老客户）</li>
+</ol>
+</section><section id="s6"><h2>六、指标与复盘</h2>
+<table class=""><thead><tr><th>别看</th><th>看</th></tr></thead><tbody><tr><td>播放量</td><td><b>2 秒跳出</b>（&lt;35% 合格）</td></tr><tr><td>点赞</td><td>评论里有无职业词：老板／设计师／档口／工作室</td></tr><tr><td>完播单点</td><td><b>5 秒完播</b>（≥40% 合格）</td></tr></tbody></table>
+<div class="note">台账 <b>口播/数据台账.csv</b>，每条回填；<b>每条只改一个变量</b>，每 5 条复盘一次。<br>时长不是主因，痛感才是：11-08 31.5 秒完播 10.43%，11-09 压到 25.3 秒反而 4.84%。</div>
+</section><section id="s7"><h2>七、红线</h2>
+<ol class="steps red">
+<li>不得出现：微信、VX、加V、手机号、QQ、淘宝、1688、拼多多、网址、http、公众号、小程序、二维码、扫码、加我、扣1</li>
+<li>禁用绝对化词：绝不、100%、第一、最好、全网最低、国家级、零风险、永不、绝对、保证不</li>
+<li>非国标数据必须标「经验值」，并给标准号或出处</li>
+<li>页脚只写：<b>TT纺织 · 窦金龙　轻薄羽绒面料</b></li>
+</ol>
+</section><section id="s8"><h2>八、每日交付（07:30）</h2>
+<table class=""><thead><tr><th>#</th><th>交付项</th></tr></thead><tbody><tr><td>1</td><td>站点标题（等你口令再上站）</td></tr><tr><td>2</td><td>成片 mp4（抖音、视频号直接发）</td></tr><tr><td>3</td><td>小红书封面 1080×1440 一张</td></tr><tr><td>4</td><td>合集名</td></tr><tr><td>5</td><td>三端文案（第一行都是提问句）</td></tr></tbody></table>
+<div class="note">单日发日课，双日发行业动态。<b>不做</b>：抖音封面图、视频号封面图、首帧文件。</div>
+</section><section id="s9"><h2>九、30 天目标（11-11 → 12-10）</h2>
+<table class=""><thead><tr><th>指标</th><th>目标</th></tr></thead><tbody><tr><td>新增发布</td><td>22 条</td></tr><tr><td>私信咨询</td><td>≥15 条</td></tr><tr><td>加微信</td><td>≥8 人</td></tr><tr><td>寄样／看版</td><td>≥5 次</td></tr><tr><td>2 秒跳出</td><td>稳定 &lt;35%</td></tr><tr><td>爆款</td><td>≥1 条（播放≥1000 且完播≥25%）</td></tr></tbody></table>
+<h3>四周主题</h3>
+<ol class="steps">
+<li>跑通结构：固定开头句式、固定语速</li>
+<li>建立信任：染厂专题（设备、工期、色差怎么控）</li>
+<li>对准设计口：颜色、趋势、小单、打样速度</li>
+<li>转化收口：寄样、看版、报数提问</li>
+</ol>
+</section>
+<div class="qrrow">
+  <div><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信"><span>微信</span></div>
+  <div><img src="../assets/img/douyin-qr.jpg" alt="抖音"><span>抖音</span></div>
+  <div><img src="../assets/img/xhs-qr.jpg?v=2" alt="小红书"><span>小红书</span></div>
+</div>
+<div class="foot">dv面料手记 · TT纺织出品　窦金龙 dv13588355444<br>本页为内部执行标准，含口令与红线，请勿外传。</div>
+</div>
+<script>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+</script>
+</body>
+</html>
