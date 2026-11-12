@@ -148,8 +148,7 @@ b.addEventListener('click',copyLink);
       <tr><th>码折</th><td>98 码 ＝ 每给 0.98 米，就是比足码贵 2%</td></tr>
     </tbody>
   </table>
-  <p class="cm" style="margin:8px 0 0">例（都报 10 元/米）：足码 143 cm → <b>6.99 元/㎡</b>；98 码 143 cm → <b>7.13 元/㎡</b>，光码折就贵 <b>2.0%</b>。门幅再从 143 掉到 142：<b>7.18 元/㎡</b>，两项叠加 <b>2.7%</b>。按单件净面积 1.8 ㎡、利用率 80% 算，1000 件多付约 <b>430 元</b>，10 万件多付约 <b>4.3 万元</b>。</p>
-  <p class="cm" style="margin:6px 0 0">上面那张实时结论是按你填的两家算的；这个例子只是演示怎么拆开看。</p>
+  <div id="steps" class="cm" style="margin:10px 0 0;line-height:2"></div>
 </section>
 
 <section>
@@ -188,6 +187,25 @@ function calc(){
   document.getElementById("mb").textContent = mb? mb.toFixed(2)+" 元/㎡" : "—";
   document.getElementById("ca").textContent = ca? ca.toFixed(2)+" 元" : "—";
   document.getElementById("cb").textContent = cb? cb.toFixed(2)+" 元" : "—";
+  var S=document.getElementById("steps");
+  if(S){
+    if(!ma||!mb||!ca||!cb){S.innerHTML="";}
+    else{
+      var f2=function(x){return x.toFixed(2);};
+      var dd=Math.abs(ma-mb), pp=Math.abs(pct);
+      var tenK=Math.round(Math.abs(ca-cb)*1000).toLocaleString();
+      var tenW=Math.round(Math.abs(ca-cb)*100000);
+      var tenWan=(tenW/10000).toFixed(1);
+      S.innerHTML =
+        "<div><b>① A 家每平方米</b>　"+f2(A.p)+" ÷ "+f2(A.z)+" ÷ "+f2(A.w/100)+" ＝ <b>"+f2(ma)+" 元/㎡</b></div>"+
+        "<div><b>② B 家每平方米</b>　"+f2(B.p)+" ÷ "+f2(B.z)+" ÷ "+f2(B.w/100)+" ＝ <b>"+f2(mb)+" 元/㎡</b></div>"+
+        "<div><b>③ 每平方米差</b>　"+f2(ma)+" − "+f2(mb)+" ＝ "+f2(dd)+" 元（"+pp.toFixed(1)+"%）</div>"+
+        "<div><b>④ 单件成本</b>　"+f2(area)+" ÷ "+(util*100).toFixed(0)+"% × "+f2(ma)+" ＝ "+f2(ca)+" 元　／　"+f2(area)+" ÷ "+(util*100).toFixed(0)+"% × "+f2(mb)+" ＝ "+f2(cb)+" 元</div>"+
+        "<div><b>⑤ 单件差</b>　"+f2(ca)+" − "+f2(cb)+" ＝ <b>"+f2(Math.abs(ca-cb))+" 元</b></div>"+
+        "<div><b>⑥ 1 000 件</b>　"+f2(Math.abs(ca-cb))+" × 1 000 ＝ <b>"+tenK+" 元</b></div>"+
+        "<div><b>⑦ 10 万件</b>　"+f2(Math.abs(ca-cb))+" × 100 000 ＝ <b>"+tenW.toLocaleString()+" 元（"+tenWan+" 万元）</b></div>";
+    }
+  }
   var v=document.getElementById("verdict");
   if(!ma||!mb){v.textContent="把四格数字填全，就能出结论。";return;}
   var d=ma-mb, pct=mb? (d/mb*100):0;
