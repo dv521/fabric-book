@@ -192,7 +192,7 @@ function calc(){
     if(!ma||!mb||!ca||!cb){S.innerHTML="";}
     else{
       var f2=function(x){return x.toFixed(2);};
-      var dd=Math.abs(ma-mb), pp=Math.abs(pct);
+      var dd=Math.abs(ma-mb), pct2=(mb? (ma-mb)/mb*100 : 0), pp=Math.abs(pct2);
       var tenK=Math.round(Math.abs(ca-cb)*1000).toLocaleString();
       var tenW=Math.round(Math.abs(ca-cb)*100000);
       var tenWan=(tenW/10000).toFixed(1);
