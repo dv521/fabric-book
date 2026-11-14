@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12202c">
+<title>Codex CLI 实战教程 · 14 个案例</title>
+<style>
+:root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e6eef4;--bg:#f4f8fb;--brand:#2f8fb5;--dark:#12202c;--code:#f8fbfd;--codeln:#cfdde9}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 14px 44px}
+header{background:var(--dark);color:#fff;padding:20px 16px 16px;margin:0 0 14px;border-radius:0 0 14px 14px}
+header h1{margin:0;font-size:19px;line-height:1.4}
+header p{margin:6px 0 0;font-size:12.5px;color:#a9bccb}
+.lead{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.lead b{color:#12556f}
+.rule{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0 0}
+.rule div{background:#f7fbfd;border:1px solid #e2eef5;border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.6}
+.rule .n{display:block;font-size:11px;letter-spacing:.14em;color:var(--mut);margin-bottom:3px}
+h2{font-size:14px;color:var(--mut);letter-spacing:.08em;margin:22px 0 8px;font-weight:700}
+.case{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.case h3{margin:0 0 6px;font-size:16px;line-height:1.45}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:#eef6fb;color:#12556f;font-weight:650;margin-bottom:8px}
+.case .sc{font-size:13.5px;color:var(--ink2);margin:0 0 8px}
+.case .sc b{color:#a8352b}
+pre{position:relative;background:var(--code);border:1px solid var(--codeln);border-left:3px solid var(--brand);
+  border-radius:10px;padding:11px 12px;margin:8px 0 0;font-size:13px;line-height:1.65;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;-webkit-overflow-scrolling:touch}
+pre code{font:inherit}
+.cp{position:absolute;right:6px;top:6px;border:1px solid #cfdde9;background:#fff;color:#12556f;
+  border-radius:8px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit}
+.cp:active{background:#eef6fb}
+.out{font-size:13px;color:var(--ink2);margin:8px 0 0}
+.out b{color:#12556f}
+.key{font-size:12.5px;color:#8a4b06;background:#fdf5ec;border:1px solid #f0dcc4;border-radius:9px;padding:7px 10px;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:12px;overflow:hidden;margin-top:6px}
+th{background:#f4f9fc;text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);color:#12556f;font-weight:650}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.qrrow{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:20px 0 8px}
+.qrcell{margin:0;text-align:center}
+.qrcell img{width:86px;height:86px;border-radius:10px;border:1px solid var(--line);object-fit:cover;display:block}
+.qrcell figcaption{font-size:12px;color:#7a8794;margin-top:6px;white-space:nowrap}
+.foot{color:var(--mut);font-size:11.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:6px 2px 0}
+#gate{position:fixed;inset:0;background:var(--dark);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px}
+#gate .box{background:#fff;border-radius:16px;padding:22px;max-width:340px;width:100%;text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+#gate .t{font-size:15px;color:var(--dark);font-weight:700;margin-bottom:6px}
+#gate .d{font-size:12.5px;color:var(--mut);line-height:1.6;margin-bottom:14px}
+#gate input{width:100%;padding:12px;border:1px solid #dbe5ee;border-radius:10px;font-size:16px;text-align:center;letter-spacing:.12em;outline:none}
+#gate button{margin-top:12px;width:100%;padding:13px;border:0;border-radius:10px;background:#1f6f95;color:#fff;font-size:15px;font-weight:600}
+#gate .err{margin-top:10px;font-size:12px;color:#c0504d;height:16px}
+body.locked{overflow:hidden}
+@media(max-width:640px){
+  body{font-size:15px}
+  header h1{font-size:17px}
+  .rule{grid-template-columns:1fr}
+  pre{font-size:12.5px}
+  .case{padding:12px 13px}
+}
+@media(min-width:900px){
+  .lead{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}
+  .lead .rule{margin:0}
+}
+@media print{ .cp,#gate{display:none} }
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <div class="box">
+    <div class="t">Codex CLI 实战教程</div>
+    <div class="d">内部资料，请输入访问码</div>
+    <input id="pw" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="手机号 11 位">
+    <button onclick="check()">进 入</button>
+    <div class="err" id="err"></div>
+  </div>
+</div>
+
+<div class="wrap">
+<header>
+  <h1>Codex CLI 实战教程 · 14 个案例</h1>
+  <p>一个案例 = 一个功能　由浅入深　全部照抄可用　·　dv面料手记 · 工具</p>
+</header>
+
+<div class="lead">
+  <div>
+    <p style="margin:0 0 6px"><b>先记三条铁律，比记命令重要。</b></p>
+    <p style="margin:0;font-size:13.5px;color:var(--ink2)">这套命令全部围绕三个真实目录：站点 <code>~/deploy-fabric-book</code>、资料 <code>~/Documents/面料资料</code>、归档 <code>…/归档</code>。装好独立版后终端里输 <code>codex</code> 即可。</p>
+  </div>
+  <div class="rule">
+    <div><span class="n">铁律 1</span>先只读，后动手</div>
+    <div><span class="n">铁律 2</span>永远带 <code>-C 目录</code></div>
+    <div><span class="n">铁律 3</span>改完必看 <code>git diff</code></div>
+  </div>
+</div>
+
+<h2>第一层 · 入门：能对话、能读、能改</h2>
+
+<section class="case">
+  <span class="tag">案例 1 · 交互模式</span>
+  <h3>第一次对话：让它体检，不动手</h3>
+  <p class="sc">刚装好，先看它能不能读懂你的站点。</p>
+<pre><button class="cp">复制</button><code>cd ~/deploy-fabric-book
+codex</code></pre>
+  <p class="sc" style="margin-top:8px">进去打：</p>
+<pre><button class="cp">复制</button><code>只读，不要改文件。告诉我这个仓库有几类文件、各多少个，以及首页用的是哪个 html。</code></pre>
+  <p class="out"><b>你会看到</b>：一份文件清点 + 指认 <code>index.html</code>。</p>
+  <div class="key">交互里 <code>/</code> 看命令，Ctrl+C 中断，Ctrl+D 退出。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 2 · 精准提问</span>
+  <h3>问一个具体答案：比翻文件快</h3>
+  <p class="sc">忘了某条红线写在哪。</p>
+<pre><button class="cp">复制</button><code>codex exec -s read-only -C ~/deploy-fabric-book "「绝对化词禁用」这条规则写在项目里哪个文件？把原文那一行引出来。"</code></pre>
+  <p class="out"><b>你会看到</b>：文件路径 + 原文行。</p>
+  <div class="key">问「在哪、原文是什么」，不问「你觉得该怎么写」。前者可核查，后者容易编。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 3 · 第一次动手</span>
+  <h3>改一个文件的一段文案</h3>
+  <p class="sc">某页文案要改口径。</p>
+<pre><button class="cp">复制</button><code>codex exec -s workspace-write -C ~/deploy-fabric-book "打开 tools/price-compare.html，把页面标题里的『报价换算』改成『每平方米单价换算』，只改这一处，其余不动，改完列出 diff。"</code></pre>
+  <p class="sc" style="margin-top:8px">验收：</p>
+<pre><button class="cp">复制</button><code>cd ~/deploy-fabric-book && git diff</code></pre>
+  <div class="key">指令必须写清三件事：<b>哪个文件、改哪一句、其它不动</b>。少一样，它就会顺手多改。</div>
+</section>
+
+<h2>第二层 · 单次执行：批处理与产出</h2>
+
+<section class="case">
+  <span class="tag">案例 4 · 导出 CSV</span>
+  <h3>统计章节字数：让它算，不要它说</h3>
+  <p class="sc">想看 36 章各多少字，手数太慢。</p>
+<pre><button class="cp">复制</button><code>codex exec -s workspace-write -C ~/deploy-fabric-book "统计 book/ 下每个 html 的正文汉字数（去掉标签和脚本），输出 csv 到 /tmp/章节字数.csv，列为 文件名,字数，按字数降序。"</code></pre>
+  <p class="out"><b>你会看到</b>：<code>/tmp/章节字数.csv</code>，可直接用 Numbers 打开。</p>
+  <div class="key">让它<b>产出文件</b>而不是在屏幕上念数字——文件能核对，屏幕上的数字不能。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 5 · 批量替换</span>
+  <h3>限定范围才安全</h3>
+  <p class="sc">全站把旧参数改成新值（例：门幅 142 改 143）。</p>
+<pre><button class="cp">复制</button><code>codex exec -s workspace-write -C ~/deploy-fabric-book "只在 book/ 和 daily/ 两个目录里，把『142 厘米』改成『143 厘米』，其它目录不要动，改完报告每个文件改了几处。"</code></pre>
+  <p class="sc" style="margin-top:8px">验收：</p>
+<pre><button class="cp">复制</button><code>git diff --stat
+git diff | grep -c "143 厘米"</code></pre>
+  <div class="key">批量替换最怕「顺手全文替换」。<b>写死目录范围 + 要它报处数</b>，是唯一可靠的约束。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 6 · 新建页面</span>
+  <h3>按现有风格加一个工具页</h3>
+  <p class="sc">想加「退货分类卡」小工具页。</p>
+<pre><button class="cp">复制</button><code>codex exec -s workspace-write -C ~/deploy-fabric-book "照 tools/quote-sheet.html 的结构、配色、字体，新建 tools/return-card.html：标题『退货分类卡』，四个按钮（钻绒/破洞/跑绒/色差），点一下显示对应处理动作。样式必须和现有页面完全一致，不要引入外部库。"</code></pre>
+  <p class="sc" style="margin-top:8px">验收：</p>
+<pre><button class="cp">复制</button><code>grep -c "noindex" tools/return-card.html</code></pre>
+  <div class="key">让它<b>照抄一个现成文件</b>，比描述风格有效十倍。</div>
+</section>
+
+<h2>第三层 · 检查与回退：让改动可控</h2>
+
+<section class="case">
+  <span class="tag">案例 7 · 红线扫描</span>
+  <h3>发布前自检</h3>
+  <p class="sc">发站之前，确认没有微信、二维码、http:// 泄漏。</p>
+<pre><button class="cp">复制</button><code>codex exec -s read-only -C ~/deploy-fabric-book "扫描所有 html，找出出现以下词的页面并列出文件名与那一行：微信、扫码、二维码、http://、加我、扣1。只报告，不要改。"</code></pre>
+  <div class="key">这类检查<b>每周跑一次</b>，比出事再查省事。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 8 · 审与退</span>
+  <h3>审改动、回退、第二天续做</h3>
+  <p class="sc">它改完你不放心。</p>
+<pre><button class="cp">复制</button><code>cd ~/deploy-fabric-book
+codex review              # 让它自己挑这次改动的毛病
+git diff --stat           # 看改了哪几个文件
+git checkout -- 文件名     # 单文件撤回
+git reset --hard HEAD     # 全撤回（慎重）</code></pre>
+  <p class="sc" style="margin-top:8px">接第二天：</p>
+<pre><button class="cp">复制</button><code>codex resume --last</code></pre>
+  <div class="key">改之前先 commit 一次，退路就永远在。</div>
+</section>
+
+<h2>第四层 · 进阶：隔离、看图、进管道</h2>
+
+<section class="case">
+  <span class="tag">案例 9 · worktree</span>
+  <h3>大改动先隔离，不脏主分支</h3>
+  <p class="sc">要重构 tools 的公共样式，改坏了不能影响线上。</p>
+<pre><button class="cp">复制</button><code>codex exec --worktree -C ~/deploy-fabric-book "把 tools 下所有页面重复的内联样式抽成 tools/ui.css，页面改为引用它，视觉不得变化。"</code></pre>
+  <p class="out"><b>你会看到</b>：它在一个新的 git worktree 里干活，你的主目录一动不动。</p>
+<pre><button class="cp">复制</button><code>git worktree list</code></pre>
+  <div class="key"><code>--worktree</code> 是你敢让它动大手术的前提。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 10 · 看图</span>
+  <h3>发一张截图让它找问题</h3>
+  <p class="sc">手机上看某页按钮被截断，说半天说不清。</p>
+<pre><button class="cp">复制</button><code>codex exec -s read-only -C ~/deploy-fabric-book -i ~/Desktop/手机截图.png "这个页面在 390 宽的屏幕上按钮被截断，找出是哪个样式导致的，给出修改方案，先不要改。"</code></pre>
+  <div class="key">UI 问题<b>一张图胜过五百字</b>。它看得到像素，就看得到你的问题。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 11 · 进管道</span>
+  <h3>把结果喂给脚本</h3>
+  <p class="sc">想接进每天的检查流程。</p>
+<pre><button class="cp">复制</button><code>codex exec --json -s read-only -C ~/deploy-fabric-book "检查是否存在空的 html 文件、以及没有 viewport 的页面，输出结构化结果" > /tmp/check.json</code></pre>
+  <p class="sc" style="margin-top:8px">再用 python 读：</p>
+<pre><button class="cp">复制</button><code>/usr/bin/python3 -c "
+import json
+d=json.load(open('/tmp/check.json'))
+print(json.dumps(d, ensure_ascii=False)[:500])
+"</code></pre>
+  <div class="key"><code>--json</code> 让它变成<b>一个可以被程序调用的函数</b>，不再只是聊天工具。</div>
+</section>
+
+<h2>第五层 · 高手：配置档、外挂、定时</h2>
+
+<section class="case">
+  <span class="tag">案例 12 · 配置档</span>
+  <h3>快活和慢活分开</h3>
+  <p class="sc">日常小改用快模型，深度分析用高思考。新建 <code>~/.codex/slow.config.toml</code>：</p>
+<pre><button class="cp">复制</button><code>model = "deepseek-flash"
+model_reasoning_effort = "high"</code></pre>
+  <p class="sc" style="margin-top:8px">用的时候：</p>
+<pre><button class="cp">复制</button><code>codex -p slow exec -C ~/deploy-fabric-book "分析首页在手机上加载慢的原因，给出前三条"</code></pre>
+  <div class="key"><code>-p</code> 是叠加在主配置上的补丁，不动主配置就能换档。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 13 · MCP</span>
+  <h3>接外部工具</h3>
+  <p class="sc">让它直接查某个服务，而不是靠你复制粘贴。</p>
+<pre><button class="cp">复制</button><code>codex mcp list
+codex mcp add 名称 -- 启动命令
+codex mcp get 名称
+codex mcp remove 名称</code></pre>
+  <div class="key">MCP 是「给它装外挂」。先 <code>list</code> 看已有什么，再加新的。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 14 · 定时</span>
+  <h3>每天自动跑一次检查</h3>
+  <p class="sc">睡前不想手动查站，让机器自己查。脚本 <code>/tmp/daily_check.sh</code>：</p>
+<pre><button class="cp">复制</button><code>#!/bin/zsh
+cd ~/deploy-fabric-book || exit 1
+codex exec --json -s read-only -C . "检查是否有页面缺 viewport、是否出现微信或二维码字样，输出 json" \
+  > ~/Documents/面料资料/归档/check_$(date +%F).json</code></pre>
+  <div class="key"><code>codex exec</code> 天生适合被定时任务调用：跑完就退出，不留交互。</div>
+</section>
+
+<h2>附 · 参数速查</h2>
+<table>
+<tr><th style="width:34%">参数</th><th>作用</th><th style="width:26%">什么时候用</th></tr>
+<tr><td><code>-C 目录</code></td><td>指定工作目录</td><td><b>每次都要</b></td></tr>
+<tr><td><code>-s read-only</code></td><td>只读</td><td>先看、出方案</td></tr>
+<tr><td><code>-s workspace-write</code></td><td>只改当前目录</td><td>真动手</td></tr>
+<tr><td><code>--json</code></td><td>结构化输出</td><td>给脚本读</td></tr>
+<tr><td><code>--worktree</code></td><td>新 worktree 干活</td><td>大改动</td></tr>
+<tr><td><code>-i 图片</code></td><td>附带截图</td><td>UI 问题</td></tr>
+<tr><td><code>-p 名称</code></td><td>用配置档</td><td>换思考深度</td></tr>
+<tr><td><code>--ephemeral</code></td><td>不存会话</td><td>一次性任务</td></tr>
+<tr><td><code>-c key=value</code></td><td>临时改配置</td><td>试参数</td></tr>
+</table>
+
+<h2>附 · 三句最常用的话</h2>
+<pre><button class="cp">复制</button><code>codex exec -s read-only -C 目录 "问题，只报告不要改"
+codex exec -s workspace-write -C 目录 "任务，只改这些文件，其余不动，改完列 diff"
+cd 目录 && codex review && git diff</code></pre>
+
+<h2>附 · 出错对照</h2>
+<table>
+<tr><th style="width:40%">现象</th><th>处理</th></tr>
+<tr><td><code>command not found</code></td><td><code>source ~/.zshrc</code>，或直接用 <code>~/.local/bin/codex</code></td></tr>
+<tr><td>说改了但没变</td><td>沙箱是 read-only，换 <code>-s workspace-write</code></td></tr>
+<tr><td>顺手多改了文件</td><td><code>git checkout -- 文件名</code>，下次指令写死范围</td></tr>
+<tr><td>一直弹确认</td><td>加 <code>--approve-for-me</code></td></tr>
+<tr><td>答非所问</td><td>会话太长，<code>/compact</code> 或开新会话</td></tr>
+<tr><td>装不上（权限）</td><td><code>npm install -g @openai/codex --prefix ~/.local</code></td></tr>
+</table>
+
+<div class="qrrow">
+  <figure class="qrcell"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/douyin-qr.jpg?v=3" alt="抖音二维码" style="border-radius:50%"><figcaption>抖音</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/xhs-qr.jpg?v=2" alt="小红书二维码" style="border-radius:6px"><figcaption>小红书</figcaption></figure>
+</div>
+<div class="foot"><span>dv面料手记 · 工具 · 内部资料</span><span>TT纺织 · 窦金龙　轻薄羽绒面料</span></div>
+</div>
+
+<script>
+document.body.classList.add('locked');
+function dvnorm(v){return (v||'').toLowerCase().replace(/[^0-9a-z]/g,'').replace(/^dv/,'');}
+function check(){
+  var v=dvnorm(document.getElementById('pw').value);
+  if(v==='13588355444'){var g=document.getElementById('gate');if(g)g.remove();document.body.classList.remove('locked');}
+  else{document.getElementById('err').textContent='不对（你输了 '+v.length+' 位），应是手机号 11 位';
+       var i=document.getElementById('pw');i.value='';i.focus();}
+}
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&document.getElementById('gate'))check();});
+setTimeout(function(){var el=document.getElementById('pw');if(el)el.focus();},300);
+
+document.querySelectorAll('.cp').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.parentElement.querySelector('code').innerText;
+    navigator.clipboard?.writeText(t).then(function(){
+      b.textContent='已复制';setTimeout(function(){b.textContent='复制';},1200);
+    }).catch(function(){b.textContent='长按复制';});
+  });
+});
+</script>
+</body>
+</html>
