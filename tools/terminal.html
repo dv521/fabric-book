@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12202c">
+<title>终端入门 · 从打开到第一次对话</title>
+<style>
+:root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e6eef4;--bg:#f4f8fb;--brand:#2f8fb5;--dark:#12202c;--code:#f8fbfd;--codeln:#cfdde9}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.78 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 44px}
+header{background:var(--dark);color:#fff;padding:20px 16px 16px;margin:0 0 14px;border-radius:0 0 14px 14px}
+header h1{margin:0;font-size:19px;line-height:1.4}
+header p{margin:6px 0 0;font-size:12.5px;color:#a9bccb}
+section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.step{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--brand);
+  border-radius:999px;padding:2px 10px;margin-bottom:8px}
+h2{font-size:16px;margin:0 0 6px;line-height:1.45}
+.p{font-size:14px;color:var(--ink2);margin:0 0 8px}
+.p b{color:#a8352b}
+pre{position:relative;background:var(--code);border:1px solid var(--codeln);border-left:3px solid var(--brand);
+  border-radius:10px;padding:11px 12px;margin:8px 0 0;font-size:13.5px;line-height:1.7;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;-webkit-overflow-scrolling:touch}
+.cp{position:absolute;right:6px;top:6px;border:1px solid #cfdde9;background:#fff;color:#12556f;
+  border-radius:8px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit}
+.cp:active{background:#eef6fb}
+.tip{font-size:12.5px;color:#8a4b06;background:#fdf5ec;border:1px solid #f0dcc4;border-radius:9px;padding:8px 10px;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border-radius:12px;overflow:hidden;margin-top:6px}
+th{background:#f4f9fc;text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);color:#12556f;font-weight:650}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.kbd{display:inline-block;background:#eef4f9;border:1px solid #d3e2ee;border-bottom-width:2px;border-radius:6px;
+  padding:1px 7px;font-size:12.5px;color:#12556f;font-weight:600}
+.qrrow{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:20px 0 8px}
+.qrcell{margin:0;text-align:center}
+.qrcell img{width:86px;height:86px;border-radius:10px;border:1px solid var(--line);object-fit:cover;display:block}
+.qrcell figcaption{font-size:12px;color:#7a8794;margin-top:6px;white-space:nowrap}
+.foot{color:var(--mut);font-size:11.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:6px 2px 0}
+@media(max-width:640px){body{font-size:15px}header h1{font-size:17px}pre{font-size:12.5px}section{padding:12px 13px}}
+@media print{.cp{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>终端入门 · 从打开到第一次对话</h1>
+  <p>五分钟上手　·　照着做就行　·　dv面料手记 · 工具</p>
+</header>
+
+<section>
+  <span class="step">第 1 步</span>
+  <h2>打开「终端」</h2>
+  <p class="p">Mac 自带，不用装。两种办法任选：</p>
+  <p class="p"><b>A（最快）</b>按 <span class="kbd">⌘</span> + <span class="kbd">空格</span>，输入「终端」，回车。</p>
+  <p class="p"><b>B</b>访达 → 应用程序 → 实用工具 → <b>终端</b>。</p>
+  <div class="tip">打开后是一个窗口，里面一行字，末尾是 <code>%</code> 或 <code>$</code>。那是“等着你下命令”的地方，不是报错。</div>
+</section>
+
+<section>
+  <span class="step">第 2 步</span>
+  <h2>进到要干活的目录</h2>
+  <p class="p">输入下面这行，回车。站点想改就进站点目录，资料想改就进资料目录。</p>
+<pre><button class="cp">复制</button><code>cd ~/deploy-fabric-book</code></pre>
+  <p class="p" style="margin-top:8px">资料库：</p>
+<pre><button class="cp">复制</button><code>cd ~/Documents/面料资料</code></pre>
+  <div class="tip"><code>cd</code> 是“进去哪个文件夹”。<code>~</code> 代表你的用户目录，不用改成别的。</div>
+</section>
+
+<section>
+  <span class="step">第 3 步</span>
+  <h2>启动对话</h2>
+<pre><button class="cp">复制</button><code>codex</code></pre>
+  <p class="p" style="margin-top:8px">回车后屏幕变成 Codex 界面，底部等你打字。<b>第一次会问是否信任这个目录</b>，选 Yes / Trust，只问一次。</p>
+</section>
+
+<section>
+  <span class="step">第 4 步</span>
+  <h2>像微信一样说话</h2>
+  <p class="p">直接打中文，回车发送。第一次可以这样问：</p>
+<pre><button class="cp">复制</button><code>这个仓库有哪些页面？只回答，不要改任何文件</code></pre>
+  <p class="p" style="margin-top:8px">它回完可以接着问，上下文会接着。想让它动手时，指令里说清三件事：<b>哪个文件、改哪一句、其它不动</b>。</p>
+</section>
+
+<section>
+  <span class="step">第 5 步</span>
+  <h2>退出</h2>
+<pre><button class="cp">复制</button><code>/quit</code></pre>
+  <p class="p" style="margin-top:8px">或者按 <span class="kbd">Ctrl</span> + <span class="kbd">D</span>，或者直接关窗口。</p>
+</section>
+
+<section>
+  <h2>三个常见情况</h2>
+  <table>
+    <tr><th style="width:44%">现象</th><th>怎么办</th></tr>
+    <tr><td>打字出来是英文标点、中文打不出</td><td>按 <span class="kbd">Ctrl</span> + <span class="kbd">空格</span> 切输入法</td></tr>
+    <tr><td>报 <code>command not found: codex</code></td><td>先输 <code>source ~/.zshrc</code> 回车，再输 <code>codex</code></td></tr>
+    <tr><td>问「是否信任此目录」</td><td>选 Yes / Trust，只问一次</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>两个常用小命令（会这俩就够）</h2>
+  <p class="p"><b>看当前在哪个目录</b>（忘了自己在哪儿时）：</p>
+<pre><button class="cp">复制</button><code>pwd</code></pre>
+  <p class="p" style="margin-top:8px"><b>看这个目录里有什么</b>：</p>
+<pre><button class="cp">复制</button><code>ls</code></pre>
+  <div class="tip">不需要记更多。真正的活在 Codex 里说中文就行，终端只负责“进去、启动、退出”这三下。</div>
+</section>
+
+<section>
+  <h2>一句话记住全流程</h2>
+  <p class="p" style="font-size:14.5px;line-height:2">
+    <span class="kbd">⌘空格</span> → 输「终端」→ 回车 →
+    输 <code>cd ~/deploy-fabric-book</code> → 回车 →
+    输 <code>codex</code> → 回车 → 开始打字
+  </p>
+</section>
+
+<div class="qrrow">
+  <figure class="qrcell"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/douyin-qr.jpg?v=3" alt="抖音二维码" style="border-radius:50%"><figcaption>抖音</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/xhs-qr.jpg?v=2" alt="小红书二维码" style="border-radius:6px"><figcaption>小红书</figcaption></figure>
+</div>
+<div class="foot"><span>dv面料手记 · 工具</span><span>TT纺织 · 窦金龙　轻薄羽绒面料</span></div>
+</div>
+
+<script>
+document.querySelectorAll('.cp').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.parentElement.querySelector('code').innerText;
+    navigator.clipboard?.writeText(t).then(function(){
+      b.textContent='已复制';setTimeout(function(){b.textContent='复制';},1200);
+    }).catch(function(){b.textContent='长按复制';});
+  });
+});
+</script>
+</body>
+</html>
