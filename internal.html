@@ -58,7 +58,7 @@
   function dvnorm(v){return (v||'').toLowerCase().replace(/[^0-9a-z]/g,'').replace(/^dv/,'');}
   function check(){
     var v=dvnorm(document.getElementById('pw').value);
-    if(v==='13588355444'){var g=document.getElementById('gate');g.remove();document.body.classList.remove('locked');}
+    if(['13588355444','18832649921'].indexOf(v)>=0){var g=document.getElementById('gate');g.remove();document.body.classList.remove('locked');}
     else{document.getElementById('err').textContent='不对（你输了 '+v.length+' 位），应是手机号 11 位';document.getElementById('pw').value='';document.getElementById('pw').focus();}
   }
   document.addEventListener('keydown',function(e){if(e.key==='Enter')check();});

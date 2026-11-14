@@ -298,7 +298,7 @@ document.body.classList.add('locked');
 function dvnorm(v){return (v||'').toLowerCase().replace(/[^0-9a-z]/g,'').replace(/^dv/,'');}
 function check(){
   var v=dvnorm(document.getElementById('pw').value);
-  if(v==='13588355444'){var g=document.getElementById('gate');if(g)g.remove();document.body.classList.remove('locked');}
+  if(['13588355444','18832649921'].indexOf(v)>=0){var g=document.getElementById('gate');if(g)g.remove();document.body.classList.remove('locked');}
   else{
        var mask = v.length>5 ? (v.slice(0,3)+'****'+v.slice(-2)) : (v||'空');
        document.getElementById('err').innerHTML='不对。你输的是 '+v.length+' 位：<b>'+mask+'</b><br><span style="color:#7c8a97">访问码＝微信 dv 后面那 11 位数字</span>';

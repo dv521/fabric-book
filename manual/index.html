@@ -178,7 +178,7 @@ document.addEventListener('copy',e=>e.preventDefault());
   function norm(v){return (v||'').toLowerCase().replace(/[^0-9a-z]/g,'').replace(/^dv/,'');}
   function ok(){
     var raw=key.value.trim(), v=norm(raw);
-    if(v==='13588355444'){sessionStorage.setItem(K,'1');g.remove();document.documentElement.style.overflow='';}
+    if(['13588355444','18832649921'].indexOf(v)>=0){sessionStorage.setItem(K,'1');g.remove();document.documentElement.style.overflow='';}
     else{err.textContent='不对（你输了 '+v.length+' 位），应是手机号 11 位';key.value='';key.focus();}
   }
   btn.onclick=ok;
