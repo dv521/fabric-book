@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12202c">
-<title>Codex CLI 实战教程 · 22 个案例</title>
+<title>Codex CLI 实战教程 · 30 个案例</title>
 <style>
 :root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e6eef4;--bg:#f4f8fb;--brand:#2f8fb5;--dark:#12202c;--code:#f8fbfd;--codeln:#cfdde9}
 *{box-sizing:border-box;-webkit-text-size-adjust:100%}
@@ -81,7 +81,7 @@ body.locked{overflow:hidden}
 
 <div class="wrap">
 <header>
-  <h1>Codex CLI 实战教程 · 22 个案例</h1>
+  <h1>Codex CLI 实战教程 · 30 个案例</h1>
   <p>一个案例 = 一个功能　由浅入深　全部照抄可用　·　dv面料手记 · 工具</p>
 </header>
 
@@ -331,6 +331,91 @@ codex delete &lt;会话ID&gt;       # 永久删除（不可恢复）</code></pre
 codex update              # 升级到最新版
 codex doctor              # 体检：配置、登录、沙箱、磁盘</code></pre>
   <div class="key">出怪问题时，<b>先跑 doctor</b>，九成能看出是哪一层坏了。</div>
+</section>
+
+
+<h2>第七层 · 真正进阶的八个（案例 23–30）</h2>
+
+<section class="case">
+  <span class="tag">案例 23 · 管道输入</span>
+  <h3>把文件直接喂给它，不用复制粘贴</h3>
+  <p class="sc">一段日志、一份 csv、一篇文章，不想选中复制进对话框。</p>
+<pre><button class="cp">复制</button><code>cat /tmp/章节字数.csv | codex exec -s read-only -C ~/deploy-fabric-book "这份 csv 里字数最少的三章是哪三个？"
+
+echo "这段文案有没有绝对化词：全网最低，绝不掉绒" | codex exec -s read-only -C . -</code></pre>
+  <div class="key">提示词用 <code>-</code> 就从标准输入读。配合 <code>cat</code>、<code>grep</code>、<code>git diff</code> 输出，一条链就完成“取样→判断”。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 24 · 非交互续跑</span>
+  <h3>不打开界面，接着上次那条活干</h3>
+<pre><button class="cp">复制</button><code>codex exec resume --last "把刚才列出的问题按严重程度排序，先修前两条"
+
+codex exec fork --last "换个做法：不动样式，只加一个开关"</code></pre>
+  <div class="key"><code>resume</code> 是接着干，<code>fork</code> 是岔出去试另一种做法——原会话都不动。适合晚上挂一条长任务、早上接着改。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 25 · 交互内命令</span>
+  <h3>进去以后用斜杠管自己</h3>
+  <p class="sc">在 <code>codex</code> 交互模式里，输 <code>/</code> 看全部，最常用的四个：</p>
+<pre><button class="cp">复制</button><code>/compact     上下文太长、开始答非所问时压缩
+/model       临时换模型
+/diff        看它这次到底改了什么
+/init        给这个目录生成一份初始 AGENTS.md</code></pre>
+  <div class="key">会话越聊越慢、越聊越笨，八成是该 <code>/compact</code> 了，不是模型不行。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 26 · 全局规矩</span>
+  <h3>跨项目生效的规矩文件</h3>
+  <p class="sc">项目里有 <code>AGENTS.md</code>，全局还有一份 <code>~/.codex/AGENTS.md</code>——所有目录都先读它。</p>
+<pre><button class="cp">复制</button><code># ~/.codex/AGENTS.md
+- 一律用中文回答，不要英文段落
+- 结论先行，再给数字，最后给依据
+- 不确定就说不确定，不要编标准号
+- 改动前列 diff，改完报处数</code></pre>
+  <div class="key">项目文件管“这个仓库的规矩”，全局文件管“我的说话方式”。两层叠加，一次写好长期生效。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 27 · 插件</span>
+  <h3>让它直接产出 PDF、表格、PPT</h3>
+  <p class="sc">本机已装好这几个官方插件（<code>codex plugin list</code> 可查）：<code>documents</code>、<code>pdf</code>、<code>spreadsheets</code>、<code>presentations</code>、<code>visualize</code>。</p>
+<pre><button class="cp">复制</button><code>codex exec -s workspace-write -C ~/Documents/面料资料 "把 总则.md 里「三 录音与出片」整节做成一页 A4 PDF，输出到 ~/Desktop/出片规范.pdf"
+
+codex exec -s workspace-write -C ~/Documents/面料资料 "把 口播/数据台账.csv 做成一张折线图，标出完播率最高的三条"</code></pre>
+  <div class="key">这是 Codex 比你想象的更有用的地方：<b>不只是改代码，还能出物料</b>。装新插件用 <code>codex plugin add</code>。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 28 · 手机遥控</span>
+  <h3>人在外面，用手机让电脑干活</h3>
+<pre><button class="cp">复制</button><code>codex remote-control start     # 起一个带远程控制的守护进程
+codex remote-control pair      # 生成一次性配对码
+codex remote-control stop      # 用完关掉</code></pre>
+  <div class="key">实验功能。配对码是一次性的，<b>用完就 stop</b>，别长期开着——这是唯一能从外部指挥你电脑的通道。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 29 · 长任务</span>
+  <h3>跑一小时也不怕断线</h3>
+<pre><button class="cp">复制</button><code>nohup codex exec -s workspace-write -C ~/deploy-fabric-book \
+  "给全部 36 章补上「本节要点」小结，逐章改，改完输出清单" \
+  > /tmp/long.log 2>&1 &
+
+tail -f /tmp/long.log     # 随时看进度</code></pre>
+  <div class="key">长任务用 <code>nohup … &amp;</code> 挂后台 + 日志文件。手机断网、电脑合盖都不影响（合盖需插电）。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 30 · 成本与安全</span>
+  <h3>看得见的 token，看得见的权限</h3>
+  <p class="sc">每次 <code>exec</code> 结尾都会打印 <code>tokens used</code>——那就是这次花的量。三条省钱省心的习惯：</p>
+<pre><button class="cp">复制</button><code>codex exec --ephemeral -s read-only -C . "一句话回答：首页标题是什么"   # 一次性任务，不存会话
+codex exec -c model_reasoning_effort="low" -C . "把这段文案改得更口语"   # 小活用低思考
+codex sandbox -- rm -rf /tmp/test                                        # 危险命令先沙箱试</code></pre>
+  <div class="key"><code>--approve-for-me</code> 是「自动审批，但仍在沙箱内」；<code>--dangerously-bypass-approvals-and-sandbox</code> 是「拆掉所有防线」，<b>永远不用</b>。</div>
 </section>
 
 <h2>附 · 参数速查</h2>
