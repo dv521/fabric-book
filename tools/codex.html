@@ -299,7 +299,9 @@ function dvnorm(v){return (v||'').toLowerCase().replace(/[^0-9a-z]/g,'').replace
 function check(){
   var v=dvnorm(document.getElementById('pw').value);
   if(v==='13588355444'){var g=document.getElementById('gate');if(g)g.remove();document.body.classList.remove('locked');}
-  else{document.getElementById('err').textContent='不对（你输了 '+v.length+' 位），应是手机号 11 位';
+  else{
+       var mask = v.length>5 ? (v.slice(0,3)+'****'+v.slice(-2)) : (v||'空');
+       document.getElementById('err').innerHTML='不对。你输的是 '+v.length+' 位：<b>'+mask+'</b><br><span style="color:#7c8a97">访问码＝微信 dv 后面那 11 位数字</span>';
        var i=document.getElementById('pw');i.value='';i.focus();}
 }
 document.addEventListener('keydown',function(e){if(e.key==='Enter'&&document.getElementById('gate'))check();});
