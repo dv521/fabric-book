@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12202c">
-<title>Codex CLI 实战教程 · 14 个案例</title>
+<title>Codex CLI 实战教程 · 22 个案例</title>
 <style>
 :root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e6eef4;--bg:#f4f8fb;--brand:#2f8fb5;--dark:#12202c;--code:#f8fbfd;--codeln:#cfdde9}
 *{box-sizing:border-box;-webkit-text-size-adjust:100%}
@@ -81,7 +81,7 @@ body.locked{overflow:hidden}
 
 <div class="wrap">
 <header>
-  <h1>Codex CLI 实战教程 · 14 个案例</h1>
+  <h1>Codex CLI 实战教程 · 22 个案例</h1>
   <p>一个案例 = 一个功能　由浅入深　全部照抄可用　·　dv面料手记 · 工具</p>
 </header>
 
@@ -255,6 +255,84 @@ codex exec --json -s read-only -C . "检查是否有页面缺 viewport、是否�
   <div class="key"><code>codex exec</code> 天生适合被定时任务调用：跑完就退出，不留交互。</div>
 </section>
 
+
+<h2>第六层 · 常被忽略但很有用（案例 15–22）</h2>
+
+<section class="case">
+  <span class="tag">案例 15 · 多目录</span>
+  <h3>一次改两个目录</h3>
+  <p class="sc">站点和资料库要同时改（比如总则改了，站点文案跟着改）。</p>
+<pre><button class="cp">复制</button><code>codex exec -s workspace-write -C ~/deploy-fabric-book --add-dir ~/Documents/面料资料 "把总则里的『130–135 字』同步到 tools/codex.html 的对应说明里"</code></pre>
+  <div class="key">默认只能写 <code>-C</code> 那一个目录；要碰别处必须 <code>--add-dir</code> 显式放行。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 16 · 固定输出格式</span>
+  <h3>让它按你的表格输出</h3>
+  <p class="sc">要接进表格或脚本，格式必须固定。先写一个 schema 文件 <code>/tmp/ch.json</code>：</p>
+<pre><button class="cp">复制</button><code>{"type":"object","required":["file","chars"],
+ "properties":{"file":{"type":"string"},"chars":{"type":"integer"}},
+ "additionalProperties":false}</code></pre>
+  <p class="sc" style="margin-top:8px">再跑：</p>
+<pre><button class="cp">复制</button><code>codex exec -s read-only --output-schema /tmp/ch.json -C ~/deploy-fabric-book "输出 book/ch01.html 的字数"</code></pre>
+  <div class="key"><code>--output-schema</code> 保证它<b>不会自由发挥</b>，字段名错一个就报错，适合接自动化。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 17 · 多任务并行</span>
+  <h3>同时开几条活，来回切</h3>
+  <p class="sc">一条在改站点、一条在整理资料，不想互相打断。</p>
+<pre><button class="cp">复制</button><code>codex agents          # 命令中心：看所有会话、切换
+codex fork --last     # 从上次的会话岔出一条，原会话不动
+codex queue --thread &lt;会话ID&gt; --message "改完顺手跑一次检查"</code></pre>
+  <div class="key"><code>fork</code> 是「同一份上下文，两种走法」，比复制粘贴上下文省事。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 18 · 清理</span>
+  <h3>会话多了要归档</h3>
+<pre><button class="cp">复制</button><code>codex archive --last        # 归档最近一条
+codex archive &lt;会话ID&gt;      # 指定归档
+codex unarchive &lt;会话ID&gt;    # 取回
+codex delete &lt;会话ID&gt;       # 永久删除（不可恢复）</code></pre>
+  <div class="key">配置里 <code>autoArchiveAfterDays = 14</code>，两周不用的会话会自动归档，不会丢但也不碍眼。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 19 · 项目规矩</span>
+  <h3>把红线写进 AGENTS.md，让它别再犯</h3>
+  <p class="sc">每次都在指令里重复「不许出现微信、二维码」太累。在仓库根目录建 <code>AGENTS.md</code>：</p>
+<pre><button class="cp">复制</button><code># 本站红线（每次改动都必须遵守）
+- 页面不得出现：微信、二维码、扫码、http://、手机号
+- 不得使用绝对化词：绝不、100%、第一、最好
+- 改任何页面必须保留 noindex,nofollow
+- 标准号与经验值必须标注出处</code></pre>
+  <div class="key">它每次进这个目录都会先读这份文件。<b>规矩写一次，省一百次叮嘱。</b></div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 20 · 带标准的审查</span>
+  <h3>审查时给它判据</h3>
+<pre><button class="cp">复制</button><code>codex review "重点看三件事：有没有出现微信或二维码；有没有绝对化词；新增页面有没有 noindex。按严重程度排。"</code></pre>
+  <div class="key">不给判据，它就按通用代码规范挑毛病；给了判据，它才按<b>你的</b>规矩挑。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 21 · 本地模型</span>
+  <h3>不想走网络时</h3>
+<pre><button class="cp">复制</button><code>codex exec --oss --local-provider ollama -C ~/deploy-fabric-book "这段 css 是做什么的"</code></pre>
+  <div class="key">需要本机装了 Ollama 或 LM Studio。能力弱一些，但断网可用、内容不出本机。</div>
+</section>
+
+<section class="case">
+  <span class="tag">案例 22 · 维护</span>
+  <h3>补全、更新、体检</h3>
+<pre><button class="cp">复制</button><code>codex completion zsh      # 生成命令补全（写进 ~/.zshrc 后 tab 能补）
+codex update              # 升级到最新版
+codex doctor              # 体检：配置、登录、沙箱、磁盘</code></pre>
+  <div class="key">出怪问题时，<b>先跑 doctor</b>，九成能看出是哪一层坏了。</div>
+</section>
+
 <h2>附 · 参数速查</h2>
 <table>
 <tr><th style="width:34%">参数</th><th>作用</th><th style="width:26%">什么时候用</th></tr>
@@ -267,6 +345,10 @@ codex exec --json -s read-only -C . "检查是否有页面缺 viewport、是否�
 <tr><td><code>-p 名称</code></td><td>用配置档</td><td>换思考深度</td></tr>
 <tr><td><code>--ephemeral</code></td><td>不存会话</td><td>一次性任务</td></tr>
 <tr><td><code>-c key=value</code></td><td>临时改配置</td><td>试参数</td></tr>
+<tr><td><code>--add-dir 目录</code></td><td>额外允许写的目录</td><td>跨目录修改</td></tr>
+<tr><td><code>--output-schema 文件</code></td><td>强制输出结构</td><td>接脚本、接表格</td></tr>
+<tr><td><code>--oss</code></td><td>用本机模型</td><td>断网 / 不出本机</td></tr>
+<tr><td><code>--trust</code></td><td>信任当前项目</td><td>不复述授权</td></tr>
 </table>
 
 <h2>附 · 三句最常用的话</h2>
