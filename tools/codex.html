@@ -418,6 +418,56 @@ codex sandbox -- rm -rf /tmp/test                                        # 危�
   <div class="key"><code>--approve-for-me</code> 是「自动审批，但仍在沙箱内」；<code>--dangerously-bypass-approvals-and-sandbox</code> 是「拆掉所有防线」，<b>永远不用</b>。</div>
 </section>
 
+
+<h2>附 · 参数三兄弟：-s / -c / -C（最容易混）</h2>
+
+<section class="case">
+  <span class="tag">必看</span>
+  <h3>三个只差一个字母，作用完全不同</h3>
+  <table>
+    <tr><th style="width:16%">写法</th><th style="width:22%">全称</th><th>作用</th><th style="width:30%">例子</th></tr>
+    <tr><td><code>-s</code></td><td>sandbox（沙箱）</td><td><b>能改多少</b>：只读 / 只能改当前目录 / 全盘可写</td><td><code>-s read-only</code><br><code>-s workspace-write</code></td></tr>
+    <tr><td><code>-c</code></td><td>config（配置）</td><td><b>临时改一条设置</b>，只对这次命令有效，不动配置文件</td><td><code>-c model_reasoning_effort="high"</code></td></tr>
+    <tr><td><code>-C</code></td><td>current dir（目录）</td><td><b>在哪个文件夹干活</b></td><td><code>-C ~/deploy-fabric-book</code></td></tr>
+  </table>
+  <div class="key"><b>最危险的一处：<code>-c</code> 和 <code>-C</code> 只差大小写。</b>小写是「改设置」，大写是「进目录」——打错一个字母，它可能跑到别的文件夹去改东西。</div>
+</section>
+
+<section class="case">
+  <span class="tag">-s 详解</span>
+  <h3>沙箱三档：先看、再改、永不放开</h3>
+  <table>
+    <tr><th style="width:32%">写法</th><th>它能做什么</th><th style="width:26%">用在哪</th></tr>
+    <tr><td><code>-s read-only</code></td><td>只能读，改不了任何文件</td><td>查规则、出清单、做方案</td></tr>
+    <tr><td><code>-s workspace-write</code></td><td>只能在 <code>-C</code> 指定的目录里写</td><td><b>真动手改文件</b></td></tr>
+    <tr><td><code>-s danger-full-access</code></td><td>全盘可读写、可执行</td><td><b>不用</b>，等于不设防</td></tr>
+  </table>
+  <p class="sc" style="margin-top:8px">标准两段式：</p>
+<pre><button class="cp">复制</button><code>codex exec -s read-only -C ~/deploy-fabric-book "列出所有缺 viewport 的页面"
+codex exec -s workspace-write -C ~/deploy-fabric-book "给这些页面补上 viewport"</code></pre>
+</section>
+
+<section class="case">
+  <span class="tag">-c 详解</span>
+  <h3>配置临时改一条，不动 config.toml</h3>
+  <p class="sc">写法与配置文件一致，<code>key=value</code>，只对这一次命令生效。</p>
+  <table>
+    <tr><th style="width:52%">写法</th><th>作用</th></tr>
+    <tr><td><code>-c model="deepseek-flash"</code></td><td>临时换模型</td></tr>
+    <tr><td><code>-c model_reasoning_effort="high"</code></td><td>让它多想一会儿（默认 low）</td></tr>
+    <tr><td><code>-c features.某个功能=true</code></td><td>开关某个功能</td></tr>
+  </table>
+<pre><button class="cp">复制</button><code>codex exec -c model_reasoning_effort="high" -C ~/deploy-fabric-book "分析首页为什么加载慢"</code></pre>
+  <div class="key">等价写法：<code>--enable 功能名</code> ／ <code>--disable 功能名</code>，比写 <code>-c features.x=true</code> 短。</div>
+</section>
+
+<section class="case">
+  <span class="tag">组合</span>
+  <h3>三个一起用的典型一跑</h3>
+<pre><button class="cp">复制</button><code>codex exec -s read-only -C ~/deploy-fabric-book -c model_reasoning_effort="high" "把全书 36 章里所有提到门幅的句子找出来，按章节列"</code></pre>
+  <p class="out"><b>读法：</b>只在站点目录里找（<code>-C</code>）、只读不改（<code>-s</code>）、这次多想一想（<code>-c</code>）。</p>
+</section>
+
 <h2>附 · 参数速查</h2>
 <table>
 <tr><th style="width:34%">参数</th><th>作用</th><th style="width:26%">什么时候用</th></tr>
