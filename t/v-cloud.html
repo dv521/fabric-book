@@ -163,7 +163,13 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   var data=[], filter='all';
   var geoLat=null, geoLng=null, geoName='';
   try{data=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){data=[]}
-  data.forEach(function(x){ if(!x.hist)x.hist=[]; if(!x.addr)x.addr=''; if(x.synced===undefined)x.synced=false; });
+  data.forEach(function(x){
+    if(!x.hist)x.hist=[]; if(!x.addr)x.addr=''; if(x.synced===undefined)x.synced=false;
+    if(!x.state){
+      var h=x.hist[x.hist.length-1];
+      x.state=(h&&h.a==='放弃跟进')?'gaveup':'active';
+    }
+  });
 
   function save(){localStorage.setItem(KEY,JSON.stringify(data))}
   function pad(n){return n<10?'0'+n:''+n}
@@ -379,7 +385,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   });
 
   function counts(){
-    var t=today(), todo=data.filter(function(x){return x.rate!=='没戏'});
+    var t=today(), todo=data.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'});
     return {all:data.length, todo:todo.length,
             today:todo.filter(function(x){return x.next===t}).length,
             late:todo.filter(function(x){return x.next<t}).length};
@@ -402,24 +408,25 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     badge();
 
     var rows=data.slice();
-    if(filter==='todo')rows=rows.filter(function(x){return x.rate!=='没戏'});
-    if(filter==='today')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.next===t});
-    if(filter==='late')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.next<t});
+    if(filter==='todo')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'});
+    if(filter==='today')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'&&x.next===t});
+    if(filter==='late')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'&&x.next<t});
     rows.sort(function(a,b){return a.next<b.next?-1:a.next>b.next?1:0});
 
     $('#listhint').textContent={all:'共 '+c.all+' 家',todo:'待跟进 '+c.todo+' 家',today:'今天 '+c.today+' 家',late:'逾期 '+c.late+' 家'}[filter];
 
     var box=$('#list');
-    if(!rows.length){box.innerHTML='<div class="empty">这个筛选下没有客户</div>';return}
+    if(!rows.length){box.innerHTML='<div class="empty">'+(filter==='late'?'逾期已清空 👍':'这个筛选下没有客户')+'</div>';return}
 
     box.innerHTML=rows.map(function(x){
       var d=diff(x.next,t);
-      var cls=x.next<t?'due-late':(x.next===t?'due-today':'due-ok');
-      var when=x.next<t?'逾期 '+Math.abs(d)+' 天':(x.next===t?'今天到期':(d===1?'明天':'还有 '+d+' 天'));
+      var gaveup=(x.state==='gaveup');
+      var cls=gaveup?'due-ok':(x.next<t?'due-late':(x.next===t?'due-today':'due-ok'));
+      var when=gaveup?'已放弃':(x.next<t?'逾期 '+Math.abs(d)+' 天':(x.next===t?'今天到期':(d===1?'明天':'还有 '+d+' 天')));
       var bcls=x.rate==='有戏'?'b-hot':(x.rate==='没戏'?'b-dead':'b-wait');
       var hist=(x.hist||[]).slice(-5).map(function(h){return h.d+'　'+esc(h.a)}).join('<br>');
       return '<div class="rowwrap" data-id="'+x.id+'">'+
-        '<div class="row"><div><div class="nm">'+esc(x.name)+(x.synced?'':' <span class="badge b-wait" style="font-size:10px">待同步</span>')+'</div>'+
+        '<div class="row"><div><div class="nm">'+esc(x.name)+(x.synced?'':' <span class="badge b-wait" style="font-size:10px">待同步</span>')+(gaveup?' <span class="badge b-dead" style="font-size:10px">已放弃</span>':'')+'</div>'+
         '<div class="meta">'+esc(x.area)+(x.designer?' · '+esc(x.designer):'')+' · '+((x.acts&&x.acts.length)?esc(x.acts.join('/')):'—')+
         (x.addr?'<br>📍'+esc(x.addr):'')+'</div></div>'+
         '<div style="text-align:right"><span class="badge '+bcls+'">'+esc(x.rate)+'</span>'+
@@ -429,9 +436,36 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
           '<p style="color:#8a97a6">已跟进 '+((x.hist||[]).length)+' 次'+(x.lastFollow?' · 最近 '+x.lastFollow:'')+
             (x.lat?' · <a href="https://uri.amap.com/marker?position='+x.lng+','+x.lat+'&name='+encodeURIComponent(x.name)+'" target="_blank" rel="noopener">地图</a>':'')+'</p>'+
           (hist?'<div class="hist">'+hist+'</div>':'')+
-          '<div class="acts"><button data-act="bump">跟进过了（+7 天）</button><button data-act="done">标记没戏</button><button class="del" data-act="del">删除</button></div>'+
+          '<div class="acts">'+(gaveup
+              ? '<button data-act="restore">恢复跟进</button>'
+              : (x.next<t
+                  ? '<button data-act="fix">补救（改下次跟进）</button><button class="del" data-act="giveup">放弃</button>'
+                  : '<button data-act="bump">跟进过了（+7 天）</button>')+
+                '<button data-act="done">标记没戏</button>')+
+            '<button class="del" data-act="del">删除</button></div>'+
         '</div></div>';
     }).join('');
+  }
+
+  function pickDays(it){
+    var old=document.getElementById('fixpick'); if(old)old.remove();
+    var d=document.createElement('div'); d.id='fixpick';
+    d.style.cssText='position:fixed;inset:0;background:rgba(10,16,22,.55);z-index:10000;display:flex;align-items:flex-end;justify-content:center;padding:16px';
+    d.innerHTML='<div style="background:#fff;border-radius:16px;padding:16px;width:100%;max-width:420px">'+
+      '<div style="font-weight:700;margin-bottom:4px">补救：把「'+esc(it.name)+'」改到哪天跟进？</div>'+
+      '<div style="font-size:12.5px;color:#7c8a97;margin-bottom:12px">选完就移出逾期，到期再提醒</div>'+
+      '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">'+
+      ['明天','3 天后','7 天后','15 天后'].map(function(t,i){return '<button data-d="'+[1,3,7,15][i]+'" style="padding:14px 0;border:1px solid #cfdde9;background:#f4f9fc;border-radius:10px;font-size:14px">'+t+'</button>'}).join('')+
+      '</div><button id="fixcancel" style="margin-top:10px;width:100%;padding:12px;border:0;background:#eef2f6;border-radius:10px;font-size:14px">取消</button></div>';
+    document.body.appendChild(d);
+    d.addEventListener('click',function(e){
+      if(e.target===d||e.target.id==='fixcancel'){d.remove();return}
+      var b=e.target.closest('button[data-d]'); if(!b)return;
+      var n=parseInt(b.dataset.d,10);
+      it.next=shift(n); it.synced=false;
+      it.hist=(it.hist||[]).concat([{d:today(),a:'补救→'+n+'天后'}]);
+      d.remove(); save();render();syncAll(false,true); toast('已改到 '+it.next);
+    });
   }
 
   $('#list').addEventListener('click',function(e){
@@ -446,6 +480,20 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
         it.synced=false;
         toast('已推到 '+it.next);
       }
+      if(btn.dataset.act==='fix'){ pickDays(it); return; }
+      if(btn.dataset.act==='giveup'){
+        if(!confirm('放弃跟进「'+it.name+'」？\n记录会保留在「全部」里，可随时恢复，不会删除档案。'))return;
+        it.state='gaveup'; it.synced=false;
+        it.hist=(it.hist||[]).concat([{d:today(),a:'放弃跟进'}]);
+        save();render();syncAll(false,true);toast('已放弃，逾期列表已清');
+        return;
+      }
+      if(btn.dataset.act==='restore'){
+        it.state='active'; it.next=shift(7); it.synced=false;
+        it.hist=(it.hist||[]).concat([{d:today(),a:'恢复跟进'}]);
+        save();render();syncAll(false,true);toast('已恢复，下次跟进 '+it.next);
+        return;
+      }
       if(btn.dataset.act==='done'){it.rate='没戏';it.synced=false;toast('已标记没戏')}
       if(btn.dataset.act==='del'){
         if(!confirm('删除「'+it.name+'」？本地会删；云端记录保留'))return;
@@ -459,9 +507,9 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   function csvCell(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'}
   $('#btn-csv').addEventListener('click',function(){
     if(!data.length){toast('没有数据');return}
-    var head=['客户','片区','详细地址','设计师','最近动作','评级','下次跟进','备注','跟进次数','最后跟进','录入日期','纬度','经度','已上云'];
+    var head=['客户','片区','详细地址','设计师','最近动作','评级','下次跟进','备注','跟进次数','最后跟进','录入日期','纬度','经度','已上云','状态'];
     var rows=[head.map(csvCell).join(',')].concat(data.map(function(x){
-      return [x.name,x.area,x.addr||'',x.designer,(x.acts||[]).join('/'),x.rate,x.next,x.note,(x.hist||[]).length,x.lastFollow||'',x.created,x.lat||'',x.lng||'',x.synced?'是':'否'].map(csvCell).join(',');
+      return [x.name,x.area,x.addr||'',x.designer,(x.acts||[]).join('/'),x.rate,x.next,x.note,(x.hist||[]).length,x.lastFollow||'',x.created,x.lat||'',x.lng||'',x.synced?'是':'否',x.state==='gaveup'?'已放弃':'跟进中'].map(csvCell).join(',');
     }));
     var blob=new Blob(['\ufeff'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'});
     var a=document.createElement('a');
