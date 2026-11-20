@@ -77,7 +77,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   <p>本地先存，联网自动上云；跑完一天也建议导出备份</p>
   <div class="stat">
     <button data-f="all" class="on"><b id="s-all">0</b><span>全部</span></button>
-    <button data-f="todo"><b id="s-todo">0</b><span>待跟进</span></button>
+    <button data-f="todo"><b id="s-todo">0</b><span>待办</span></button>
     <button data-f="today"><b id="s-today">0</b><span>今天</span></button>
     <button data-f="late" class="late"><b id="s-late">0</b><span>逾期</span></button>
   </div>
@@ -410,10 +410,13 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   });
 
   function counts(){
-    var t=today(), todo=data.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'});
-    return {all:data.length, todo:todo.length,
-            today:todo.filter(function(x){return x.next===t}).length,
-            late:todo.filter(function(x){return x.next<t}).length};
+    var t=today(), act=data.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'});
+    return {all:data.length,
+            todo:act.filter(function(x){return x.next&&x.next<=t}).length,   // 今天 + 逾期
+            today:act.filter(function(x){return x.next===t}).length,
+            late:act.filter(function(x){return x.next&&x.next<t}).length,
+            sched:act.filter(function(x){return x.next&&x.next>t}).length,   // 排期中
+            unsch:act.filter(function(x){return !x.next}).length};           // 待安排
   }
   function syncFilter(){
     Array.prototype.forEach.call(document.querySelectorAll('.stat button'),function(b){
@@ -433,12 +436,12 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     badge();
 
     var rows=data.slice();
-    if(filter==='todo')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'});
+    if(filter==='todo')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'&&x.next&&x.next<=t});
     if(filter==='today')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'&&x.next===t});
     if(filter==='late')rows=rows.filter(function(x){return x.rate!=='没戏'&&x.state!=='gaveup'&&x.next<t});
     rows.sort(function(a,b){return a.next<b.next?-1:a.next>b.next?1:0});
 
-    $('#listhint').textContent={all:'共 '+c.all+' 家',todo:'待跟进 '+c.todo+' 家',today:'今天 '+c.today+' 家',late:'逾期 '+c.late+' 家'}[filter];
+    $('#listhint').textContent={all:'共 '+c.all+' 家 · 排期中 '+c.sched+' · 待安排 '+c.unsch,todo:'今天该跟 '+c.todo+' 家',today:'今天 '+c.today+' 家',late:'逾期 '+c.late+' 家'}[filter];
 
     var box=$('#list');
     if(!rows.length){box.innerHTML='<div class="empty">'+(filter==='late'?'逾期已清空 👍':'这个筛选下没有客户')+'</div>';return}
@@ -451,7 +454,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       var bcls=x.rate==='有戏'?'b-hot':(x.rate==='没戏'?'b-dead':'b-wait');
       var hist=(x.hist||[]).slice(-5).map(function(h){return h.d+'　'+esc(h.a)}).join('<br>');
       return '<div class="rowwrap" data-id="'+x.id+'">'+
-        '<div class="row"><div><div class="nm">'+esc(x.name)+(x.synced?'':' <span class="badge b-wait" style="font-size:10px">待同步</span>')+(gaveup?' <span class="badge b-dead" style="font-size:10px">已放弃</span>':'')+((!gaveup&&x.lastFollow===t)?' <span class="badge" style="font-size:10px;background:#E8F2FF;color:#0F64B5">今日已跟进</span>':'')+'</div>'+
+        '<div class="row"><div><div class="nm">'+esc(x.name)+(x.synced?'':' <span class="badge b-wait" style="font-size:10px">待同步</span>')+(gaveup?' <span class="badge b-dead" style="font-size:10px">已放弃</span>':'')+((!gaveup&&x.lastFollow===t)?' <span class="badge" style="font-size:10px;background:#E8F2FF;color:#0F64B5">今日已跟进</span>':'')+((!gaveup&&!x.next)?' <span class="badge" style="font-size:10px;background:#FFF4E5;color:#9A6218">待安排</span>':'')+'</div>'+
         '<div class="meta">'+esc(x.area)+(x.designer?' · '+esc(x.designer):'')+' · '+((x.acts&&x.acts.length)?esc(x.acts.join('/')):'—')+
         (x.addr?'<br>📍'+esc(x.addr):'')+'</div></div>'+
         '<div style="text-align:right"><span class="badge '+bcls+'">'+esc(x.rate)+'</span>'+
