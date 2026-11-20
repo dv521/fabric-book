@@ -65,6 +65,15 @@
     .stage{ padding:10px; }
     .sheet{ padding:6mm; width:100%; }
   }
+  body.locked{ overflow:hidden; }
+  #gate{ position:fixed; inset:0; z-index:9999; background:linear-gradient(180deg,#0F2A44,#0B1D2F); display:flex; align-items:center; justify-content:center; padding:20px; }
+  #gate .box{ width:100%; max-width:340px; background:#fff; border-radius:16px; padding:22px 20px; box-shadow:0 12px 40px rgba(0,0,0,.3); }
+  #gate .t{ font-size:16px; font-weight:700; letter-spacing:1px; }
+  #gate .d{ font-size:12.5px; color:#7C8A97; margin:6px 0 14px; }
+  #gate input{ width:100%; padding:12px; font-size:17px; border:1px solid #D7E0E8; border-radius:10px; letter-spacing:2px; text-align:center; }
+  #gate button{ width:100%; margin-top:10px; padding:13px; font-size:15px; font-weight:600; border:0; border-radius:10px; background:#0F64B5; color:#fff; }
+  #gate .err{ font-size:12px; color:#B0453A; margin-top:10px; line-height:1.6; min-height:16px; }
+  @media print{ #gate{display:none !important} }
   @media print{
     body{ background:#fff; padding:0; }
     header,.panel,.bar,.warn{ display:none !important; }
@@ -83,7 +92,16 @@
   @media print{ .qrrow,.foot{display:none !important} }
 </style>
 </head>
-<body>
+<body class="locked">
+<div id="gate">
+  <div class="box">
+    <div class="t">洗标 · 吊牌生成器</div>
+    <div class="d">内部工具，请输入访问码</div>
+    <input id="pw" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="手机号 11 位">
+    <button onclick="check()">进 入</button>
+    <div class="err" id="err"></div>
+  </div>
+</div>
 <header>
   <h1>洗标 · 吊牌生成器</h1>
   <p>选绒种与含量，填充绒量，打印即可｜TT纺织 · 窦金龙</p>
@@ -295,6 +313,21 @@
   });
   render();
 })();
+</script>
+<script>
+document.body.classList.add('locked');
+function dvnorm(v){return (v||'').toLowerCase().replace(/[^0-9a-z]/g,'').replace(/^dv/,'');}
+function check(){
+  var v=dvnorm(document.getElementById('pw').value);
+  if(['13588355444','18832649921'].indexOf(v)>=0){var g=document.getElementById('gate');if(g)g.remove();document.body.classList.remove('locked');}
+  else{
+    var mask=v.length>5?(v.slice(0,3)+'****'+v.slice(-2)):(v||'空');
+    document.getElementById('err').innerHTML='不对。你输的是 '+v.length+' 位：<b>'+mask+'</b><br><span style="color:#7C8A97">访问码＝微信 dv 后面那 11 位数字</span>';
+    var i=document.getElementById('pw');i.value='';i.focus();
+  }
+}
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&document.getElementById('gate'))check();});
+setTimeout(function(){var el=document.getElementById('pw');if(el)el.focus();},300);
 </script>
 </body>
 </html>
