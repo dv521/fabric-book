@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>洗标 · 吊牌生成器</title>
+<style>
+  :root{ --ink:#16222E; --blue:#0F64B5; --grey:#7C8A97; --line:#E2DCCC; --cream:#FFFBEF; }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ margin:0; background:#EEF2F6; color:var(--ink); font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; }
+  body{ padding-bottom:calc(74px + env(safe-area-inset-bottom)); }
+  header{ background:#fff; border-bottom:1px solid #E5EAF0; padding:14px 16px; position:sticky; top:0; z-index:20; }
+  header h1{ font-size:16px; margin:0; letter-spacing:1px; }
+  header p{ margin:4px 0 0; font-size:12px; color:var(--grey); }
+  .wrap{ max-width:1180px; margin:0 auto; padding:14px; display:grid; grid-template-columns:340px 1fr; gap:14px; }
+  @media (max-width:860px){ .wrap{ grid-template-columns:1fr; padding:10px; } }
+  .panel{ background:#fff; border:1px solid #E5EAF0; border-radius:14px; padding:14px; }
+  .panel h2{ font-size:13px; margin:0 0 10px; color:var(--grey); letter-spacing:1px; font-weight:600; }
+  label{ display:block; font-size:12.5px; color:#41525f; margin:10px 0 4px; }
+  input,select{ width:100%; padding:10px 11px; font-size:15px; border:1px solid #D7E0E8; border-radius:10px; background:#FBFCFD; color:var(--ink); font-family:inherit; }
+  input:focus,select:focus{ outline:none; border-color:var(--blue); background:#fff; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .row4{ display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+  .seg{ display:flex; gap:6px; flex-wrap:wrap; }
+  .seg button{ flex:1 1 0; min-width:64px; padding:9px 6px; font-size:13px; border:1px solid #D7E0E8; background:#FBFCFD; border-radius:10px; color:#41525f; font-family:inherit; }
+  .seg button.on{ background:var(--blue); border-color:var(--blue); color:#fff; font-weight:600; }
+  .hint{ font-size:11.5px; color:var(--grey); margin-top:6px; line-height:1.5; }
+  .stage{ background:#fff; border:1px solid #E5EAF0; border-radius:14px; padding:14px; overflow:auto; }
+  .sheets{ display:flex; gap:18px; flex-wrap:wrap; justify-content:center; }
+  .sheet{ background:#fff; padding:10mm; box-shadow:0 2px 10px rgba(20,40,60,.08); border:1px solid #E9EEF3; }
+  /* 洗标 */
+  .lab{ width:150mm; font-size:9.4pt; }
+  .lab h3{ font-size:11pt; margin:0 0 3mm; padding-bottom:2mm; border-bottom:1px solid #E6EBF0; letter-spacing:1px; }
+  .lab table{ width:100%; border-collapse:collapse; }
+  .lab td{ padding:1.6mm 1mm; border-bottom:1px dotted #DFE5EA; vertical-align:top; }
+  .lab td.k{ width:32mm; color:#41525f; }
+  .sym{ display:flex; gap:5mm; margin:3mm 0 2mm; flex-wrap:wrap; }
+  .sym div{ text-align:center; font-size:7.6pt; color:#41525f; width:20mm; }
+  .sym .b{ width:12mm; height:12mm; border:1.5px solid var(--ink); border-radius:2mm; margin:0 auto 1.2mm; font-size:11pt; line-height:12mm; font-weight:700; }
+  .ws{ font-size:8.4pt; line-height:1.75; color:#41525f; margin-top:3mm; }
+  /* 吊牌 */
+  .tag{ width:68mm; border:1.4px solid var(--ink); border-radius:4mm; padding:5mm; }
+  .tag .bd{ font-size:17pt; font-weight:800; letter-spacing:4px; text-align:center; }
+  .tag .en{ font-size:7pt; letter-spacing:3px; text-align:center; color:var(--grey); margin-bottom:4mm; }
+  .tag .nm{ font-size:10.5pt; text-align:center; }
+  .tag .md{ font-size:7.6pt; text-align:center; color:var(--grey); margin:1mm 0 4mm; }
+  .tag .big{ font-size:20pt; font-weight:800; text-align:center; letter-spacing:1px; }
+  .tag .big span{ font-size:9pt; }
+  .tag .cap{ font-size:7.6pt; text-align:center; color:#41525f; margin-top:1mm; }
+  .tag .hr{ height:1px; background:#E6EBF0; margin:3mm 0; }
+  .tag .r{ display:flex; justify-content:space-between; font-size:8pt; margin:1.2mm 0; gap:6px; }
+  .bc{ display:flex; align-items:flex-end; height:9mm; margin-top:3mm; }
+  .bc i{ display:block; height:9mm; background:var(--ink); }
+  .bcode{ font-size:7.4pt; letter-spacing:2px; text-align:center; margin-top:1.4mm; }
+  .bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(255,255,255,.97); border-top:1px solid #E5EAF0; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); display:flex; gap:10px; z-index:30; }
+  .bar button{ flex:1; padding:14px 8px; font-size:15px; font-weight:600; border-radius:12px; border:1px solid var(--blue); background:var(--blue); color:#fff; font-family:inherit; }
+  .bar button.ghost{ background:#fff; color:var(--blue); }
+  .warn{ margin-top:10px; font-size:11.5px; color:#B0453A; line-height:1.6; background:#FDF2F0; border-left:3px solid #B0453A; padding:8px 10px; border-radius:4px; }
+  @media (max-width:860px){
+    .lab{ width:100%; font-size:8.8pt; }
+    .lab td.k{ width:26mm; }
+    .tag{ width:100%; max-width:300px; }
+    .sym div{ width:17mm; }
+    .stage{ padding:10px; }
+    .sheet{ padding:6mm; width:100%; }
+  }
+  @media print{
+    body{ background:#fff; padding:0; }
+    header,.panel,.bar,.warn{ display:none !important; }
+    .wrap{ display:block; padding:0; max-width:none; }
+    .stage{ border:0; padding:0; border-radius:0; }
+    .sheets{ display:block; }
+    .sheet{ box-shadow:none; border:0; padding:0; page-break-after:always; }
+    .sheet:last-child{ page-break-after:auto; }
+    .lab,.tag{ transform:none; }
+  }
+.qrrow{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:18px 10px 8px}
+  .qrcell{margin:0;text-align:center}
+  .qrcell img{width:86px;height:86px;border-radius:10px;border:1px solid #e6eef4;object-fit:cover;display:block}
+  .qrcell figcaption{font-size:12px;color:#7a8794;margin-top:6px;white-space:nowrap}
+  .foot{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#7C8A97;padding:6px 14px 16px;max-width:1180px;margin:0 auto}
+  @media print{ .qrrow,.foot{display:none !important} }
+</style>
+</head>
+<body>
+<header>
+  <h1>洗标 · 吊牌生成器</h1>
+  <p>选绒种与含量，填充绒量，打印即可｜TT纺织 · 窦金龙</p>
+</header>
+
+<div class="wrap">
+  <div class="panel">
+    <h2>一 · 绒与类别</h2>
+    <label>绒种</label>
+    <div class="seg" id="segKind">
+      <button data-v="白鸭绒" class="on">白鸭绒</button>
+      <button data-v="灰鸭绒">灰鸭绒</button>
+      <button data-v="白鹅绒">白鹅绒</button>
+      <button data-v="灰鹅绒">灰鹅绒</button>
+    </div>
+
+    <label>绒子含量</label>
+    <div class="seg" id="segRate">
+      <button data-v="95%" class="on">95%</button>
+      <button data-v="90%">90%</button>
+      <button data-v="85%">85%</button>
+    </div>
+
+    <label>安全类别（GB 18401）</label>
+    <div class="seg" id="segSafe">
+      <button data-v="B" class="on">B 类 · 直接接触</button>
+      <button data-v="C">C 类 · 非直接接触</button>
+    </div>
+    <div class="hint">贴身穿标 B 类，外穿款标 C 类；标哪类，就得按哪类检测。</div>
+
+    <h2 style="margin-top:16px">二 · 基本信息</h2>
+    <div class="row2">
+      <div><label>品牌</label><input id="iBrand" value="他地"></div>
+      <div><label>英文（可空）</label><input id="iEn" value="HEADSHE"></div>
+    </div>
+    <div class="row2">
+      <div><label>品名</label><input id="iName" value="轻薄羽绒服"></div>
+      <div><label>款号</label><input id="iModel" value="J2601-95"></div>
+    </div>
+    <div class="row2">
+      <div><label>产地</label><input id="iOrigin" value="福建 晋江"></div>
+      <div><label>检验员</label><input id="iQC" value="Q/C 03"></div>
+    </div>
+
+    <h2 style="margin-top:16px">三 · 成分</h2>
+    <div class="row2">
+      <div><label>面料</label><select id="iShell"><option>100% 锦纶</option><option>100% 聚酯纤维</option></select></div>
+      <div><label>胆布</label><select id="iDown"><option>100% 锦纶</option><option>100% 聚酯纤维</option></select></div>
+    </div>
+    <div class="row2">
+      <div><label>里布</label><select id="iLining"><option>100% 锦纶</option><option>100% 聚酯纤维</option></select></div>
+      <div><label>局部填充</label><input id="iLocal" value="100% 聚酯纤维（帽子里、领里）"></div>
+    </div>
+
+    <h2 style="margin-top:16px">四 · 充绒量（克）</h2>
+    <div class="row4">
+      <div><label>S</label><input id="wS" type="number" value="128"></div>
+      <div><label>M</label><input id="wM" type="number" value="146"></div>
+      <div><label>L</label><input id="wL" type="number" value="164"></div>
+      <div><label>XL</label><input id="wXL" type="number" value="182"></div>
+    </div>
+    <div class="hint">吊牌上的「充绒量」默认取 M 码。</div>
+    <div class="warn">这是排版工具，不是检测报告。标签上的数字必须与实测一致，否则属虚假标注。</div>
+  </div>
+
+  <div class="stage">
+    <div class="sheets">
+      <div class="sheet">
+        <div class="lab">
+          <h3>使用说明与成分</h3>
+          <table>
+            <tr><td class="k">品名</td><td id="oName">轻薄羽绒服</td></tr>
+            <tr><td class="k">款号</td><td id="oModel">J2601-95</td></tr>
+            <tr><td class="k">面料</td><td id="oShell">100% 锦纶</td></tr>
+            <tr><td class="k">胆布</td><td id="oDown">100% 锦纶</td></tr>
+            <tr><td class="k">里布</td><td id="oLining">100% 锦纶</td></tr>
+            <tr><td class="k">填充物</td><td id="oFill">白鸭绒　绒子含量 95%</td></tr>
+            <tr><td class="k">局部填充物</td><td id="oLocal">100% 聚酯纤维（帽子里、领里）</td></tr>
+            <tr><td class="k">充绒量</td><td id="oWeight">S 128g　M 146g　L 164g　XL 182g</td></tr>
+            <tr><td class="k">执行标准</td><td>GB/T 14272-2021《羽绒服装》</td></tr>
+            <tr><td class="k">安全类别</td><td id="oSafe">GB 18401-2010　B 类（直接接触皮肤）</td></tr>
+            <tr><td class="k">产地</td><td id="oOrigin">福建 晋江</td></tr>
+          </table>
+
+          <div class="sym">
+            <div><div class="b">30</div>最高 30℃ 缓和洗涤</div>
+            <div><div class="b">✕</div>不可漂白</div>
+            <div><div class="b">▭</div><span id="oDry">悬挂晾干</span></div>
+            <div><div class="b">✕</div>不可熨烫</div>
+            <div><div class="b">○</div>可干洗（缓和）</div>
+          </div>
+
+          <div class="ws" id="oWash"></div>
+        </div>
+      </div>
+
+      <div class="sheet">
+        <div class="tag">
+          <div class="bd" id="tBrand">他地</div>
+          <div class="en" id="tEn">HEADSHE</div>
+          <div class="nm" id="tName">轻薄羽绒服</div>
+          <div class="md">款号 <span id="tModel">J2601-95</span></div>
+          <div class="big" id="tBig">95<span>%</span></div>
+          <div class="cap"><span id="tKind">白鸭绒</span>　绒子含量</div>
+          <div class="hr"></div>
+          <div class="r"><span>充绒量（M）</span><b id="tWeight">146 g</b></div>
+          <div class="r"><span>面料</span><span id="tShell">100% 锦纶</span></div>
+          <div class="r"><span>尺码</span><span>S / M / L / XL</span></div>
+          <div class="hr"></div>
+          <div class="r"><span>执行标准</span><span>GB/T 14272-2021</span></div>
+          <div class="r"><span>安全类别</span><span id="tSafe">GB 18401-2010 B 类</span></div>
+          <div class="r"><span>产地</span><span id="tOrigin">福建 晋江</span></div>
+          <div class="bc" id="tBar"></div>
+          <div class="bcode" id="tCode">6 971234 567895</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="qrrow">
+  <figure class="qrcell"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/douyin-qr.jpg?v=3" alt="抖音二维码" style="border-radius:50%"><figcaption>抖音</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/xhs-qr.jpg?v=2" alt="小红书二维码" style="border-radius:6px"><figcaption>小红书</figcaption></figure>
+</div>
+<div class="foot"><span>dv面料手记 · 工具</span><span>标签样式仅作排版参考，数据须与实测一致</span></div>
+
+<div class="bar">
+  <button id="btnPrint">打印 / 存 PDF</button>
+  <button class="ghost" id="btnReset">恢复默认</button>
+</div>
+
+<script>
+(function(){
+  var state={ kind:"白鸭绒", rate:"95%", safe:"B" };
+  function q(id){ return document.getElementById(id); }
+  function seg(id, key){
+    q(id).addEventListener("click", function(e){
+      var b=e.target.closest("button"); if(!b) return;
+      [].forEach.call(this.querySelectorAll("button"), function(x){ x.classList.remove("on"); });
+      b.classList.add("on"); state[key]=b.dataset.v; render();
+    });
+  }
+  seg("segKind","kind"); seg("segRate","rate"); seg("segSafe","safe");
+
+  function bars(seed){
+    var rnd=(function(s){ return function(){ s=(s*9301+49297)%233280; return s/233280; }; })(seed);
+    var h="";
+    for(var i=0;i<46;i++){
+      var w=[0.25,0.35,0.5,0.7][Math.floor(rnd()*4)];
+      h+='<i style="width:'+w+'mm"></i><i style="width:0.25mm;background:#fff"></i>';
+    }
+    return h;
+  }
+
+  function render(){
+    var kind=state.kind, rate=state.rate;
+    var safeTxt = state.safe==="B" ? "GB 18401-2010　B 类（直接接触皮肤）" : "GB 18401-2010　C 类（非直接接触皮肤）";
+    var safeShort = "GB 18401-2010 "+state.safe+" 类";
+    var wS=+q("wS").value||0, wM=+q("wM").value||0, wL=+q("wL").value||0, wXL=+q("wXL").value||0;
+
+    q("oName").textContent=q("iName").value;
+    q("oModel").textContent=q("iModel").value;
+    q("oShell").textContent=q("iShell").value;
+    q("oDown").textContent=q("iDown").value;
+    q("oLining").textContent=q("iLining").value;
+    q("oFill").textContent=kind+"　绒子含量 "+rate;
+    q("oLocal").textContent=q("iLocal").value;
+    q("oWeight").textContent="S "+wS+"g　M "+wM+"g　L "+wL+"g　XL "+wXL+"g";
+    q("oSafe").textContent=safeTxt;
+    q("oOrigin").textContent=q("iOrigin").value;
+    q("oDry").textContent = state.safe==="B" ? "悬挂晾干" : "平摊晾干";
+
+    var tip = state.safe==="B"
+      ? "C 类说明不适用；本标为 B 类，可直接接触皮肤。"
+      : "C 类指非直接接触皮肤，建议内搭穿着；若贴身穿出现不适，请停止穿着。";
+    q("oWash").innerHTML =
+      "洗涤说明：30℃ 以下中性洗涤剂轻揉，勿拧绞；清水漂净后轻压去水，"+
+      (state.safe==="B"?"悬挂":"平摊")+"阴干；干燥后轻拍使羽绒回松。<br>"+
+      "注意事项：勿使用含氯漂白剂；勿高温烘干；勿长时间浸泡；与深色衣物分开洗涤。<br>"+
+      tip;
+
+    q("tBrand").textContent=q("iBrand").value;
+    q("tEn").textContent=q("iEn").value;
+    q("tName").textContent=q("iName").value;
+    q("tModel").textContent=q("iModel").value;
+    q("tBig").innerHTML=rate.replace("%","")+"<span>%</span>";
+    q("tKind").textContent=kind;
+    q("tWeight").textContent=wM+" g";
+    q("tShell").textContent=q("iShell").value;
+    q("tSafe").textContent=safeShort;
+    q("tOrigin").textContent=q("iOrigin").value;
+    q("tBar").innerHTML=bars(rate.length*7+safeCodes());
+    q("tCode").textContent="6 97"+(wM*13%900+100)+" "+(wS+wL)+"8"+(wXL%10);
+  }
+  function safeCodes(){ return state.safe==="B"?3:5; }
+
+  ["iName","iModel","iBrand","iEn","iOrigin","iQC","iShell","iDown","iLining","iLocal","wS","wM","wL","wXL"]
+    .forEach(function(id){ q(id).addEventListener("input",render); q(id).addEventListener("change",render); });
+
+  q("btnPrint").addEventListener("click",function(){ window.print(); });
+  q("btnReset").addEventListener("click",function(){
+    q("iBrand").value="他地"; q("iEn").value="HEADSHE"; q("iName").value="轻薄羽绒服";
+    q("iModel").value="J2601-95"; q("iOrigin").value="福建 晋江"; q("iQC").value="Q/C 03";
+    q("iShell").value="100% 锦纶"; q("iDown").value="100% 锦纶"; q("iLining").value="100% 锦纶";
+    q("iLocal").value="100% 聚酯纤维（帽子里、领里）";
+    q("wS").value=128; q("wM").value=146; q("wL").value=164; q("wXL").value=182;
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
