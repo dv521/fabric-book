@@ -203,6 +203,29 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       last_follow:x.lastFollow||null, hist:x.hist||[]
     };
   }
+
+  function delRow(x){
+    var u=CLOUD.url+'/rest/v1/visits?client_id=eq.'+encodeURIComponent(String(x.id));
+    return fetch(u,{method:'DELETE',headers:baseHeaders()}).then(function(r){
+      if(!r.ok) return r.text().then(function(t){ throw new Error('HTTP '+r.status+(t?' · '+t.slice(0,90):'')) });
+      return true;
+    });
+  }
+  function pendingDel(){ try{ return JSON.parse(localStorage.getItem('dv_del_queue')||'[]') }catch(e){ return [] } }
+  function setPendingDel(a){ localStorage.setItem('dv_del_queue', JSON.stringify(a)) }
+  function flushDeletes(){
+    var q=pendingDel(); if(!q.length||!cloudOn) return Promise.resolve(0);
+    var done=[];
+    var chain=Promise.resolve();
+    q.forEach(function(id){
+      chain=chain.then(function(){ return delRow({id:id}).then(function(){ done.push(id) }).catch(function(){}) });
+    });
+    return chain.then(function(){
+      setPendingDel(q.filter(function(id){ return done.indexOf(id)<0 }));
+      return done.length;
+    });
+  }
+
   function baseHeaders(){
     return {'Content-Type':'application/json','apikey':CLOUD.key,'Authorization':'Bearer '+CLOUD.key,'Prefer':'return=minimal'};
   }
@@ -229,6 +252,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   function syncAll(full, silent){
     if(!cloudOn){ if(!silent) toast('还没配置云端'); return Promise.resolve(0) }
     if(syncing) return Promise.resolve(0);
+    flushDeletes();
     var list = full ? data.slice() : data.filter(function(x){return !x.synced});
     if(!list.length){ badge(); if(!silent) toast('已经全部同步'); return Promise.resolve(0) }
     syncing=true;
@@ -494,8 +518,21 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       }
       if(btn.dataset.act==='done'){it.rate='没戏';it.synced=false;toast('已标记没戏')}
       if(btn.dataset.act==='del'){
-        if(!confirm('删除「'+it.name+'」？本地会删；云端记录保留'))return;
-        data=data.filter(function(x){return x.id!==id});
+        if(!confirm('删除「'+it.name+'」？\n云端记录一并删除，删了不能恢复。'))return;
+        var cid=it.id;
+        data=data.filter(function(x){return x.id!==cid});
+        save();render();
+        if(!cloudOn){ toast('已删除（未配置云端）'); return; }
+        bar('warn','正在删除云端记录…');
+        delRow(it).then(function(){
+          bar('ok','已删除：本机与云端都已清掉');
+          toast('已彻底删除');
+        }).catch(function(e){
+          var q=pendingDel(); if(q.indexOf(cid)<0) q.push(cid); setPendingDel(q);
+          bar('warn','本机已删，云端没删掉（'+e.message.slice(0,40)+'），联网后自动补删');
+          toast('本机已删，云端待补删');
+        });
+        return;
       }
       save();render();syncAll(false,true);return;
     }
