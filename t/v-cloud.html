@@ -426,7 +426,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       var bcls=x.rate==='有戏'?'b-hot':(x.rate==='没戏'?'b-dead':'b-wait');
       var hist=(x.hist||[]).slice(-5).map(function(h){return h.d+'　'+esc(h.a)}).join('<br>');
       return '<div class="rowwrap" data-id="'+x.id+'">'+
-        '<div class="row"><div><div class="nm">'+esc(x.name)+(x.synced?'':' <span class="badge b-wait" style="font-size:10px">待同步</span>')+(gaveup?' <span class="badge b-dead" style="font-size:10px">已放弃</span>':'')+'</div>'+
+        '<div class="row"><div><div class="nm">'+esc(x.name)+(x.synced?'':' <span class="badge b-wait" style="font-size:10px">待同步</span>')+(gaveup?' <span class="badge b-dead" style="font-size:10px">已放弃</span>':'')+((!gaveup&&x.lastFollow===t)?' <span class="badge" style="font-size:10px;background:#E8F2FF;color:#0F64B5">今日已跟进</span>':'')+'</div>'+
         '<div class="meta">'+esc(x.area)+(x.designer?' · '+esc(x.designer):'')+' · '+((x.acts&&x.acts.length)?esc(x.acts.join('/')):'—')+
         (x.addr?'<br>📍'+esc(x.addr):'')+'</div></div>'+
         '<div style="text-align:right"><span class="badge '+bcls+'">'+esc(x.rate)+'</span>'+
@@ -440,20 +440,21 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
               ? '<button data-act="restore">恢复跟进</button>'
               : (x.next<t
                   ? '<button data-act="fix">补救（改下次跟进）</button><button class="del" data-act="giveup">放弃</button>'
-                  : '<button data-act="bump">跟进过了（+7 天）</button>')+
+                  : '<button data-act="bump">已跟进</button>')+
                 '<button data-act="done">标记没戏</button>')+
             '<button class="del" data-act="del">删除</button></div>'+
         '</div></div>';
     }).join('');
   }
 
-  function pickDays(it){
+  function pickDays(it, mode){
+    mode = mode || 'fix';
     var old=document.getElementById('fixpick'); if(old)old.remove();
     var d=document.createElement('div'); d.id='fixpick';
     d.style.cssText='position:fixed;inset:0;background:rgba(10,16,22,.55);z-index:10000;display:flex;align-items:flex-end;justify-content:center;padding:16px';
     d.innerHTML='<div style="background:#fff;border-radius:16px;padding:16px;width:100%;max-width:420px">'+
-      '<div style="font-weight:700;margin-bottom:4px">补救：把「'+esc(it.name)+'」改到哪天跟进？</div>'+
-      '<div style="font-size:12.5px;color:#7c8a97;margin-bottom:12px">选完就移出逾期，到期再提醒</div>'+
+      '<div style="font-weight:700;margin-bottom:4px">'+(mode==='done'?'已跟进：下次哪天再跟？':'补救：把「'+esc(it.name)+'」改到哪天？')+'</div>'+
+      '<div style="font-size:12.5px;color:#7c8a97;margin-bottom:12px">'+(mode==='done'?'从今天算起，到那天再提醒你':'选完就移出逾期，到期再提醒')+'</div>'+
       '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">'+
       ['明天','3 天后','7 天后','15 天后'].map(function(t,i){return '<button data-d="'+[1,3,7,15][i]+'" style="padding:14px 0;border:1px solid #cfdde9;background:#f4f9fc;border-radius:10px;font-size:14px">'+t+'</button>'}).join('')+
       '</div><button id="fixcancel" style="margin-top:10px;width:100%;padding:12px;border:0;background:#eef2f6;border-radius:10px;font-size:14px">取消</button></div>';
@@ -463,8 +464,9 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       var b=e.target.closest('button[data-d]'); if(!b)return;
       var n=parseInt(b.dataset.d,10);
       it.next=shift(n); it.synced=false;
-      it.hist=(it.hist||[]).concat([{d:today(),a:'补救→'+n+'天后'}]);
-      d.remove(); save();render();syncAll(false,true); toast('已改到 '+it.next);
+      if(mode==='done'){ it.lastFollow=today(); it.hist=(it.hist||[]).concat([{d:today(),a:'已跟进→'+n+'天后'}]); }
+      else { it.hist=(it.hist||[]).concat([{d:today(),a:'补救→'+n+'天后'}]); }
+      d.remove(); save();render();syncAll(false,true); toast('下次跟进 '+it.next);
     });
   }
 
@@ -474,12 +476,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     var btn=e.target.closest('button[data-act]');
     var it=data.filter(function(x){return x.id===id})[0]; if(!it)return;
     if(btn){
-      if(btn.dataset.act==='bump'){
-        it.next=shift(7); it.lastFollow=today();
-        it.hist=(it.hist||[]).concat([{d:today(),a:'跟进'}]);
-        it.synced=false;
-        toast('已推到 '+it.next);
-      }
+      if(btn.dataset.act==='bump'){ pickDays(it,'done'); return; }
       if(btn.dataset.act==='fix'){ pickDays(it); return; }
       if(btn.dataset.act==='giveup'){
         if(!confirm('放弃跟进「'+it.name+'」？\n记录会保留在「全部」里，可随时恢复，不会删除档案。'))return;
