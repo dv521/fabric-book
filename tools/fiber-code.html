@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12202c">
+<title>成分字母速查 · AC/P/N/R/SP 一次认清 · dv面料手记</title>
+<style>
+:root{--ink:#111d27;--ink2:#3f4b57;--mut:#7c8a97;--line:#e3ebf2;--bg:#f4f8fb;--brand:#2f8fb5;--warn:#B0453A}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB",sans-serif}
+.wrap{max-width:920px;margin:0 auto;padding:0 14px 40px;overflow-wrap:anywhere}
+header{background:#12202c;color:#fff;padding:18px 16px calc(14px + env(safe-area-inset-top));margin:0 -14px 14px}
+header h1{margin:0;font-size:19px}
+header p{margin:5px 0 0;font-size:12.5px;color:#a9bccb}
+section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+h2{font-size:13px;color:var(--mut);letter-spacing:.07em;margin:0 0 10px;font-weight:700}
+/* 缩写卡：三端自适应 */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.fib{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fbfdff}
+.fib .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.fib .code{font:800 20px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--brand);letter-spacing:.02em}
+.fib .cn{font-weight:700;font-size:15px}
+.fib .en{font-size:11.5px;color:var(--mut);margin-top:2px}
+.fib .say{font-size:13px;color:var(--ink2);margin-top:6px;line-height:1.65}
+.fib .tag{display:inline-block;font-size:11px;color:#12556f;background:#eaf5fa;border:1px solid #cfe6f1;border-radius:999px;padding:1px 8px;margin-top:7px}
+/* 组合读法 */
+.combo{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.cb{border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:10px 12px;background:#fbfdff}
+.cb .raw{font:700 16px/1.2 ui-monospace,Menlo,monospace;color:var(--ink)}
+.cb .read{font-size:13.5px;color:var(--ink2);margin-top:4px}
+.cb .use{font-size:12px;color:var(--mut);margin-top:3px}
+.note{background:#f8fbfd;border:1px dashed #cfdde9;border-radius:10px;padding:10px 12px;font-size:13.4px;line-height:1.85}
+.note b{color:#12556f}
+.warn{background:#FDF2F0;border-left:3px solid var(--warn);border-radius:6px;padding:9px 11px;font-size:13px;line-height:1.8;color:#7a2b22}
+ul.plain{margin:6px 0 0;padding-left:18px;font-size:13.4px;line-height:1.85;color:var(--ink2)}
+ul.plain b{color:var(--ink)}
+.cm{color:var(--mut);font-size:12px;margin:8px 0 0}
+.foot{color:var(--mut);font-size:11.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:4px 2px 0}
+/* 三码 */
+.qrrow{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:18px 0 8px}
+.qrcell{margin:0;text-align:center}
+.qrcell img{width:86px;height:86px;border-radius:10px;border:1px solid #e6eef4;object-fit:cover;display:block}
+.qrcell figcaption{font-size:12px;color:#7a8794;margin-top:6px;white-space:nowrap}
+@media(max-width:760px){ .grid,.combo{grid-template-columns:1fr} }
+@media(max-width:640px){
+  header h1{font-size:17.5px;line-height:1.35}
+  header p{font-size:12px;line-height:1.5}
+  .fib{padding:10px}
+  .fib .code{font-size:19px}
+  .wrap{padding:0 12px 34px}
+}
+@media print{
+  @page{size:A4 portrait;margin:0}
+  body{background:#fff;font-size:11.5px;line-height:1.55}
+  .wrap{max-width:none;padding:11mm 10mm 7mm}
+  header{background:#fff;color:#111d27;border-bottom:2.5px solid #111d27;padding:0 0 7px;margin:0 0 11px}
+  header h1{font-size:21px}
+  header p{color:#444;font-size:10.5px}
+  section{border:0;padding:0;margin:0 0 9px}
+  h2{font-size:10.5px;margin:0 0 6px}
+  .grid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .fib{padding:7px 8px}
+  .fib .code{font-size:14px}
+  .fib .cn{font-size:11.5px}
+  .fib .say{font-size:9.6px;line-height:1.5}
+  .combo{grid-template-columns:repeat(3,1fr);gap:6px}
+  .cb{padding:7px 8px}
+  .note{font-size:10px;padding:7px 9px}
+  ul.plain{font-size:10px}
+  .qrrow{gap:3mm;justify-content:flex-start;margin:1.4mm 0 0}
+  .qrcell img{width:10mm;height:10mm;border-radius:0;border:.4pt solid #999}
+  .qrcell figcaption{font-size:6.6pt;margin-top:.5mm;color:#444}
+  .foot{font-size:9pt}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>成分字母速查 · 一张卡认全</h1>
+  <p>客户发来一张物性卡写着 25%AC 75%P，你得三秒读出来，还得知道它不合规在哪</p>
+</header>
+
+<section>
+  <h2>一、最常见的 12 个缩写</h2>
+  <div class="grid">
+    <div class="fib"><div class="top"><span class="code">AC</span><span class="cn">腈纶</span></div><div class="en">Acrylic</div><div class="say">手感蓬松、发暖、染色艳；强度低，易起球、易静电。</div><span class="tag">仿毛主力</span></div>
+    <div class="fib"><div class="top"><span class="code">P</span><span class="cn">聚酯纤维（涤纶）</span></div><div class="en">Polyester，也写 PET / PES / T</div><div class="say">挺括耐磨、便宜、尺寸稳；吸湿差，易起球。</div><span class="tag">用量最大</span></div>
+    <div class="fib"><div class="top"><span class="code">N</span><span class="cn">锦纶（尼龙）</span></div><div class="en">Nylon / Polyamide，也写 PA</div><div class="say">比涤纶更滑、更轻、更强，能压得很密；贵一档，怕高温。</div><span class="tag">防绒首选</span></div>
+    <div class="fib"><div class="top"><span class="code">R</span><span class="cn">粘胶纤维（人棉）</span></div><div class="en">Viscose / Rayon，也写 CV</div><div class="say">手感软、吸湿好、垂；湿强力差，洗后易缩。</div><span class="tag">里布 / 衬</span></div>
+    <div class="fib"><div class="top"><span class="code">SP</span><span class="cn">氨纶</span></div><div class="en">Spandex / Elastane，也写 EL / EA</div><div class="say">只加 3–15% 就有弹性；不耐氯、怕高温久烫。</div><span class="tag">弹力布</span></div>
+    <div class="fib"><div class="top"><span class="code">C</span><span class="cn">棉</span></div><div class="en">Cotton，也写 CO</div><div class="say">亲肤透气、吸湿；皱、缩、干得慢。</div><span class="tag">内搭 / 里布</span></div>
+    <div class="fib"><div class="top"><span class="code">W</span><span class="cn">羊毛</span></div><div class="en">Wool；羊绒写 WS（Cashmere）</div><div class="say">保暖、回弹好；贵，易虫蛀。</div><span class="tag">呢料</span></div>
+    <div class="fib"><div class="top"><span class="code">S</span><span class="cn">桑蚕丝</span></div><div class="en">Silk</div><div class="say">光泽好、滑；怕晒、怕碱、要干洗。</div><span class="tag">高档里布</span></div>
+    <div class="fib"><div class="top"><span class="code">L</span><span class="cn">亚麻</span></div><div class="en">Linen</div><div class="say">挺、透气、凉；易皱，缩率大。</div><span class="tag">春夏</span></div>
+    <div class="fib"><div class="top"><span class="code">MD</span><span class="cn">莫代尔</span></div><div class="en">Modal（再生纤维素）</div><div class="say">比人棉更软更滑，垂感好；易变形。</div><span class="tag">贴身</span></div>
+    <div class="fib"><div class="top"><span class="code">LY</span><span class="cn">莱赛尔（天丝）</span></div><div class="en">Lyocell，也写 CLY / Tencel</div><div class="say">凉感、垂、强度比人棉好；价格高。</div><span class="tag">夏料</span></div>
+    <div class="fib"><div class="top"><span class="code">PU</span><span class="cn">聚氨酯</span></div><div class="en">Polyurethane</div><div class="say">涂层防水 / 做弹性膜；透气差，老化会裂。</div><span class="tag">涂层 / 面料</span></div>
+  </div>
+  <p class="cm">字母不是国际强制代号，各家卡面写法不统一：<b>A</b> 有的厂指腈纶、有的指羊毛；<b>T</b> 多数指涤纶，也有厂当纱支用。见到生面孔，以卡面中文为准，别硬猜。</p>
+</section>
+
+<section>
+  <h2>二、常见组合怎么念</h2>
+  <div class="combo">
+    <div class="cb"><div class="raw">25AC / 75P</div><div class="read">腈纶 25%，涤纶 75%</div><div class="use">仿毛、里布；做防绒胆布不行——没有高密压光</div></div>
+    <div class="cb"><div class="raw">90N / 10SP</div><div class="read">锦纶 90%，氨纶 10%</div><div class="use">四面弹、轻薄羽绒外层</div></div>
+    <div class="cb"><div class="raw">65T / 35C</div><div class="read">涤纶 65%，棉 35%</div><div class="use">工装、衬衫，俗称 TC</div></div>
+    <div class="cb"><div class="raw">65C / 35T</div><div class="read">棉 65%，涤纶 35%</div><div class="use">贴身款，俗称 CVC，比 TC 舒服</div></div>
+    <div class="cb"><div class="raw">100P</div><div class="read">纯涤纶</div><div class="use">摇粒绒、里布、低价外层</div></div>
+    <div class="cb"><div class="raw">50W / 50AC</div><div class="read">羊毛 50%，腈纶 50%</div><div class="use">仿呢料大衣，降成本不降手感</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>三、别把工艺参数当成成分</h2>
+  <div class="note">
+    <b>75D / 40S / 32S</b>：旦数（D）和纱支（S），说的是纱线粗细，不是成分。<br>
+    <b>DTY / FDY / FTY / POY</b>：长丝的加工方式，也不是成分。<br>
+    <b>CD</b>：阳离子可染涤纶，是涤纶的一种；<b>T400</b>：双组分弹性丝，也不是“另一种纤维”。<br>
+    <b>20D / 15D</b>：旦数，越小数越细；<b>34F</b>：一根丝里 34 孔，影响手感不是成分。
+  </div>
+  <p class="cm">客户说“这是 75D 的布”，只说明纱细，含量还得看成分那行。</p>
+</section>
+
+<section>
+  <h2>四、这种写法为什么不合规</h2>
+  <div class="warn">
+    标 <b>“25%AC 75%P”</b> 出现在商品标签上会被挑出来，两处硬伤：<br>
+    ① <b>顺序反了</b>：应按含量从大到小排；<br>
+    ② <b>用了英文缩写</b>：必须写规范中文名，缩写只能补充。
+  </div>
+  <ul class="plain">
+    <li><b>依据</b>：GB/T 29862《纺织品 纤维含量的标识》——纤维名称用规范名称，含量按递减顺序标注。</li>
+    <li><b>正确写法</b>：聚酯纤维 75%，腈纶 25%。</li>
+    <li><b>允差</b>：混纺一般 ±5 个百分点；含量 ≤10% 的组分 ±3 个百分点。具体以检测机构判定为准。</li>
+    <li><b>标 100%</b>：意味着不含其他纤维，检出别的纤维即判不符——这类争议直接送检，别口头解释。</li>
+    <li><b>厂内物性卡</b>用缩写没问题，<b>商品吊牌 / 洗标</b>必须按上面写。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>五、看成分猜用途（羽绒服这行）</h2>
+  <div class="note">
+    <b>N 或 P 为主、35–60 g/㎡、压光/轧光</b> → 防绒胆布。掺 AC 会掉密度，别当胆布卖。<br>
+    <b>P 为主 + R 或 AC 少量、60–90 g/㎡</b> → 里布、内袋。<br>
+    <b>P 100% 或 P/AC、200–300 g/㎡</b> → 摇粒绒、领口、内胆贴片。<br>
+    <b>N 85–95% + SP 5–15%</b> → 四面弹外层，做轻薄羽绒有弹。<br>
+    <b>AC 50% 以上</b> → 仿毛、呢料，秋冬款外层，不是防绒料。
+  </div>
+  <p class="cm">一句话对客户说：<b>“这卡上写的 25AC 75P，是腈纶两成半、涤纶七成半；做里布行，做防绒胆布不行。”</b></p>
+</section>
+
+<div class="qrrow">
+  <figure class="qrcell"><img src="../assets/img/wechat-qr.jpg?v=3" alt="微信二维码：TT纺织 窦金龙"><figcaption>微信 · 窦金龙</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/douyin-qr.jpg?v=3" alt="抖音二维码：dv面料手记 抖音号 90405142813" style="border-radius:50%"><figcaption>抖音</figcaption></figure>
+  <figure class="qrcell"><img src="../assets/img/xhs-qr.jpg?v=2" alt="小红书二维码：dv面料手记" style="border-radius:6px"><figcaption>小红书</figcaption></figure>
+</div>
+
+<div class="foot">
+  <span>TT纺织 · 窦金龙 · 微信 dv13588355444</span>
+  <span>dv面料手记 · 工具</span>
+</div>
+</div>
+</body>
+</html>
