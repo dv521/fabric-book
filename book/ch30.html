@@ -118,6 +118,49 @@
     <p>受检 <strong>120 码</strong>，有效幅宽 <strong>57 英寸</strong>，全卷累计扣 <strong>38 分</strong>：<br>
     38 × 3600 ÷（120 × 57）＝ 136 800 ÷ 6 840 ＝ <strong>20.0 分／100 平方码</strong>。</p>
   </div>
+  <h4>为什么是 3600：拆开就明白</h4>
+  <p>3600 不是一个神秘常数，是两个数乘出来的：<strong>36 × 100</strong>。</p>
+  <div class="tw">
+  <table class="zebra">
+    <thead><tr><th style="width:16%">数</th><th style="width:44%">管什么</th><th>从哪来</th></tr></thead>
+    <tbody>
+      <tr><td><strong>36</strong></td><td>把「英寸」换成「码」</td><td>1 码 ＝ 36 英寸，幅宽是按英寸量的</td></tr>
+      <tr><td><strong>100</strong></td><td>把分数折成「每百」平方码</td><td>判定线说的是每 100 平方码扣几分</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>推导三步：</p>
+  <ol>
+    <li>面积（平方码）＝ 码数 × 幅宽英寸 ÷ 36</li>
+    <li>每平方码扣分 ＝ 总扣分 ÷ 面积</li>
+    <li>每百平方码扣分 ＝ 上一步 × 100 ＝ 总扣分 × 3600 ÷（码数 × 幅宽英寸）</li>
+  </ol>
+  <p class="cm">单位验一遍：分 × 3600 ÷（码 × 英寸）＝ 分 ÷ ［码 × 英寸 ÷ 36 ÷ 100］＝ 分 ÷ 百平方码 ✓ 所以结果单位就是「分／100 平方码」。<br>
+  记法：<strong>36 管「英寸变码」，100 管「每百平方码」，合起来 3600。</strong></p>
+
+  <h4>整批平均：按面积加权，不是各卷算术平均</h4>
+  <p>两卷布长度差一半，直接取平均分会把长卷的分量算轻。正确做法：<strong>先把所有卷的总扣分加起来，再把所有卷的面积加起来</strong>，然后套同一个公式。</p>
+  <div class="tw">
+  <table class="zebra">
+    <thead><tr><th>卷号</th><th>受检码数</th><th>有效幅宽（寸）</th><th>总扣分</th><th>本卷折算</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td>120</td><td>57</td><td>38</td><td>20.0 分／100 平方码</td></tr>
+      <tr><td>B</td><td>60</td><td>57</td><td>10</td><td>10.5 分／100 平方码</td></tr>
+      <tr><td colspan="3"><strong>整批合计</strong></td><td><strong>48</strong></td><td><strong>48 × 3600 ÷（180 × 57）＝ 16.8 分</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="cm">若错误地取算术平均：（20.0 ＋ 10.5）÷ 2 ＝ 15.3 分——比实际 16.8 分乐观了 1.5 分，验收时会被客户抓。</p>
+
+  <h4>三个最容易错的地方</h4>
+  <div class="box warn">
+    <div class="bt">验收前先对这三条</div>
+    <ul>
+      <li><strong>幅宽要用「有效幅宽」</strong>（英寸）：布边各 1–2 cm 不计，标称门幅不能直接用</li>
+      <li><strong>码数用实际量出来的长度</strong>：标签写 120 码、实量 118 码，就按 118 算；短码本身也是问题</li>
+      <li><strong>幅宽给的是厘米</strong>：先 ÷ 2.54 换成英寸再套公式；100 平方码 ≈ 83.6 平方米</li>
+    </ul>
+  </div>
   <div class="tw">
   <table class="zebra">
     <thead><tr><th style="width:36%">判定线（合同约定，行业常见）</th><th>说明</th></tr></thead>
