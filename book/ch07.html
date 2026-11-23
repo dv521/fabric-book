@@ -446,9 +446,9 @@
   .mm-btn:active{background:#eef6fb}
   .mm-hint{font-size:12.5px;color:#8b9aa8}
   .mm-tree{font-size:15px;line-height:1.65}
-  .mm-tree ul{list-style:none;margin:4px 0 4px 14px;padding-left:16px;border-left:1px dashed #cfdde9}
-  .mm-tree li{margin:5px 0}
-  .mm-tree summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:3px 0}
+  .mm-tree ul{list-style:none;margin:4px 0 4px 12px;padding:0 6px 0 14px;border-left:1px dashed #cfdde9}
+  .mm-tree li{margin:5px 0;overflow-wrap:anywhere;word-break:break-word}
+  .mm-tree summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:3px 4px 3px 0;overflow-wrap:anywhere}
   .mm-tree summary::-webkit-details-marker{display:none}
   .mm-tree summary::before{content:"●";font-size:11px;color:#9fb4c6;flex:0 0 auto}
   .mm-tree details[open]>summary::before{content:"◉";color:#2f8fb5}
@@ -462,7 +462,9 @@
   .mm-root>summary b{font-size:16px}
   @media(max-width:640px){
     .mm-tree{font-size:14.5px}
-    .mm-tree ul{margin-left:4px;padding-left:12px}
+    .mm-tree ul{margin-left:2px;padding:0 2px 0 10px}
+    .mm-tree summary{gap:4px}
+    .mm-wrap{padding:12px 10px 4px}
     .mm-btn{font-size:13.5px;padding:6px 12px}
   }
   </style>
