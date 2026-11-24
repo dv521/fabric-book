@@ -73,7 +73,9 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 .addr-row .chips.mini{flex:0 0 auto;gap:5px;flex-wrap:nowrap}
 .addr-row .chips.mini .chip{padding:7px 10px;font-size:13px;border-radius:9px}
 .addr-row #f-addr{flex:1 1 auto;min-width:0}
-.addr-row #f-unit{flex:0 0 84px;width:84px;text-align:center;font-weight:600}
+.unit-pair{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.unit-pair input{width:42px;text-align:center;font-weight:600;padding:10px 4px}
+.unit-pair i{font-style:normal;font-size:12.5px;color:#7c8a97}
 .addr-row .geo-btn{flex:0 0 auto;border:1px solid #cfdde9;background:#f8fbfd;color:#1d6f8f;font:inherit;font-size:13.5px;font-weight:650;border-radius:11px;padding:0 12px;height:44px;white-space:nowrap}
 @media(max-width:430px){
   .addr-row{flex-wrap:wrap}
@@ -109,7 +111,12 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
         <button class="chip" data-v="其他">其他</button>
       </div>
       <input id="f-addr" type="text" placeholder="地址，可点定位" autocomplete="off">
-      <input id="f-unit" class="unit" type="tel" inputmode="numeric" pattern="[0-9\-]*" maxlength="6" placeholder="3-2" autocomplete="off" aria-label="幢号-楼层，可空，只填数字">
+      <span class="unit-pair" aria-label="幢号与楼层，可空">
+        <input id="f-bldg" type="tel" inputmode="numeric" maxlength="2" placeholder="3" autocomplete="off" aria-label="幢号">
+        <i>幢</i>
+        <input id="f-floor" type="tel" inputmode="numeric" maxlength="2" placeholder="2" autocomplete="off" aria-label="楼层">
+        <i>层</i>
+      </span>
       <button id="btn-geo" type="button" class="geo-btn">定位</button>
     </div>
     <div id="geo-hint" style="font-size:12.5px;color:#7c8a97;margin-top:6px"></div>
@@ -241,6 +248,10 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     });
   }
 
+  function unitVal(){
+    var b=($('#f-bldg').value||'').trim(), f=($('#f-floor').value||'').trim();
+    return b&&f ? b+'-'+f : (b||f||'');
+  }
   function baseHeaders(){
     return {'Content-Type':'application/json','apikey':CLOUD.key,'Authorization':'Bearer '+CLOUD.key,'Prefer':'return=minimal'};
   }
@@ -370,7 +381,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     });
   }
   function collectDraft(){
-    return {name:$('#f-name').value, designer:$('#f-designer').value, addr:addrInput.value, unit:$('#f-unit').value,
+    return {name:$('#f-name').value, designer:$('#f-designer').value, addr:addrInput.value, unit:unitVal(),
             area:(picked('#f-area')[0]||''), acts:picked('#f-acts'), rate:(picked('#f-rate')[0]||''),
             plus:(picked('#f-next')[0]||''), note:$('#f-note').value,
             lat:geoLat, lng:geoLng, geoName:geoName, ts:Date.now()};
@@ -389,6 +400,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     $('#f-name').value=d.name||'';
     $('#f-designer').value=d.designer||'';
     addrInput.value=d.addr||'';
+    if(d.unit){ var a=String(d.unit).split('-'); $('#f-bldg').value=a[0]||''; $('#f-floor').value=a[1]||''; }
     $('#f-note').value=d.note||'';
     geoLat=(d.lat===undefined?null:d.lat); geoLng=(d.lng===undefined?null:d.lng); geoName=d.geoName||'';
     if(d.area) setChips('#f-area', d.area);
@@ -414,7 +426,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     var acts=picked('#f-acts');
     var item={
       id:Date.now(), name:name, area:(picked('#f-area')[0]||'平湖'),
-      addr:addrInput.value.trim(), unit:($('#f-unit').value||'').trim(), lat:geoLat, lng:geoLng, geoName:geoName,
+      addr:addrInput.value.trim(), unit:unitVal(), lat:geoLat, lng:geoLng, geoName:geoName,
       designer:$('#f-designer').value.trim(), acts:acts,
       rate:picked('#f-rate')[0]||'待观察', next:shift(plus),
       note:$('#f-note').value.trim(), created:today(),
@@ -422,7 +434,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     };
     data.unshift(item);save();clearDraft();
     filter='todo';syncFilter();render();badge();
-    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';addrInput.value='';$('#f-unit').value='';
+    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';addrInput.value='';$('#f-bldg').value='';$('#f-floor').value='';
     geoLat=null;geoLng=null;geoName='';setHint('');
     Array.prototype.forEach.call(document.querySelectorAll('#f-acts .chip'),function(c){c.classList.remove('on')});
     toast('已存：'+name+'，'+item.next+' 跟进');
@@ -599,8 +611,11 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 })();
 </script>
 <script id="f-unit-unit-filter">
-(function(){var el=document.getElementById('f-unit'); if(!el) return;
-  el.addEventListener('input',function(){ var v=el.value.replace(/[^0-9\-]/g,'').slice(0,6); if(v!==el.value) el.value=v; });
+(function(){
+  ['f-bldg','f-floor'].forEach(function(id){
+    var el=document.getElementById(id); if(!el) return;
+    el.addEventListener('input',function(){ var v=el.value.replace(/[^0-9]/g,'').slice(0,2); if(v!==el.value) el.value=v; });
+  });
 })();
 </script>
 </body>
