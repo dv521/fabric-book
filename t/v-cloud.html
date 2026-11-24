@@ -70,14 +70,11 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 .sync.bad{background:#fdecea;color:#8f2b22}
 @media print{.save,.tools{display:none}}
 .addr-row{display:flex;align-items:center;gap:8px;flex-wrap:nowrap}
-.addr-row .chips.mini{flex:0 0 auto;gap:5px;flex-wrap:nowrap}
-.addr-row .chips.mini .chip{padding:7px 10px;font-size:13px;border-radius:9px}
 .addr-row #f-addr{flex:1 1 auto;min-width:0}
 .addr-row .geo-btn{flex:0 0 auto;border:1px solid #cfdde9;background:#f8fbfd;color:#1d6f8f;font:inherit;font-size:13.5px;font-weight:650;border-radius:11px;padding:0 12px;height:44px;white-space:nowrap}
 @media(max-width:430px){
   .addr-row{flex-wrap:wrap}
-  .addr-row .chips.mini{width:100%}
-  .addr-row #f-addr{flex:1 1 140px}
+    .addr-row #f-addr{flex:1 1 140px}
 }
 </style>
 </head>
@@ -203,10 +200,10 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   function bar(cls,msg){
     var b=$('#syncbar'); b.className='sync on '+cls; b.textContent=msg;
   }
-  function row(x, mergeUnit){
+  function row(x){
     var o={
       client_id:String(x.id), name:x.name, area:x.area,
-      addr: mergeUnit ? ((x.addr||'')) : (x.addr||''),
+      addr:x.addr||'',
       lat:x.lat, lng:x.lng, designer:x.designer||'',
       acts:(x.acts||[]).join('/'), rate:x.rate,
       next_date:x.next||null, note:x.note||'', created:x.created||null,
@@ -214,8 +211,6 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     };
     return o;
   }
-  // 列还没加上时的兜底：把幢号并进地址，保证同步不中断
-  function needsUnitFallback(status,t){ return status===400 && /unit/i.test(t||''); }
 
   function delRow(x){
     var u=CLOUD.url+'/rest/v1/visits?client_id=eq.'+encodeURIComponent(String(x.id));
@@ -252,25 +247,23 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   function baseHeaders(){
     return {'Content-Type':'application/json','apikey':CLOUD.key,'Authorization':'Bearer '+CLOUD.key,'Prefer':'return=minimal'};
   }
-  function patchRow(x, mergeUnit){
+  function patchRow(x){
     var u=CLOUD.url+'/rest/v1/visits?client_id=eq.'+encodeURIComponent(String(x.id));
-    return fetch(u,{method:'PATCH',headers:baseHeaders(),body:JSON.stringify(row(x,mergeUnit))}).then(function(r){
+    return fetch(u,{method:'PATCH',headers:baseHeaders(),body:JSON.stringify(row(x))}).then(function(r){
       if(r.ok) return true;
       return r.text().then(function(t){
-        if(!mergeUnit && needsUnitFallback(r.status,t)) return patchRow(x,true);
         throw new Error('HTTP '+r.status+(t?' · '+t.slice(0,90):''));
       });
     });
   }
-  function push(x, allowUpdate, mergeUnit){
-    return fetch(CLOUD.url+'/rest/v1/visits',{method:'POST',headers:baseHeaders(),body:JSON.stringify(row(x,mergeUnit))}).then(function(r){
+  function push(x, allowUpdate){
+    return fetch(CLOUD.url+'/rest/v1/visits',{method:'POST',headers:baseHeaders(),body:JSON.stringify(row(x))}).then(function(r){
       if(r.ok) return 'inserted';
       if(r.status===409){
         if(!allowUpdate) return 'exists';          // 全新同步：后端已有就跳过
-        return patchRow(x,mergeUnit).then(function(){ return 'updated'; });
+        return patchRow(x).then(function(){ return 'updated'; });
       }
       return r.text().then(function(t){
-        if(!mergeUnit && needsUnitFallback(r.status,t)) return push(x,allowUpdate,true);
         throw new Error('HTTP '+r.status+(t?' · '+t.slice(0,90):''));
       });
     });
