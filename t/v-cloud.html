@@ -82,6 +82,18 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   .addr-row .unit3{width:100%;justify-content:flex-start;margin-top:2px}
 }
 </style>
+<style id="addr-final-fix">
+.addr-row{flex-wrap:wrap !important}
+.addr-row .chips{flex:1 1 100% !important;width:100% !important}
+.addr-row #f-addr{flex:1 1 0 !important;width:0 !important;min-width:0 !important}
+.addr-row .unit3{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px}
+.addr-row .unit3 input{width:38px;padding:10px 2px;text-align:center;font-weight:600}
+.addr-row .unit3 i{font-style:normal;font-size:12px;color:#7c8a97}
+@media(max-width:480px){
+  .addr-row #f-addr{flex:1 1 100% !important;width:100% !important}
+  .addr-row .unit3{width:100%;margin-top:6px;justify-content:flex-start}
+}
+</style>
 </head>
 <body>
 <header>
