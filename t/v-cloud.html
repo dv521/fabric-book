@@ -206,7 +206,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   }
   function row(x){
     return {
-      client_id:String(x.id), name:x.name, area:x.area, addr:(x.addr||'')+(x.unit?' '+x.unit:''),
+      client_id:String(x.id), name:x.name, area:x.area, addr:x.addr||'', unit:x.unit||'',
       lat:x.lat, lng:x.lng, designer:x.designer||'',
       acts:(x.acts||[]).join('/'), rate:x.rate,
       next_date:x.next||null, note:x.note||'', created:x.created||null,
