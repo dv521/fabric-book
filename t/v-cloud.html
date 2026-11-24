@@ -182,7 +182,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   var geoLat=null, geoLng=null, geoName='';
   try{data=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){data=[]}
   data.forEach(function(x){
-    if(!x.hist)x.hist=[]; if(!x.addr)x.addr=''; if(!x.unit)x.unit=''; if(x.synced===undefined)x.synced=false;
+    if(!x.hist)x.hist=[]; if(!x.addr)x.addr=''; else x.addr=trimAddr(x.addr); if(!x.unit)x.unit=''; if(x.synced===undefined)x.synced=false;
     if(!x.state){
       var h=x.hist[x.hist.length-1];
       x.state=(h&&h.a==='放弃跟进')?'gaveup':'active';
@@ -248,6 +248,16 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     });
   }
 
+  // 地址精简：去掉「中华人民共和国 + 省 + 市」，只留区/街道/门牌
+  function trimAddr(a){
+    a=String(a||'').trim();
+    a=a.replace(/^(中华人民共和国|中国)/,'');
+    a=a.replace(/^(内蒙古自治区|广西壮族自治区|西藏自治区|宁夏回族自治区|新疆维吾尔自治区|香港特别行政区|澳门特别行政区)/,'');
+    a=a.replace(/^[^省市]{2,8}省/,'');
+    a=a.replace(/^(北京市|上海市|天津市|重庆市)/,'');
+    a=a.replace(/^[^市]{2,8}市/,'');
+    return a.trim();
+  }
   function unitVal(){
     var b=($('#f-bldg').value||'').trim(), f=($('#f-floor').value||'').trim();
     return b&&f ? b+'-'+f : (b||f||'');
@@ -346,7 +356,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
           adm.filter(function(a){return a.order>=2}).sort(function(a,b){return a.order-b.order}).forEach(function(a){
             if(a.name&&parts.indexOf(a.name)<0)parts.push(a.name);
           });
-          geoName=parts.join('');
+          geoName=trimAddr(parts.join(''));
           if(geoName)addrInput.value=geoName;
           setHint('已定位'+(geoName?'：'+geoName:'')+'　'+(geoLat+','+geoLng)+'（可手改）','#1f7a4d');
         })
@@ -489,7 +499,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       return '<div class="rowwrap" data-id="'+x.id+'">'+
         '<div class="row"><div><div class="nm">'+esc(x.name)+(x.synced?'':' <span class="badge b-wait" style="font-size:10px">待同步</span>')+(gaveup?' <span class="badge b-dead" style="font-size:10px">已放弃</span>':'')+((!gaveup&&x.lastFollow===t)?' <span class="badge" style="font-size:10px;background:#E8F2FF;color:#0F64B5">今日已跟进</span>':'')+((!gaveup&&!x.next)?' <span class="badge" style="font-size:10px;background:#FFF4E5;color:#9A6218">待安排</span>':'')+'</div>'+
         '<div class="meta">'+esc(x.area)+(x.designer?' · '+esc(x.designer):'')+' · '+((x.acts&&x.acts.length)?esc(x.acts.join('/')):'—')+
-        (x.addr?'<br>📍'+esc(x.addr)+(x.unit?' '+esc(x.unit):''):'')+'</div></div>'+
+        '<br>'+(x.addr?('📍'+esc(x.addr)+(x.unit?' '+esc(x.unit):'')):'<span style="color:#a8b4bf">未填地址</span>')+'</div></div>'+
         '<div style="text-align:right"><span class="badge '+bcls+'">'+esc(x.rate)+'</span>'+
         '<div class="meta '+cls+'">'+x.next+'<br>'+when+'</div></div></div>'+
         '<div class="detail">'+
