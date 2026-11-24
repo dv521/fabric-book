@@ -73,6 +73,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 .addr-row .chips.mini{flex:0 0 auto;gap:5px;flex-wrap:nowrap}
 .addr-row .chips.mini .chip{padding:7px 10px;font-size:13px;border-radius:9px}
 .addr-row #f-addr{flex:1 1 auto;min-width:0}
+.addr-row #f-unit{flex:0 0 84px;width:84px;text-align:center;font-weight:600}
 .addr-row .geo-btn{flex:0 0 auto;border:1px solid #cfdde9;background:#f8fbfd;color:#1d6f8f;font:inherit;font-size:13.5px;font-weight:650;border-radius:11px;padding:0 12px;height:44px;white-space:nowrap}
 @media(max-width:430px){
   .addr-row{flex-wrap:wrap}
@@ -108,6 +109,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
         <button class="chip" data-v="其他">其他</button>
       </div>
       <input id="f-addr" type="text" placeholder="地址，可点定位" autocomplete="off">
+      <input id="f-unit" class="unit" type="text" inputmode="text" placeholder="3幢2F" autocomplete="off" aria-label="幢号楼层">
       <button id="btn-geo" type="button" class="geo-btn">定位</button>
     </div>
     <div id="geo-hint" style="font-size:12.5px;color:#7c8a97;margin-top:6px"></div>
@@ -173,7 +175,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   var geoLat=null, geoLng=null, geoName='';
   try{data=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){data=[]}
   data.forEach(function(x){
-    if(!x.hist)x.hist=[]; if(!x.addr)x.addr=''; if(x.synced===undefined)x.synced=false;
+    if(!x.hist)x.hist=[]; if(!x.addr)x.addr=''; if(!x.unit)x.unit=''; if(x.synced===undefined)x.synced=false;
     if(!x.state){
       var h=x.hist[x.hist.length-1];
       x.state=(h&&h.a==='放弃跟进')?'gaveup':'active';
@@ -357,7 +359,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     });
   }
   function collectDraft(){
-    return {name:$('#f-name').value, designer:$('#f-designer').value, addr:addrInput.value,
+    return {name:$('#f-name').value, designer:$('#f-designer').value, addr:addrInput.value, unit:$('#f-unit').value,
             area:(picked('#f-area')[0]||''), acts:picked('#f-acts'), rate:(picked('#f-rate')[0]||''),
             plus:(picked('#f-next')[0]||''), note:$('#f-note').value,
             lat:geoLat, lng:geoLng, geoName:geoName, ts:Date.now()};
@@ -401,7 +403,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     var acts=picked('#f-acts');
     var item={
       id:Date.now(), name:name, area:(picked('#f-area')[0]||'平湖'),
-      addr:addrInput.value.trim(), lat:geoLat, lng:geoLng, geoName:geoName,
+      addr:addrInput.value.trim(), unit:($('#f-unit').value||'').trim(), lat:geoLat, lng:geoLng, geoName:geoName,
       designer:$('#f-designer').value.trim(), acts:acts,
       rate:picked('#f-rate')[0]||'待观察', next:shift(plus),
       note:$('#f-note').value.trim(), created:today(),
@@ -409,7 +411,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     };
     data.unshift(item);save();clearDraft();
     filter='todo';syncFilter();render();badge();
-    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';addrInput.value='';
+    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';addrInput.value='';$('#f-unit').value='';
     geoLat=null;geoLng=null;geoName='';setHint('');
     Array.prototype.forEach.call(document.querySelectorAll('#f-acts .chip'),function(c){c.classList.remove('on')});
     toast('已存：'+name+'，'+item.next+' 跟进');
@@ -464,7 +466,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       return '<div class="rowwrap" data-id="'+x.id+'">'+
         '<div class="row"><div><div class="nm">'+esc(x.name)+(x.synced?'':' <span class="badge b-wait" style="font-size:10px">待同步</span>')+(gaveup?' <span class="badge b-dead" style="font-size:10px">已放弃</span>':'')+((!gaveup&&x.lastFollow===t)?' <span class="badge" style="font-size:10px;background:#E8F2FF;color:#0F64B5">今日已跟进</span>':'')+((!gaveup&&!x.next)?' <span class="badge" style="font-size:10px;background:#FFF4E5;color:#9A6218">待安排</span>':'')+'</div>'+
         '<div class="meta">'+esc(x.area)+(x.designer?' · '+esc(x.designer):'')+' · '+((x.acts&&x.acts.length)?esc(x.acts.join('/')):'—')+
-        (x.addr?'<br>📍'+esc(x.addr):'')+'</div></div>'+
+        (x.addr?'<br>📍'+esc(x.addr)+(x.unit?' '+esc(x.unit):''):'')+'</div></div>'+
         '<div style="text-align:right"><span class="badge '+bcls+'">'+esc(x.rate)+'</span>'+
         '<div class="meta '+cls+'">'+x.next+'<br>'+when+'</div></div></div>'+
         '<div class="detail">'+
@@ -553,9 +555,9 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   function csvCell(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'}
   $('#btn-csv').addEventListener('click',function(){
     if(!data.length){toast('没有数据');return}
-    var head=['客户','片区','详细地址','设计师','最近动作','评级','下次跟进','备注','跟进次数','最后跟进','录入日期','纬度','经度','已上云','状态'];
+    var head=['客户','片区','详细地址','幢/楼层','设计师','最近动作','评级','下次跟进','备注','跟进次数','最后跟进','录入日期','纬度','经度','已上云','状态'];
     var rows=[head.map(csvCell).join(',')].concat(data.map(function(x){
-      return [x.name,x.area,x.addr||'',x.designer,(x.acts||[]).join('/'),x.rate,x.next,x.note,(x.hist||[]).length,x.lastFollow||'',x.created,x.lat||'',x.lng||'',x.synced?'是':'否',x.state==='gaveup'?'已放弃':'跟进中'].map(csvCell).join(',');
+      return [x.name,x.area,x.addr||'',x.unit||'',x.designer,(x.acts||[]).join('/'),x.rate,x.next,x.note,(x.hist||[]).length,x.lastFollow||'',x.created,x.lat||'',x.lng||'',x.synced?'是':'否',x.state==='gaveup'?'已放弃':'跟进中'].map(csvCell).join(',');
     }));
     var blob=new Blob(['\ufeff'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'});
     var a=document.createElement('a');
@@ -566,7 +568,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   $('#btn-txt').addEventListener('click',function(){
     if(!data.length){toast('没有数据');return}
     var txt=data.map(function(x){
-      return x.next+' | '+x.name+' | '+(x.area||'')+' | '+(x.designer||'—')+' | '+((x.acts||[]).join('/')||'—')+' | '+x.rate+' | '+(x.note||'');
+      return x.next+' | '+x.name+' | '+(x.area||'')+' | '+(x.addr||'')+(x.unit?' '+x.unit:'')+' | '+(x.designer||'—')+' | '+((x.acts||[]).join('/')||'—')+' | '+x.rate+' | '+(x.note||'');
     }).join('\n');
     if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){toast('已复制，可粘到微信')},function(){prompt('手动复制：',txt)})}
     else prompt('手动复制：',txt);
