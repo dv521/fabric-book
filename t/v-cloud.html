@@ -394,7 +394,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     if($('#f-name').value) return;                 // 已有内容就不覆盖
     $('#f-name').value=d.name||'';
     $('#f-designer').value=d.designer||'';
-    addrInput.value=d.addr||'';
+    addrInput.value=trimAddr(d.addr||'');
     $('#f-note').value=d.note||'';
     geoLat=(d.lat===undefined?null:d.lat); geoLng=(d.lng===undefined?null:d.lng); geoName=d.geoName||'';
     if(d.area) setChips('#f-area', d.area);
@@ -606,7 +606,13 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   (function(){
     var el=document.getElementById('f-addr'); if(!el) return;
     el.addEventListener('blur',function(){
-      var v=el.value.replace(/(^|[\s号道街路区村园])(\d{3,4})\s*$/,function(m,pre,d){return pre+d.split('').join('-')});
+      var v=el.value.trim();
+      v=v.replace(/^\s*(中华人民共和国|中国)\s*/,'')
+         .replace(/^(内蒙古自治区|广西壮族自治区|西藏自治区|宁夏回族自治区|新疆维吾尔自治区|香港特别行政区|澳门特别行政区)/,'')
+         .replace(/^[^省市]{2,8}省/,'')
+         .replace(/^(北京市|上海市|天津市|重庆市)/,'')
+         .replace(/^[^市]{2,8}市/,'');
+      v=v.replace(/(^|[\s号道街路区村园])(\d{3,4})\s*$/,function(m,pre,d){return pre+d.split('').join('-')});
       if(v!==el.value) el.value=v;
     });
   })();
