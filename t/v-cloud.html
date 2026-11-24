@@ -123,11 +123,11 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
       </div>
       <input id="f-addr" type="text" placeholder="地址（可空，可点定位）" autocomplete="off">
       <span class="unit3">
-        <input id="f-b" type="tel" inputmode="numeric" maxlength="3" placeholder="8" aria-label="幢">
+        <input id="f-b" type="tel" inputmode="numeric" maxlength="4" placeholder="0" aria-label="幢">
         <i>幢</i>
-        <input id="f-f" type="tel" inputmode="numeric" maxlength="3" placeholder="8" aria-label="层">
+        <input id="f-f" type="tel" inputmode="numeric" maxlength="4" placeholder="0" aria-label="层">
         <i>层</i>
-        <input id="f-r" type="tel" inputmode="numeric" maxlength="4" placeholder="8" aria-label="室">
+        <input id="f-r" type="tel" inputmode="numeric" maxlength="4" placeholder="0" aria-label="室">
         <i>室</i>
       </span>
 
@@ -262,8 +262,8 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   // 地址精简：去掉「中华人民共和国 + 省 + 市」，只留区/街道/门牌
   function unitVal(){
     var b=($('#f-b').value||'').trim(), f=($('#f-f').value||'').trim(), r=($('#f-r').value||'').trim();
-    var parts=[b,f,r].filter(function(v){return v!==''});
-    return parts.join('-');
+    if(!b && !f && !r) return '';           // 三格全空：地址里不追加
+    return (b||'0')+'-'+(f||'0')+'-'+(r||'0');
   }
   function trimAddr(a){
     a=String(a||'').trim();
