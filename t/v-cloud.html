@@ -69,6 +69,16 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 .sync.warn{background:#fff3dc;color:#8a5a00}
 .sync.bad{background:#fdecea;color:#8f2b22}
 @media print{.save,.tools{display:none}}
+.addr-row{display:flex;align-items:center;gap:8px;flex-wrap:nowrap}
+.addr-row .chips.mini{flex:0 0 auto;gap:5px;flex-wrap:nowrap}
+.addr-row .chips.mini .chip{padding:7px 10px;font-size:13px;border-radius:9px}
+.addr-row #f-addr{flex:1 1 auto;min-width:0}
+.addr-row .geo-btn{flex:0 0 auto;border:1px solid #cfdde9;background:#f8fbfd;color:#1d6f8f;font:inherit;font-size:13.5px;font-weight:650;border-radius:11px;padding:0 12px;height:44px;white-space:nowrap}
+@media(max-width:430px){
+  .addr-row{flex-wrap:wrap}
+  .addr-row .chips.mini{width:100%}
+  .addr-row #f-addr{flex:1 1 140px}
+}
 </style>
 </head>
 <body>
@@ -90,17 +100,15 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     <label>客户／档口名（或代号 A01）</label>
     <input id="f-name" type="text" placeholder="例：平湖·XX服饰 / A07" autocomplete="off">
 
-    <label>片区</label>
-    <div class="chips" id="f-area">
-      <button class="chip on" data-v="平湖">平湖</button>
-      <button class="chip" data-v="杭州">杭州</button>
-      <button class="chip" data-v="其他">其他</button>
-    </div>
-
-    <label>详细地址</label>
-    <div style="display:flex;gap:8px">
-      <input id="f-addr" type="text" placeholder="点「定位」自动填，也可手改" autocomplete="off">
-      <button id="btn-geo" type="button" style="flex:0 0 auto;border:1px solid #cfdde9;background:#f8fbfd;color:#1d6f8f;font:inherit;font-size:14.5px;font-weight:650;border-radius:11px;padding:0 16px;white-space:nowrap">定位</button>
+    <label>片区与地址</label>
+    <div class="addr-row">
+      <div class="chips mini" id="f-area">
+        <button class="chip on" data-v="平湖">平湖</button>
+        <button class="chip" data-v="杭州">杭州</button>
+        <button class="chip" data-v="其他">其他</button>
+      </div>
+      <input id="f-addr" type="text" placeholder="地址，可点定位" autocomplete="off">
+      <button id="btn-geo" type="button" class="geo-btn">定位</button>
     </div>
     <div id="geo-hint" style="font-size:12.5px;color:#7c8a97;margin-top:6px"></div>
 
