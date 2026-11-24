@@ -83,16 +83,16 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 }
 </style>
 <style id="addr-final-fix">
-.addr-row{flex-wrap:wrap !important}
-.addr-row .chips{flex:1 1 100% !important;width:100% !important}
-.addr-row #f-addr{flex:1 1 0 !important;width:0 !important;min-width:0 !important}
-.addr-row .unit3{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px}
-.addr-row .unit3 input{width:38px;padding:10px 2px;text-align:center;font-weight:600}
-.addr-row .unit3 i{font-style:normal;font-size:12px;color:#7c8a97}
-@media(max-width:480px){
-  .addr-row #f-addr{flex:1 1 100% !important;width:100% !important}
-  .addr-row .unit3{flex:0 0 auto;margin-top:6px}
-}
+.addr-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%}
+.addr-row .chips{flex:1 1 100%;width:100%;gap:6px;flex-wrap:nowrap}
+.addr-row .chips .chip{padding:7px 10px;font-size:13px;border-radius:9px;white-space:nowrap}
+.ar-line{display:flex;align-items:center;gap:10px;width:100%}
+.ar-line #f-addr{flex:1 1 0;width:0;min-width:0}
+.geo-text{flex:0 0 auto;background:none;border:0;color:#1d6f8f;font:inherit;font-size:14.5px;font-weight:700;padding:6px 2px}
+.hand{margin-left:auto;font-size:12.5px;color:#8a97a6;letter-spacing:.05em}
+.unit3{display:inline-flex;align-items:center;gap:4px}
+.unit3 input{width:44px;padding:10px 2px;text-align:center;font-weight:600}
+.unit3 i{font-style:normal;font-size:12.5px;color:#7c8a97}
 </style>
 </head>
 <body>
@@ -116,22 +116,26 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 
     <label>片区与地址</label>
     <div class="addr-row">
-      <div class="chips mini" id="f-area">
+      <div class="chips" id="f-area">
         <button class="chip on" data-v="平湖">平湖</button>
         <button class="chip" data-v="杭州">杭州</button>
         <button class="chip" data-v="其他">其他</button>
       </div>
-      <input id="f-addr" type="text" placeholder="地址（可空，可点定位）" autocomplete="off">
-      <span class="unit3">
-        <input id="f-b" type="tel" inputmode="numeric" maxlength="4" placeholder="0" aria-label="幢">
-        <i>幢</i>
-        <input id="f-f" type="tel" inputmode="numeric" maxlength="4" placeholder="0" aria-label="层">
-        <i>层</i>
-        <input id="f-r" type="tel" inputmode="numeric" maxlength="4" placeholder="0" aria-label="室">
-        <i>室</i>
-      </span>
-
-      <button id="btn-geo" type="button" class="geo-btn">定位</button>
+      <div class="ar-line">
+        <input id="f-addr" type="text" placeholder="地址，可点定位（可空）" autocomplete="off">
+        <button id="btn-geo" type="button" class="geo-text">定位</button>
+      </div>
+      <div class="ar-line">
+        <span class="unit3">
+          <input id="f-b" type="tel" inputmode="numeric" maxlength="4" placeholder="0" aria-label="幢">
+          <i>幢</i>
+          <input id="f-f" type="tel" inputmode="numeric" maxlength="4" placeholder="0" aria-label="层">
+          <i>层</i>
+          <input id="f-r" type="tel" inputmode="numeric" maxlength="4" placeholder="0" aria-label="室">
+          <i>室</i>
+        </span>
+        <span class="hand">手工</span>
+      </div>
     </div>
     <div id="geo-hint" style="font-size:12.5px;color:#7c8a97;margin-top:6px"></div>
 
