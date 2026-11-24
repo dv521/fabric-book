@@ -245,6 +245,13 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   }
 
   // 地址精简：去掉「中华人民共和国 + 省 + 市」，只留区/街道/门牌
+  // 地址末尾连写的幢层室数字（888）自动补横杠（8-8-8）
+  function fmtUnitText(a){
+    a=String(a||'');
+    return a.replace(/(\d{3,4})\s*$/, function(m){
+      return m.replace(/\s+$/,'').split('').join('-');
+    });
+  }
   function trimAddr(a){
     a=String(a||'').trim();
     a=a.replace(/^(中华人民共和国|中国)/,'');
@@ -425,7 +432,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     var acts=picked('#f-acts');
     var item={
       id:Date.now(), name:name, area:(picked('#f-area')[0]||'平湖'),
-      addr:addrInput.value.trim(), lat:geoLat, lng:geoLng, geoName:geoName,
+      addr:fmtUnitText(addrInput.value.trim()), lat:geoLat, lng:geoLng, geoName:geoName,
       designer:$('#f-designer').value.trim(), acts:acts,
       rate:picked('#f-rate')[0]||'待观察', next:shift(plus),
       note:$('#f-note').value.trim(), created:today(),
@@ -608,6 +615,13 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   } else if(cloudOn){ bar('ok','云端已连接；保存后自动上云'); syncAll(false,true); }
   else { bar('warn','云端未配置：现在和旧版一样，只存本机'); }
 })();
+  (function(){
+    var el=document.getElementById('f-addr'); if(!el) return;
+    el.addEventListener('blur',function(){
+      var v=el.value.replace(/(\d{3,4})\s*$/,function(m){return m.trim().split('').join('-')});
+      if(v!==el.value) el.value=v;
+    });
+  })();
 </script>
 </body>
 </html>
