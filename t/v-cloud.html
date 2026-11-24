@@ -74,6 +74,13 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 .addr-row .chips .chip{padding:7px 10px;font-size:13px;border-radius:9px;white-space:nowrap}
 .addr-row #f-addr{flex:1 1 0;width:0;min-width:0}
 .addr-row .geo-btn{flex:0 0 auto;border:1px solid #cfdde9;background:#f8fbfd;color:#1d6f8f;font:inherit;font-size:13.5px;font-weight:650;border-radius:11px;padding:0 12px;height:44px;white-space:nowrap}
+.addr-row .unit3{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px}
+.addr-row .unit3 input{width:38px;padding:10px 2px;text-align:center;font-weight:600}
+.addr-row .unit3 i{font-style:normal;font-size:12px;color:#7c8a97}
+@media(max-width:430px){
+  .addr-row #f-addr{flex:1 1 100%}
+  .addr-row .unit3{width:100%;justify-content:flex-start;margin-top:2px}
+}
 </style>
 </head>
 <body>
@@ -102,7 +109,15 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
         <button class="chip" data-v="杭州">杭州</button>
         <button class="chip" data-v="其他">其他</button>
       </div>
-      <input id="f-addr" type="text" placeholder="地址 + 幢 + 层 + 室，如：18号 6幢 8层 502室（可空）" autocomplete="off">
+      <input id="f-addr" type="text" placeholder="地址（可空，可点定位）" autocomplete="off">
+      <span class="unit3">
+        <input id="f-b" type="tel" inputmode="numeric" maxlength="3" placeholder="8" aria-label="幢">
+        <i>幢</i>
+        <input id="f-f" type="tel" inputmode="numeric" maxlength="3" placeholder="8" aria-label="层">
+        <i>层</i>
+        <input id="f-r" type="tel" inputmode="numeric" maxlength="4" placeholder="8" aria-label="室">
+        <i>室</i>
+      </span>
 
       <button id="btn-geo" type="button" class="geo-btn">定位</button>
     </div>
@@ -233,12 +248,10 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   }
 
   // 地址精简：去掉「中华人民共和国 + 省 + 市」，只留区/街道/门牌
-  // 地址末尾连写的幢层室数字（888）自动补横杠（8-8-8）
-  function fmtUnitText(a){
-    a=String(a||'');
-    return a.replace(/(^|[\s号道街路区村园])(\d{3,4})\s*$/, function(m,pre,d){
-      return pre + d.split('').join('-');
-    });
+  function unitVal(){
+    var b=($('#f-b').value||'').trim(), f=($('#f-f').value||'').trim(), r=($('#f-r').value||'').trim();
+    var parts=[b,f,r].filter(function(v){return v!==''});
+    return parts.join('-');
   }
   function trimAddr(a){
     a=String(a||'').trim();
@@ -376,7 +389,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     });
   }
   function collectDraft(){
-    return {name:$('#f-name').value, designer:$('#f-designer').value, addr:addrInput.value,
+    return {name:$('#f-name').value, designer:$('#f-designer').value, addr:addrInput.value, unit:unitVal(),
             area:(picked('#f-area')[0]||''), acts:picked('#f-acts'), rate:(picked('#f-rate')[0]||''),
             plus:(picked('#f-next')[0]||''), note:$('#f-note').value,
             lat:geoLat, lng:geoLng, geoName:geoName, ts:Date.now()};
@@ -394,7 +407,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     if($('#f-name').value) return;                 // 已有内容就不覆盖
     $('#f-name').value=d.name||'';
     $('#f-designer').value=d.designer||'';
-    addrInput.value=trimAddr(d.addr||'');
+    addrInput.value=trimAddr(d.addr||''); if(d.unit){var a=String(d.unit).split('-'); $('#f-b').value=a[0]||'';$('#f-f').value=a[1]||'';$('#f-r').value=a[2]||'';}
     $('#f-note').value=d.note||'';
     geoLat=(d.lat===undefined?null:d.lat); geoLng=(d.lng===undefined?null:d.lng); geoName=d.geoName||'';
     if(d.area) setChips('#f-area', d.area);
@@ -420,7 +433,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     var acts=picked('#f-acts');
     var item={
       id:Date.now(), name:name, area:(picked('#f-area')[0]||'平湖'),
-      addr:fmtUnitText(addrInput.value.trim()), lat:geoLat, lng:geoLng, geoName:geoName,
+      addr:(trimAddr(addrInput.value.trim())+(unitVal()?' '+unitVal():'')).trim(), lat:geoLat, lng:geoLng, geoName:geoName,
       designer:$('#f-designer').value.trim(), acts:acts,
       rate:picked('#f-rate')[0]||'待观察', next:shift(plus),
       note:$('#f-note').value.trim(), created:today(),
@@ -428,7 +441,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
     };
     data.unshift(item);save();clearDraft();
     filter='todo';syncFilter();render();badge();
-    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';addrInput.value='';
+    $('#f-name').value='';$('#f-designer').value='';$('#f-note').value='';addrInput.value='';$('#f-b').value='';$('#f-f').value='';$('#f-r').value='';
     geoLat=null;geoLng=null;geoName='';setHint('');
     Array.prototype.forEach.call(document.querySelectorAll('#f-acts .chip'),function(c){c.classList.remove('on')});
     toast('已存：'+name+'，'+item.next+' 跟进');
@@ -603,19 +616,10 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   } else if(cloudOn){ bar('ok','云端已连接；保存后自动上云'); syncAll(false,true); }
   else { bar('warn','云端未配置：现在和旧版一样，只存本机'); }
 })();
-  (function(){
-    var el=document.getElementById('f-addr'); if(!el) return;
-    el.addEventListener('blur',function(){
-      var v=el.value.trim();
-      v=v.replace(/^\s*(中华人民共和国|中国)\s*/,'')
-         .replace(/^(内蒙古自治区|广西壮族自治区|西藏自治区|宁夏回族自治区|新疆维吾尔自治区|香港特别行政区|澳门特别行政区)/,'')
-         .replace(/^[^省市]{2,8}省/,'')
-         .replace(/^(北京市|上海市|天津市|重庆市)/,'')
-         .replace(/^[^市]{2,8}市/,'');
-      v=v.replace(/(^|[\s号道街路区村园])(\d{3,4})\s*$/,function(m,pre,d){return pre+d.split('').join('-')});
-      if(v!==el.value) el.value=v;
-    });
-  })();
+  ['f-b','f-f','f-r'].forEach(function(id){
+    var el=document.getElementById(id); if(!el) return;
+    el.addEventListener('input',function(){ var v=el.value.replace(/[^0-9]/g,''); if(v!==el.value) el.value=v; });
+  });
 </script>
 </body>
 </html>
