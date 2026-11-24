@@ -248,8 +248,8 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   // 地址末尾连写的幢层室数字（888）自动补横杠（8-8-8）
   function fmtUnitText(a){
     a=String(a||'');
-    return a.replace(/(\d{3,4})\s*$/, function(m){
-      return m.replace(/\s+$/,'').split('').join('-');
+    return a.replace(/(^|\s)(\d{3,4})\s*$/, function(m,pre,d){
+      return pre + d.split('').join('-');
     });
   }
   function trimAddr(a){
@@ -618,7 +618,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   (function(){
     var el=document.getElementById('f-addr'); if(!el) return;
     el.addEventListener('blur',function(){
-      var v=el.value.replace(/(\d{3,4})\s*$/,function(m){return m.trim().split('').join('-')});
+      var v=el.value.replace(/(^|\s)(\d{3,4})\s*$/,function(m,pre,d){return pre+d.split('').join('-')});
       if(v!==el.value) el.value=v;
     });
   })();
