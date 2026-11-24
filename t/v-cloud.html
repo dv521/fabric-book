@@ -73,9 +73,6 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
 .addr-row .chips.mini{flex:0 0 auto;gap:5px;flex-wrap:nowrap}
 .addr-row .chips.mini .chip{padding:7px 10px;font-size:13px;border-radius:9px}
 .addr-row #f-addr{flex:1 1 auto;min-width:0}
-.unit-pair{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
-.unit-pair input{width:42px;text-align:center;font-weight:600;padding:10px 4px}
-.unit-pair i{font-style:normal;font-size:12.5px;color:#7c8a97}
 .addr-row .geo-btn{flex:0 0 auto;border:1px solid #cfdde9;background:#f8fbfd;color:#1d6f8f;font:inherit;font-size:13.5px;font-weight:650;border-radius:11px;padding:0 12px;height:44px;white-space:nowrap}
 @media(max-width:430px){
   .addr-row{flex-wrap:wrap}
@@ -177,7 +174,7 @@ h2 span{font-weight:600;font-size:12px;color:#93a3b1}
   var geoLat=null, geoLng=null, geoName='';
   try{data=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){data=[]}
   data.forEach(function(x){
-    if(!x.hist)x.hist=[]; if(!x.addr)x.addr=''; else x.addr=trimAddr(x.addr); if(!x.unit)x.unit=''; if(x.synced===undefined)x.synced=false;
+    if(!x.hist)x.hist=[]; if(!x.addr)x.addr=''; else x.addr=trimAddr(x.addr); if(x.synced===undefined)x.synced=false;
     if(!x.state){
       var h=x.hist[x.hist.length-1];
       x.state=(h&&h.a==='放弃跟进')?'gaveup':'active';
