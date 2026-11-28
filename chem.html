@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>从原油到羽绒服面料 · 产业链导图 | dv面料手记</title>
+<meta name="description" content="PA6 锦纶、PET 涤纶、PA66 尼龙三条链，从原油到羽绒服面料，标注 15D34F 所在位置。">
+<style>
+:root{
+  --navy:#22384D; --grey:#5B7086; --line:#C9D5E0; --bg:#F5F7FA;
+  --pa6:#1F6FA8; --pa6bg:#E7F0F7;
+  --pet:#B4632C; --petbg:#FBEEE6;
+  --pa66:#3F7A56; --pa66bg:#E9F3EC;
+  --up:#3B5570; --upbg:#E9EFF5;
+  --end:#8E3A5D; --endbg:#F6E9EE;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden}
+body{
+  margin:0;background:var(--bg);color:var(--navy);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-user-select:none;user-select:none;line-height:1.35;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 16px 60px}
+h1{font-size:26px;margin:6px 0 6px;letter-spacing:.5px}
+.sub{color:var(--grey);font-size:13px;margin-bottom:4px;overflow-wrap:anywhere}
+.rule{height:2px;background:var(--navy);margin:14px 0 22px;border:0}
+
+.lane{margin:0 0 26px}
+.lane h2{font-size:16px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.lane h2 i{display:inline-block;width:6px;height:16px;border-radius:3px;background:currentColor}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;counter-reset:step}
+.card{
+  position:relative;flex:1 1 150px;min-width:132px;max-width:200px;
+  border:1.5px solid;border-radius:12px;padding:9px 26px 10px 10px;background:#fff;
+}
+.card::after{
+  counter-increment:step;content:counter(step);position:absolute;top:7px;right:8px;
+  width:16px;height:16px;line-height:16px;text-align:center;border-radius:8px;
+  font-size:10px;font-weight:700;color:rgba(34,56,77,.45);
+  background:rgba(255,255,255,.9);border:1px solid rgba(34,56,77,.14);
+}
+.card b{display:block;font-size:15px;font-weight:700;margin-bottom:3px}
+.card span{display:block;font-size:11.5px;color:var(--grey);line-height:1.3}
+.arw{display:none;align-self:center;color:var(--line);font-size:16px;flex:0 0 auto;padding:0 1px}
+
+.up .card{border-color:var(--up);background:var(--upbg)} .up .card b{color:var(--up)}
+.pa6 .card{border-color:var(--pa6);background:var(--pa6bg)} .pa6 .card b{color:var(--pa6)}
+.pet .card{border-color:var(--pet);background:var(--petbg)} .pet .card b{color:var(--pet)}
+.pa66 .card{border-color:var(--pa66);background:var(--pa66bg)} .pa66 .card b{color:var(--pa66)}
+.hl{border-width:2.5px;border-color:var(--end)!important;background:var(--endbg)!important;box-shadow:0 2px 10px rgba(142,58,93,.16)}
+.hl b{color:var(--end)!important}
+
+.join{margin-top:8px;background:var(--navy);color:#fff;border-radius:14px;padding:14px 16px}
+.join b{display:block;font-size:16px;margin-bottom:4px}
+.join span{font-size:12px;color:#C9D6E2}
+
+.note{margin-top:18px;color:var(--grey);font-size:11.5px;line-height:1.6}
+.wm{position:fixed;right:12px;bottom:10px;font-size:10px;color:rgba(34,56,77,.28);pointer-events:none}
+
+@media (max-width:760px){
+  .wrap{padding:16px 12px 54px}
+  h1{font-size:21px}
+  .flow{flex-direction:column;gap:0}
+  .card{flex:1 1 auto;max-width:none;min-width:0}
+  .arw{display:block;width:100%;text-align:center;padding:2px 0;font-size:14px;transform:rotate(90deg);line-height:1}
+  .lane h2{font-size:15px}
+  .join b{font-size:15px}
+}
+@media print{
+  body{background:#fff}
+  .wm{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>从原油到羽绒服面料</h1>
+  <div class="sub">三条链：PA6 锦纶 · PET 涤纶 · PA66 尼龙　｜　上游共用石脑油</div>
+  <hr class="rule">
+
+  <section class="lane up">
+    <h2 style="color:var(--up)"><i></i>上游：共用同一条石脑油</h2>
+    <div class="flow">
+      <div class="card"><b>原油</b><span>地下开采</span></div><div class="arw">→</div>
+      <div class="card"><b>常减压蒸馏</b><span>按沸点切割</span></div><div class="arw">→</div>
+      <div class="card"><b>石脑油</b><span>轻质馏分</span></div><div class="arw">→</div>
+      <div class="card"><b>蒸汽裂解</b><span>产乙烯·丙烯·丁二烯</span></div><div class="arw">→</div>
+      <div class="card"><b>裂解汽油</b><span>含苯，可抽提</span></div><div class="arw">→</div>
+      <div class="card"><b>芳烃抽提</b><span>苯·甲苯·二甲苯</span></div>
+    </div>
+  </section>
+
+  <section class="lane pa6">
+    <h2 style="color:var(--pa6)"><i></i>链一　PA6 锦纶（15D34F 走这条）</h2>
+    <div class="flow">
+      <div class="card"><b>苯</b><span>重整/裂解汽油</span></div><div class="arw">→</div>
+      <div class="card"><b>环己烷</b><span>苯加氢</span></div><div class="arw">→</div>
+      <div class="card"><b>环己酮·环己醇</b><span>环己烷氧化</span></div><div class="arw">→</div>
+      <div class="card"><b>肟化·重排</b><span>生成 CPL</span></div><div class="arw">→</div>
+      <div class="card"><b>CPL 己内酰胺</b><span>聚合单体</span></div><div class="arw">→</div>
+      <div class="card"><b>开环聚合</b><span>PA6 切片</span></div><div class="arw">→</div>
+      <div class="card"><b>熔融纺丝</b><span>POY 原丝</span></div><div class="arw">→</div>
+      <div class="card"><b>加弹 DTY</b><span>15 旦 / 34 孔</span></div><div class="arw">→</div>
+      <div class="card hl"><b>15D34F</b><span>36 g/㎡ · 有效门幅 143 cm</span></div>
+    </div>
+  </section>
+
+  <section class="lane pet">
+    <h2 style="color:var(--pet)"><i></i>链二　PET 涤纶（对照：便宜、手感偏硬）</h2>
+    <div class="flow">
+      <div class="card"><b>乙烯</b><span>裂解气分离</span></div><div class="arw">→</div>
+      <div class="card"><b>环氧乙烷</b><span>乙烯氧化</span></div><div class="arw">→</div>
+      <div class="card"><b>乙二醇 MEG</b><span>PET 的另一半</span></div><div class="arw">→</div>
+      <div class="card"><b>对二甲苯 PX</b><span>二甲苯分离</span></div><div class="arw">→</div>
+      <div class="card"><b>PTA</b><span>PX 氧化</span></div><div class="arw">→</div>
+      <div class="card"><b>缩聚</b><span>PTA + MEG</span></div><div class="arw">→</div>
+      <div class="card"><b>PET 切片</b><span>纺丝 POY/FDY</span></div><div class="arw">→</div>
+      <div class="card"><b>加弹 DTY</b><span>涤纶低弹丝</span></div>
+    </div>
+  </section>
+
+  <section class="lane pa66">
+    <h2 style="color:var(--pa66)"><i></i>链三　PA66 尼龙（更挺、更耐磨，成本更高）</h2>
+    <div class="flow">
+      <div class="card"><b>丁二烯</b><span>裂解 C4 馏分</span></div><div class="arw">→</div>
+      <div class="card"><b>＋氢氰酸 HCN</b><span>氢氧化法加成</span></div><div class="arw">→</div>
+      <div class="card"><b>己二腈 ADN</b><span>中间体</span></div><div class="arw">→</div>
+      <div class="card"><b>加氢</b><span>己二胺 HMDA</span></div><div class="arw">→</div>
+      <div class="card"><b>己二酸 AA</b><span>环己醇氧化</span></div><div class="arw">→</div>
+      <div class="card"><b>缩聚</b><span>HMDA + AA</span></div><div class="arw">→</div>
+      <div class="card"><b>PA66 切片</b><span>纺丝 DTY</span></div>
+    </div>
+  </section>
+
+  <div class="join">
+    <b>三条链汇合：纺丝 → 织造 → 染整 → 羽绒服面料</b>
+    <span>同一台喷水/喷气织机都能织，差在纱线：锦纶更轻更软，涤纶更便宜，尼龙 66 更挺更耐磨。</span>
+  </div>
+
+  <div class="note">
+    属名依据 GB/T 4146.1-2020《纺织品 化学纤维 第1部分：属名》；工艺路线按化纤行业通行流程整理；15D34F 克重与门幅为厂内实测（36 g/㎡、有效门幅 143 cm，标签常写含边 145）。<br>
+    TT纺织 · 窦金龙 · 轻薄羽绒服面料 · 杭州／平湖
+  </div>
+</div>
+<div class="wm">TT纺织 窦金龙 dv13588355444</div>
+</body>
+</html>
