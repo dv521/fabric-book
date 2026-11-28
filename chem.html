@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>从原油到羽绒服面料 · 产业链导图 | dv面料手记</title>
-<meta name="description" content="PA6 锦纶、PET 涤纶、PA66 尼龙三条链，从原油到羽绒服面料，标注 15D34F 所在位置。">
+<meta name="description" content="石脑油分两支：催化重整产芳烃（主）、蒸汽裂解产烯烃与裂解汽油（副）；到 PA6 锦纶、PET 涤纶、PA66 尼龙三条链，标注 15D34F 位置。">
 <style>
 :root{
   --navy:#22384D; --grey:#5B7086; --line:#C9D5E0; --bg:#F5F7FA;
@@ -27,8 +27,9 @@ h1{font-size:26px;margin:6px 0 6px;letter-spacing:.5px}
 .rule{height:2px;background:var(--navy);margin:14px 0 22px;border:0}
 
 .lane{margin:0 0 26px}
-.lane h2{font-size:16px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.lane h2{font-size:16px;margin:0 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .lane h2 i{display:inline-block;width:6px;height:16px;border-radius:3px;background:currentColor}
+.lane h2 em{font-style:normal;font-size:12px;color:var(--grey);font-weight:400}
 .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;counter-reset:step}
 .card{
   position:relative;flex:1 1 150px;min-width:132px;max-width:200px;
@@ -51,6 +52,14 @@ h1{font-size:26px;margin:6px 0 6px;letter-spacing:.5px}
 .hl{border-width:2.5px;border-color:var(--end)!important;background:var(--endbg)!important;box-shadow:0 2px 10px rgba(142,58,93,.16)}
 .hl b{color:var(--end)!important}
 
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0}
+.branch{border-radius:14px;padding:12px 12px 14px;background:rgba(59,85,112,.05);border:1px dashed rgba(59,85,112,.28)}
+.branch .tag{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--up);border-radius:10px;padding:2px 8px;margin-bottom:8px}
+.branch .tag.alt{background:#7A8B9C}
+.branch .card{max-width:none;flex:1 1 auto;margin-bottom:8px}
+.branch .down{color:var(--line);text-align:center;font-size:15px;line-height:1;margin:2px 0 6px}
+.merge{margin:2px 0 10px}
+
 .join{margin-top:8px;background:var(--navy);color:#fff;border-radius:14px;padding:14px 16px}
 .join b{display:block;font-size:16px;margin-bottom:4px}
 .join span{font-size:12px;color:#C9D6E2}
@@ -64,19 +73,17 @@ h1{font-size:26px;margin:6px 0 6px;letter-spacing:.5px}
   .flow{flex-direction:column;gap:0}
   .card{flex:1 1 auto;max-width:none;min-width:0}
   .arw{display:block;width:100%;text-align:center;padding:2px 0;font-size:14px;transform:rotate(90deg);line-height:1}
+  .fork{grid-template-columns:1fr;gap:10px}
   .lane h2{font-size:15px}
   .join b{font-size:15px}
 }
-@media print{
-  body{background:#fff}
-  .wm{display:none}
-}
+@media print{ body{background:#fff} .wm{display:none} }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>从原油到羽绒服面料</h1>
-  <div class="sub">三条链：PA6 锦纶 · PET 涤纶 · PA66 尼龙　｜　上游共用石脑油</div>
+  <div class="sub">石脑油分两支：催化重整产芳烃（主）、蒸汽裂解产烯烃与裂解汽油（副）　｜　三条链：PA6 · PET · PA66</div>
   <hr class="rule">
 
   <section class="lane up">
@@ -84,51 +91,73 @@ h1{font-size:26px;margin:6px 0 6px;letter-spacing:.5px}
     <div class="flow">
       <div class="card"><b>原油</b><span>地下开采</span></div><div class="arw">→</div>
       <div class="card"><b>常减压蒸馏</b><span>按沸点切割</span></div><div class="arw">→</div>
-      <div class="card"><b>石脑油</b><span>轻质馏分</span></div><div class="arw">→</div>
-      <div class="card"><b>蒸汽裂解</b><span>产乙烯·丙烯·丁二烯</span></div><div class="arw">→</div>
-      <div class="card"><b>裂解汽油</b><span>含苯，可抽提</span></div><div class="arw">→</div>
-      <div class="card"><b>芳烃抽提</b><span>苯·甲苯·二甲苯</span></div>
+      <div class="card"><b>石脑油</b><span>轻质馏分</span></div>
+    </div>
+
+    <div class="fork">
+      <div class="branch">
+        <span class="tag">主路线</span>
+        <div class="card"><b>催化重整</b><span>石脑油重整，生成芳烃</span></div>
+        <div class="down">↓</div>
+        <div class="card"><b>重整生成油</b><span>苯 · 甲苯 · 二甲苯</span></div>
+      </div>
+      <div class="branch">
+        <span class="tag alt">副产路线</span>
+        <div class="card"><b>蒸汽裂解</b><span>产乙烯·丙烯·丁二烯＋裂解汽油</span></div>
+        <div class="down">↓</div>
+        <div class="card"><b>裂解汽油</b><span>含苯 40–60%，需先加氢</span></div>
+      </div>
+    </div>
+
+    <div class="flow merge">
+      <div class="card" style="max-width:none;flex:1 1 auto"><b>芳烃抽提＋分离</b><span>两条路在这里合流，分出苯、甲苯、二甲苯</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="card"><b>苯</b><span>→ 环己烷 → 己内酰胺</span></div>
+      <div class="card"><b>甲苯</b><span>可歧化转苯</span></div>
+      <div class="card"><b>二甲苯</b><span>分离出对二甲苯 PX</span></div>
     </div>
   </section>
 
   <section class="lane pa6">
-    <h2 style="color:var(--pa6)"><i></i>链一　PA6 锦纶（15D34F 走这条）</h2>
+    <h2 style="color:var(--pa6)"><i></i>链一　PA6 锦纶 <em>15D34F 走这条</em></h2>
     <div class="flow">
-      <div class="card"><b>苯</b><span>重整/裂解汽油</span></div><div class="arw">→</div>
-      <div class="card"><b>环己烷</b><span>苯加氢</span></div><div class="arw">→</div>
-      <div class="card"><b>环己酮·环己醇</b><span>环己烷氧化</span></div><div class="arw">→</div>
-      <div class="card"><b>肟化·重排</b><span>生成 CPL</span></div><div class="arw">→</div>
-      <div class="card"><b>CPL 己内酰胺</b><span>聚合单体</span></div><div class="arw">→</div>
-      <div class="card"><b>开环聚合</b><span>PA6 切片</span></div><div class="arw">→</div>
-      <div class="card"><b>熔融纺丝</b><span>POY 原丝</span></div><div class="arw">→</div>
-      <div class="card"><b>加弹 DTY</b><span>15 旦 / 34 孔</span></div><div class="arw">→</div>
+      <div class="card"><b>苯</b><span>重整为主·裂解副产</span></div>
+      <div class="card"><b>环己烷</b><span>苯加氢</span></div>
+      <div class="card"><b>环己酮·环己醇</b><span>环己烷氧化</span></div>
+      <div class="card"><b>肟化·重排</b><span>生成 CPL</span></div>
+      <div class="card"><b>CPL 己内酰胺</b><span>聚合单体</span></div>
+      <div class="card"><b>开环聚合</b><span>PA6 切片</span></div>
+      <div class="card"><b>熔融纺丝</b><span>POY 原丝</span></div>
+      <div class="card"><b>加弹 DTY</b><span>15 旦 / 34 孔</span></div>
       <div class="card hl"><b>15D34F</b><span>36 g/㎡ · 有效门幅 143 cm</span></div>
     </div>
   </section>
 
   <section class="lane pet">
-    <h2 style="color:var(--pet)"><i></i>链二　PET 涤纶（对照：便宜、手感偏硬）</h2>
+    <h2 style="color:var(--pet)"><i></i>链二　PET 涤纶 <em>对照：便宜、手感偏硬</em></h2>
     <div class="flow">
-      <div class="card"><b>乙烯</b><span>裂解气分离</span></div><div class="arw">→</div>
-      <div class="card"><b>环氧乙烷</b><span>乙烯氧化</span></div><div class="arw">→</div>
-      <div class="card"><b>乙二醇 MEG</b><span>PET 的另一半</span></div><div class="arw">→</div>
-      <div class="card"><b>对二甲苯 PX</b><span>二甲苯分离</span></div><div class="arw">→</div>
-      <div class="card"><b>PTA</b><span>PX 氧化</span></div><div class="arw">→</div>
-      <div class="card"><b>缩聚</b><span>PTA + MEG</span></div><div class="arw">→</div>
-      <div class="card"><b>PET 切片</b><span>纺丝 POY/FDY</span></div><div class="arw">→</div>
+      <div class="card"><b>乙烯</b><span>裂解气分离</span></div>
+      <div class="card"><b>环氧乙烷</b><span>乙烯氧化</span></div>
+      <div class="card"><b>乙二醇 MEG</b><span>PET 的另一半</span></div>
+      <div class="card"><b>对二甲苯 PX</b><span>二甲苯分离</span></div>
+      <div class="card"><b>PTA</b><span>PX 氧化</span></div>
+      <div class="card"><b>缩聚</b><span>PTA + MEG</span></div>
+      <div class="card"><b>PET 切片</b><span>纺丝 POY/FDY</span></div>
       <div class="card"><b>加弹 DTY</b><span>涤纶低弹丝</span></div>
     </div>
   </section>
 
   <section class="lane pa66">
-    <h2 style="color:var(--pa66)"><i></i>链三　PA66 尼龙（更挺、更耐磨，成本更高）</h2>
+    <h2 style="color:var(--pa66)"><i></i>链三　PA66 尼龙 <em>更挺、更耐磨，成本更高</em></h2>
     <div class="flow">
-      <div class="card"><b>丁二烯</b><span>裂解 C4 馏分</span></div><div class="arw">→</div>
-      <div class="card"><b>＋氢氰酸 HCN</b><span>氢氧化法加成</span></div><div class="arw">→</div>
-      <div class="card"><b>己二腈 ADN</b><span>中间体</span></div><div class="arw">→</div>
-      <div class="card"><b>加氢</b><span>己二胺 HMDA</span></div><div class="arw">→</div>
-      <div class="card"><b>己二酸 AA</b><span>环己醇氧化</span></div><div class="arw">→</div>
-      <div class="card"><b>缩聚</b><span>HMDA + AA</span></div><div class="arw">→</div>
+      <div class="card"><b>丁二烯</b><span>裂解 C4 馏分</span></div>
+      <div class="card"><b>＋氢氰酸 HCN</b><span>氢氧化法加成</span></div>
+      <div class="card"><b>己二腈 ADN</b><span>中间体</span></div>
+      <div class="card"><b>加氢</b><span>己二胺 HMDA</span></div>
+      <div class="card"><b>己二酸 AA</b><span>环己醇氧化</span></div>
+      <div class="card"><b>缩聚</b><span>HMDA + AA</span></div>
       <div class="card"><b>PA66 切片</b><span>纺丝 DTY</span></div>
     </div>
   </section>
