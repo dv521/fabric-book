@@ -3,175 +3,187 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>从原油到羽绒服面料 · 产业链导图 | dv面料手记</title>
-<meta name="description" content="石脑油分两支：催化重整产芳烃（主）、蒸汽裂解产烯烃与裂解汽油（副）；到 PA6 锦纶、PET 涤纶、PA66 尼龙三条链，标注 15D34F 位置。">
+<title>从原油到羽绒服面料：三条线 | dv面料手记</title>
+<meta name="description" content="PA6 锦纶、PET 涤纶、PA66 尼龙三条线，从原油到面料，一步一格，标出 15D34F 位置。">
 <style>
-:root{
-  --navy:#22384D; --grey:#5B7086; --line:#C9D5E0; --bg:#F5F7FA;
-  --pa6:#1F6FA8; --pa6bg:#E7F0F7;
-  --pet:#B4632C; --petbg:#FBEEE6;
-  --pa66:#3F7A56; --pa66bg:#E9F3EC;
-  --up:#3B5570; --upbg:#E9EFF5;
-  --end:#8E3A5D; --endbg:#F6E9EE;
-}
+:root{--navy:#22384D;--grey:#5B7086;--line:#C9D5E0;--bg:#F5F7FA;
+--pa6:#1F6FA8;--pa6bg:#EDF4FA;--pet:#B4632C;--petbg:#FCF1EA;--pa66:#3F7A56;--pa66bg:#EDF5F0;--end:#8E3A5D;--endbg:#FAEEF2}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{overflow-x:hidden}
-body{
-  margin:0;background:var(--bg);color:var(--navy);
-  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
-  -webkit-user-select:none;user-select:none;line-height:1.35;
-}
-.wrap{max-width:1180px;margin:0 auto;padding:22px 16px 60px}
-h1{font-size:26px;margin:6px 0 6px;letter-spacing:.5px}
-.sub{color:var(--grey);font-size:13px;margin-bottom:4px;overflow-wrap:anywhere}
-.rule{height:2px;background:var(--navy);margin:14px 0 22px;border:0}
+body{margin:0;background:var(--bg);color:var(--navy);
+font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+-webkit-user-select:none;user-select:none;line-height:1.35}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 16px 56px}
+h1{font-size:25px;margin:4px 0 6px}
+.sub{color:var(--grey);font-size:13px}
+.rule{height:2px;background:var(--navy);margin:14px 0 20px;border:0}
 
-.lane{margin:0 0 26px}
-.lane h2{font-size:16px;margin:0 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.lane h2 i{display:inline-block;width:6px;height:16px;border-radius:3px;background:currentColor}
-.lane h2 em{font-style:normal;font-size:12px;color:var(--grey);font-weight:400}
-.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;counter-reset:step}
-.card{
-  position:relative;flex:1 1 150px;min-width:132px;max-width:200px;
-  border:1.5px solid;border-radius:12px;padding:9px 26px 10px 10px;background:#fff;
-}
-.card::after{
-  counter-increment:step;content:counter(step);position:absolute;top:7px;right:8px;
-  width:16px;height:16px;line-height:16px;text-align:center;border-radius:8px;
-  font-size:10px;font-weight:700;color:rgba(34,56,77,.45);
-  background:rgba(255,255,255,.9);border:1px solid rgba(34,56,77,.14);
-}
-.card b{display:block;font-size:15px;font-weight:700;margin-bottom:3px}
-.card span{display:block;font-size:11.5px;color:var(--grey);line-height:1.3}
-.arw{display:none;align-self:center;color:var(--line);font-size:16px;flex:0 0 auto;padding:0 1px}
+.chain{margin:0 0 24px}
+.chain h2{font-size:16px;margin:0 0 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.chain h2 i{width:6px;height:16px;border-radius:3px;background:currentColor;display:inline-block}
+.chain h2 em{font-style:normal;font-size:12px;color:var(--grey);font-weight:400}
+.chain .why{font-size:12px;color:var(--grey);margin:0 0 10px}
 
-.up .card{border-color:var(--up);background:var(--upbg)} .up .card b{color:var(--up)}
-.pa6 .card{border-color:var(--pa6);background:var(--pa6bg)} .pa6 .card b{color:var(--pa6)}
-.pet .card{border-color:var(--pet);background:var(--petbg)} .pet .card b{color:var(--pet)}
-.pa66 .card{border-color:var(--pa66);background:var(--pa66bg)} .pa66 .card b{color:var(--pa66)}
-.hl{border-width:2.5px;border-color:var(--end)!important;background:var(--endbg)!important;box-shadow:0 2px 10px rgba(142,58,93,.16)}
-.hl b{color:var(--end)!important}
+.flow{display:flex;flex-direction:column;gap:8px}
+.row{display:flex;align-items:center;gap:5px}
+.row .arw{font-size:14px}
+.step{position:relative;border:1.5px solid;border-radius:11px;background:#fff;
+padding:10px 11px 9px;width:146px;flex:0 0 auto}
+.step b{display:block;font-size:15.5px;font-weight:700;margin-bottom:2px}
+.step span{display:block;font-size:11.5px;color:var(--grey);line-height:1.3}
+.step u{position:absolute;top:-7px;left:8px;background:#fff;border:1px solid;border-radius:8px;
+font-size:10px;font-weight:700;padding:0 5px;text-decoration:none;line-height:14px}
+.arw{color:var(--line);font-size:15px;flex:0 0 auto}
+.pa6 .step{border-color:var(--pa6)} .pa6 .step b{color:var(--pa6)} .pa6 .step u{color:var(--pa6);border-color:var(--pa6)}
+.pet .step{border-color:var(--pet)} .pet .step b{color:var(--pet)} .pet .step u{color:var(--pet);border-color:var(--pet)}
+.pa66 .step{border-color:var(--pa66)} .pa66 .step b{color:var(--pa66)} .pa66 .step u{color:var(--pa66);border-color:var(--pa66)}
+.end .step{border-color:var(--end);background:var(--endbg)} .end .step b{color:var(--end)} .end .step u{color:var(--end);border-color:var(--end);background:var(--endbg)}
 
-.fork{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0}
-.branch{border-radius:14px;padding:12px 12px 14px;background:rgba(59,85,112,.05);border:1px dashed rgba(59,85,112,.28)}
-.branch .tag{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--up);border-radius:10px;padding:2px 8px;margin-bottom:8px}
-.branch .tag.alt{background:#7A8B9C}
-.branch .card{max-width:none;flex:1 1 auto;margin-bottom:8px}
-.branch .down{color:var(--line);text-align:center;font-size:15px;line-height:1;margin:2px 0 6px}
-.merge{margin:2px 0 10px}
+.brk{flex:0 0 100%;height:0}
+.cont{flex:0 0 100%;color:var(--line);font-size:13px;padding:2px 0}
 
-.join{margin-top:8px;background:var(--navy);color:#fff;border-radius:14px;padding:14px 16px}
-.join b{display:block;font-size:16px;margin-bottom:4px}
-.join span{font-size:12px;color:#C9D6E2}
-
-.note{margin-top:18px;color:var(--grey);font-size:11.5px;line-height:1.6}
+.note{margin-top:8px;padding:12px 14px;border-radius:12px;background:rgba(34,56,77,.05);
+font-size:12px;color:var(--grey);line-height:1.6}
+.note b{color:var(--navy)}
 .wm{position:fixed;right:12px;bottom:10px;font-size:10px;color:rgba(34,56,77,.28);pointer-events:none}
 
 @media (max-width:760px){
-  .wrap{padding:16px 12px 54px}
-  h1{font-size:21px}
-  .flow{flex-direction:column;gap:0}
-  .card{flex:1 1 auto;max-width:none;min-width:0}
-  .arw{display:block;width:100%;text-align:center;padding:2px 0;font-size:14px;transform:rotate(90deg);line-height:1}
-  .fork{grid-template-columns:1fr;gap:10px}
-  .lane h2{font-size:15px}
-  .join b{font-size:15px}
+  .wrap{padding:16px 12px 50px}
+  h1{font-size:20px}
+  .flow{flex-direction:column;align-items:stretch;gap:0}
+  .step{max-width:none;width:100%;border-radius:10px;margin:0}
+  .arw{width:100%;text-align:center;line-height:1;padding:3px 0;transform:rotate(90deg)}
+  .cont{display:none}
+  .brk{display:none}
 }
-@media print{ body{background:#fff} .wm{display:none} }
+@media print{body{background:#fff}.wm{display:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>从原油到羽绒服面料</h1>
-  <div class="sub">石脑油分两支：催化重整产芳烃（主）、蒸汽裂解产烯烃与裂解汽油（副）　｜　三条链：PA6 · PET · PA66</div>
+  <h1>从原油到羽绒服面料：三条线</h1>
+  <div class="sub">一步一格，按顺序读　｜　方格上的小圆号是步骤号</div>
   <hr class="rule">
 
-  <section class="lane up">
-    <h2 style="color:var(--up)"><i></i>上游：共用同一条石脑油</h2>
+  <!-- PA6 -->
+  <section class="chain pa6">
+    <h2 style="color:var(--pa6)"><i></i>一、PA6 锦纶　<em>15D34F 走这条</em></h2>
+    <p class="why">这条线上每个价格跳动，最后都落进你的米价。</p>
     <div class="flow">
-      <div class="card"><b>原油</b><span>地下开采</span></div><div class="arw">→</div>
-      <div class="card"><b>常减压蒸馏</b><span>按沸点切割</span></div><div class="arw">→</div>
-      <div class="card"><b>石脑油</b><span>轻质馏分</span></div>
-    </div>
-
-    <div class="fork">
-      <div class="branch">
-        <span class="tag">主路线</span>
-        <div class="card"><b>催化重整</b><span>石脑油重整，生成芳烃</span></div>
-        <div class="down">↓</div>
-        <div class="card"><b>重整生成油</b><span>苯 · 甲苯 · 二甲苯</span></div>
+      <div class="row">
+      <div class="step"><u>1</u><b>原油</b><span>地下开采</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>2</u><b>常减压蒸馏</b><span>按沸点切割</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>3</u><b>石脑油</b><span>轻质馏分</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>4</u><b>催化重整</b><span>或裂解汽油加氢</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>5</u><b>芳烃抽提</b><span>分出苯</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>6</u><b>苯</b><span>C6H6</span></div>
+      <div class="arw">↓</div>
       </div>
-      <div class="branch">
-        <span class="tag alt">副产路线</span>
-        <div class="card"><b>蒸汽裂解</b><span>产乙烯·丙烯·丁二烯＋裂解汽油</span></div>
-        <div class="down">↓</div>
-        <div class="card"><b>裂解汽油</b><span>含苯 40–60%，需先加氢</span></div>
+      <div class="row">
+      <div class="step"><u>7</u><b>加氢</b><span>→ 环己烷</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>8</u><b>氧化</b><span>环己烷 → 环己酮</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>9</u><b>肟化</b><span>→ 环己酮肟</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>10</u><b>贝克曼重排</b><span>→ 己内酰胺</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>11</u><b>CPL</b><span>己内酰胺</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>12</u><b>开环聚合</b><span>→ PA6 切片</span></div>
+      <div class="arw">↓</div>
+      </div>
+      <div class="row">
+      <div class="step"><u>13</u><b>熔融纺丝</b><span>→ POY</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>14</u><b>加弹</b><span>→ DTY / FDY</span></div>
+      <div class="arw">→</div>
+      <div class="step end"><u>15</u><b>15D34F</b><span>15 旦 / 34 孔</span></div>
+      <div class="arw">→</div>
+      <div class="step end"><u>16</u><b>织造 · 染整</b><span>晋江自有染整</span></div>
+      <div class="arw">→</div>
+      <div class="step end"><u>17</u><b>羽绒服面料</b><span>36 g/㎡ · 门幅 143 cm</span></div>
       </div>
     </div>
-
-    <div class="flow merge">
-      <div class="card" style="max-width:none;flex:1 1 auto"><b>芳烃抽提＋分离</b><span>两条路在这里合流，分出苯、甲苯、二甲苯</span></div>
-    </div>
-
+  </section><!-- PET -->
+  <section class="chain pet">
+    <h2 style="color:var(--pet)"><i></i>二、PET 涤纶　<em>对照：便宜、手感偏硬</em></h2>
+    <p class="why">同样从石脑油出发，但走芳烃的另一个分支——对二甲苯。</p>
     <div class="flow">
-      <div class="card"><b>苯</b><span>→ 环己烷 → 己内酰胺</span></div>
-      <div class="card"><b>甲苯</b><span>可歧化转苯</span></div>
-      <div class="card"><b>二甲苯</b><span>分离出对二甲苯 PX</span></div>
+      <div class="row">
+      <div class="step"><u>1</u><b>石脑油</b><span>同上游</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>2</u><b>催化重整</b><span>产芳烃</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>3</u><b>二甲苯</b><span>分离</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>4</u><b>对二甲苯 PX</b><span>C8H10</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>5</u><b>氧化</b><span>→ PTA</span></div>
+      <div class="arw">↓</div>
+      </div>
+      <div class="row">
+      <div class="step"><u>6</u><b>PTA</b><span>精对苯二甲酸</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>7</u><b>缩聚</b><span>PTA ＋ 乙二醇</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>8</u><b>乙烯</b><span>蒸汽裂解</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>9</u><b>环氧乙烷</b><span>氧化</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>10</u><b>乙二醇 MEG</b><span>缩聚的另一半</span></div>
+      <div class="arw">↓</div>
+      </div>
+      <div class="row">
+      <div class="step"><u>11</u><b>PET 切片</b><span>聚酯</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>12</u><b>纺丝</b><span>POY / FDY</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>13</u><b>加弹</b><span>→ DTY</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>14</u><b>织造 · 染整</b><span>涤塔夫、春亚纺</span></div>
+      </div>
+    </div>
+  </section><!-- PA66 -->
+  <section class="chain pa66">
+    <h2 style="color:var(--pa66)"><i></i>三、PA66 尼龙　<em>更挺更耐磨，成本更高</em></h2>
+    <p class="why">走的是裂解 C4，不经过苯。</p>
+    <div class="flow">
+      <div class="row">
+      <div class="step"><u>1</u><b>石脑油</b><span>同上游</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>2</u><b>蒸汽裂解</b><span>产烯烃</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>3</u><b>丁二烯</b><span>裂解 C4 馏分</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>4</u><b>＋ 氢氰酸 HCN</b><span>氢氧化法加成</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>5</u><b>己二腈 ADN</b><span>中间体</span></div>
+      <div class="arw">↓</div>
+      </div>
+      <div class="row">
+      <div class="step"><u>6</u><b>加氢</b><span>→ 己二胺 HMDA</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>7</u><b>缩聚</b><span>HMDA ＋ 己二酸</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>8</u><b>环己烷</b><span>苯加氢</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>9</u><b>氧化</b><span>环己醇 / 环己酮</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>10</u><b>己二酸 AA</b><span>C6H10O4</span></div>
+      <div class="arw">↓</div>
+      </div>
+      <div class="row">
+      <div class="step"><u>11</u><b>PA66 切片</b><span>尼龙 66</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>12</u><b>纺丝 · 加弹</b><span>→ DTY</span></div>
+      <div class="arw">→</div>
+      <div class="step"><u>13</u><b>织造 · 染整</b><span>更挺、耐磨</span></div>
+      </div>
     </div>
   </section>
-
-  <section class="lane pa6">
-    <h2 style="color:var(--pa6)"><i></i>链一　PA6 锦纶 <em>15D34F 走这条</em></h2>
-    <div class="flow">
-      <div class="card"><b>苯</b><span>重整为主·裂解副产</span></div>
-      <div class="card"><b>环己烷</b><span>苯加氢</span></div>
-      <div class="card"><b>环己酮·环己醇</b><span>环己烷氧化</span></div>
-      <div class="card"><b>肟化·重排</b><span>生成 CPL</span></div>
-      <div class="card"><b>CPL 己内酰胺</b><span>聚合单体</span></div>
-      <div class="card"><b>开环聚合</b><span>PA6 切片</span></div>
-      <div class="card"><b>熔融纺丝</b><span>POY 原丝</span></div>
-      <div class="card"><b>加弹 DTY</b><span>15 旦 / 34 孔</span></div>
-      <div class="card hl"><b>15D34F</b><span>36 g/㎡ · 有效门幅 143 cm</span></div>
-    </div>
-  </section>
-
-  <section class="lane pet">
-    <h2 style="color:var(--pet)"><i></i>链二　PET 涤纶 <em>对照：便宜、手感偏硬</em></h2>
-    <div class="flow">
-      <div class="card"><b>乙烯</b><span>裂解气分离</span></div>
-      <div class="card"><b>环氧乙烷</b><span>乙烯氧化</span></div>
-      <div class="card"><b>乙二醇 MEG</b><span>PET 的另一半</span></div>
-      <div class="card"><b>对二甲苯 PX</b><span>二甲苯分离</span></div>
-      <div class="card"><b>PTA</b><span>PX 氧化</span></div>
-      <div class="card"><b>缩聚</b><span>PTA + MEG</span></div>
-      <div class="card"><b>PET 切片</b><span>纺丝 POY/FDY</span></div>
-      <div class="card"><b>加弹 DTY</b><span>涤纶低弹丝</span></div>
-    </div>
-  </section>
-
-  <section class="lane pa66">
-    <h2 style="color:var(--pa66)"><i></i>链三　PA66 尼龙 <em>更挺、更耐磨，成本更高</em></h2>
-    <div class="flow">
-      <div class="card"><b>丁二烯</b><span>裂解 C4 馏分</span></div>
-      <div class="card"><b>＋氢氰酸 HCN</b><span>氢氧化法加成</span></div>
-      <div class="card"><b>己二腈 ADN</b><span>中间体</span></div>
-      <div class="card"><b>加氢</b><span>己二胺 HMDA</span></div>
-      <div class="card"><b>己二酸 AA</b><span>环己醇氧化</span></div>
-      <div class="card"><b>缩聚</b><span>HMDA + AA</span></div>
-      <div class="card"><b>PA66 切片</b><span>纺丝 DTY</span></div>
-    </div>
-  </section>
-
-  <div class="join">
-    <b>三条链汇合：纺丝 → 织造 → 染整 → 羽绒服面料</b>
-    <span>同一台喷水/喷气织机都能织，差在纱线：锦纶更轻更软，涤纶更便宜，尼龙 66 更挺更耐磨。</span>
-  </div>
-
-  <div class="note">
-    属名依据 GB/T 4146.1-2020《纺织品 化学纤维 第1部分：属名》；工艺路线按化纤行业通行流程整理；15D34F 克重与门幅为厂内实测（36 g/㎡、有效门幅 143 cm，标签常写含边 145）。<br>
-    TT纺织 · 窦金龙 · 轻薄羽绒服面料 · 杭州／平湖
-  </div>
-</div>
-<div class="wm">TT纺织 窦金龙 dv13588355444</div>
-</body>
-</html>
